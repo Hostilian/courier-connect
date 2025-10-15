@@ -1,0 +1,285 @@
+{
+  "nav": {
+    "home": "Início",
+    "forCouriers": "Para Estafetas",
+    "trackDelivery": "Rastrear Entrega",
+    "requestDelivery": "Solicitar Entrega"
+  },
+  "home": {
+    "hero": {
+      "title": "Serviço de Entrega Rápido e Confiável",
+      "subtitle": "Receba seus pacotes entregues de forma rápida e segura com nossa rede de estafetas confiáveis",
+      "cta": "Solicitar Entrega",
+      "ctaSecondary": "Tornar-se Estafeta"
+    },
+    "stats": {
+      "deliveries": "Entregas Ativas",
+      "couriers": "Estafetas Verificados",
+      "cities": "Cidades Cobertas",
+      "rating": "Avaliação dos Clientes"
+    },
+    "howItWorks": {
+      "title": "Como Funciona",
+      "step1": {
+        "title": "Solicitar Entrega",
+        "description": "Insira os detalhes de coleta e entrega"
+      },
+      "step2": {
+        "title": "Encontrar Estafeta",
+        "description": "Nosso sistema encontra o melhor estafeta"
+      },
+      "step3": {
+        "title": "Rastrear em Tempo Real",
+        "description": "Monitore sua entrega a cada passo"
+      },
+      "step4": {
+        "title": "Receber Pacote",
+        "description": "Receba seu pacote entregue com segurança"
+      }
+    },
+    "features": {
+      "title": "Por Que Nos Escolher",
+      "fast": {
+        "title": "Super Rápido",
+        "description": "Entrega no mesmo dia disponível na maioria das cidades"
+      },
+      "secure": {
+        "title": "100% Seguro",
+        "description": "Seus pacotes estão totalmente segurados e rastreados"
+      },
+      "affordable": {
+        "title": "Preços Acessíveis",
+        "description": "Preços transparentes sem taxas ocultas"
+      },
+      "support": {
+        "title": "Suporte 24/7",
+        "description": "Nossa equipe está sempre aqui para ajudá-lo"
+      }
+    },
+    "testimonials": {
+      "title": "O Que Nossos Clientes Dizem",
+      "customer1": {
+        "name": "Sarah Johnson",
+        "role": "Proprietária de Pequeno Negócio",
+        "quote": "Serviço excelente! Meus pacotes sempre chegam no prazo e em perfeitas condições."
+      },
+      "customer2": {
+        "name": "Michael Chen",
+        "role": "Comprador Online",
+        "quote": "O rastreamento em tempo real me dá tranquilidade. Altamente recomendado!"
+      },
+      "customer3": {
+        "name": "Emma Rodriguez",
+        "role": "Freelancer",
+        "quote": "Preços acessíveis e estafetas confiáveis. Este é meu serviço de entrega preferido."
+      }
+    },
+    "cta": {
+      "title": "Pronto Para Começar?",
+      "subtitle": "Junte-se a milhares de clientes satisfeitos",
+      "button": "Solicitar Entrega Agora"
+    }
+  },
+  "request": {
+    "title": "Solicitar Entrega",
+    "subtitle": "Preencha os detalhes e encontraremos o estafeta perfeito para você",
+    "steps": {
+      "pickup": "Detalhes da Coleta",
+      "delivery": "Detalhes da Entrega",
+      "preferences": "Preferências"
+    },
+    "pickup": {
+      "title": "Informações da Coleta",
+      "name": "Seu Nome",
+      "namePlaceholder": "João Silva",
+      "phone": "Número de Telefone",
+      "phonePlaceholder": "+351 910 000 000",
+      "email": "Email (opcional)",
+      "emailPlaceholder": "joao@exemplo.pt",
+      "address": "Endereço de Coleta",
+      "street": "Rua",
+      "city": "Cidade",
+      "zipCode": "Código Postal"
+    },
+    "delivery": {
+      "title": "Informações da Entrega",
+      "recipientName": "Nome do Destinatário",
+      "recipientPhone": "Telefone do Destinatário",
+      "address": "Endereço de Entrega",
+      "street": "Rua",
+      "city": "Cidade",
+      "zipCode": "Código Postal",
+      "notes": "Notas de Entrega (opcional)",
+      "notesPlaceholder": "Tocar a campainha, deixar à porta, etc."
+    },
+    "preferences": {
+      "title": "Pacote e Preferências",
+      "packageType": "Tipo de Pacote",
+      "packageTypes": {
+        "documents": "Documentos",
+        "small": "Pacote Pequeno",
+        "medium": "Pacote Médio",
+        "large": "Pacote Grande"
+      },
+      "weight": "Peso (kg)",
+      "dimensions": "Dimensões (opcional)",
+      "dimensionsPlaceholder": "C x L x A (cm)",
+      "specialInstructions": "Instruções Especiais",
+      "specialInstructionsPlaceholder": "Frágil, Manter na vertical, etc.",
+      "urgency": "Urgência da Entrega",
+      "urgencyTypes": {
+        "standard": "Padrão (2-3 horas)",
+        "express": "Express (1 hora)",
+        "scheduled": "Agendada"
+      }
+    },
+    "buttons": {
+      "next": "Próximo",
+      "previous": "Anterior",
+      "submit": "Solicitar Entrega"
+    },
+    "success": {
+      "title": "Entrega Solicitada!",
+      "message": "Seu código de rastreamento é:",
+      "info": "Estamos encontrando o melhor estafeta para você. Você receberá atualizações por SMS e email.",
+      "track": "Rastrear Entrega",
+      "newRequest": "Nova Solicitação"
+    }
+  },
+  "track": {
+    "title": "Rastrear Sua Entrega",
+    "subtitle": "Insira seu código de rastreamento para ver atualizações em tempo real",
+    "trackingCode": "Código de Rastreamento",
+    "trackingCodePlaceholder": "Insira o código de rastreamento de 10 dígitos",
+    "trackButton": "Rastrear Pacote",
+    "status": {
+      "pending": "Aguardando Estafeta",
+      "accepted": "Estafeta Atribuído",
+      "picked_up": "Pacote Coletado",
+      "in_transit": "Em Trânsito",
+      "delivered": "Entregue",
+      "cancelled": "Cancelado"
+    },
+    "details": {
+      "title": "Detalhes da Entrega",
+      "from": "De",
+      "to": "Para",
+      "courier": "Estafeta",
+      "estimatedTime": "Entrega Estimada",
+      "actualTime": "Entregue Às",
+      "packageType": "Tipo de Pacote",
+      "status": "Estado Atual"
+    },
+    "notFound": {
+      "title": "Código de Rastreamento Não Encontrado",
+      "message": "Por favor, verifique seu código de rastreamento e tente novamente.",
+      "button": "Tentar Novamente"
+    }
+  },
+  "courier": {
+    "register": {
+      "title": "Tornar-se Estafeta",
+      "subtitle": "Comece a ganhar entregando pacotes em sua cidade",
+      "steps": {
+        "credentials": "Conta",
+        "vehicle": "Veículo",
+        "verification": "Verificação"
+      },
+      "credentials": {
+        "title": "Crie Sua Conta",
+        "firstName": "Nome",
+        "lastName": "Sobrenome",
+        "email": "Endereço de Email",
+        "phone": "Número de Telefone",
+        "password": "Senha",
+        "confirmPassword": "Confirmar Senha",
+        "terms": "Concordo com os Termos de Serviço e Política de Privacidade"
+      },
+      "vehicle": {
+        "title": "Informações do Veículo",
+        "vehicleType": "Tipo de Veículo",
+        "vehicleTypes": {
+          "bike": "Bicicleta",
+          "motorcycle": "Motocicleta",
+          "car": "Carro",
+          "van": "Van"
+        },
+        "licensePlate": "Placa (se aplicável)",
+        "insurance": "Informações do Seguro",
+        "insurancePlaceholder": "Número da apólice ou detalhes"
+      },
+      "verification": {
+        "title": "Documentos de Verificação",
+        "idDocument": "Documento de Identidade",
+        "driversLicense": "Carteira de Motorista (se aplicável)",
+        "insurance": "Certificado de Seguro",
+        "photo": "Foto de Perfil",
+        "uploadInstructions": "Carregue fotos claras dos seus documentos",
+        "agreement": "Confirmo que todas as informações fornecidas são precisas"
+      },
+      "buttons": {
+        "next": "Próximo",
+        "previous": "Anterior",
+        "submit": "Enviar Candidatura"
+      },
+      "success": {
+        "title": "Candidatura Enviada!",
+        "message": "Analisaremos sua candidatura em 24-48 horas.",
+        "info": "Você receberá um email assim que sua conta for verificada.",
+        "login": "Ir para Login"
+      }
+    },
+    "login": {
+      "title": "Login de Estafeta",
+      "subtitle": "Entre para acessar seu painel",
+      "email": "Endereço de Email",
+      "password": "Senha",
+      "remember": "Lembrar-me",
+      "forgotPassword": "Esqueceu a senha?",
+      "loginButton": "Entrar",
+      "noAccount": "Não tem uma conta?",
+      "register": "Registre-se aqui"
+    },
+    "dashboard": {
+      "title": "Painel do Estafeta",
+      "welcome": "Bem-vindo de volta",
+      "stats": {
+        "available": "Trabalhos Disponíveis",
+        "active": "Entregas Ativas",
+        "completed": "Concluídas Hoje",
+        "earnings": "Ganhos de Hoje"
+      },
+      "availableJobs": {
+        "title": "Entregas Disponíveis",
+        "noJobs": "Nenhuma entrega disponível no momento",
+        "distance": "km de distância",
+        "accept": "Aceitar Trabalho",
+        "viewDetails": "Ver Detalhes"
+      },
+      "activeDeliveries": {
+        "title": "Suas Entregas Ativas",
+        "pickup": "Coleta",
+        "delivery": "Entrega",
+        "updateStatus": "Atualizar Estado",
+        "complete": "Completar Entrega",
+        "cancel": "Cancelar"
+      },
+      "statusUpdate": {
+        "picked_up": "Marcar como Coletado",
+        "in_transit": "Marcar como Em Trânsito",
+        "delivered": "Marcar como Entregue"
+      }
+    }
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Ocorreu um erro",
+    "tryAgain": "Tentar Novamente",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "save": "Salvar",
+    "close": "Fechar",
+    "required": "Obrigatório",
+    "optional": "Opcional"
+  }
+}

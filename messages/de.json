@@ -1,0 +1,285 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "forCouriers": "Für Kuriere",
+    "trackDelivery": "Sendung Verfolgen",
+    "requestDelivery": "Lieferung Anfordern"
+  },
+  "home": {
+    "hero": {
+      "title": "Schneller, Zuverlässiger Lieferservice",
+      "subtitle": "Erhalten Sie Ihre Pakete schnell und sicher mit unserem vertrauenswürdigen Kuriernetzwerk geliefert",
+      "cta": "Lieferung Anfordern",
+      "ctaSecondary": "Kurier Werden"
+    },
+    "stats": {
+      "deliveries": "Aktive Lieferungen",
+      "couriers": "Verifizierte Kuriere",
+      "cities": "Abgedeckte Städte",
+      "rating": "Kundenbewertung"
+    },
+    "howItWorks": {
+      "title": "Wie Es Funktioniert",
+      "step1": {
+        "title": "Lieferung Anfordern",
+        "description": "Geben Sie Abhol- und Lieferdetails ein"
+      },
+      "step2": {
+        "title": "Kurier Finden",
+        "description": "Unser System findet den besten Kurier"
+      },
+      "step3": {
+        "title": "In Echtzeit Verfolgen",
+        "description": "Überwachen Sie Ihre Lieferung bei jedem Schritt"
+      },
+      "step4": {
+        "title": "Paket Erhalten",
+        "description": "Erhalten Sie Ihr Paket sicher geliefert"
+      }
+    },
+    "features": {
+      "title": "Warum Uns Wählen",
+      "fast": {
+        "title": "Blitzschnell",
+        "description": "Lieferung am selben Tag in den meisten Städten verfügbar"
+      },
+      "secure": {
+        "title": "100% Sicher",
+        "description": "Ihre Pakete sind vollständig versichert und verfolgt"
+      },
+      "affordable": {
+        "title": "Erschwingliche Preise",
+        "description": "Transparente Preise ohne versteckte Gebühren"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "description": "Unser Team ist immer für Sie da"
+      }
+    },
+    "testimonials": {
+      "title": "Was Unsere Kunden Sagen",
+      "customer1": {
+        "name": "Sarah Johnson",
+        "role": "Kleinunternehmerin",
+        "quote": "Ausgezeichneter Service! Meine Pakete kommen immer pünktlich und in perfektem Zustand an."
+      },
+      "customer2": {
+        "name": "Michael Chen",
+        "role": "Online-Käufer",
+        "quote": "Die Echtzeit-Verfolgung gibt mir Sicherheit. Sehr empfehlenswert!"
+      },
+      "customer3": {
+        "name": "Emma Rodriguez",
+        "role": "Freelancerin",
+        "quote": "Erschwingliche Preise und zuverlässige Kuriere. Dies ist mein bevorzugter Lieferservice."
+      }
+    },
+    "cta": {
+      "title": "Bereit Loszulegen?",
+      "subtitle": "Schließen Sie sich Tausenden zufriedener Kunden an",
+      "button": "Jetzt Lieferung Anfordern"
+    }
+  },
+  "request": {
+    "title": "Lieferung Anfordern",
+    "subtitle": "Füllen Sie die Details aus und wir finden den perfekten Kurier für Sie",
+    "steps": {
+      "pickup": "Abholdetails",
+      "delivery": "Lieferdetails",
+      "preferences": "Präferenzen"
+    },
+    "pickup": {
+      "title": "Abholinformationen",
+      "name": "Ihr Name",
+      "namePlaceholder": "Max Mustermann",
+      "phone": "Telefonnummer",
+      "phonePlaceholder": "+49 170 000 0000",
+      "email": "E-Mail (optional)",
+      "emailPlaceholder": "max@beispiel.de",
+      "address": "Abholadresse",
+      "street": "Straße",
+      "city": "Stadt",
+      "zipCode": "Postleitzahl"
+    },
+    "delivery": {
+      "title": "Lieferinformationen",
+      "recipientName": "Name des Empfängers",
+      "recipientPhone": "Telefon des Empfängers",
+      "address": "Lieferadresse",
+      "street": "Straße",
+      "city": "Stadt",
+      "zipCode": "Postleitzahl",
+      "notes": "Lieferhinweise (optional)",
+      "notesPlaceholder": "Klingeln, an der Tür lassen, usw."
+    },
+    "preferences": {
+      "title": "Paket & Präferenzen",
+      "packageType": "Pakettyp",
+      "packageTypes": {
+        "documents": "Dokumente",
+        "small": "Kleines Paket",
+        "medium": "Mittleres Paket",
+        "large": "Großes Paket"
+      },
+      "weight": "Gewicht (kg)",
+      "dimensions": "Abmessungen (optional)",
+      "dimensionsPlaceholder": "L x B x H (cm)",
+      "specialInstructions": "Spezielle Anweisungen",
+      "specialInstructionsPlaceholder": "Zerbrechlich, Aufrecht halten, usw.",
+      "urgency": "Lieferdringlichkeit",
+      "urgencyTypes": {
+        "standard": "Standard (2-3 Stunden)",
+        "express": "Express (1 Stunde)",
+        "scheduled": "Geplant"
+      }
+    },
+    "buttons": {
+      "next": "Weiter",
+      "previous": "Zurück",
+      "submit": "Lieferung Anfordern"
+    },
+    "success": {
+      "title": "Lieferung Angefordert!",
+      "message": "Ihr Tracking-Code ist:",
+      "info": "Wir suchen den besten Kurier für Sie. Sie erhalten Updates per SMS und E-Mail.",
+      "track": "Lieferung Verfolgen",
+      "newRequest": "Neue Anfrage"
+    }
+  },
+  "track": {
+    "title": "Ihre Lieferung Verfolgen",
+    "subtitle": "Geben Sie Ihren Tracking-Code ein, um Echtzeit-Updates zu sehen",
+    "trackingCode": "Tracking-Code",
+    "trackingCodePlaceholder": "Geben Sie den 10-stelligen Tracking-Code ein",
+    "trackButton": "Paket Verfolgen",
+    "status": {
+      "pending": "Warten auf Kurier",
+      "accepted": "Kurier Zugewiesen",
+      "picked_up": "Paket Abgeholt",
+      "in_transit": "Unterwegs",
+      "delivered": "Zugestellt",
+      "cancelled": "Storniert"
+    },
+    "details": {
+      "title": "Lieferdetails",
+      "from": "Von",
+      "to": "Nach",
+      "courier": "Kurier",
+      "estimatedTime": "Geschätzte Lieferung",
+      "actualTime": "Geliefert Um",
+      "packageType": "Pakettyp",
+      "status": "Aktueller Status"
+    },
+    "notFound": {
+      "title": "Tracking-Code Nicht Gefunden",
+      "message": "Bitte überprüfen Sie Ihren Tracking-Code und versuchen Sie es erneut.",
+      "button": "Erneut Versuchen"
+    }
+  },
+  "courier": {
+    "register": {
+      "title": "Kurier Werden",
+      "subtitle": "Beginnen Sie zu verdienen, indem Sie Pakete in Ihrer Stadt liefern",
+      "steps": {
+        "credentials": "Konto",
+        "vehicle": "Fahrzeug",
+        "verification": "Verifizierung"
+      },
+      "credentials": {
+        "title": "Erstellen Sie Ihr Konto",
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "email": "E-Mail-Adresse",
+        "phone": "Telefonnummer",
+        "password": "Passwort",
+        "confirmPassword": "Passwort Bestätigen",
+        "terms": "Ich stimme den Nutzungsbedingungen und der Datenschutzrichtlinie zu"
+      },
+      "vehicle": {
+        "title": "Fahrzeuginformationen",
+        "vehicleType": "Fahrzeugtyp",
+        "vehicleTypes": {
+          "bike": "Fahrrad",
+          "motorcycle": "Motorrad",
+          "car": "Auto",
+          "van": "Transporter"
+        },
+        "licensePlate": "Kennzeichen (falls zutreffend)",
+        "insurance": "Versicherungsinformationen",
+        "insurancePlaceholder": "Versicherungsnummer oder Details"
+      },
+      "verification": {
+        "title": "Verifizierungsdokumente",
+        "idDocument": "Ausweisdokument",
+        "driversLicense": "Führerschein (falls zutreffend)",
+        "insurance": "Versicherungszertifikat",
+        "photo": "Profilfoto",
+        "uploadInstructions": "Laden Sie klare Fotos Ihrer Dokumente hoch",
+        "agreement": "Ich bestätige, dass alle bereitgestellten Informationen korrekt sind"
+      },
+      "buttons": {
+        "next": "Weiter",
+        "previous": "Zurück",
+        "submit": "Bewerbung Einreichen"
+      },
+      "success": {
+        "title": "Bewerbung Eingereicht!",
+        "message": "Wir werden Ihre Bewerbung innerhalb von 24-48 Stunden prüfen.",
+        "info": "Sie erhalten eine E-Mail, sobald Ihr Konto verifiziert wurde.",
+        "login": "Zur Anmeldung Gehen"
+      }
+    },
+    "login": {
+      "title": "Kurier-Anmeldung",
+      "subtitle": "Melden Sie sich an, um auf Ihr Dashboard zuzugreifen",
+      "email": "E-Mail-Adresse",
+      "password": "Passwort",
+      "remember": "Angemeldet bleiben",
+      "forgotPassword": "Passwort vergessen?",
+      "loginButton": "Anmelden",
+      "noAccount": "Haben Sie kein Konto?",
+      "register": "Hier registrieren"
+    },
+    "dashboard": {
+      "title": "Kurier-Dashboard",
+      "welcome": "Willkommen zurück",
+      "stats": {
+        "available": "Verfügbare Jobs",
+        "active": "Aktive Lieferungen",
+        "completed": "Heute Abgeschlossen",
+        "earnings": "Heutige Einnahmen"
+      },
+      "availableJobs": {
+        "title": "Verfügbare Lieferungen",
+        "noJobs": "Derzeit keine verfügbaren Lieferungen",
+        "distance": "km entfernt",
+        "accept": "Job Annehmen",
+        "viewDetails": "Details Anzeigen"
+      },
+      "activeDeliveries": {
+        "title": "Ihre Aktiven Lieferungen",
+        "pickup": "Abholung",
+        "delivery": "Lieferung",
+        "updateStatus": "Status Aktualisieren",
+        "complete": "Lieferung Abschließen",
+        "cancel": "Abbrechen"
+      },
+      "statusUpdate": {
+        "picked_up": "Als Abgeholt Markieren",
+        "in_transit": "Als Unterwegs Markieren",
+        "delivered": "Als Geliefert Markieren"
+      }
+    }
+  },
+  "common": {
+    "loading": "Lädt...",
+    "error": "Ein Fehler ist aufgetreten",
+    "tryAgain": "Erneut Versuchen",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "save": "Speichern",
+    "close": "Schließen",
+    "required": "Erforderlich",
+    "optional": "Optional"
+  }
+}

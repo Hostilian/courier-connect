@@ -1,0 +1,285 @@
+{
+  "nav": {
+    "home": "Home",
+    "forCouriers": "Per Corrieri",
+    "trackDelivery": "Traccia Consegna",
+    "requestDelivery": "Richiedi Consegna"
+  },
+  "home": {
+    "hero": {
+      "title": "Servizio di Consegna Veloce e Affidabile",
+      "subtitle": "Ricevi i tuoi pacchi consegnati rapidamente e in sicurezza con la nostra rete di corrieri fidati",
+      "cta": "Richiedi Consegna",
+      "ctaSecondary": "Diventa Corriere"
+    },
+    "stats": {
+      "deliveries": "Consegne Attive",
+      "couriers": "Corrieri Verificati",
+      "cities": "Città Coperte",
+      "rating": "Valutazione Clienti"
+    },
+    "howItWorks": {
+      "title": "Come Funziona",
+      "step1": {
+        "title": "Richiedi Consegna",
+        "description": "Inserisci i dettagli di ritiro e consegna"
+      },
+      "step2": {
+        "title": "Trova Corriere",
+        "description": "Il nostro sistema trova il miglior corriere"
+      },
+      "step3": {
+        "title": "Traccia in Tempo Reale",
+        "description": "Monitora la tua consegna ad ogni passo"
+      },
+      "step4": {
+        "title": "Ricevi il Pacco",
+        "description": "Ricevi il tuo pacco consegnato in sicurezza"
+      }
+    },
+    "features": {
+      "title": "Perché Sceglierci",
+      "fast": {
+        "title": "Velocissimo",
+        "description": "Consegna in giornata disponibile nella maggior parte delle città"
+      },
+      "secure": {
+        "title": "100% Sicuro",
+        "description": "I tuoi pacchi sono completamente assicurati e tracciati"
+      },
+      "affordable": {
+        "title": "Tariffe Convenienti",
+        "description": "Prezzi trasparenti senza costi nascosti"
+      },
+      "support": {
+        "title": "Supporto 24/7",
+        "description": "Il nostro team è sempre qui per aiutarti"
+      }
+    },
+    "testimonials": {
+      "title": "Cosa Dicono i Nostri Clienti",
+      "customer1": {
+        "name": "Sarah Johnson",
+        "role": "Proprietaria Piccola Impresa",
+        "quote": "Servizio eccellente! I miei pacchi arrivano sempre in tempo e in perfette condizioni."
+      },
+      "customer2": {
+        "name": "Michael Chen",
+        "role": "Acquirente Online",
+        "quote": "Il tracciamento in tempo reale mi dà tranquillità. Altamente raccomandato!"
+      },
+      "customer3": {
+        "name": "Emma Rodriguez",
+        "role": "Freelancer",
+        "quote": "Tariffe convenienti e corrieri affidabili. Questo è il mio servizio di consegna preferito."
+      }
+    },
+    "cta": {
+      "title": "Pronto per Iniziare?",
+      "subtitle": "Unisciti a migliaia di clienti soddisfatti",
+      "button": "Richiedi Consegna Ora"
+    }
+  },
+  "request": {
+    "title": "Richiedi Consegna",
+    "subtitle": "Compila i dettagli e troveremo il corriere perfetto per te",
+    "steps": {
+      "pickup": "Dettagli Ritiro",
+      "delivery": "Dettagli Consegna",
+      "preferences": "Preferenze"
+    },
+    "pickup": {
+      "title": "Informazioni Ritiro",
+      "name": "Il Tuo Nome",
+      "namePlaceholder": "Mario Rossi",
+      "phone": "Numero di Telefono",
+      "phonePlaceholder": "+39 333 000 0000",
+      "email": "Email (opzionale)",
+      "emailPlaceholder": "mario@esempio.it",
+      "address": "Indirizzo di Ritiro",
+      "street": "Via",
+      "city": "Città",
+      "zipCode": "CAP"
+    },
+    "delivery": {
+      "title": "Informazioni Consegna",
+      "recipientName": "Nome Destinatario",
+      "recipientPhone": "Telefono Destinatario",
+      "address": "Indirizzo di Consegna",
+      "street": "Via",
+      "city": "Città",
+      "zipCode": "CAP",
+      "notes": "Note di Consegna (opzionale)",
+      "notesPlaceholder": "Suonare il campanello, lasciare alla porta, ecc."
+    },
+    "preferences": {
+      "title": "Pacco e Preferenze",
+      "packageType": "Tipo di Pacco",
+      "packageTypes": {
+        "documents": "Documenti",
+        "small": "Pacco Piccolo",
+        "medium": "Pacco Medio",
+        "large": "Pacco Grande"
+      },
+      "weight": "Peso (kg)",
+      "dimensions": "Dimensioni (opzionale)",
+      "dimensionsPlaceholder": "L x L x A (cm)",
+      "specialInstructions": "Istruzioni Speciali",
+      "specialInstructionsPlaceholder": "Fragile, Tenere verticale, ecc.",
+      "urgency": "Urgenza Consegna",
+      "urgencyTypes": {
+        "standard": "Standard (2-3 ore)",
+        "express": "Express (1 ora)",
+        "scheduled": "Programmata"
+      }
+    },
+    "buttons": {
+      "next": "Avanti",
+      "previous": "Indietro",
+      "submit": "Richiedi Consegna"
+    },
+    "success": {
+      "title": "Consegna Richiesta!",
+      "message": "Il tuo codice di tracciamento è:",
+      "info": "Stiamo cercando il miglior corriere per te. Riceverai aggiornamenti via SMS ed email.",
+      "track": "Traccia Consegna",
+      "newRequest": "Nuova Richiesta"
+    }
+  },
+  "track": {
+    "title": "Traccia la Tua Consegna",
+    "subtitle": "Inserisci il tuo codice di tracciamento per vedere gli aggiornamenti in tempo reale",
+    "trackingCode": "Codice di Tracciamento",
+    "trackingCodePlaceholder": "Inserisci il codice di tracciamento a 10 cifre",
+    "trackButton": "Traccia Pacco",
+    "status": {
+      "pending": "In Attesa di Corriere",
+      "accepted": "Corriere Assegnato",
+      "picked_up": "Pacco Ritirato",
+      "in_transit": "In Transito",
+      "delivered": "Consegnato",
+      "cancelled": "Annullato"
+    },
+    "details": {
+      "title": "Dettagli Consegna",
+      "from": "Da",
+      "to": "A",
+      "courier": "Corriere",
+      "estimatedTime": "Consegna Stimata",
+      "actualTime": "Consegnato Alle",
+      "packageType": "Tipo di Pacco",
+      "status": "Stato Attuale"
+    },
+    "notFound": {
+      "title": "Codice di Tracciamento Non Trovato",
+      "message": "Verifica il tuo codice di tracciamento e riprova.",
+      "button": "Riprova"
+    }
+  },
+  "courier": {
+    "register": {
+      "title": "Diventa Corriere",
+      "subtitle": "Inizia a guadagnare consegnando pacchi nella tua città",
+      "steps": {
+        "credentials": "Account",
+        "vehicle": "Veicolo",
+        "verification": "Verifica"
+      },
+      "credentials": {
+        "title": "Crea il Tuo Account",
+        "firstName": "Nome",
+        "lastName": "Cognome",
+        "email": "Indirizzo Email",
+        "phone": "Numero di Telefono",
+        "password": "Password",
+        "confirmPassword": "Conferma Password",
+        "terms": "Accetto i Termini di Servizio e l'Informativa sulla Privacy"
+      },
+      "vehicle": {
+        "title": "Informazioni Veicolo",
+        "vehicleType": "Tipo di Veicolo",
+        "vehicleTypes": {
+          "bike": "Bicicletta",
+          "motorcycle": "Motocicletta",
+          "car": "Auto",
+          "van": "Furgone"
+        },
+        "licensePlate": "Targa (se applicabile)",
+        "insurance": "Informazioni Assicurazione",
+        "insurancePlaceholder": "Numero polizza o dettagli"
+      },
+      "verification": {
+        "title": "Documenti di Verifica",
+        "idDocument": "Documento d'Identità",
+        "driversLicense": "Patente di Guida (se applicabile)",
+        "insurance": "Certificato di Assicurazione",
+        "photo": "Foto Profilo",
+        "uploadInstructions": "Carica foto chiare dei tuoi documenti",
+        "agreement": "Confermo che tutte le informazioni fornite sono accurate"
+      },
+      "buttons": {
+        "next": "Avanti",
+        "previous": "Indietro",
+        "submit": "Invia Candidatura"
+      },
+      "success": {
+        "title": "Candidatura Inviata!",
+        "message": "Esamineremo la tua candidatura entro 24-48 ore.",
+        "info": "Riceverai un'email una volta verificato il tuo account.",
+        "login": "Vai al Login"
+      }
+    },
+    "login": {
+      "title": "Login Corriere",
+      "subtitle": "Accedi per accedere alla tua dashboard",
+      "email": "Indirizzo Email",
+      "password": "Password",
+      "remember": "Ricordami",
+      "forgotPassword": "Password dimenticata?",
+      "loginButton": "Accedi",
+      "noAccount": "Non hai un account?",
+      "register": "Registrati qui"
+    },
+    "dashboard": {
+      "title": "Dashboard Corriere",
+      "welcome": "Bentornato",
+      "stats": {
+        "available": "Lavori Disponibili",
+        "active": "Consegne Attive",
+        "completed": "Completate Oggi",
+        "earnings": "Guadagni di Oggi"
+      },
+      "availableJobs": {
+        "title": "Consegne Disponibili",
+        "noJobs": "Nessuna consegna disponibile al momento",
+        "distance": "km di distanza",
+        "accept": "Accetta Lavoro",
+        "viewDetails": "Vedi Dettagli"
+      },
+      "activeDeliveries": {
+        "title": "Le Tue Consegne Attive",
+        "pickup": "Ritiro",
+        "delivery": "Consegna",
+        "updateStatus": "Aggiorna Stato",
+        "complete": "Completa Consegna",
+        "cancel": "Annulla"
+      },
+      "statusUpdate": {
+        "picked_up": "Segna come Ritirato",
+        "in_transit": "Segna come In Transito",
+        "delivered": "Segna come Consegnato"
+      }
+    }
+  },
+  "common": {
+    "loading": "Caricamento...",
+    "error": "Si è verificato un errore",
+    "tryAgain": "Riprova",
+    "cancel": "Annulla",
+    "confirm": "Conferma",
+    "save": "Salva",
+    "close": "Chiudi",
+    "required": "Obbligatorio",
+    "optional": "Opzionale"
+  }
+}

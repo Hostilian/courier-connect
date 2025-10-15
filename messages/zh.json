@@ -1,0 +1,285 @@
+{
+  "nav": {
+    "home": "首页",
+    "forCouriers": "快递员",
+    "trackDelivery": "追踪快递",
+    "requestDelivery": "请求配送"
+  },
+  "home": {
+    "hero": {
+      "title": "快速可靠的配送服务",
+      "subtitle": "通过我们值得信赖的快递网络，快速安全地获得您的包裹配送",
+      "cta": "请求配送",
+      "ctaSecondary": "成为快递员"
+    },
+    "stats": {
+      "deliveries": "活跃配送",
+      "couriers": "已验证快递员",
+      "cities": "覆盖城市",
+      "rating": "客户评分"
+    },
+    "howItWorks": {
+      "title": "如何运作",
+      "step1": {
+        "title": "请求配送",
+        "description": "输入取件和配送详情"
+      },
+      "step2": {
+        "title": "匹配快递员",
+        "description": "我们的系统会找到最佳快递员"
+      },
+      "step3": {
+        "title": "实时追踪",
+        "description": "监控您的配送每一步"
+      },
+      "step4": {
+        "title": "收到包裹",
+        "description": "安全地收到您的包裹"
+      }
+    },
+    "features": {
+      "title": "为什么选择我们",
+      "fast": {
+        "title": "闪电般快速",
+        "description": "大多数城市可提供当日送达服务"
+      },
+      "secure": {
+        "title": "100% 安全",
+        "description": "您的包裹完全投保并可追踪"
+      },
+      "affordable": {
+        "title": "价格实惠",
+        "description": "透明定价，无隐藏费用"
+      },
+      "support": {
+        "title": "24/7 支持",
+        "description": "我们的团队随时为您提供帮助"
+      }
+    },
+    "testimonials": {
+      "title": "客户评价",
+      "customer1": {
+        "name": "莎拉·约翰逊",
+        "role": "小企业主",
+        "quote": "优秀的服务！我的包裹总是准时到达且状态完美。"
+      },
+      "customer2": {
+        "name": "迈克尔·陈",
+        "role": "在线购物者",
+        "quote": "实时追踪让我安心。强烈推荐！"
+      },
+      "customer3": {
+        "name": "艾玛·罗德里格斯",
+        "role": "自由职业者",
+        "quote": "价格实惠，快递员可靠。这是我首选的配送服务。"
+      }
+    },
+    "cta": {
+      "title": "准备开始了吗？",
+      "subtitle": "加入数千名满意的客户",
+      "button": "立即请求配送"
+    }
+  },
+  "request": {
+    "title": "请求配送",
+    "subtitle": "填写详细信息，我们将为您找到完美的快递员",
+    "steps": {
+      "pickup": "取件详情",
+      "delivery": "配送详情",
+      "preferences": "偏好设置"
+    },
+    "pickup": {
+      "title": "取件信息",
+      "name": "您的姓名",
+      "namePlaceholder": "张三",
+      "phone": "电话号码",
+      "phonePlaceholder": "+86 138 0000 0000",
+      "email": "电子邮件（可选）",
+      "emailPlaceholder": "zhangsan@example.com",
+      "address": "取件地址",
+      "street": "街道地址",
+      "city": "城市",
+      "zipCode": "邮政编码"
+    },
+    "delivery": {
+      "title": "配送信息",
+      "recipientName": "收件人姓名",
+      "recipientPhone": "收件人电话",
+      "address": "配送地址",
+      "street": "街道地址",
+      "city": "城市",
+      "zipCode": "邮政编码",
+      "notes": "配送备注（可选）",
+      "notesPlaceholder": "按门铃、放在门口等"
+    },
+    "preferences": {
+      "title": "包裹和偏好",
+      "packageType": "包裹类型",
+      "packageTypes": {
+        "documents": "文件",
+        "small": "小包裹",
+        "medium": "中等包裹",
+        "large": "大包裹"
+      },
+      "weight": "重量（公斤）",
+      "dimensions": "尺寸（可选）",
+      "dimensionsPlaceholder": "长 x 宽 x 高（厘米）",
+      "specialInstructions": "特殊说明",
+      "specialInstructionsPlaceholder": "易碎、保持直立等",
+      "urgency": "配送紧急程度",
+      "urgencyTypes": {
+        "standard": "标准（2-3小时）",
+        "express": "快速（1小时）",
+        "scheduled": "预约"
+      }
+    },
+    "buttons": {
+      "next": "下一步",
+      "previous": "上一步",
+      "submit": "请求配送"
+    },
+    "success": {
+      "title": "配送已请求！",
+      "message": "您的追踪代码是：",
+      "info": "我们正在为您寻找最佳快递员。您将通过短信和电子邮件收到更新。",
+      "track": "追踪配送",
+      "newRequest": "新请求"
+    }
+  },
+  "track": {
+    "title": "追踪您的配送",
+    "subtitle": "输入您的追踪代码以查看实时更新",
+    "trackingCode": "追踪代码",
+    "trackingCodePlaceholder": "输入10位追踪代码",
+    "trackButton": "追踪包裹",
+    "status": {
+      "pending": "等待快递员",
+      "accepted": "已分配快递员",
+      "picked_up": "包裹已取件",
+      "in_transit": "运输中",
+      "delivered": "已送达",
+      "cancelled": "已取消"
+    },
+    "details": {
+      "title": "配送详情",
+      "from": "发件地",
+      "to": "收件地",
+      "courier": "快递员",
+      "estimatedTime": "预计送达",
+      "actualTime": "送达时间",
+      "packageType": "包裹类型",
+      "status": "当前状态"
+    },
+    "notFound": {
+      "title": "未找到追踪代码",
+      "message": "请检查您的追踪代码并重试。",
+      "button": "重试"
+    }
+  },
+  "courier": {
+    "register": {
+      "title": "成为快递员",
+      "subtitle": "通过在您的城市配送包裹开始赚钱",
+      "steps": {
+        "credentials": "账户",
+        "vehicle": "车辆",
+        "verification": "验证"
+      },
+      "credentials": {
+        "title": "创建您的账户",
+        "firstName": "名",
+        "lastName": "姓",
+        "email": "电子邮件地址",
+        "phone": "电话号码",
+        "password": "密码",
+        "confirmPassword": "确认密码",
+        "terms": "我同意服务条款和隐私政策"
+      },
+      "vehicle": {
+        "title": "车辆信息",
+        "vehicleType": "车辆类型",
+        "vehicleTypes": {
+          "bike": "自行车",
+          "motorcycle": "摩托车",
+          "car": "汽车",
+          "van": "面包车"
+        },
+        "licensePlate": "车牌号（如适用）",
+        "insurance": "保险信息",
+        "insurancePlaceholder": "保单号或详细信息"
+      },
+      "verification": {
+        "title": "验证文件",
+        "idDocument": "身份证件",
+        "driversLicense": "驾驶执照（如适用）",
+        "insurance": "保险证书",
+        "photo": "个人照片",
+        "uploadInstructions": "上传您的文件清晰照片",
+        "agreement": "我确认所提供的所有信息准确无误"
+      },
+      "buttons": {
+        "next": "下一步",
+        "previous": "上一步",
+        "submit": "提交申请"
+      },
+      "success": {
+        "title": "申请已提交！",
+        "message": "我们将在24-48小时内审核您的申请。",
+        "info": "账户验证后，您将收到电子邮件。",
+        "login": "前往登录"
+      }
+    },
+    "login": {
+      "title": "快递员登录",
+      "subtitle": "登录以访问您的控制面板",
+      "email": "电子邮件地址",
+      "password": "密码",
+      "remember": "记住我",
+      "forgotPassword": "忘记密码？",
+      "loginButton": "登录",
+      "noAccount": "没有账户？",
+      "register": "在这里注册"
+    },
+    "dashboard": {
+      "title": "快递员控制面板",
+      "welcome": "欢迎回来",
+      "stats": {
+        "available": "可用工作",
+        "active": "活跃配送",
+        "completed": "今日完成",
+        "earnings": "今日收入"
+      },
+      "availableJobs": {
+        "title": "可用配送",
+        "noJobs": "目前没有可用的配送",
+        "distance": "公里",
+        "accept": "接受工作",
+        "viewDetails": "查看详情"
+      },
+      "activeDeliveries": {
+        "title": "您的活跃配送",
+        "pickup": "取件",
+        "delivery": "配送",
+        "updateStatus": "更新状态",
+        "complete": "完成配送",
+        "cancel": "取消"
+      },
+      "statusUpdate": {
+        "picked_up": "标记为已取件",
+        "in_transit": "标记为运输中",
+        "delivered": "标记为已送达"
+      }
+    }
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "发生错误",
+    "tryAgain": "重试",
+    "cancel": "取消",
+    "confirm": "确认",
+    "save": "保存",
+    "close": "关闭",
+    "required": "必填",
+    "optional": "可选"
+  }
+}

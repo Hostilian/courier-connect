@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
-import jwt from 'jsonwebtoken';
 import dbConnect from '@/lib/mongodb';
 import DeliveryRequest from '@/models/DeliveryRequest';
 import User from '@/models/User';
+import jwt from 'jsonwebtoken';
+import { NextRequest, NextResponse } from 'next/server';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'courier-connect-secret-key-change-in-production';
 

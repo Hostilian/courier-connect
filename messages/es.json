@@ -1,0 +1,285 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "forCouriers": "Para Mensajeros",
+    "trackDelivery": "Rastrear Entrega",
+    "requestDelivery": "Solicitar Entrega"
+  },
+  "home": {
+    "hero": {
+      "title": "Servicio de Entrega Rápido y Confiable",
+      "subtitle": "Recibe tus paquetes entregados de forma rápida y segura con nuestra red de mensajeros de confianza",
+      "cta": "Solicitar Entrega",
+      "ctaSecondary": "Ser Mensajero"
+    },
+    "stats": {
+      "deliveries": "Entregas Activas",
+      "couriers": "Mensajeros Verificados",
+      "cities": "Ciudades Cubiertas",
+      "rating": "Valoración de Clientes"
+    },
+    "howItWorks": {
+      "title": "Cómo Funciona",
+      "step1": {
+        "title": "Solicitar Entrega",
+        "description": "Ingresa los detalles de recogida y entrega"
+      },
+      "step2": {
+        "title": "Encontrar Mensajero",
+        "description": "Nuestro sistema encuentra el mejor mensajero"
+      },
+      "step3": {
+        "title": "Rastrear en Tiempo Real",
+        "description": "Monitorea tu entrega en cada paso"
+      },
+      "step4": {
+        "title": "Recibir Paquete",
+        "description": "Recibe tu paquete entregado de forma segura"
+      }
+    },
+    "features": {
+      "title": "Por Qué Elegirnos",
+      "fast": {
+        "title": "Súper Rápido",
+        "description": "Entrega el mismo día disponible en la mayoría de las ciudades"
+      },
+      "secure": {
+        "title": "100% Seguro",
+        "description": "Tus paquetes están completamente asegurados y rastreados"
+      },
+      "affordable": {
+        "title": "Tarifas Económicas",
+        "description": "Precios transparentes sin cargos ocultos"
+      },
+      "support": {
+        "title": "Soporte 24/7",
+        "description": "Nuestro equipo siempre está aquí para ayudarte"
+      }
+    },
+    "testimonials": {
+      "title": "Lo Que Dicen Nuestros Clientes",
+      "customer1": {
+        "name": "Sarah Johnson",
+        "role": "Propietaria de Pequeño Negocio",
+        "quote": "¡Excelente servicio! Mis paquetes siempre llegan a tiempo y en perfectas condiciones."
+      },
+      "customer2": {
+        "name": "Michael Chen",
+        "role": "Comprador en Línea",
+        "quote": "El rastreo en tiempo real me da tranquilidad. ¡Muy recomendado!"
+      },
+      "customer3": {
+        "name": "Emma Rodriguez",
+        "role": "Freelancer",
+        "quote": "Tarifas económicas y mensajeros confiables. Este es mi servicio de entrega preferido."
+      }
+    },
+    "cta": {
+      "title": "¿Listo Para Comenzar?",
+      "subtitle": "Únete a miles de clientes satisfechos",
+      "button": "Solicitar Entrega Ahora"
+    }
+  },
+  "request": {
+    "title": "Solicitar Entrega",
+    "subtitle": "Completa los detalles y encontraremos el mensajero perfecto para ti",
+    "steps": {
+      "pickup": "Detalles de Recogida",
+      "delivery": "Detalles de Entrega",
+      "preferences": "Preferencias"
+    },
+    "pickup": {
+      "title": "Información de Recogida",
+      "name": "Tu Nombre",
+      "namePlaceholder": "Juan Pérez",
+      "phone": "Número de Teléfono",
+      "phonePlaceholder": "+34 600 000 000",
+      "email": "Correo Electrónico (opcional)",
+      "emailPlaceholder": "juan@ejemplo.com",
+      "address": "Dirección de Recogida",
+      "street": "Dirección",
+      "city": "Ciudad",
+      "zipCode": "Código Postal"
+    },
+    "delivery": {
+      "title": "Información de Entrega",
+      "recipientName": "Nombre del Destinatario",
+      "recipientPhone": "Teléfono del Destinatario",
+      "address": "Dirección de Entrega",
+      "street": "Dirección",
+      "city": "Ciudad",
+      "zipCode": "Código Postal",
+      "notes": "Notas de Entrega (opcional)",
+      "notesPlaceholder": "Tocar el timbre, dejar en la puerta, etc."
+    },
+    "preferences": {
+      "title": "Paquete y Preferencias",
+      "packageType": "Tipo de Paquete",
+      "packageTypes": {
+        "documents": "Documentos",
+        "small": "Paquete Pequeño",
+        "medium": "Paquete Mediano",
+        "large": "Paquete Grande"
+      },
+      "weight": "Peso (kg)",
+      "dimensions": "Dimensiones (opcional)",
+      "dimensionsPlaceholder": "Largo x Ancho x Alto (cm)",
+      "specialInstructions": "Instrucciones Especiales",
+      "specialInstructionsPlaceholder": "Frágil, Mantener vertical, etc.",
+      "urgency": "Urgencia de Entrega",
+      "urgencyTypes": {
+        "standard": "Estándar (2-3 horas)",
+        "express": "Express (1 hora)",
+        "scheduled": "Programada"
+      }
+    },
+    "buttons": {
+      "next": "Siguiente",
+      "previous": "Anterior",
+      "submit": "Solicitar Entrega"
+    },
+    "success": {
+      "title": "¡Entrega Solicitada!",
+      "message": "Tu código de rastreo es:",
+      "info": "Estamos encontrando el mejor mensajero para ti. Recibirás actualizaciones por SMS y correo electrónico.",
+      "track": "Rastrear Entrega",
+      "newRequest": "Nueva Solicitud"
+    }
+  },
+  "track": {
+    "title": "Rastrear Tu Entrega",
+    "subtitle": "Ingresa tu código de rastreo para ver actualizaciones en tiempo real",
+    "trackingCode": "Código de Rastreo",
+    "trackingCodePlaceholder": "Ingresa el código de rastreo de 10 dígitos",
+    "trackButton": "Rastrear Paquete",
+    "status": {
+      "pending": "Esperando Mensajero",
+      "accepted": "Mensajero Asignado",
+      "picked_up": "Paquete Recogido",
+      "in_transit": "En Tránsito",
+      "delivered": "Entregado",
+      "cancelled": "Cancelado"
+    },
+    "details": {
+      "title": "Detalles de la Entrega",
+      "from": "Desde",
+      "to": "Hasta",
+      "courier": "Mensajero",
+      "estimatedTime": "Entrega Estimada",
+      "actualTime": "Entregado A Las",
+      "packageType": "Tipo de Paquete",
+      "status": "Estado Actual"
+    },
+    "notFound": {
+      "title": "Código de Rastreo No Encontrado",
+      "message": "Por favor verifica tu código de rastreo e intenta de nuevo.",
+      "button": "Intentar de Nuevo"
+    }
+  },
+  "courier": {
+    "register": {
+      "title": "Ser Mensajero",
+      "subtitle": "Comienza a ganar entregando paquetes en tu ciudad",
+      "steps": {
+        "credentials": "Cuenta",
+        "vehicle": "Vehículo",
+        "verification": "Verificación"
+      },
+      "credentials": {
+        "title": "Crea Tu Cuenta",
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "email": "Correo Electrónico",
+        "phone": "Número de Teléfono",
+        "password": "Contraseña",
+        "confirmPassword": "Confirmar Contraseña",
+        "terms": "Acepto los Términos de Servicio y Política de Privacidad"
+      },
+      "vehicle": {
+        "title": "Información del Vehículo",
+        "vehicleType": "Tipo de Vehículo",
+        "vehicleTypes": {
+          "bike": "Bicicleta",
+          "motorcycle": "Motocicleta",
+          "car": "Automóvil",
+          "van": "Furgoneta"
+        },
+        "licensePlate": "Matrícula (si aplica)",
+        "insurance": "Información del Seguro",
+        "insurancePlaceholder": "Número de póliza o detalles"
+      },
+      "verification": {
+        "title": "Documentos de Verificación",
+        "idDocument": "Documento de Identidad",
+        "driversLicense": "Licencia de Conducir (si aplica)",
+        "insurance": "Certificado de Seguro",
+        "photo": "Foto de Perfil",
+        "uploadInstructions": "Sube fotos claras de tus documentos",
+        "agreement": "Confirmo que toda la información proporcionada es precisa"
+      },
+      "buttons": {
+        "next": "Siguiente",
+        "previous": "Anterior",
+        "submit": "Enviar Solicitud"
+      },
+      "success": {
+        "title": "¡Solicitud Enviada!",
+        "message": "Revisaremos tu solicitud en 24-48 horas.",
+        "info": "Recibirás un correo electrónico una vez que tu cuenta sea verificada.",
+        "login": "Ir a Iniciar Sesión"
+      }
+    },
+    "login": {
+      "title": "Inicio de Sesión de Mensajero",
+      "subtitle": "Inicia sesión para acceder a tu panel",
+      "email": "Correo Electrónico",
+      "password": "Contraseña",
+      "remember": "Recuérdame",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "loginButton": "Iniciar Sesión",
+      "noAccount": "¿No tienes una cuenta?",
+      "register": "Regístrate aquí"
+    },
+    "dashboard": {
+      "title": "Panel de Mensajero",
+      "welcome": "Bienvenido de nuevo",
+      "stats": {
+        "available": "Trabajos Disponibles",
+        "active": "Entregas Activas",
+        "completed": "Completadas Hoy",
+        "earnings": "Ganancias de Hoy"
+      },
+      "availableJobs": {
+        "title": "Entregas Disponibles",
+        "noJobs": "No hay entregas disponibles en este momento",
+        "distance": "km de distancia",
+        "accept": "Aceptar Trabajo",
+        "viewDetails": "Ver Detalles"
+      },
+      "activeDeliveries": {
+        "title": "Tus Entregas Activas",
+        "pickup": "Recogida",
+        "delivery": "Entrega",
+        "updateStatus": "Actualizar Estado",
+        "complete": "Completar Entrega",
+        "cancel": "Cancelar"
+      },
+      "statusUpdate": {
+        "picked_up": "Marcar como Recogido",
+        "in_transit": "Marcar como En Tránsito",
+        "delivered": "Marcar como Entregado"
+      }
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "tryAgain": "Intentar de Nuevo",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "save": "Guardar",
+    "close": "Cerrar",
+    "required": "Requerido",
+    "optional": "Opcional"
+  }
+}

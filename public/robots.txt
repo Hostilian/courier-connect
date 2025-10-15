@@ -1,0 +1,28 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://hostilian.org/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /admin/
+
+# Allow all language versions
+Allow: /en/
+Allow: /es/
+Allow: /fr/
+Allow: /de/
+Allow: /it/
+Allow: /pt/
+Allow: /cs/
+Allow: /uk/
+Allow: /vi/
+Allow: /tr/
+Allow: /ru/
+Allow: /pl/
+Allow: /ar/
+Allow: /zh/
