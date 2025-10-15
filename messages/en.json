@@ -5,12 +5,23 @@
     "trackDelivery": "Track Delivery",
     "requestDelivery": "Request Delivery"
   },
+  "header": {
+    "taglineLocationCity": "Serving {country} · {city}",
+    "taglineLocationCountry": "Serving {country}",
+    "taglineDefault": "Fast. Local. Friendly.",
+    "requestLink": "Request",
+    "becomeCourier": "Become a courier"
+  },
   "home": {
     "hero": {
       "title": "Fast, Reliable Delivery Service",
       "subtitle": "Get your packages delivered quickly and safely with our trusted courier network",
       "cta": "Request Delivery",
-      "ctaSecondary": "Become a Courier"
+      "ctaSecondary": "Become a Courier",
+      "locationCity": "Local couriers in {city}",
+      "locationCountry": "Serving {country} with sunshine energy",
+      "locationFallback": "Delivering with a sunshine smile worldwide",
+      "changeLocation": "Need a different spot?"
     },
     "stats": {
       "deliveries": "Active Deliveries",
@@ -56,6 +67,23 @@
         "description": "Our team is always here to help you"
       }
     },
+    "locations": {
+      "title": "Trusted wherever you need us",
+      "subtitle": "From historic boulevards to coastal markets, Courier Connect brings sunshine energy to every doorstep.",
+      "global": "Worldwide coverage",
+      "activeCity": "Showing nearby couriers in {city}",
+      "activeGlobal": "Pick a location to see local courier vibes",
+      "coverage": "We operate across the European Union, North and South America, and every country Steam recognizes. Tap the selector to share where you are, and we will handle the hand-off.",
+      "hubTagline": "Same-day sunshine service",
+      "hubs": {
+        "berlin": "Berlin",
+        "prague": "Prague",
+        "istanbul": "Istanbul",
+        "newYork": "New York",
+        "toronto": "Toronto",
+        "saoPaulo": "São Paulo"
+      }
+    },
     "testimonials": {
       "title": "What Our Customers Say",
       "customer1": {
@@ -83,6 +111,53 @@
   "request": {
     "title": "Request Delivery",
     "subtitle": "Fill in the details and we'll find the perfect courier for you",
+    "banner": {
+      "globalTitle": "Worldwide coverage",
+      "city": "We will route couriers near {city}.",
+      "country": "We match you with trusted couriers in {country}.",
+      "global": "Tell us where you are to unlock local courier options.",
+      "change": "Update location"
+    },
+    "error": "Something went wrong. Please try again.",
+    "next": "Next Step",
+    "back": "Back",
+    "submitting": "Submitting...",
+    "submit": "Submit Request",
+    "step1": { "title": "Pickup Details" },
+    "senderName": "Your Name",
+    "senderNamePlaceholder": "John Doe",
+    "senderPhone": "Your Phone",
+    "pickupAddress": "Pickup Address",
+    "addressPlaceholder": "Street, City, Postal Code",
+    "pickupTime": "When to pickup?",
+    "asap": "As soon as possible",
+    "today": "Later today",
+    "tomorrow": "Tomorrow",
+    "scheduled": "Schedule for later",
+    "step2": { "title": "Delivery Details" },
+    "receiverName": "Recipient Name",
+    "receiverNamePlaceholder": "Jane Smith",
+    "receiverPhone": "Recipient Phone",
+    "deliveryAddress": "Delivery Address",
+    "step3": { "title": "Package Details" },
+    "packageType": "What are you sending?",
+    "envelope": "📧 Envelope / Documents",
+    "gift": "🎁 Gift / Present",
+    "marketplace": "📦 Marketplace Item",
+    "food": "🍱 Food / Groceries",
+    "other": "📦 Other",
+    "packageSize": "Size",
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large",
+    "packageDescription": "Description",
+    "descriptionPlaceholder": "Any special instructions or details...",
+    "urgency": "Delivery Speed",
+    "standard": "🚶 Standard (2-4 hours) - $5",
+    "express": "🚴 Express (1-2 hours) - $10",
+    "urgent": "🏃 Urgent (< 1 hour) - $20",
+    "notes": "Additional Notes",
+    "notesPlaceholder": "Anything else the courier should know...",
     "steps": {
       "pickup": "Pickup Details",
       "delivery": "Delivery Details",
@@ -138,8 +213,13 @@
       "previous": "Previous",
       "submit": "Request Delivery"
     },
+    "trackButton": "Track Delivery",
+    "trackingId": "Tracking ID",
+    "newRequest": "New Request",
     "success": {
       "title": "Delivery Requested!",
+      "description": "Your delivery request has been created. A courier will pick it up soon!",
+      "save": "Save this tracking ID to check your delivery status anytime.",
       "message": "Your tracking code is:",
       "info": "We're finding the best courier for you. You'll receive updates via SMS and email.",
       "track": "Track Delivery",
@@ -148,31 +228,44 @@
   },
   "track": {
     "title": "Track Your Delivery",
-    "subtitle": "Enter your tracking code to see real-time updates",
-    "trackingCode": "Tracking Code",
-    "trackingCodePlaceholder": "Enter 10-digit tracking code",
-    "trackButton": "Track Package",
+    "subtitle": "Enter your tracking ID to see real-time updates",
+    "placeholder": "Enter tracking ID (e.g., CC-123456)",
+    "track": "Track",
+    "searching": "Searching...",
+    "trackingId": "Tracking ID",
     "status": {
-      "pending": "Waiting for Courier",
-      "accepted": "Courier Assigned",
-      "picked_up": "Package Picked Up",
-      "in_transit": "In Transit",
+      "pending": "Pending",
+      "pendingDesc": "Waiting for a courier to accept",
+      "accepted": "Accepted",
+      "acceptedDesc": "Courier is on the way to pickup",
+      "pickedUp": "Picked Up",
+      "pickedUpDesc": "Package collected from sender",
+      "inTransit": "In Transit",
+      "inTransitDesc": "On the way to delivery address",
       "delivered": "Delivered",
-      "cancelled": "Cancelled"
+      "deliveredDesc": "Successfully delivered!",
+      "cancelled": "Cancelled",
+      "cancelledDesc": "Delivery request was cancelled"
     },
-    "details": {
-      "title": "Delivery Details",
-      "from": "From",
-      "to": "To",
-      "courier": "Courier",
-      "estimatedTime": "Estimated Delivery",
-      "actualTime": "Delivered At",
-      "packageType": "Package Type",
-      "status": "Current Status"
-    },
+    "pickup": "Pickup",
+    "from": "From",
+    "delivery": "Delivery",
+    "to": "To",
+    "package": "Package",
+    "type": "Type",
+    "urgency": "Speed",
+    "courier": "Your Courier",
+    "name": "Name",
+    "phone": "Phone",
+    "timeline": "Timeline",
+    "created": "Request Created",
+    "lastUpdate": "Last Update",
+    "estimated": "Estimated Delivery",
+    "help": "Need help? Your tracking ID was sent when you created the request.",
+    "format": "Format: CC-XXXXXX (e.g., CC-123456)",
     "notFound": {
-      "title": "Tracking Code Not Found",
-      "message": "Please check your tracking code and try again.",
+      "title": "Tracking ID Not Found",
+      "message": "Tracking ID not found. Please check and try again.",
       "button": "Try Again"
     }
   },

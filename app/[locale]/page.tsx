@@ -68,8 +68,7 @@ export default function HomePage() {
 
   const locationLine = location.city
     ? t('home.hero.locationCity', {
-        city: location.city,
-        country: country?.name,
+        city: location.city || '',
         defaultMessage: 'Local couriers in {city}',
       })
     : country
@@ -291,8 +290,8 @@ export default function HomePage() {
                 </h2>
                 <p className="text-lg text-gray-600">
                   {t('home.locations.subtitle', {
-                    city: location.city,
-                    country: country?.name,
+                    city: location.city || '',
+                    country: country?.name || '',
                     defaultMessage: 'From historic boulevards to coastal markets, Courier Connect brings sunshine energy to every doorstep.',
                   })}
                 </p>
@@ -306,7 +305,7 @@ export default function HomePage() {
                       <p className="text-sm text-gray-500">
                         {location.city
                           ? t('home.locations.activeCity', {
-                              city: location.city,
+                              city: location.city || '',
                               defaultMessage: 'Showing nearby couriers in {city}',
                             })
                           : t('home.locations.activeGlobal', {

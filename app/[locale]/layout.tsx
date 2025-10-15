@@ -1,5 +1,9 @@
 import Providers from '@/components/Providers';
+import SimpleFooter from '@/components/SimpleFooter';
+import SimpleHeader from '@/components/SimpleHeader';
+import WelcomeModal from '@/components/WelcomeModal';
 import { locales } from '@/i18n';
+import { getLanguageByCode } from '@/lib/languages';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Inter } from 'next/font/google';
@@ -59,13 +63,17 @@ export default async function LocaleLayout({
 
   // Get messages for the locale
   const messages = await getMessages();
+  const isRtl = !!getLanguageByCode(locale)?.rtl;
 
   return (
-    <html lang={locale} className="scroll-smooth">
-      <body className={`${inter.className} antialiased bg-gray-50 min-h-screen`}>
+    <html lang={locale} dir={isRtl ? 'rtl' : 'ltr'} className="scroll-smooth">
+      <body className={`${inter.className} antialiased bg-gray-50 min-h-screen flex flex-col`}>
         <NextIntlClientProvider messages={messages}>
           <Providers>
-            {children}
+            <WelcomeModal />
+            <SimpleHeader />
+            <main className="flex-1 w-full">{children}</main>
+            <SimpleFooter />
             <Toaster
               position="top-center"
               toastOptions={{
