@@ -1,5 +1,7 @@
 'use client';
 
+import { useLocationContext } from '@/components/LocationProvider';
+import { getCountryByCode } from '@/lib/countries';
 import { getLanguageByCode } from '@/lib/languages';
 import { loadGoogleMaps } from '@/lib/maps';
 import { motion } from 'framer-motion';
@@ -13,6 +15,8 @@ export default function RequestPage() {
   const locale = useLocale();
   const router = useRouter();
   const theme = getLanguageByCode(locale)?.culturalTheme;
+  const { location } = useLocationContext();
+  const country = location.countryCode ? getCountryByCode(location.countryCode) : undefined;
 
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -80,7 +84,7 @@ export default function RequestPage() {
     }
     const origin = encodeURIComponent(formData.senderAddress);
     const destination = encodeURIComponent(formData.receiverAddress);
-    setRouteUrl(`https://www.google.com/maps/embed/v1/directions?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&origin=${origin}&destination=${destination}`);
+  setRouteUrl(`https://www.google.com/maps/embed/v1/directions?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&origin=${origin}&destination=${destination}`);
   }, [formData.senderAddress, formData.receiverAddress]);
 
   const [loading, setLoading] = useState(false);
@@ -122,7 +126,13 @@ export default function RequestPage() {
       const response = await fetch('/api/deliveries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, locale }),
+        body: JSON.stringify({
+          ...formData,
+          locale,
+          serviceCountry: location.countryCode,
+          serviceCity: location.city,
+          senderLocation: location.coordinates,
+        }),
       });
 
       if (response.ok) {
@@ -202,6 +212,27 @@ export default function RequestPage() {
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
+        {country && (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
+          >
+            <div className="flex items-center gap-3 text-sm text-gray-600">
+              <span className="text-2xl" aria-hidden="true">{country.flag}</span>
+              <div>
+                <p className="text-base font-semibold text-gray-900">
+                  {country.name}
+                </p>
+                <p>
+                  {location.city
+                    ? `We will route couriers near ${location.city}.`
+                    : 'We match you with trusted couriers in your area.'}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

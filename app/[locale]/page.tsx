@@ -1,6 +1,7 @@
 'use client';
 
 import LanguageSelector from '@/components/LanguageSelector';
+import LocationSelector from '@/components/LocationSelector';
 import { motion } from 'framer-motion';
 import { ArrowRight, Clock, MapPin, Package, Shield, Star, Truck, Users } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
@@ -99,12 +100,16 @@ export default function HomePage() {
               >
                 {t('nav.forCouriers')}
               </Link>
+              <LocationSelector />
               <LanguageSelector />
             </div>
 
             {/* Mobile Menu Button */}
             <div className="md:hidden">
-              <LanguageSelector />
+              <div className="flex items-center gap-2">
+                <LocationSelector />
+                <LanguageSelector />
+              </div>
             </div>
           </div>
         </div>

@@ -2,9 +2,14 @@
 
 import LanguageSelector from '@/components/LanguageSelector';
 import LocationSelector from '@/components/LocationSelector';
+import { useLocationContext } from '@/components/LocationProvider';
+import { getCountryByCode } from '@/lib/countries';
 import Link from 'next/link';
 
 export default function SimpleHeader() {
+  const { location } = useLocationContext();
+  const country = location.countryCode ? getCountryByCode(location.countryCode) : undefined;
+
   return (
     <header className="w-full bg-white shadow-sm sticky top-0 z-50">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 py-3 flex items-center justify-between">
@@ -12,7 +17,11 @@ export default function SimpleHeader() {
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-300 to-orange-400 flex items-center justify-center font-bold text-lg">CC</div>
           <div>
             <div className="font-semibold text-lg">Courier Connect</div>
-            <div className="text-xs text-muted-foreground">Fast. Local. Friendly.</div>
+            <div className="text-xs text-muted-foreground">
+              {country
+                ? `Serving ${country.name}${location.city ? ` · ${location.city}` : ''}`
+                : 'Fast. Local. Friendly.'}
+            </div>
           </div>
         </Link>
 

@@ -25,6 +25,8 @@ export interface IDeliveryRequest extends Document {
   urgency: 'standard' | 'express' | 'urgent';
   pickupTime: string;
   notes?: string;
+  serviceCountry?: string;
+  serviceCity?: string;
   
   // Courier Assignment
   courierId?: mongoose.Types.ObjectId;
@@ -142,6 +144,18 @@ const DeliveryRequestSchema: Schema = new Schema(
       trim: true,
       maxlength: [500, 'Notes cannot exceed 500 characters'],
     },
+    serviceCountry: {
+      type: String,
+      trim: true,
+      uppercase: true,
+      minlength: 2,
+      maxlength: 2,
+    },
+    serviceCity: {
+      type: String,
+      trim: true,
+      maxlength: [120, 'City name cannot exceed 120 characters'],
+    },
     
     // Courier Assignment
     courierId: {
@@ -197,6 +211,7 @@ DeliveryRequestSchema.index({ status: 1 });
 DeliveryRequestSchema.index({ courierId: 1 });
 DeliveryRequestSchema.index({ createdAt: -1 });
 DeliveryRequestSchema.index({ status: 1, createdAt: -1 });
+DeliveryRequestSchema.index({ serviceCountry: 1, createdAt: -1 });
 
 export default mongoose.models.DeliveryRequest || 
   mongoose.model<IDeliveryRequest>('DeliveryRequest', DeliveryRequestSchema);

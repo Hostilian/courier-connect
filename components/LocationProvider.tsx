@@ -81,7 +81,11 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
   };
 
   const detectLocation = async () => {
-    if (typeof window === 'undefined' || !('geolocation' in navigator)) {
+    if (
+      typeof window === 'undefined' ||
+      typeof navigator === 'undefined' ||
+      !('geolocation' in navigator)
+    ) {
       setError('Location detection is not supported on this device.');
       return;
     }
@@ -99,18 +103,18 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
 
           try {
             const response = await fetch(
-              `https://geocode.maps.co/reverse?lat=${latitude}&lon=${longitude}`,
+              `/api/geocode/reverse?lat=${latitude}&lng=${longitude}`,
               {
                 headers: {
-                  'User-Agent': 'courier-connect/1.0 (+https://hostilian.org)',
+                  Accept: 'application/json',
                 },
               }
             );
 
             if (response.ok) {
               const data = await response.json();
-              const countryCode = data?.address?.country_code?.toUpperCase();
-              const city = data?.address?.city || data?.address?.town || data?.address?.village;
+              const countryCode = data?.countryCode?.toUpperCase();
+              const city = data?.city;
 
               if (countryCode) {
                 const country = getCountryByCode(countryCode);

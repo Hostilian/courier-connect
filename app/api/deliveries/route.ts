@@ -48,6 +48,8 @@ export async function POST(request: NextRequest) {
       pickupTime,
       notes,
       locale = 'en',
+      serviceCountry,
+      serviceCity,
     } = body;
 
     // Validate required fields
@@ -105,6 +107,8 @@ export async function POST(request: NextRequest) {
       notes: notes || '',
       price,
       locale,
+      serviceCountry,
+      serviceCity,
     });
 
     return NextResponse.json(
