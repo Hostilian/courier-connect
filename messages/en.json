@@ -1,0 +1,285 @@
+{
+  "nav": {
+    "home": "Home",
+    "forCouriers": "For Couriers",
+    "trackDelivery": "Track Delivery",
+    "requestDelivery": "Request Delivery"
+  },
+  "home": {
+    "hero": {
+      "title": "Fast, Reliable Delivery Service",
+      "subtitle": "Get your packages delivered quickly and safely with our trusted courier network",
+      "cta": "Request Delivery",
+      "ctaSecondary": "Become a Courier"
+    },
+    "stats": {
+      "deliveries": "Active Deliveries",
+      "couriers": "Verified Couriers",
+      "cities": "Cities Covered",
+      "rating": "Customer Rating"
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "step1": {
+        "title": "Request Delivery",
+        "description": "Enter pickup and delivery details"
+      },
+      "step2": {
+        "title": "Get Matched",
+        "description": "Our system finds the best courier"
+      },
+      "step3": {
+        "title": "Track in Real-time",
+        "description": "Monitor your delivery every step"
+      },
+      "step4": {
+        "title": "Receive Package",
+        "description": "Get your package safely delivered"
+      }
+    },
+    "features": {
+      "title": "Why Choose Us",
+      "fast": {
+        "title": "Lightning Fast",
+        "description": "Same-day delivery available in most cities"
+      },
+      "secure": {
+        "title": "100% Secure",
+        "description": "Your packages are fully insured and tracked"
+      },
+      "affordable": {
+        "title": "Affordable Rates",
+        "description": "Transparent pricing with no hidden fees"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "description": "Our team is always here to help you"
+      }
+    },
+    "testimonials": {
+      "title": "What Our Customers Say",
+      "customer1": {
+        "name": "Sarah Johnson",
+        "role": "Small Business Owner",
+        "quote": "Excellent service! My packages always arrive on time and in perfect condition."
+      },
+      "customer2": {
+        "name": "Michael Chen",
+        "role": "Online Shopper",
+        "quote": "The real-time tracking gives me peace of mind. Highly recommended!"
+      },
+      "customer3": {
+        "name": "Emma Rodriguez",
+        "role": "Freelancer",
+        "quote": "Affordable rates and reliable couriers. This is my go-to delivery service."
+      }
+    },
+    "cta": {
+      "title": "Ready to Get Started?",
+      "subtitle": "Join thousands of satisfied customers",
+      "button": "Request Delivery Now"
+    }
+  },
+  "request": {
+    "title": "Request Delivery",
+    "subtitle": "Fill in the details and we'll find the perfect courier for you",
+    "steps": {
+      "pickup": "Pickup Details",
+      "delivery": "Delivery Details",
+      "preferences": "Preferences"
+    },
+    "pickup": {
+      "title": "Pickup Information",
+      "name": "Your Name",
+      "namePlaceholder": "John Doe",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+1 234 567 8900",
+      "email": "Email (optional)",
+      "emailPlaceholder": "john@example.com",
+      "address": "Pickup Address",
+      "street": "Street Address",
+      "city": "City",
+      "zipCode": "ZIP Code"
+    },
+    "delivery": {
+      "title": "Delivery Information",
+      "recipientName": "Recipient Name",
+      "recipientPhone": "Recipient Phone",
+      "address": "Delivery Address",
+      "street": "Street Address",
+      "city": "City",
+      "zipCode": "ZIP Code",
+      "notes": "Delivery Notes (optional)",
+      "notesPlaceholder": "Ring the doorbell, leave at door, etc."
+    },
+    "preferences": {
+      "title": "Package & Preferences",
+      "packageType": "Package Type",
+      "packageTypes": {
+        "documents": "Documents",
+        "small": "Small Package",
+        "medium": "Medium Package",
+        "large": "Large Package"
+      },
+      "weight": "Weight (kg)",
+      "dimensions": "Dimensions (optional)",
+      "dimensionsPlaceholder": "L x W x H (cm)",
+      "specialInstructions": "Special Instructions",
+      "specialInstructionsPlaceholder": "Fragile, Keep upright, etc.",
+      "urgency": "Delivery Urgency",
+      "urgencyTypes": {
+        "standard": "Standard (2-3 hours)",
+        "express": "Express (1 hour)",
+        "scheduled": "Scheduled"
+      }
+    },
+    "buttons": {
+      "next": "Next",
+      "previous": "Previous",
+      "submit": "Request Delivery"
+    },
+    "success": {
+      "title": "Delivery Requested!",
+      "message": "Your tracking code is:",
+      "info": "We're finding the best courier for you. You'll receive updates via SMS and email.",
+      "track": "Track Delivery",
+      "newRequest": "New Request"
+    }
+  },
+  "track": {
+    "title": "Track Your Delivery",
+    "subtitle": "Enter your tracking code to see real-time updates",
+    "trackingCode": "Tracking Code",
+    "trackingCodePlaceholder": "Enter 10-digit tracking code",
+    "trackButton": "Track Package",
+    "status": {
+      "pending": "Waiting for Courier",
+      "accepted": "Courier Assigned",
+      "picked_up": "Package Picked Up",
+      "in_transit": "In Transit",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    },
+    "details": {
+      "title": "Delivery Details",
+      "from": "From",
+      "to": "To",
+      "courier": "Courier",
+      "estimatedTime": "Estimated Delivery",
+      "actualTime": "Delivered At",
+      "packageType": "Package Type",
+      "status": "Current Status"
+    },
+    "notFound": {
+      "title": "Tracking Code Not Found",
+      "message": "Please check your tracking code and try again.",
+      "button": "Try Again"
+    }
+  },
+  "courier": {
+    "register": {
+      "title": "Become a Courier",
+      "subtitle": "Start earning by delivering packages in your city",
+      "steps": {
+        "credentials": "Account",
+        "vehicle": "Vehicle",
+        "verification": "Verification"
+      },
+      "credentials": {
+        "title": "Create Your Account",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "terms": "I agree to the Terms of Service and Privacy Policy"
+      },
+      "vehicle": {
+        "title": "Vehicle Information",
+        "vehicleType": "Vehicle Type",
+        "vehicleTypes": {
+          "bike": "Bicycle",
+          "motorcycle": "Motorcycle",
+          "car": "Car",
+          "van": "Van"
+        },
+        "licensePlate": "License Plate (if applicable)",
+        "insurance": "Insurance Information",
+        "insurancePlaceholder": "Policy number or details"
+      },
+      "verification": {
+        "title": "Verification Documents",
+        "idDocument": "ID Document",
+        "driversLicense": "Driver's License (if applicable)",
+        "insurance": "Insurance Certificate",
+        "photo": "Profile Photo",
+        "uploadInstructions": "Upload clear photos of your documents",
+        "agreement": "I confirm that all information provided is accurate"
+      },
+      "buttons": {
+        "next": "Next",
+        "previous": "Previous",
+        "submit": "Submit Application"
+      },
+      "success": {
+        "title": "Application Submitted!",
+        "message": "We'll review your application within 24-48 hours.",
+        "info": "You'll receive an email once your account is verified.",
+        "login": "Go to Login"
+      }
+    },
+    "login": {
+      "title": "Courier Login",
+      "subtitle": "Sign in to access your dashboard",
+      "email": "Email Address",
+      "password": "Password",
+      "remember": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "loginButton": "Sign In",
+      "noAccount": "Don't have an account?",
+      "register": "Register here"
+    },
+    "dashboard": {
+      "title": "Courier Dashboard",
+      "welcome": "Welcome back",
+      "stats": {
+        "available": "Available Jobs",
+        "active": "Active Deliveries",
+        "completed": "Completed Today",
+        "earnings": "Today's Earnings"
+      },
+      "availableJobs": {
+        "title": "Available Deliveries",
+        "noJobs": "No available deliveries at the moment",
+        "distance": "km away",
+        "accept": "Accept Job",
+        "viewDetails": "View Details"
+      },
+      "activeDeliveries": {
+        "title": "Your Active Deliveries",
+        "pickup": "Pickup",
+        "delivery": "Delivery",
+        "updateStatus": "Update Status",
+        "complete": "Complete Delivery",
+        "cancel": "Cancel"
+      },
+      "statusUpdate": {
+        "picked_up": "Mark as Picked Up",
+        "in_transit": "Mark as In Transit",
+        "delivered": "Mark as Delivered"
+      }
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "tryAgain": "Try Again",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "close": "Close",
+    "required": "Required",
+    "optional": "Optional"
+  }
+}
