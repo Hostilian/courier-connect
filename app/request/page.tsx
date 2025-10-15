@@ -41,8 +41,11 @@ export default function RequestPage() {
     customerPhone: '',
     urgency: 'standard'
   })
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [trackingId, setTrackingId] = useState<string | null>(null)
 
-  const totalSteps = 4
+  const totalSteps = 5
 
   const updateRequest = (field: keyof DeliveryRequest, value: string) => {
     setRequest(prev => ({ ...prev, [field]: value }))
@@ -66,10 +69,31 @@ export default function RequestPage() {
     return basePrice * urgencyMultiplier[request.urgency]
   }
 
-  const submitRequest = () => {
-    // Here you would submit to your API
-    console.log('Submitting request:', request)
-    // Redirect to tracking page or show success
+  const submitRequest = async () => {
+    setIsLoading(true)
+    setError(null)
+    try {
+      const response = await fetch('/api/deliveries', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(request)
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Something went wrong')
+      }
+
+      setTrackingId(result.trackingId)
+      nextStep() // Move to a new success step
+    } catch (err: any) {
+      setError(err.message)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -443,10 +467,49 @@ export default function RequestPage() {
                   <button
                     onClick={submitRequest}
                     className="btn-primary bg-green-600 hover:bg-green-700"
+                    disabled={isLoading}
                   >
-                    Confirm & Submit Request
+                    {isLoading ? 'Submitting...' : 'Confirm & Submit Request'}
                   </button>
                 </div>
+
+                {error && (
+                  <div className="mt-4 text-center text-red-500">
+                    {error}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Step 5: Success */}
+            {step === 5 && (
+              <div className="card text-center">
+                <motion.div
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.2, type: 'spring', stiffness: 120 }}
+                >
+                  <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                    <svg className="w-12 h-12 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-900 mt-6">Request Submitted!</h2>
+                  <p className="text-gray-600 mt-2">
+                    Your delivery request has been successfully submitted. A courier will be assigned shortly.
+                  </p>
+                  <div className="mt-8">
+                    <p className="text-sm text-gray-500">Your Tracking ID is:</p>
+                    <div className="text-2xl font-bold text-blue-600 tracking-widest bg-gray-100 rounded-md py-2 mt-2">
+                      {trackingId}
+                    </div>
+                  </div>
+                  <div className="mt-8">
+                    <Link href={`/track?id=${trackingId}`} className="btn-primary">
+                      Track Your Delivery
+                    </Link>
+                  </div>
+                </motion.div>
               </div>
             )}
           </motion.div>

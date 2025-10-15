@@ -65,10 +65,28 @@ export default function CourierRegisterPage() {
     if (step > 1) setStep(step - 1)
   }
 
-  const submitRegistration = () => {
+  const submitRegistration = async () => {
     // Here you would submit to your API
     console.log('Submitting registration:', registration)
-    // Redirect to dashboard or verification page
+    try {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(registration)
+      })
+
+      if (response.ok) {
+        nextStep()
+      } else {
+        const errorData = await response.json()
+        alert(`Registration failed: ${errorData.message}`)
+      }
+    } catch (error) {
+      console.error('Registration error:', error)
+      alert('An error occurred during registration.')
+    }
   }
 
   const toggleAvailableHour = (hour: string) => {
