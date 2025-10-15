@@ -1,6 +1,6 @@
-import dbConnect from '@/lib/mongodb'
-import { DeliveryRequest } from '@/models/DeliveryRequest'
-import { NextRequest, NextResponse } from 'next/server'
+import dbConnect from '@/lib/mongodb';
+import { DeliveryRequest } from '@/models/DeliveryRequest';
+import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
 const deliveryRequestSchema = z.object({
