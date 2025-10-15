@@ -1,19 +1,38 @@
-import Providers from '@/components/Providers'
-import type { Metadata } from 'next'
+import { redirect } from 'next/navigation';import Providers from '@/components/Providers'
+
+import { defaultLocale } from '@/i18n';import type { Metadata } from 'next'
+
 import { Inter } from 'next/font/google'
-import { Toaster } from 'react-hot-toast'
-import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+// Root layout - redirects to default localeimport { Toaster } from 'react-hot-toast'
 
-export const metadata: Metadata = {
-  title: 'Courier Connect - Neighbors Helping Neighbors',
-  description: 'A friendly local delivery service connecting neighbors who need help with trusted couriers. No sign-up needed to request deliveries!',
-  keywords: 'local delivery, community courier, neighbor help, package delivery, friendly service',
-  authors: [{ name: 'Courier Connect Team' }],
-  viewport: 'width=device-width, initial-scale=1',
-  themeColor: '#3B82F6',
-  manifest: '/manifest.json',
+export default function RootLayout({import './globals.css'
+
+  children,
+
+}: {const inter = Inter({ subsets: ['latin'] })
+
+  children: React.ReactNode;
+
+}) {import type { Metadata } from 'next'
+
+  // This will never render because middleware handles the redirectimport './globals.css'
+
+  return children;
+
+}export const metadata: Metadata = {
+
+  title: 'Courier Connect',
+  description: 'Fast and reliable delivery service',
+}
+
+// This is just a wrapper - the actual layout is in [locale]/layout.tsx
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return children;
 }
 
 export default function RootLayout({
