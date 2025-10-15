@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import { countries } from '@/lib/countries';
+import Link from 'next/link';
 
 export default function SimpleFooter() {
   return (

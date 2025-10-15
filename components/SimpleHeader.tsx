@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import LanguageSelector from '@/components/LanguageSelector';
 import LocationSelector from '@/components/LocationSelector';
+import Link from 'next/link';
 
 export default function SimpleHeader() {
   return (

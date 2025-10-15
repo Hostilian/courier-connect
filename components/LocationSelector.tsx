@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { countries, getCountryByCode, searchCountries } from '@/lib/countries';
+import { useEffect, useState } from 'react';
 
 interface Props {
   onChange?: (countryCode: string) => void;

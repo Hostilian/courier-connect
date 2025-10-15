@@ -1,7 +1,7 @@
 // Root layout
-import './globals.css';
-import SimpleHeader from '@/components/SimpleHeader';
 import SimpleFooter from '@/components/SimpleFooter';
+import SimpleHeader from '@/components/SimpleHeader';
+import './globals.css';
 
 export default function RootLayout({
   children,
