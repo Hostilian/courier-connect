@@ -1,36 +1,69 @@
-# Courier Connect 🚀
+# Courier Connect# Courier Connect 🚀
 
-> Neighbors helping neighbors with local deliveries
 
-Connect with friendly local couriers for quick pickups and deliveries. Built for real people, real connections.
 
-## What is Courier Connect?
+Local delivery platform connecting customers with couriers.> Neighbors helping neighbors with local deliveries
 
-A simple, mobile-first platform where:
 
-- **Customers** can request pickups without signing up
-- **Couriers** can earn money helping their community
+
+## FeaturesConnect with friendly local couriers for quick pickups and deliveries. Built for real people, real connections.
+
+
+
+- Customer delivery requests with tracking## What is Courier Connect?
+
+- Courier dashboard and delivery management
+
+- Email verification and password resetA simple, mobile-first platform where:
+
+- Customer ratings system
+
+- Multi-language support (14 languages)- **Customers** can request pickups without signing up
+
+- Mobile-responsive design- **Couriers** can earn money helping their community
+
 - Everyone enjoys fast, friendly, local service
+
+## Setup
 
 Perfect for envelopes, gifts, or marketplace items you can't pick up yourself.
 
-## Features
+```bash
 
-### For Customers 🙋
-- ✅ No registration required
-- 📦 Simple pickup requests
+npm install## Features
+
+cp .env.example .env.local
+
+# Configure MongoDB and JWT_SECRET in .env.local### For Customers 🙋
+
+npm run dev- ✅ No registration required
+
+```- 📦 Simple pickup requests
+
 - 📱 Real-time tracking
-- 💰 Fair, transparent pricing
 
-### For Couriers 🚴
-- 💼 Flexible schedule
-- 📍 Choose your deliveries
-- 💳 Secure payments
-- ⭐ Build your reputation
+## Tech Stack- 💰 Fair, transparent pricing
 
-## Getting Started
 
-### Prerequisites
+
+- Next.js 14### For Couriers 🚴
+
+- MongoDB- 💼 Flexible schedule
+
+- TypeScript- 📍 Choose your deliveries
+
+- Tailwind CSS- 💳 Secure payments
+
+- Resend (email)- ⭐ Build your reputation
+
+
+
+## License## Getting Started
+
+
+
+MIT### Prerequisites
+
 - Node.js 18+
 - MongoDB (local or [MongoDB Atlas](https://mongodb.com/cloud/atlas))
 

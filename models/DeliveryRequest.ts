@@ -8,11 +8,13 @@ export interface IDeliveryRequest extends Document {
   senderName: string;
   senderPhone: string;
   senderAddress: string;
+  senderLocation?: { lat: number; lng: number };
   
   // Receiver Information
   receiverName: string;
   receiverPhone: string;
   receiverAddress: string;
+  receiverLocation?: { lat: number; lng: number };
   
   // Package Information
   packageType: string;
@@ -33,6 +35,9 @@ export interface IDeliveryRequest extends Document {
   price: number;
   estimatedDelivery?: Date;
   actualDelivery?: Date;
+  // Payment
+  paymentStatus?: 'unpaid' | 'paid' | 'refunded';
+  paymentIntentId?: string;
   
   // Metadata
   locale: string;
@@ -72,6 +77,13 @@ const DeliveryRequestSchema: Schema = new Schema(
       required: [true, 'Sender address is required'],
       trim: true,
     },
+    senderLocation: {
+      type: {
+        lat: { type: Number },
+        lng: { type: Number },
+      },
+      _id: false,
+    },
     
     // Receiver Information
     receiverName: {
@@ -88,6 +100,13 @@ const DeliveryRequestSchema: Schema = new Schema(
       type: String,
       required: [true, 'Receiver address is required'],
       trim: true,
+    },
+    receiverLocation: {
+      type: {
+        lat: { type: Number },
+        lng: { type: Number },
+      },
+      _id: false,
     },
     
     // Package Information
@@ -149,6 +168,15 @@ const DeliveryRequestSchema: Schema = new Schema(
     },
     actualDelivery: {
       type: Date,
+    },
+    paymentStatus: {
+      type: String,
+      enum: ['unpaid', 'paid', 'refunded'],
+      default: 'unpaid',
+    },
+    paymentIntentId: {
+      type: String,
+      trim: true,
     },
     
     // Metadata

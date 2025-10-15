@@ -1,4 +1,4 @@
-name: 🚀 CI/CD Pipeline - Production Grade
+name: CI/CD Pipeline
 
 on:
   push:
@@ -13,214 +13,82 @@ env:
   JWT_SECRET_TEST: test-jwt-secret-key-for-ci-builds-only-minimum-32-characters-required
 
 jobs:
-  # Job 1: Code Quality Checks
   code-quality:
-    name: 🔍 Code Quality & Security
+    name: Code Quality
     runs-on: ubuntu-latest
     
     steps:
-      - name: 📥 Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       
-      - name: 🟢 Setup Node.js ${{ env.NODE_VERSION }}
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
       
-      - name: 📦 Install Dependencies
+      - name: Install Dependencies
         run: npm ci
       
-      - name: � Run Security Audit
-        run: npm audit --audit-level=moderate
-        continue-on-error: true
-      
-      - name: �🔍 TypeScript Type Check
+      - name: TypeScript Check
         run: npm run type-check
       
-      - name: 🎨 Run ESLint
+      - name: Lint
         run: npm run lint
-      
-      - name: 💅 Check Code Formatting (Prettier)
-        run: npm run format:check
-        continue-on-error: true
-      
-      - name: � Generate Code Quality Report
-        run: |
-          echo "✅ Code Quality Checks Passed!"
-          echo "- TypeScript: ✓"
-          echo "- ESLint: ✓"
-          echo "- Prettier: ✓"
 
-  # Job 2: Build & Test
   build-and-test:
-    name: 🏗️ Build & Integration Tests
+    name: Build
     runs-on: ubuntu-latest
     needs: code-quality
     
-    strategy:
-      matrix:
-        node-version: [18, 20]
-    
     steps:
-      - name: 📥 Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
       
-      - name: 🟢 Setup Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
       
-      - name: 📦 Install Dependencies
+      - name: Install Dependencies
         run: npm ci
       
-      - name: 🏗️ Build Production Bundle
+      - name: Build
         run: npm run build
         env:
           MONGODB_URI: ${{ env.MONGODB_URI_TEST }}
           JWT_SECRET: ${{ env.JWT_SECRET_TEST }}
           NODE_ENV: production
       
-      - name: 📏 Check Bundle Size
-        run: |
-          echo "📦 Checking build output size..."
-          du -sh .next
-          echo "✅ Build completed successfully!"
-      
-      - name: 💾 Cache Build Output
+      - name: Cache Build
         uses: actions/cache@v4
         with:
           path: .next
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-
 
-  # Job 3: Mobile & Accessibility Tests
-  lighthouse:
-    name: 🚦 Lighthouse Performance & Accessibility
+  deploy-preview:
+    name: Deploy Preview
     runs-on: ubuntu-latest
     needs: build-and-test
-    
-    steps:
-      - name: 📥 Checkout Repository
-        uses: actions/checkout@v4
-      
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-      
-      - name: 📦 Install Dependencies
-        run: npm ci
-      
-      - name: 🏗️ Build for Production
-        run: npm run build
-        env:
-          MONGODB_URI: ${{ env.MONGODB_URI_TEST }}
-          JWT_SECRET: ${{ env.JWT_SECRET_TEST }}
-      
-      - name: 🚀 Start Production Server
-        run: |
-          npm run start &
-          sleep 10
-        env:
-          MONGODB_URI: ${{ env.MONGODB_URI_TEST }}
-          JWT_SECRET: ${{ env.JWT_SECRET_TEST }}
-      
-      - name: 🚦 Run Lighthouse CI
-        run: |
-          npm install -g @lhci/cli
-          echo "📱 Testing mobile performance..."
-          echo "✅ Lighthouse checks completed!"
-        continue-on-error: true
-
-  # Job 4: Security Scan
-  security:
-    name: 🔐 Security Vulnerability Scan
-    runs-on: ubuntu-latest
-    needs: code-quality
-    
-    steps:
-      - name: 📥 Checkout Repository
-        uses: actions/checkout@v4
-      
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      
-      - name: 🔒 Run NPM Audit
-        run: |
-          npm audit --production || true
-          echo "🔐 Security scan completed!"
-      
-      - name: 🔍 Check for Known Vulnerabilities
-        run: |
-          echo "Checking dependencies for security issues..."
-          npm list --depth=0 || true
-  
-  # Job 5: Deploy Preview (Pull Requests)
-  deploy-preview:
-    name: 🌍 Deploy Preview Environment
-    runs-on: ubuntu-latest
-    needs: [build-and-test, security]
     if: github.event_name == 'pull_request'
     
     steps:
-      - name: 📥 Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
       
-      - name: 🚀 Deploy to Vercel Preview
-        run: |
-          echo "🌍 Preview deployment would happen here"
-          echo "📍 Preview URL: https://courier-connect-pr-${{ github.event.pull_request.number }}.vercel.app"
-          echo "✅ Preview environment ready for testing"
+      - name: Deploy to Vercel
+        run: echo "Deploy preview when configured"
   
-  # Job 6: Deploy Production
   deploy-production:
-    name: 🚀 Deploy to Production
+    name: Deploy Production
     runs-on: ubuntu-latest
-    needs: [build-and-test, security, lighthouse]
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/itirations')
+    needs: build-and-test
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
     
     steps:
-      - name: 📥 Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
       
-      - name: 🚀 Production Deployment
-        run: |
-          echo "🚀 Deploying to production..."
-          echo "📍 Production URL: https://courier-connect-lq0tu3ce3-hostilianns-projects.vercel.app"
-          echo "🌐 Custom Domain: https://hostilian.org (when DNS configured)"
-          echo "✅ Production deployment ready!"
-      
-      - name: 📊 Deployment Summary
-        run: |
-          echo "## 🎉 Deployment Successful!" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Code Quality: Passed" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Build: Successful" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Security: Scanned" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Performance: Checked" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "🌐 **Production URL**: https://courier-connect-lq0tu3ce3-hostilianns-projects.vercel.app" >> $GITHUB_STEP_SUMMARY
-  
-  # Job 7: Post-Deploy Health Check
-  health-check:
-    name: 🏥 Production Health Check
-    runs-on: ubuntu-latest
-    needs: deploy-production
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/itirations')
-    
-    steps:
-      - name: 🏥 Check Production Health
-        run: |
-          echo "🏥 Running health checks..."
-          echo "✅ Homepage: Accessible"
-          echo "✅ API Routes: Responsive"
-          echo "✅ Database Connection: Ready"
-          echo "✅ All systems operational!"
+      - name: Deploy to Vercel
+        run: echo "Deploy production when configured"

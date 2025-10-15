@@ -5,7 +5,8 @@ import { motion } from 'framer-motion';
 import { ArrowRight, MapPin, Package, User } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { loadGoogleMaps } from '@/lib/maps';
 
 export default function RequestPage() {
   const t = useTranslations('request');
@@ -35,6 +36,52 @@ export default function RequestPage() {
     pickupTime: 'asap',
     notes: '',
   });
+  const [routeUrl, setRouteUrl] = useState<string>('');
+  const pickupRef = useRef<HTMLTextAreaElement | null>(null);
+  const dropoffRef = useRef<HTMLTextAreaElement | null>(null);
+
+  useEffect(() => {
+    // Setup Google Places Autocomplete on address fields
+    let cleanup = () => {};
+    loadGoogleMaps().then((g) => {
+      const options: google.maps.places.AutocompleteOptions = {
+        fields: ['formatted_address', 'geometry'],
+        types: ['geocode'],
+      };
+      if (pickupRef.current) {
+        const ac1 = new g.maps.places.Autocomplete(pickupRef.current as any, options);
+        ac1.addListener('place_changed', () => {
+          const p = ac1.getPlace();
+          if (p.formatted_address) handleChange('senderAddress', p.formatted_address);
+        });
+        cleanup = () => g.maps.event.clearInstanceListeners(ac1);
+      }
+      if (dropoffRef.current) {
+        const ac2 = new g.maps.places.Autocomplete(dropoffRef.current as any, options);
+        ac2.addListener('place_changed', () => {
+          const p = ac2.getPlace();
+          if (p.formatted_address) handleChange('receiverAddress', p.formatted_address);
+        });
+        const prev = cleanup;
+        cleanup = () => {
+          prev();
+          g.maps.event.clearInstanceListeners(ac2);
+        };
+      }
+    }).catch(() => {});
+    return () => cleanup();
+  }, []);
+
+  useEffect(() => {
+    // Build a lightweight route preview using Google Maps Directions URL
+    if (!formData.senderAddress || !formData.receiverAddress) {
+      setRouteUrl('');
+      return;
+    }
+    const origin = encodeURIComponent(formData.senderAddress);
+    const destination = encodeURIComponent(formData.receiverAddress);
+    setRouteUrl(`https://www.google.com/maps/embed/v1/directions?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&origin=${origin}&destination=${destination}`);
+  }, [formData.senderAddress, formData.receiverAddress]);
 
   const [loading, setLoading] = useState(false);
   const [trackingId, setTrackingId] = useState('');
@@ -200,6 +247,7 @@ export default function RequestPage() {
                     rows={3}
                     value={formData.senderAddress}
                     onChange={(e) => handleChange('senderAddress', e.target.value)}
+                    ref={pickupRef}
                     className="w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all"
                     placeholder={t('addressPlaceholder') || 'Street, City, Postal Code'}
                   />
@@ -276,11 +324,28 @@ export default function RequestPage() {
                     rows={3}
                     value={formData.receiverAddress}
                     onChange={(e) => handleChange('receiverAddress', e.target.value)}
+                    ref={dropoffRef}
                     className="w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all"
                     placeholder={t('addressPlaceholder') || 'Street, City, Postal Code'}
                   />
                 </div>
               </div>
+
+              {routeUrl && (
+                <div className="mt-6">
+                  <div className="rounded-xl overflow-hidden border">
+                    <iframe
+                      title="Route preview"
+                      width="100%"
+                      height="300"
+                      loading="lazy"
+                      allowFullScreen
+                      referrerPolicy="no-referrer-when-downgrade"
+                      src={routeUrl}
+                    />
+                  </div>
+                </div>
+              )}
 
               <div className="flex gap-3 mt-8">
                 <button

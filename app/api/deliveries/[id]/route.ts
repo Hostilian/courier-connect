@@ -1,6 +1,6 @@
 import { getAuth } from '@/lib/auth';
 import dbConnect from '@/lib/mongodb';
-import { DeliveryRequest } from '@/models/DeliveryRequest';
+import DeliveryRequest from '@/models/DeliveryRequest';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
