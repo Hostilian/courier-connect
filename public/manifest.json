@@ -1,7 +1,7 @@
 {
   "name": "Courier Connect",
   "short_name": "CourierConnect",
-  "description": "Fast local delivery service connecting customers with trusted couriers",
+  "description": "A friendly community of neighbors helping with local deliveries",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -19,12 +19,12 @@
       "type": "image/png"
     }
   ],
-  "categories": ["productivity", "business"],
+  "categories": ["productivity", "lifestyle"],
   "shortcuts": [
     {
-      "name": "Request Delivery",
+      "name": "Request Help",
       "short_name": "Request",
-      "description": "Quickly request a new delivery",
+      "description": "Ask for delivery help",
       "url": "/request",
       "icons": [
         {
@@ -36,7 +36,7 @@
     {
       "name": "Track Package",
       "short_name": "Track",
-      "description": "Track your delivery",
+      "description": "See where your item is",
       "url": "/track",
       "icons": [
         {
