@@ -28,17 +28,17 @@ export default function CTA() {
               Ready to Get Started?
             </h2>
             <p className="text-xl md:text-2xl mb-8 text-blue-100">
-              Join thousands of customers and couriers who trust Courier Connect for fast, reliable local delivery.
+              Join a community of helpful neighbors making local deliveries easier for everyone.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
             <div className="text-center">
-              <h3 className="text-2xl font-bold mb-2">Need Something Delivered?</h3>
-              <p className="text-blue-100 mb-4">No registration required</p>
+              <h3 className="text-2xl font-bold mb-2">Need Help With a Delivery?</h3>
+              <p className="text-blue-100 mb-4">No sign-up needed—just ask!</p>
               <Link href="/request" className="btn-secondary text-lg px-8 py-4 inline-flex items-center bg-white text-blue-600 hover:bg-gray-50">
                 <Package className="w-5 h-5 mr-2" />
-                Request Delivery
+                Request Help
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
             </div>
@@ -46,11 +46,11 @@ export default function CTA() {
             <div className="hidden sm:block w-px h-24 bg-blue-400" />
 
             <div className="text-center">
-              <h3 className="text-2xl font-bold mb-2">Want to Earn Money?</h3>
-              <p className="text-blue-100 mb-4">Become a courier today</p>
+              <h3 className="text-2xl font-bold mb-2">Want to Help & Earn?</h3>
+              <p className="text-blue-100 mb-4">Become a friendly courier</p>
               <Link href="/courier/register" className="btn-primary text-lg px-8 py-4 inline-flex items-center bg-blue-800 hover:bg-blue-900">
                 <Smartphone className="w-5 h-5 mr-2" />
-                Join as Courier
+                Join Our Team
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
             </div>

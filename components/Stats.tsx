@@ -6,23 +6,23 @@ export default function Stats() {
   const stats = [
     {
       number: '10,000+',
-      label: 'Deliveries Completed',
-      description: 'Successful deliveries across the city'
+      label: 'Happy Deliveries',
+      description: 'Items safely delivered with care'
     },
     {
       number: '500+',
-      label: 'Active Couriers',
-      description: 'Verified and trusted delivery partners'
+      label: 'Trusted Helpers',
+      description: 'Verified and friendly neighbors'
     },
     {
       number: '4.9★',
-      label: 'Average Rating',
-      description: 'Based on 5,000+ customer reviews'
+      label: 'Community Rating',
+      description: 'Loved by thousands of users'
     },
     {
-      number: '< 2hr',
-      label: 'Average Delivery Time',
-      description: 'From pickup to your doorstep'
+      number: '< 2hrs',
+      label: 'Average Time',
+      description: 'From pickup to happy delivery'
     }
   ]
 

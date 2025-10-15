@@ -9,21 +9,21 @@ export default function Testimonials() {
       name: 'Sarah Johnson',
       role: 'Small Business Owner',
       rating: 5,
-      text: "Courier Connect saved my business! When I needed urgent documents delivered to clients, they made it happen in under 2 hours. Amazing service!",
+      text: "I needed urgent documents delivered to a client and was in a panic. The courier was so understanding and made it happen in under 2 hours. Truly a lifesaver!",
       avatar: '👩‍💼'
     },
     {
       name: 'Mike Chen',
-      role: 'Facebook Marketplace Buyer',
+      role: 'Happy Customer',
       rating: 5,
-      text: "I bought a guitar from Facebook Marketplace but couldn't pick it up myself. The courier was professional and delivered it safely to my home.",
+      text: "Bought a guitar from someone online but couldn't pick it up. My courier treated it like it was their own and delivered it perfectly. Such peace of mind!",
       avatar: '🎸'
     },
     {
       name: 'Lisa Rodriguez',
       role: 'Busy Parent',
       rating: 5,
-      text: "As a working mom, I don't have time to pick up gifts. Courier Connect helped me send a birthday present to my daughter's friend. Lifesaver!",
+      text: "Between work and kids, I had no time to get a birthday gift. Courier Connect came through and made my daughter's friend so happy. Thank you!",
       avatar: '👩‍👧'
     }
   ]
@@ -33,10 +33,10 @@ export default function Testimonials() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            What Our Customers Say
+            Stories From Our Community
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Join thousands of satisfied customers who trust Courier Connect for their delivery needs.
+            Real people sharing how Courier Connect helped them out when they needed it most.
           </p>
         </div>
 
