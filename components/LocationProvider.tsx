@@ -1,7 +1,7 @@
 "use client";
 
 import { getCountryByCode } from '@/lib/countries';
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 interface Coordinates {
   lat: number;
@@ -70,7 +70,7 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
     }
   }, [location]);
 
-  const setLocation = (value: UserLocation) => {
+  const setLocation = useCallback((value: UserLocation) => {
     setLocationState((prev) => {
       const next = { ...prev, ...value };
       if (!value.countryCode) {
@@ -78,9 +78,9 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
       }
       return next;
     });
-  };
+  }, []);
 
-  const detectLocation = async () => {
+  const detectLocation = useCallback(async () => {
     if (
       typeof window === 'undefined' ||
       typeof navigator === 'undefined' ||
@@ -131,7 +131,10 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
             console.warn('Reverse geocoding failed', geoError);
           }
 
-          setLocation(nextLocation);
+          setLocationState((prev) => {
+            const next = { ...prev, ...nextLocation };
+            return next;
+          });
           setLoading(false);
           resolve();
         },
@@ -144,7 +147,7 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
         { timeout: 10000 }
       );
     });
-  };
+  }, []);
 
   const value = useMemo<LocationContextValue>(
     () => ({
