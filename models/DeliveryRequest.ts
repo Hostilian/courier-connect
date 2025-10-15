@@ -244,33 +244,12 @@ const DeliveryRequestSchema = new Schema<IDeliveryRequest>({
   timestamps: true
 })
 
-// Indexes
-DeliveryRequestSchema.index({ trackingId: 1 })
-DeliveryRequestSchema.index({ status: 1, createdAt: -1 })
-DeliveryRequestSchema.index({ courierId: 1, status: 1 })
-DeliveryRequestSchema.index({ customerPhone: 1 })
-DeliveryRequestSchema.index({ pickupLocation: '2dsphere' })
-DeliveryRequestSchema.index({ deliveryLocation: '2dsphere' })
-
-// Pre-save middleware to generate tracking ID
-DeliveryRequestSchema.pre('save', function(next) {
-  if (!this.trackingId) {
-    this.trackingId = 'DC' + Math.random().toString(36).substr(2, 6).toUpperCase()
+// Auto-generate a short, unique, uppercase tracking ID before saving
+DeliveryRequestSchema.pre<IDeliveryRequest>('save', function (next) {
+  if (this.isNew && !this.trackingId) {
+    this.trackingId = `C${Date.now().toString().slice(-6)}${Math.random().toString(36).substring(2, 4).toUpperCase()}`
   }
   next()
-})
-
-// Virtual to check if delivery is active
-DeliveryRequestSchema.virtual('isActive').get(function() {
-  return !['delivered', 'cancelled'].includes(this.status)
-})
-
-// Virtual to calculate delivery duration
-DeliveryRequestSchema.virtual('deliveryDuration').get(function() {
-  if (this.actualPickupTime && this.actualDeliveryTime) {
-    return Math.round((this.actualDeliveryTime.getTime() - this.actualPickupTime.getTime()) / (1000 * 60)) // minutes
-  }
-  return null
 })
 
 export const DeliveryRequest = mongoose.models.DeliveryRequest || mongoose.model<IDeliveryRequest>('DeliveryRequest', DeliveryRequestSchema)

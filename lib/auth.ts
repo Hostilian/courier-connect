@@ -20,7 +20,7 @@ export async function getAuth(request: NextRequest) {
       token,
       new TextEncoder().encode(JWT_SECRET)
     )
-    return { user: payload as UserPayload }
+    return { user: payload as unknown as UserPayload }
   } catch (error) {
     return { user: null }
   }

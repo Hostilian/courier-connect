@@ -34,8 +34,28 @@ function CourierDashboard() {
   }, [])
 
   const acceptDelivery = async (id: string) => {
-    // Implement accept delivery logic
-    console.log(`Accepted delivery ${id}`)
+    try {
+      const token = localStorage.getItem('token')
+      const response = await fetch(`/api/deliveries/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ status: 'accepted' })
+      })
+
+      if (response.ok) {
+        setDeliveries(prev => prev.filter(d => d._id !== id))
+        alert('Delivery accepted!')
+      } else {
+        const errorData = await response.json()
+        alert(`Failed to accept delivery: ${errorData.error}`)
+      }
+    } catch (error) {
+      console.error('Error accepting delivery:', error)
+      alert('An error occurred while accepting the delivery.')
+    }
   }
 
   return (
