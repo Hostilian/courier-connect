@@ -45,11 +45,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: 🚀 Deploy to Vercel (Preview)
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: echo "Deploy preview to Vercel when secrets are configured"
   
   deploy-production:
     name: Deploy Production
@@ -62,9 +58,4 @@ jobs:
         uses: actions/checkout@v4
       
       - name: 🚀 Deploy to Vercel (Production)
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
+        run: echo "Deploy to Vercel production when secrets are configured"
