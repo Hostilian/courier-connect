@@ -20,6 +20,17 @@ export interface IDeliveryRequest extends Document {
   
   // Item details
   itemDescription: string
+  itemCategory: 'document' | 'parcel' | 'food' | 'furniture' | 'electronics' | 'other'
+  itemWeight?: number // in kg
+  itemDimensions?: {
+    length: number // in cm
+    width: number // in cm
+    height: number // in cm
+  }
+  requiresPurchase?: boolean
+  purchaseAmount?: number
+  pickupImage?: string
+  deliveryImage?: string
   specialInstructions?: string
   urgency: 'standard' | 'express' | 'same-day'
   estimatedDistance?: number
@@ -111,6 +122,32 @@ const DeliveryRequestSchema = new Schema<IDeliveryRequest>({
     type: String,
     required: true,
     trim: true
+  },
+  itemCategory: {
+    type: String,
+    enum: ['document', 'parcel', 'food', 'furniture', 'electronics', 'other'],
+    default: 'other'
+  },
+  itemWeight: {
+    type: Number
+  },
+  itemDimensions: {
+    length: { type: Number },
+    width: { type: Number },
+    height: { type: Number }
+  },
+  requiresPurchase: {
+    type: Boolean,
+    default: false
+  },
+  purchaseAmount: {
+    type: Number
+  },
+  pickupImage: {
+    type: String
+  },
+  deliveryImage: {
+    type: String
   },
   specialInstructions: {
     type: String,

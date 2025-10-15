@@ -17,6 +17,9 @@ interface DeliveryRequest {
   deliveryAddress: string
   pickupTime: string
   itemDescription: string
+  itemCategory: 'document' | 'parcel' | 'food' | 'furniture' | 'electronics' | 'other'
+  requiresPurchase: boolean
+  purchaseAmount: number
   specialInstructions: string
   customerName: string
   customerPhone: string
@@ -30,6 +33,9 @@ export default function RequestPage() {
     deliveryAddress: '',
     pickupTime: '',
     itemDescription: '',
+    itemCategory: 'other',
+    requiresPurchase: false,
+    purchaseAmount: 0,
     specialInstructions: '',
     customerName: '',
     customerPhone: '',
