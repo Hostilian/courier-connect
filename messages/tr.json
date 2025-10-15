@@ -1,0 +1,285 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "forCouriers": "Kuryeler İçin",
+    "trackDelivery": "Teslimatı Takip Et",
+    "requestDelivery": "Teslimat İste"
+  },
+  "home": {
+    "hero": {
+      "title": "Hızlı ve Güvenilir Teslimat Hizmeti",
+      "subtitle": "Güvenilir kurye ağımızla paketlerinizi hızlı ve güvenli bir şekilde teslim edin",
+      "cta": "Teslimat İste",
+      "ctaSecondary": "Kurye Ol"
+    },
+    "stats": {
+      "deliveries": "Aktif Teslimatlar",
+      "couriers": "Doğrulanmış Kuryeler",
+      "cities": "Kapsanan Şehirler",
+      "rating": "Müşteri Değerlendirmesi"
+    },
+    "howItWorks": {
+      "title": "Nasıl Çalışır",
+      "step1": {
+        "title": "Teslimat İste",
+        "description": "Alım ve teslimat bilgilerini girin"
+      },
+      "step2": {
+        "title": "Eşleştirme",
+        "description": "Sistemimiz en iyi kuryeyi bulur"
+      },
+      "step3": {
+        "title": "Gerçek Zamanlı Takip",
+        "description": "Teslimatınızı her adımda izleyin"
+      },
+      "step4": {
+        "title": "Paketi Teslim Al",
+        "description": "Paketinizi güvenle teslim alın"
+      }
+    },
+    "features": {
+      "title": "Neden Bizi Seçmelisiniz",
+      "fast": {
+        "title": "Şimşek Hızı",
+        "description": "Çoğu şehirde aynı gün teslimat mevcut"
+      },
+      "secure": {
+        "title": "%100 Güvenli",
+        "description": "Paketleriniz tamamen sigortalı ve takip ediliyor"
+      },
+      "affordable": {
+        "title": "Uygun Fiyatlar",
+        "description": "Gizli ücret olmayan şeffaf fiyatlandırma"
+      },
+      "support": {
+        "title": "7/24 Destek",
+        "description": "Ekibimiz her zaman size yardımcı olmak için burada"
+      }
+    },
+    "testimonials": {
+      "title": "Müşterilerimiz Ne Diyor",
+      "customer1": {
+        "name": "Sarah Johnson",
+        "role": "Küçük İşletme Sahibi",
+        "quote": "Mükemmel hizmet! Paketlerim her zaman zamanında ve mükemmel durumda geliyor."
+      },
+      "customer2": {
+        "name": "Michael Chen",
+        "role": "Online Alışverişçi",
+        "quote": "Gerçek zamanlı takip bana huzur veriyor. Kesinlikle tavsiye ederim!"
+      },
+      "customer3": {
+        "name": "Emma Rodriguez",
+        "role": "Serbest Çalışan",
+        "quote": "Uygun fiyatlar ve güvenilir kuryeler. Bu benim tercih ettiğim teslimat hizmeti."
+      }
+    },
+    "cta": {
+      "title": "Başlamaya Hazır mısınız?",
+      "subtitle": "Binlerce memnun müşteriye katılın",
+      "button": "Hemen Teslimat İste"
+    }
+  },
+  "request": {
+    "title": "Teslimat İste",
+    "subtitle": "Bilgileri doldurun, sizin için mükemmel kuryeyi bulalım",
+    "steps": {
+      "pickup": "Alım Bilgileri",
+      "delivery": "Teslimat Bilgileri",
+      "preferences": "Tercihler"
+    },
+    "pickup": {
+      "title": "Alım Bilgileri",
+      "name": "Adınız",
+      "namePlaceholder": "Ahmet Yılmaz",
+      "phone": "Telefon Numarası",
+      "phonePlaceholder": "+90 123 456 7890",
+      "email": "E-posta (isteğe bağlı)",
+      "emailPlaceholder": "ahmet@ornek.com",
+      "address": "Alım Adresi",
+      "street": "Sokak Adresi",
+      "city": "Şehir",
+      "zipCode": "Posta Kodu"
+    },
+    "delivery": {
+      "title": "Teslimat Bilgileri",
+      "recipientName": "Alıcı Adı",
+      "recipientPhone": "Alıcı Telefonu",
+      "address": "Teslimat Adresi",
+      "street": "Sokak Adresi",
+      "city": "Şehir",
+      "zipCode": "Posta Kodu",
+      "notes": "Teslimat Notları (isteğe bağlı)",
+      "notesPlaceholder": "Kapı zilini çal, kapıya bırak, vb."
+    },
+    "preferences": {
+      "title": "Paket ve Tercihler",
+      "packageType": "Paket Türü",
+      "packageTypes": {
+        "documents": "Belgeler",
+        "small": "Küçük Paket",
+        "medium": "Orta Paket",
+        "large": "Büyük Paket"
+      },
+      "weight": "Ağırlık (kg)",
+      "dimensions": "Boyutlar (isteğe bağlı)",
+      "dimensionsPlaceholder": "U x G x Y (cm)",
+      "specialInstructions": "Özel Talimatlar",
+      "specialInstructionsPlaceholder": "Kırılır, Dik tut, vb.",
+      "urgency": "Teslimat Aciliyeti",
+      "urgencyTypes": {
+        "standard": "Standart (2-3 saat)",
+        "express": "Ekspres (1 saat)",
+        "scheduled": "Planlanmış"
+      }
+    },
+    "buttons": {
+      "next": "İleri",
+      "previous": "Geri",
+      "submit": "Teslimat İste"
+    },
+    "success": {
+      "title": "Teslimat İstendi!",
+      "message": "Takip kodunuz:",
+      "info": "Sizin için en iyi kuryeyi buluyoruz. SMS ve e-posta ile güncellemeler alacaksınız.",
+      "track": "Teslimatı Takip Et",
+      "newRequest": "Yeni İstek"
+    }
+  },
+  "track": {
+    "title": "Teslimatınızı Takip Edin",
+    "subtitle": "Gerçek zamanlı güncellemeleri görmek için takip kodunuzu girin",
+    "trackingCode": "Takip Kodu",
+    "trackingCodePlaceholder": "10 haneli takip kodunu girin",
+    "trackButton": "Paketi Takip Et",
+    "status": {
+      "pending": "Kurye Bekleniyor",
+      "accepted": "Kurye Atandı",
+      "picked_up": "Paket Alındı",
+      "in_transit": "Yolda",
+      "delivered": "Teslim Edildi",
+      "cancelled": "İptal Edildi"
+    },
+    "details": {
+      "title": "Teslimat Detayları",
+      "from": "Gönderen",
+      "to": "Alıcı",
+      "courier": "Kurye",
+      "estimatedTime": "Tahmini Teslimat",
+      "actualTime": "Teslim Zamanı",
+      "packageType": "Paket Türü",
+      "status": "Mevcut Durum"
+    },
+    "notFound": {
+      "title": "Takip Kodu Bulunamadı",
+      "message": "Lütfen takip kodunuzu kontrol edin ve tekrar deneyin.",
+      "button": "Tekrar Dene"
+    }
+  },
+  "courier": {
+    "register": {
+      "title": "Kurye Ol",
+      "subtitle": "Şehrinizde paket teslim ederek kazanmaya başlayın",
+      "steps": {
+        "credentials": "Hesap",
+        "vehicle": "Araç",
+        "verification": "Doğrulama"
+      },
+      "credentials": {
+        "title": "Hesabınızı Oluşturun",
+        "firstName": "Ad",
+        "lastName": "Soyad",
+        "email": "E-posta Adresi",
+        "phone": "Telefon Numarası",
+        "password": "Şifre",
+        "confirmPassword": "Şifreyi Onayla",
+        "terms": "Hizmet Şartlarını ve Gizlilik Politikasını kabul ediyorum"
+      },
+      "vehicle": {
+        "title": "Araç Bilgileri",
+        "vehicleType": "Araç Türü",
+        "vehicleTypes": {
+          "bike": "Bisiklet",
+          "motorcycle": "Motosiklet",
+          "car": "Araba",
+          "van": "Van"
+        },
+        "licensePlate": "Plaka (varsa)",
+        "insurance": "Sigorta Bilgileri",
+        "insurancePlaceholder": "Poliçe numarası veya detaylar"
+      },
+      "verification": {
+        "title": "Doğrulama Belgeleri",
+        "idDocument": "Kimlik Belgesi",
+        "driversLicense": "Sürücü Belgesi (varsa)",
+        "insurance": "Sigorta Sertifikası",
+        "photo": "Profil Fotoğrafı",
+        "uploadInstructions": "Belgelerinizin net fotoğraflarını yükleyin",
+        "agreement": "Sağlanan tüm bilgilerin doğru olduğunu onaylıyorum"
+      },
+      "buttons": {
+        "next": "İleri",
+        "previous": "Geri",
+        "submit": "Başvuru Gönder"
+      },
+      "success": {
+        "title": "Başvuru Gönderildi!",
+        "message": "Başvurunuzu 24-48 saat içinde inceleyeceğiz.",
+        "info": "Hesabınız doğrulandığında e-posta alacaksınız.",
+        "login": "Girişe Git"
+      }
+    },
+    "login": {
+      "title": "Kurye Girişi",
+      "subtitle": "Panonuza erişmek için giriş yapın",
+      "email": "E-posta Adresi",
+      "password": "Şifre",
+      "remember": "Beni hatırla",
+      "forgotPassword": "Şifremi unuttum?",
+      "loginButton": "Giriş Yap",
+      "noAccount": "Hesabınız yok mu?",
+      "register": "Buradan kayıt olun"
+    },
+    "dashboard": {
+      "title": "Kurye Paneli",
+      "welcome": "Tekrar hoş geldiniz",
+      "stats": {
+        "available": "Mevcut İşler",
+        "active": "Aktif Teslimatlar",
+        "completed": "Bugün Tamamlanan",
+        "earnings": "Bugünkü Kazanç"
+      },
+      "availableJobs": {
+        "title": "Mevcut Teslimatlar",
+        "noJobs": "Şu anda mevcut teslimat yok",
+        "distance": "km uzakta",
+        "accept": "İşi Kabul Et",
+        "viewDetails": "Detayları Gör"
+      },
+      "activeDeliveries": {
+        "title": "Aktif Teslimatlarınız",
+        "pickup": "Alım",
+        "delivery": "Teslimat",
+        "updateStatus": "Durumu Güncelle",
+        "complete": "Teslimatı Tamamla",
+        "cancel": "İptal Et"
+      },
+      "statusUpdate": {
+        "picked_up": "Alındı Olarak İşaretle",
+        "in_transit": "Yolda Olarak İşaretle",
+        "delivered": "Teslim Edildi Olarak İşaretle"
+      }
+    }
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Bir hata oluştu",
+    "tryAgain": "Tekrar Dene",
+    "cancel": "İptal",
+    "confirm": "Onayla",
+    "save": "Kaydet",
+    "close": "Kapat",
+    "required": "Gerekli",
+    "optional": "İsteğe Bağlı"
+  }
+}
