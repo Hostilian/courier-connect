@@ -1,0 +1,49 @@
+{
+  "name": "Courier Connect",
+  "short_name": "CourierConnect",
+  "description": "Fast local delivery service connecting customers with trusted couriers",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3B82F6",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["productivity", "business"],
+  "shortcuts": [
+    {
+      "name": "Request Delivery",
+      "short_name": "Request",
+      "description": "Quickly request a new delivery",
+      "url": "/request",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Track Package",
+      "short_name": "Track",
+      "description": "Track your delivery",
+      "url": "/track",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

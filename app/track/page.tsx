@@ -1,20 +1,20 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { 
-  MapPin, 
-  Package, 
-  Clock, 
-  Phone,
-  MessageSquare,
-  ArrowLeft,
-  CheckCircle,
-  Truck,
-  Navigation,
-  Star
+import {
+    ArrowLeft,
+    CheckCircle,
+    Clock,
+    MapPin,
+    MessageSquare,
+    Navigation,
+    Package,
+    Phone,
+    Star,
+    Truck
 } from 'lucide-react'
+import Link from 'next/link'
+import { useState } from 'react'
 
 interface DeliveryStatus {
   id: string
