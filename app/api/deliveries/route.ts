@@ -1,6 +1,22 @@
 import dbConnect from '@/lib/mongodb'
 import { DeliveryRequest } from '@/models/DeliveryRequest'
 import { NextRequest, NextResponse } from 'next/server'
+import { z } from 'zod';
+
+const deliveryRequestSchema = z.object({
+  customerName: z.string().min(1, { message: "Customer name is required" }),
+  customerPhone: z.string().min(1, { message: "Customer phone is required" }),
+  customerEmail: z.string().email().optional(),
+  pickupAddress: z.string().min(1, { message: "Pickup address is required" }),
+  deliveryAddress: z.string().min(1, { message: "Delivery address is required" }),
+  itemDescription: z.string().min(1, { message: "Item description is required" }),
+  itemCategory: z.string().optional(),
+  requiresPurchase: z.boolean().optional(),
+  purchaseAmount: z.number().optional(),
+  specialInstructions: z.string().optional(),
+  urgency: z.enum(['standard', 'express', 'same-day']).default('standard'),
+  pickupTime: z.string().optional(),
+});
 
 // POST - Create a new delivery request
 export async function POST(request: NextRequest) {
@@ -8,24 +24,29 @@ export async function POST(request: NextRequest) {
     await dbConnect()
     
     const body = await request.json()
-    
-    // Validate required fields
-    const requiredFields = [
-      'customerName', 
-      'customerPhone', 
-      'pickupAddress', 
-      'deliveryAddress', 
-      'itemDescription'
-    ]
-    
-    for (const field of requiredFields) {
-      if (!body[field]) {
-        return NextResponse.json(
-          { error: `${field} is required` },
-          { status: 400 }
-        )
-      }
+    const validation = deliveryRequestSchema.safeParse(body);
+
+    if (!validation.success) {
+      return NextResponse.json(
+        { error: "Invalid input", issues: validation.error.issues },
+        { status: 400 }
+      );
     }
+
+    const {
+      customerName,
+      customerPhone,
+      customerEmail,
+      pickupAddress,
+      deliveryAddress,
+      itemDescription,
+      itemCategory,
+      requiresPurchase,
+      purchaseAmount,
+      specialInstructions,
+      urgency,
+      pickupTime,
+    } = validation.data;
     
     // Calculate pricing based on urgency
     const basePrices = {
@@ -34,25 +55,25 @@ export async function POST(request: NextRequest) {
       'same-day': 10
     }
     
-    const basePrice = basePrices[body.urgency as keyof typeof basePrices] || basePrices.standard
+    const basePrice = basePrices[urgency] || basePrices.standard
     const totalPrice = basePrice // Add any additional fees here
     
     // Create delivery request
     const deliveryRequest = new DeliveryRequest({
-      customerName: body.customerName,
-      customerPhone: body.customerPhone,
-      customerEmail: body.customerEmail,
-      pickupAddress: body.pickupAddress,
-      deliveryAddress: body.deliveryAddress,
-      itemDescription: body.itemDescription,
-      itemCategory: body.itemCategory,
-      requiresPurchase: body.requiresPurchase,
-      purchaseAmount: body.purchaseAmount,
-      specialInstructions: body.specialInstructions,
-      urgency: body.urgency || 'standard',
+      customerName,
+      customerPhone,
+      customerEmail,
+      pickupAddress,
+      deliveryAddress,
+      itemDescription,
+      itemCategory,
+      requiresPurchase,
+      purchaseAmount,
+      specialInstructions,
+      urgency,
       basePrice,
       totalPrice,
-      requestedPickupTime: body.pickupTime ? new Date(body.pickupTime) : undefined,
+      requestedPickupTime: pickupTime ? new Date(pickupTime) : undefined,
       timeline: [{
         status: 'pending',
         message: 'Delivery request created',
@@ -106,7 +127,7 @@ export async function GET(request: NextRequest) {
     
     const deliveries = await DeliveryRequest
       .find(query)
-      .populate('courierId', 'firstName lastName rating vehicleType')
+      .populate('courierId', 'name rating vehicleType')
       .sort({ createdAt: -1 })
       .limit(50)
     

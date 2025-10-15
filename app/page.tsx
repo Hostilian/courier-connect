@@ -9,15 +9,20 @@ import Testimonials from '@/components/Testimonials'
 import {
     Clock,
     MapPin,
+    Menu,
     Package,
     Shield,
     Smartphone,
     Star,
-    Users
+    Users,
+    X
 } from 'lucide-react'
 import Link from 'next/link'
+import { useState } from 'react'
 
 export default function HomePage() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
   return (
     <div className="min-h-screen">
       {/* Navigation */}
@@ -31,6 +36,7 @@ export default function HomePage() {
               <span className="text-xl font-bold text-gray-900">Courier Connect</span>
             </Link>
             
+            {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-6">
               <Link href="#how-it-works" className="text-gray-600 hover:text-gray-900 transition-colors">
                 How it Works
@@ -43,7 +49,8 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="flex items-center space-x-3">
+            {/* Desktop CTA */}
+            <div className="hidden md:flex items-center space-x-3">
               <Link href="/courier/login" className="btn-ghost">
                 Courier Login
               </Link>
@@ -51,7 +58,60 @@ export default function HomePage() {
                 Become a Courier
               </Link>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
+
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden mt-4 pb-4 border-t border-gray-200 pt-4">
+              <div className="flex flex-col space-y-4">
+                <Link
+                  href="#how-it-works"
+                  className="text-gray-600 hover:text-gray-900 transition-colors px-2 py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  How it Works
+                </Link>
+                <Link
+                  href="#features"
+                  className="text-gray-600 hover:text-gray-900 transition-colors px-2 py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Features
+                </Link>
+                <Link
+                  href="#pricing"
+                  className="text-gray-600 hover:text-gray-900 transition-colors px-2 py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Pricing
+                </Link>
+                <div className="flex flex-col space-y-3 pt-4 border-t border-gray-200">
+                  <Link
+                    href="/courier/login"
+                    className="btn-ghost text-center"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Courier Login
+                  </Link>
+                  <Link
+                    href="/courier/register"
+                    className="btn-primary text-center"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Become a Courier
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 

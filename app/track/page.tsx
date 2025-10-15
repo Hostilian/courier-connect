@@ -58,59 +58,6 @@ export default function TrackPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
-  // Mock delivery data - in real app this would come from API
-  const mockDelivery: DeliveryStatus = {
-    id: 'DC123456',
-    status: 'in-transit',
-    customer: {
-      name: 'John Doe',
-      phone: '+1 (555) 123-4567'
-    },
-    courier: {
-      name: 'Sarah Johnson',
-      phone: '+1 (555) 987-6543',
-      rating: 4.9,
-      vehicle: 'Honda Civic - Blue',
-      photo: '👩‍💼'
-    },
-    pickup: {
-      address: '123 Main Street, Downtown',
-      time: '2:30 PM'
-    },
-    delivery: {
-      address: '456 Oak Avenue, Uptown',
-      estimatedTime: '3:15 PM'
-    },
-    item: {
-      description: 'Small envelope from office building',
-      instructions: 'Leave at front desk if not available'
-    },
-    timeline: [
-      {
-        status: 'pending',
-        timestamp: '2:00 PM',
-        message: 'Delivery request created'
-      },
-      {
-        status: 'accepted',
-        timestamp: '2:05 PM',
-        message: 'Courier Sarah accepted your request'
-      },
-      {
-        status: 'pickup',
-        timestamp: '2:30 PM',
-        message: 'Item picked up successfully'
-      },
-      {
-        status: 'in-transit',
-        timestamp: '2:35 PM',
-        message: 'On the way to delivery location'
-      }
-    ],
-    price: 7.50,
-    createdAt: '2:00 PM',
-    estimatedDelivery: '3:15 PM'
-  }
 
   const handleTrack = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -119,15 +66,19 @@ export default function TrackPage() {
     setIsLoading(true)
     setError('')
 
-    // Simulate API call
-    setTimeout(() => {
-      if (trackingId.toUpperCase() === 'DC123456') {
-        setDelivery(mockDelivery)
+    try {
+      const res = await fetch(`/api/track/${trackingId.trim()}`)
+      const data = await res.json()
+      if (res.ok && data.success && data.delivery) {
+        setDelivery(data.delivery)
       } else {
-        setError('Tracking ID not found. Please check your ID and try again.')
+        setError(data.error || 'Tracking ID not found. Please check your ID and try again.')
       }
+    } catch (err) {
+      setError('Failed to fetch tracking information. Please try again.')
+    } finally {
       setIsLoading(false)
-    }, 1000)
+    }
   }
 
   const getStatusIcon = (status: string) => {

@@ -2,6 +2,11 @@ import { getAuth } from '@/lib/auth'
 import dbConnect from '@/lib/mongodb'
 import { DeliveryRequest } from '@/models/DeliveryRequest'
 import { NextRequest, NextResponse } from 'next/server'
+import { z } from 'zod';
+
+const updateDeliverySchema = z.object({
+  status: z.enum(['accepted']),
+});
 
 // PATCH - Update a delivery (e.g., accept a delivery)
 export async function PATCH(
@@ -18,6 +23,16 @@ export async function PATCH(
 
     const { id } = params
     const body = await request.json()
+    const validation = updateDeliverySchema.safeParse(body);
+
+    if (!validation.success) {
+      return NextResponse.json(
+        { error: "Invalid input", issues: validation.error.issues },
+        { status: 400 }
+      );
+    }
+
+    const { status } = validation.data;
 
     const delivery = await DeliveryRequest.findById(id)
 
@@ -25,7 +40,7 @@ export async function PATCH(
       return NextResponse.json({ error: 'Delivery not found' }, { status: 404 })
     }
 
-    if (body.status === 'accepted') {
+    if (status === 'accepted') {
       if (delivery.status !== 'pending') {
         return NextResponse.json({ error: 'Delivery already accepted' }, { status: 400 })
       }

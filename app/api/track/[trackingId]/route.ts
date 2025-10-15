@@ -20,7 +20,7 @@ export async function GET(
     
     const delivery = await DeliveryRequest
       .findOne({ trackingId: trackingId.toUpperCase() })
-      .populate('courierId', 'firstName lastName rating vehicleType phone')
+      .populate('courierId', 'name rating vehicleType phone')
       .lean() as any
     
     if (!delivery) {
@@ -39,7 +39,7 @@ export async function GET(
         phone: delivery.customerPhone
       },
       courier: delivery.courierId ? {
-        name: `${delivery.courierId.firstName} ${delivery.courierId.lastName}`,
+        name: delivery.courierId.name,
         phone: delivery.courierId.phone,
         rating: delivery.courierId.rating,
         vehicle: delivery.courierId.vehicleType
