@@ -69,3 +69,4 @@ logs
 # Cache
 .cache
 .eslintcache
+.vercel
