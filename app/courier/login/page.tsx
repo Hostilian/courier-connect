@@ -27,14 +27,30 @@ export default function CourierLoginPage() {
     e.preventDefault()
     setIsLoading(true)
     
-    // Here you would handle the login logic
-    console.log('Login attempt:', { email, password, rememberMe })
-    
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      })
+
+      if (response.ok) {
+        const { token } = await response.json()
+        localStorage.setItem('token', token)
+        // Redirect to courier dashboard
+        window.location.href = '/courier/dashboard'
+      } else {
+        const errorData = await response.json()
+        alert(`Login failed: ${errorData.message}`)
+      }
+    } catch (error) {
+      console.error('Login error:', error)
+      alert('An error occurred during login.')
+    } finally {
       setIsLoading(false)
-      // Redirect to courier dashboard
-    }, 1000)
+    }
   }
 
   return (
