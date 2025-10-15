@@ -2,7 +2,7 @@
   "name": "courier-connect",
   "version": "1.0.0",
   "description": "Peer-to-peer delivery service platform",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
