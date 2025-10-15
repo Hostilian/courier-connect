@@ -1,6 +1,7 @@
 'use client';
 
 import { useLocationContext } from '@/components/LocationProvider';
+import LocationSelector from '@/components/LocationSelector';
 import { getCountryByCode } from '@/lib/countries';
 import { getLanguageByCode } from '@/lib/languages';
 import { loadGoogleMaps } from '@/lib/maps';
@@ -17,6 +18,20 @@ export default function RequestPage() {
   const theme = getLanguageByCode(locale)?.culturalTheme;
   const { location } = useLocationContext();
   const country = location.countryCode ? getCountryByCode(location.countryCode) : undefined;
+  const bannerTitle = country?.name || t('banner.globalTitle', { defaultMessage: 'Worldwide coverage' });
+  const bannerMessage = location.city
+    ? t('banner.city', {
+        city: location.city,
+        defaultMessage: 'We will route couriers near {city}.',
+      })
+    : country
+    ? t('banner.country', {
+        country: country.name,
+        defaultMessage: 'We match you with trusted couriers in {country}.',
+      })
+    : t('banner.global', {
+        defaultMessage: 'Tell us where you are to unlock local courier options.',
+      });
 
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -84,7 +99,9 @@ export default function RequestPage() {
     }
     const origin = encodeURIComponent(formData.senderAddress);
     const destination = encodeURIComponent(formData.receiverAddress);
-  setRouteUrl(`https://www.google.com/maps/embed/v1/directions?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&origin=${origin}&destination=${destination}`);
+    setRouteUrl(
+      `https://www.google.com/maps/embed/v1/directions?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&origin=${origin}&destination=${destination}`
+    );
   }, [formData.senderAddress, formData.receiverAddress]);
 
   const [loading, setLoading] = useState(false);
@@ -212,23 +229,25 @@ export default function RequestPage() {
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        {country && (
+        {(country || !location.countryCode) && (
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             className="mb-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
           >
-            <div className="flex items-center gap-3 text-sm text-gray-600">
-              <span className="text-2xl" aria-hidden="true">{country.flag}</span>
-              <div>
-                <p className="text-base font-semibold text-gray-900">
-                  {country.name}
-                </p>
-                <p>
-                  {location.city
-                    ? `We will route couriers near ${location.city}.`
-                    : 'We match you with trusted couriers in your area.'}
-                </p>
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between text-sm text-gray-600">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl" aria-hidden="true">{country?.flag ?? '🌍'}</span>
+                <div>
+                  <p className="text-base font-semibold text-gray-900">{bannerTitle}</p>
+                  <p>{bannerMessage}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-gray-400">
+                  {t('banner.change', { defaultMessage: 'Update location' })}
+                </span>
+                <LocationSelector />
               </div>
             </div>
           </motion.div>

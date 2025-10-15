@@ -688,3 +688,18 @@ export const getLanguageLabel = (code: string): string => {
   const lang = getLanguageByCode(code);
   return lang ? `${lang.flag} ${lang.nativeName}` : code;
 };
+
+const englishTheme = getLanguageByCode('en')?.culturalTheme;
+
+export const defaultTheme: CulturalTheme = englishTheme || {
+  primary: '#FBBF24',
+  secondary: '#FF6B6B',
+  accent: '#3B82F6',
+  gradient: 'from-yellow-400 via-orange-300 to-red-400',
+  pattern: 'geometric',
+  description: 'Warm and professional with geometric patterns',
+};
+
+export const getLocaleTheme = (code: string): CulturalTheme => {
+  return getLanguageByCode(code)?.culturalTheme || defaultTheme;
+};
