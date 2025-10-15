@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
-import { Package, MapPin, Clock, CheckCircle, Truck, Search } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { getLanguageByCode } from '@/lib/languages';
+import { motion } from 'framer-motion';
+import { CheckCircle, Clock, MapPin, Package, Search, Truck } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import { useState } from 'react';
 
 interface DeliveryStatus {
   trackingId: string;

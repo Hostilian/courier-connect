@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
-import { Mail, Lock, LogIn, Truck } from 'lucide-react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
 import { getLanguageByCode } from '@/lib/languages';
+import { motion } from 'framer-motion';
+import { Lock, LogIn, Mail, Truck } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function CourierLoginPage() {
   const t = useTranslations('courier.login');

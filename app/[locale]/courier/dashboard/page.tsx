@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { getLanguageByCode } from '@/lib/languages';
+import { motion } from 'framer-motion';
+import { CheckCircle, Clock, DollarSign, MapPin, Package, TrendingUp } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { Package, MapPin, Clock, DollarSign, CheckCircle, XCircle, TrendingUp, User } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { getLanguageByCode } from '@/lib/languages';
+import { useEffect, useState } from 'react';
 
 interface Delivery {
   _id: string;

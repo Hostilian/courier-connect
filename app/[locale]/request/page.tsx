@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { getLanguageByCode } from '@/lib/languages';
+import { motion } from 'framer-motion';
+import { ArrowRight, MapPin, Package, User } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { Package, MapPin, User, Phone, DollarSign, Clock, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { getLanguageByCode } from '@/lib/languages';
+import { useState } from 'react';
 
 export default function RequestPage() {
   const t = useTranslations('request');

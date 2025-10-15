@@ -1,6 +1,6 @@
+import { languages } from '@/lib/languages';
 import { getRequestConfig } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { languages, getLanguageByCode } from '@/lib/languages';
 
 // Supported locales - all languages from our comprehensive list
 export const locales = languages.map(l => l.code) as readonly string[];

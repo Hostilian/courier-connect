@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
-import { User, Mail, Phone, MapPin, Lock, CheckCircle, Truck } from 'lucide-react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
 import { getLanguageByCode } from '@/lib/languages';
+import { motion } from 'framer-motion';
+import { CheckCircle, Lock, Mail, MapPin, Phone, Truck, User } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function CourierRegisterPage() {
   const t = useTranslations('courier.register');
