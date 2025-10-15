@@ -21,15 +21,22 @@
 .vs/
 .vscode/
 *.bat
+.idea/
+*.swp
+*.swo
+*~
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
 # local env files
 .env*.local
 .env
+.env.development
+.env.production
 
 # vercel
 .vercel
@@ -37,3 +44,28 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# OS files
+Thumbs.db
+*.DS_Store
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Test files
+test-output.html
+
+# Logs
+logs
+*.log
+
+# Cache
+.cache
+.eslintcache

@@ -2,17 +2,61 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* Custom CSS Variables */
+/* Custom CSS Variables - 2025 Sunshine Theme ☀️ */
 :root {
+  /* Primary Colors - Warm and inviting */
   --primary-blue: #3B82F6;
   --primary-blue-dark: #2563EB;
+  --primary-blue-light: #60A5FA;
+  
+  /* Sunshine Accents */
+  --sunshine-yellow: #FBBF24;
+  --sunshine-orange: #FB923C;
+  --warm-coral: #FF6B6B;
+  
+  /* Success & Nature */
   --success-green: #10B981;
+  --fresh-mint: #6EE7B7;
+  
+  /* Warnings & Alerts */
   --warning-orange: #F59E0B;
   --error-red: #EF4444;
+  
+  /* Text Colors */
   --text-primary: #111827;
   --text-secondary: #6B7280;
-  --bg-light: #F9FAFB;
+  --text-light: #9CA3AF;
+  
+  /* Background Colors */
+  --bg-light: #FAFAFA;
+  --bg-white: #FFFFFF;
+  --bg-cream: #FFF8F0;
+  
+  /* Border & Dividers */
   --border-light: #E5E7EB;
+  --border-medium: #D1D5DB;
+  
+  /* Gradients */
+  --gradient-sunshine: linear-gradient(135deg, #FBBF24 0%, #FB923C 100%);
+  --gradient-ocean: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  --gradient-fresh: linear-gradient(135deg, #10B981 0%, #6EE7B7 100%);
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  
+  /* Border Radius - Modern 2025 */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 200ms ease-in-out;
+  --transition-slow: 300ms ease-in-out;
 }
 
 /* Base styles */
