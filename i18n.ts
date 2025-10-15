@@ -17,13 +17,14 @@ export const localeLabels: Record<Locale, { name: string; flag: string; nativeNa
   tr: { name: 'Turkish', flag: '🇹🇷', nativeName: 'Türkçe' },
 };
 
-export default getRequestConfig(async ({ locale }: { locale: string }) => {
+export default getRequestConfig(async ({ locale }) => {
   // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale as Locale)) {
+  if (!locale || !locales.includes(locale as Locale)) {
     notFound();
   }
 
   return {
+    locale,
     messages: (await import(`./messages/${locale}.json`)).default,
   };
 });

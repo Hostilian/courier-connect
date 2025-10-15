@@ -1,6 +1,7 @@
 // Root layout
 import SimpleFooter from '@/components/SimpleFooter';
 import SimpleHeader from '@/components/SimpleHeader';
+import WelcomeModal from '@/components/WelcomeModal';
 import './globals.css';
 
 export default function RootLayout({
@@ -15,6 +16,7 @@ export default function RootLayout({
         <meta name="description" content="Courier Connect — local couriers connecting people. Request pickups or become a courier. Fast, friendly service." />
       </head>
       <body className="bg-white text-slate-900 antialiased min-h-screen flex flex-col">
+        <WelcomeModal />
         <SimpleHeader />
 
         <main className="flex-1 w-full">
