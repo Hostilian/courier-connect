@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
       'same-day': 10
     }
     
-    const basePrice = basePrices[body.urgency] || basePrices.standard
+    const basePrice = basePrices[body.urgency as keyof typeof basePrices] || basePrices.standard
     const totalPrice = basePrice // Add any additional fees here
     
     // Create delivery request
