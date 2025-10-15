@@ -10,6 +10,10 @@ export interface IUser extends Document {
   idNumber: string;
   role: 'courier' | 'admin';
   isVerified: boolean;
+  verificationToken?: string;
+  verificationTokenExpires?: Date;
+  resetPasswordToken?: string;
+  resetPasswordExpires?: Date;
   rating: number;
   totalDeliveries: number;
   completedDeliveries: number;
@@ -69,6 +73,22 @@ const UserSchema: Schema = new Schema(
     isVerified: {
       type: Boolean,
       default: false,
+    },
+    verificationToken: {
+      type: String,
+      select: false,
+    },
+    verificationTokenExpires: {
+      type: Date,
+      select: false,
+    },
+    resetPasswordToken: {
+      type: String,
+      select: false,
+    },
+    resetPasswordExpires: {
+      type: Date,
+      select: false,
     },
     rating: {
       type: Number,
