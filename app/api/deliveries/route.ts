@@ -1,12 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { connectDB } from '@/lib/mongodb'
+import dbConnect from '@/lib/mongodb'
 import { DeliveryRequest } from '@/models/DeliveryRequest'
-import { User } from '@/models/User'
+import { NextRequest, NextResponse } from 'next/server'
 
 // POST - Create a new delivery request
 export async function POST(request: NextRequest) {
   try {
-    await connectDB()
+    await dbConnect()
     
     const body = await request.json()
     
@@ -80,7 +79,7 @@ export async function POST(request: NextRequest) {
 // GET - Get delivery requests (for couriers)
 export async function GET(request: NextRequest) {
   try {
-    await connectDB()
+    await dbConnect()
     
     const { searchParams } = new URL(request.url)
     const status = searchParams.get('status')
