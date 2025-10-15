@@ -5,12 +5,23 @@
     "trackDelivery": "追踪快递",
     "requestDelivery": "请求配送"
   },
+  "header": {
+    "taglineLocationCity": "服务 {country} · {city}",
+    "taglineLocationCountry": "服务 {country}",
+    "taglineDefault": "快速·本地·贴心",
+    "requestLink": "请求",
+    "becomeCourier": "成为快递员"
+  },
   "home": {
     "hero": {
       "title": "快速可靠的配送服务",
       "subtitle": "通过我们值得信赖的快递网络，快速安全地获得您的包裹配送",
       "cta": "请求配送",
-      "ctaSecondary": "成为快递员"
+      "ctaSecondary": "成为快递员",
+      "locationCity": "{city} 的本地快递员",
+      "locationCountry": "用阳光能量服务 {country}",
+      "locationFallback": "带着阳光笑容送达全球",
+      "changeLocation": "需要切换地点？"
     },
     "stats": {
       "deliveries": "活跃配送",
@@ -56,6 +67,23 @@
         "description": "我们的团队随时为您提供帮助"
       }
     },
+    "locations": {
+      "title": "无论您在哪都值得信赖",
+      "subtitle": "从历史大道到海岸集市，Courier Connect 将阳光能量送到每一扇门。",
+      "global": "全球覆盖",
+      "activeCity": "显示靠近 {city} 的快递员",
+      "activeGlobal": "选择一个地点以感受本地配送氛围",
+      "coverage": "我们在欧盟、南北美以及 Steam 认可的每个国家运营。告诉我们您在哪里，其余交给我们。",
+      "hubTagline": "同日阳光服务",
+      "hubs": {
+        "berlin": "柏林",
+        "prague": "布拉格",
+        "istanbul": "伊斯坦布尔",
+        "newYork": "纽约",
+        "toronto": "多伦多",
+        "saoPaulo": "圣保罗"
+      }
+    },
     "testimonials": {
       "title": "客户评价",
       "customer1": {
@@ -83,6 +111,13 @@
   "request": {
     "title": "请求配送",
     "subtitle": "填写详细信息，我们将为您找到完美的快递员",
+    "banner": {
+      "globalTitle": "全球覆盖",
+      "city": "我们会调度靠近 {city} 的快递员。",
+      "country": "为您连接在 {country} 值得信赖的快递员。",
+      "global": "告诉我们您所在的位置即可解锁本地选项。",
+      "change": "更新位置"
+    },
     "steps": {
       "pickup": "取件详情",
       "delivery": "配送详情",
@@ -138,6 +173,9 @@
       "previous": "上一步",
       "submit": "请求配送"
     },
+    "trackButton": "追踪配送",
+    "trackingId": "追踪代码",
+    "newRequest": "新请求",
     "success": {
       "title": "配送已请求！",
       "message": "您的追踪代码是：",

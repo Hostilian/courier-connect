@@ -5,12 +5,23 @@
     "trackDelivery": "Sledovat Dodávku",
     "requestDelivery": "Objednat Dodávku"
   },
+  "header": {
+    "taglineLocationCity": "Obsluhujeme {country} · {city}",
+    "taglineLocationCountry": "Obsluhujeme {country}",
+    "taglineDefault": "Rychle. Lokálně. Přátelsky.",
+    "requestLink": "Objednat",
+    "becomeCourier": "Staňte se kurýrem"
+  },
   "home": {
     "hero": {
       "title": "Rychlá a Spolehlivá Doručovací Služba",
       "subtitle": "Nechte si balíčky doručit rychle a bezpečně s naší důvěryhodnou sítí kurýrů",
       "cta": "Objednat Dodávku",
-      "ctaSecondary": "Staňte se Kurýrem"
+      "ctaSecondary": "Staňte se Kurýrem",
+      "locationCity": "Místní kurýři ve městě {city}",
+      "locationCountry": "Obsluhujeme {country} se slunečnou energií",
+      "locationFallback": "Doručujeme s úsměvem po celém světě",
+      "changeLocation": "Potřebujete jinou lokalitu?"
     },
     "stats": {
       "deliveries": "Aktivní Dodávky",
@@ -56,6 +67,23 @@
         "description": "Náš tým je vždy připraven vám pomoci"
       }
     },
+    "locations": {
+      "title": "Důvěryhodní kdekoli nás potřebujete",
+      "subtitle": "Od historických bulvárů až po pobřežní trhy přináší Courier Connect slunečnou energii ke každým dveřím.",
+      "global": "Celosvětové pokrytí",
+      "activeCity": "Zobrazujeme kurýry poblíž {city}",
+      "activeGlobal": "Vyberte lokalitu a objevte místní atmosféru doručování",
+      "coverage": "Působíme v Evropské unii, Severní i Jižní Americe a v každé zemi uznávané službou Steam. Sdělte nám, kde jste, a zbytek zařídíme.",
+      "hubTagline": "Sluneční doručení ještě dnes",
+      "hubs": {
+        "berlin": "Berlín",
+        "prague": "Praha",
+        "istanbul": "Istanbul",
+        "newYork": "New York",
+        "toronto": "Toronto",
+        "saoPaulo": "São Paulo"
+      }
+    },
     "testimonials": {
       "title": "Co Říkají Naši Zákazníci",
       "customer1": {
@@ -83,6 +111,13 @@
   "request": {
     "title": "Objednat Dodávku",
     "subtitle": "Vyplňte údaje a my najdeme perfektního kurýra pro vás",
+    "banner": {
+      "globalTitle": "Celosvětové pokrytí",
+      "city": "Nasadíme kurýry poblíž města {city}.",
+      "country": "Propojíme vás s důvěryhodnými kurýry v zemi {country}.",
+      "global": "Řekněte nám, kde jste, a zpřístupníme místní možnosti.",
+      "change": "Aktualizovat polohu"
+    },
     "steps": {
       "pickup": "Údaje o Vyzvednutí",
       "delivery": "Údaje o Doručení",
@@ -138,6 +173,9 @@
       "previous": "Předchozí",
       "submit": "Objednat Dodávku"
     },
+    "trackButton": "Sledovat dodávku",
+    "trackingId": "Sledovací kód",
+    "newRequest": "Nová objednávka",
     "success": {
       "title": "Dodávka Objednána!",
       "message": "Váš sledovací kód je:",

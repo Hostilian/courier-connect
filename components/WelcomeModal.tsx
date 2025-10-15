@@ -35,8 +35,6 @@ export default function WelcomeModal() {
     setOpen(false);
   }
 
-  if (!open) return null;
-
   const popularCities = [
     { code: 'DE', city: 'Berlin', flag: '🇩🇪' },
     { code: 'CZ', city: 'Prague', flag: '🇨🇿' },
@@ -57,6 +55,8 @@ export default function WelcomeModal() {
       country.code.toLowerCase().includes(lower)
     );
   }, [query]);
+
+  if (!open) return null;
 
   return (
     <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">

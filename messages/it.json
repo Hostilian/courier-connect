@@ -5,12 +5,23 @@
     "trackDelivery": "Traccia Consegna",
     "requestDelivery": "Richiedi Consegna"
   },
+  "header": {
+    "taglineLocationCity": "Serviamo {country} · {city}",
+    "taglineLocationCountry": "Serviamo {country}",
+    "taglineDefault": "Veloce. Locale. Cordiale.",
+    "requestLink": "Richiedi",
+    "becomeCourier": "Diventa corriere"
+  },
   "home": {
     "hero": {
       "title": "Servizio di Consegna Veloce e Affidabile",
       "subtitle": "Ricevi i tuoi pacchi consegnati rapidamente e in sicurezza con la nostra rete di corrieri fidati",
       "cta": "Richiedi Consegna",
-      "ctaSecondary": "Diventa Corriere"
+      "ctaSecondary": "Diventa Corriere",
+      "locationCity": "Corrieri locali a {city}",
+      "locationCountry": "Serviamo {country} con energia solare",
+      "locationFallback": "Consegniamo con un sorriso solare in tutto il mondo",
+      "changeLocation": "Hai bisogno di un'altra località?"
     },
     "stats": {
       "deliveries": "Consegne Attive",
@@ -56,6 +67,23 @@
         "description": "Il nostro team è sempre qui per aiutarti"
       }
     },
+    "locations": {
+      "title": "Affidabili ovunque tu ci voglia",
+      "subtitle": "Dai viali storici ai mercati costieri, Courier Connect porta energia solare a ogni porta.",
+      "global": "Copertura mondiale",
+      "activeCity": "Mostriamo corrieri vicini a {city}",
+      "activeGlobal": "Scegli una località per scoprire l'atmosfera dei corrieri locali",
+      "coverage": "Operiamo nell'Unione Europea, nelle Americhe e in ogni paese riconosciuto da Steam. Dicci dove ti trovi e penseremo al resto.",
+      "hubTagline": "Servizio solare in giornata",
+      "hubs": {
+        "berlin": "Berlino",
+        "prague": "Praga",
+        "istanbul": "Istanbul",
+        "newYork": "New York",
+        "toronto": "Toronto",
+        "saoPaulo": "San Paolo"
+      }
+    },
     "testimonials": {
       "title": "Cosa Dicono i Nostri Clienti",
       "customer1": {
@@ -83,6 +111,13 @@
   "request": {
     "title": "Richiedi Consegna",
     "subtitle": "Compila i dettagli e troveremo il corriere perfetto per te",
+    "banner": {
+      "globalTitle": "Copertura mondiale",
+      "city": "Instraderemo corrieri vicino a {city}.",
+      "country": "Ti colleghiamo a corrieri fidati in {country}.",
+      "global": "Facci sapere dove ti trovi per sbloccare opzioni locali.",
+      "change": "Aggiorna posizione"
+    },
     "steps": {
       "pickup": "Dettagli Ritiro",
       "delivery": "Dettagli Consegna",
@@ -138,6 +173,9 @@
       "previous": "Indietro",
       "submit": "Richiedi Consegna"
     },
+    "trackButton": "Traccia consegna",
+    "trackingId": "ID di tracciamento",
+    "newRequest": "Nuova richiesta",
     "success": {
       "title": "Consegna Richiesta!",
       "message": "Il tuo codice di tracciamento è:",

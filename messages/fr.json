@@ -5,12 +5,23 @@
     "trackDelivery": "Suivre la Livraison",
     "requestDelivery": "Demander une Livraison"
   },
+  "header": {
+    "taglineLocationCity": "Nous desservons {country} · {city}",
+    "taglineLocationCountry": "Nous desservons {country}",
+    "taglineDefault": "Rapide. Local. Sympathique.",
+    "requestLink": "Demander",
+    "becomeCourier": "Devenir coursier"
+  },
   "home": {
     "hero": {
       "title": "Service de Livraison Rapide et Fiable",
       "subtitle": "Recevez vos colis livrés rapidement et en toute sécurité avec notre réseau de coursiers de confiance",
       "cta": "Demander une Livraison",
-      "ctaSecondary": "Devenir Coursier"
+      "ctaSecondary": "Devenir Coursier",
+      "locationCity": "Coursiers locaux à {city}",
+      "locationCountry": "Nous desservons {country} avec une énergie solaire",
+      "locationFallback": "Nous livrons avec le sourire partout dans le monde",
+      "changeLocation": "Besoin d'un autre endroit ?"
     },
     "stats": {
       "deliveries": "Livraisons Actives",
@@ -56,6 +67,23 @@
         "description": "Notre équipe est toujours là pour vous aider"
       }
     },
+    "locations": {
+      "title": "Fiable où que vous soyez",
+      "subtitle": "Des boulevards historiques aux marchés côtiers, Courier Connect apporte une énergie solaire à chaque porte.",
+      "global": "Couverture mondiale",
+      "activeCity": "Coursiers disponibles autour de {city}",
+      "activeGlobal": "Choisissez un lieu pour découvrir nos vibes locales",
+      "coverage": "Nous opérons dans l'Union européenne, en Amérique du Nord et du Sud et dans tous les pays reconnus par Steam. Indiquez-nous où vous êtes et nous nous occupons du reste.",
+      "hubTagline": "Service solaire dans la journée",
+      "hubs": {
+        "berlin": "Berlin",
+        "prague": "Prague",
+        "istanbul": "Istanbul",
+        "newYork": "New York",
+        "toronto": "Toronto",
+        "saoPaulo": "São Paulo"
+      }
+    },
     "testimonials": {
       "title": "Ce Que Disent Nos Clients",
       "customer1": {
@@ -83,6 +111,13 @@
   "request": {
     "title": "Demander une Livraison",
     "subtitle": "Remplissez les détails et nous trouverons le coursier parfait pour vous",
+    "banner": {
+      "globalTitle": "Couverture mondiale",
+      "city": "Nous dépêcherons des coursiers près de {city}.",
+      "country": "Nous vous mettons en relation avec des coursiers de confiance en {country}.",
+      "global": "Dites-nous où vous êtes pour débloquer des options locales.",
+      "change": "Mettre à jour la localisation"
+    },
     "steps": {
       "pickup": "Détails de Collecte",
       "delivery": "Détails de Livraison",
@@ -138,6 +173,9 @@
       "previous": "Précédent",
       "submit": "Demander une Livraison"
     },
+    "trackButton": "Suivre la Livraison",
+    "trackingId": "Code de suivi",
+    "newRequest": "Nouvelle demande",
     "success": {
       "title": "Livraison Demandée !",
       "message": "Votre code de suivi est :",

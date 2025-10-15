@@ -5,12 +5,23 @@
     "trackDelivery": "Rastrear Entrega",
     "requestDelivery": "Solicitar Entrega"
   },
+  "header": {
+    "taglineLocationCity": "Sirviendo {country} · {city}",
+    "taglineLocationCountry": "Sirviendo {country}",
+    "taglineDefault": "Rápido. Local. Amigable.",
+    "requestLink": "Solicitar",
+    "becomeCourier": "Hazte mensajero"
+  },
   "home": {
     "hero": {
       "title": "Servicio de Entrega Rápido y Confiable",
       "subtitle": "Recibe tus paquetes entregados de forma rápida y segura con nuestra red de mensajeros de confianza",
       "cta": "Solicitar Entrega",
-      "ctaSecondary": "Ser Mensajero"
+      "ctaSecondary": "Ser Mensajero",
+      "locationCity": "Mensajeros locales en {city}",
+      "locationCountry": "Sirviendo a {country} con energía soleada",
+      "locationFallback": "Entregando con una sonrisa soleada en todo el mundo",
+      "changeLocation": "¿Necesitas otro lugar?"
     },
     "stats": {
       "deliveries": "Entregas Activas",
@@ -56,6 +67,23 @@
         "description": "Nuestro equipo siempre está aquí para ayudarte"
       }
     },
+    "locations": {
+      "title": "De confianza donde nos necesites",
+      "subtitle": "Desde bulevares históricos hasta mercados costeros, Courier Connect lleva energía soleada a cada puerta.",
+      "global": "Cobertura mundial",
+      "activeCity": "Mostrando mensajeros cercanos en {city}",
+      "activeGlobal": "Elige una ubicación para ver el ambiente local de mensajería",
+      "coverage": "Operamos en la Unión Europea, América del Norte y del Sur, y en cada país reconocido por Steam. Toca el selector para decirnos dónde estás y nos encargamos del resto.",
+      "hubTagline": "Servicio soleado en el mismo día",
+      "hubs": {
+        "berlin": "Berlín",
+        "prague": "Praga",
+        "istanbul": "Estambul",
+        "newYork": "Nueva York",
+        "toronto": "Toronto",
+        "saoPaulo": "São Paulo"
+      }
+    },
     "testimonials": {
       "title": "Lo Que Dicen Nuestros Clientes",
       "customer1": {
@@ -83,6 +111,13 @@
   "request": {
     "title": "Solicitar Entrega",
     "subtitle": "Completa los detalles y encontraremos el mensajero perfecto para ti",
+    "banner": {
+      "globalTitle": "Cobertura mundial",
+      "city": "Enviaremos mensajeros cerca de {city}.",
+      "country": "Te conectamos con mensajeros de confianza en {country}.",
+      "global": "Cuéntanos dónde estás para desbloquear opciones locales.",
+      "change": "Actualizar ubicación"
+    },
     "steps": {
       "pickup": "Detalles de Recogida",
       "delivery": "Detalles de Entrega",
@@ -138,6 +173,9 @@
       "previous": "Anterior",
       "submit": "Solicitar Entrega"
     },
+    "trackButton": "Rastrear entrega",
+    "trackingId": "ID de rastreo",
+    "newRequest": "Nueva solicitud",
     "success": {
       "title": "¡Entrega Solicitada!",
       "message": "Tu código de rastreo es:",

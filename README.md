@@ -1,109 +1,77 @@
-# Courier Connect# Courier Connect# Courier Connect 🚀
+# Courier Connect 🚀
+
 
 
 
 Local delivery platform connecting customers with couriers.
 
-
-
-## FeaturesLocal delivery platform connecting customers with couriers.> Neighbors helping neighbors with local deliveries
-
-
-
+## Features
 - Customer delivery requests with tracking
-
 - Courier dashboard and delivery management
-
-- Email verification and password reset## FeaturesConnect with friendly local couriers for quick pickups and deliveries. Built for real people, real connections.
-
+- Email verification and password reset
 - Customer ratings system
-
-- **Google Maps integration** (address autocomplete + route preview)
-
-- **Stripe payment processing**
-
-- Multi-language support (14 languages)- Customer delivery requests with tracking## What is Courier Connect?
-
+- Google Maps integration (address autocomplete + route preview)
+- Stripe payment processing
+- Multi-language support (14+ languages)
 - Mobile-responsive design
 
-- Courier dashboard and delivery management
+## What is Courier Connect?
+Connect with friendly local couriers for quick pickups and deliveries. Built for real people, real connections.
+- Customers can request pickups without signing up
+- Couriers can earn money helping their community
+- Everyone enjoys fast, friendly, local service
 
-## Quick Start
+## Getting Started
 
-- Email verification and password resetA simple, mobile-first platform where:
+### Prerequisites
+- Node.js 18+
+- MongoDB (local or MongoDB Atlas)
 
+### Quick Setup
 ```bash
-
-npm install- Customer ratings system
-
+npm install
 cp .env.example .env.local
-
-# Add your API keys to .env.local- Multi-language support (14 languages)- **Customers** can request pickups without signing up
-
+# Add your API keys to .env.local
 npm run dev
+```
 
-```- Mobile-responsive design- **Couriers** can earn money helping their community
-
-
-
-## Required Environment Variables- Everyone enjoys fast, friendly, local service
+Visit http://localhost:3000
 
 
 
-```bash## Setup
-
+### Required Environment Variables
+```bash
 MONGODB_URI=your_mongodb_connection_string
-
-JWT_SECRET=your_jwt_secretPerfect for envelopes, gifts, or marketplace items you can't pick up yourself.
-
+JWT_SECRET=your_jwt_secret
 NEXT_PUBLIC_APP_URL=http://localhost:3000
-
-RESEND_API_KEY=your_resend_api_key```bash
-
+RESEND_API_KEY=your_resend_api_key
 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_key
-
-STRIPE_SECRET_KEY=your_stripe_secret_keynpm install## Features
-
+STRIPE_SECRET_KEY=your_stripe_secret_key
 STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
-
-```cp .env.example .env.local
-
-
-
-## Tech Stack# Configure MongoDB and JWT_SECRET in .env.local### For Customers 🙋
+```
 
 
 
-- Next.js 14 (App Router)npm run dev- ✅ No registration required
-
+## Tech Stack
+- Next.js 14 (App Router)
 - MongoDB + Mongoose
-
-- TypeScript```- 📦 Simple pickup requests
-
+- TypeScript
 - Tailwind CSS + Framer Motion
-
-- Resend (email)- 📱 Real-time tracking
-
+- Resend (email)
 - Google Maps API
+- Stripe
 
-- Stripe## Tech Stack- 💰 Fair, transparent pricing
+### For Customers 🙋
+- ✅ No registration required
+- 📦 Simple pickup requests
+- 📱 Real-time tracking
+- 💰 Fair, transparent pricing
 
-
-
-## License
-
-
-
-MIT- Next.js 14### For Couriers 🚴
-
-
-- MongoDB- 💼 Flexible schedule
-
-- TypeScript- 📍 Choose your deliveries
-
-- Tailwind CSS- 💳 Secure payments
-
-- Resend (email)- ⭐ Build your reputation
+### For Couriers 🚴
+- 💼 Flexible schedule
+- 📍 Choose your deliveries
+- 💳 Secure payments
+- ⭐ Build your reputation
 
 
 

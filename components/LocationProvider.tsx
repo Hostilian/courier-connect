@@ -155,7 +155,7 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
       error,
       clearError: () => setError(null),
     }),
-    [location, loading, error]
+    [location, loading, error, detectLocation, setLocation]
   );
 
   return <LocationContext.Provider value={value}>{children}</LocationContext.Provider>;

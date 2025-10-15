@@ -5,12 +5,23 @@
     "trackDelivery": "تتبع التوصيل",
     "requestDelivery": "طلب توصيل"
   },
+  "header": {
+    "taglineLocationCity": "نخدم {country} · {city}",
+    "taglineLocationCountry": "نخدم {country}",
+    "taglineDefault": "سريع. محلي. ودود.",
+    "requestLink": "طلب",
+    "becomeCourier": "كن مُوصِّلًا"
+  },
   "home": {
     "hero": {
       "title": "خدمة توصيل سريعة وموثوقة",
       "subtitle": "احصل على طرودك مُوصَّلة بسرعة وأمان مع شبكتنا الموثوقة من المُوصِّلين",
       "cta": "طلب توصيل",
-      "ctaSecondary": "كن مُوصِّلاً"
+      "ctaSecondary": "كن مُوصِّلاً",
+      "locationCity": "مُوصِّلون محليون في {city}",
+      "locationCountry": "نخدم {country} بطاقة مفعمة بالشمس",
+      "locationFallback": "نوصّل بابتسامة مشمسة حول العالم",
+      "changeLocation": "هل تحتاج موقعًا آخر؟"
     },
     "stats": {
       "deliveries": "التوصيلات النشطة",
@@ -56,6 +67,23 @@
         "description": "فريقنا دائماً هنا لمساعدتك"
       }
     },
+    "locations": {
+      "title": "ثقة أينما كنت",
+      "subtitle": "من الشوارع التاريخية إلى الأسواق الساحلية، Courier Connect تجلب طاقة الشمس إلى كل باب.",
+      "global": "تغطية عالمية",
+      "activeCity": "نعرض مُوصِّلين قريبين في {city}",
+      "activeGlobal": "اختر موقعًا لتظهر لك أجواء التوصيل المحلية",
+      "coverage": "نعمل عبر الاتحاد الأوروبي وأمريكا الشمالية والجنوبية وكل دولة يعترف بها Steam. شاركنا موقعك وسنتولى الباقي.",
+      "hubTagline": "خدمة مشمسة في نفس اليوم",
+      "hubs": {
+        "berlin": "برلين",
+        "prague": "براغ",
+        "istanbul": "إسطنبول",
+        "newYork": "نيويورك",
+        "toronto": "تورنتو",
+        "saoPaulo": "ساو باولو"
+      }
+    },
     "testimonials": {
       "title": "ماذا يقول عملاؤنا",
       "customer1": {
@@ -83,6 +111,13 @@
   "request": {
     "title": "طلب توصيل",
     "subtitle": "املأ التفاصيل وسنجد المُوصِّل المثالي لك",
+    "banner": {
+      "globalTitle": "تغطية عالمية",
+      "city": "سنُوجّه المُوصِّلين بالقرب من {city}.",
+      "country": "نربطك بمُوصِّلين موثوقين في {country}.",
+      "global": "أخبرنا بموقعك لفتح خيارات محلية.",
+      "change": "تحديث الموقع"
+    },
     "steps": {
       "pickup": "تفاصيل الاستلام",
       "delivery": "تفاصيل التسليم",
@@ -138,6 +173,9 @@
       "previous": "السابق",
       "submit": "طلب التوصيل"
     },
+    "trackButton": "تتبع التوصيل",
+    "trackingId": "رمز التتبع",
+    "newRequest": "طلب جديد",
     "success": {
       "title": "تم طلب التوصيل!",
       "message": "رمز التتبع الخاص بك:",

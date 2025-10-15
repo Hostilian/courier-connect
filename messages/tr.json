@@ -5,12 +5,23 @@
     "trackDelivery": "Teslimatı Takip Et",
     "requestDelivery": "Teslimat İste"
   },
+  "header": {
+    "taglineLocationCity": "{country} · {city} için hizmet veriyoruz",
+    "taglineLocationCountry": "{country} için hizmet veriyoruz",
+    "taglineDefault": "Hızlı. Yerel. Güler yüzlü.",
+    "requestLink": "İste",
+    "becomeCourier": "Kurye ol"
+  },
   "home": {
     "hero": {
       "title": "Hızlı ve Güvenilir Teslimat Hizmeti",
       "subtitle": "Güvenilir kurye ağımızla paketlerinizi hızlı ve güvenli bir şekilde teslim edin",
       "cta": "Teslimat İste",
-      "ctaSecondary": "Kurye Ol"
+      "ctaSecondary": "Kurye Ol",
+      "locationCity": "{city} şehrinde yerel kuryeler",
+      "locationCountry": "{country} için güneşli enerjiyle hizmet veriyoruz",
+      "locationFallback": "Dünyanın her yerine güneşli bir gülümsemeyle teslimat yapıyoruz",
+      "changeLocation": "Başka bir konuma mı ihtiyacınız var?"
     },
     "stats": {
       "deliveries": "Aktif Teslimatlar",
@@ -56,6 +67,23 @@
         "description": "Ekibimiz her zaman size yardımcı olmak için burada"
       }
     },
+    "locations": {
+      "title": "Nerede ihtiyaç duyarsanız güveniliriz",
+      "subtitle": "Tarihi bulvarlardan kıyı pazarlarına kadar Courier Connect her kapıya güneş enerjisi getirir.",
+      "global": "Küresel kapsama",
+      "activeCity": "{city} yakınındaki kuryeleri gösteriyoruz",
+      "activeGlobal": "Yerel teslimat havasını görmek için bir konum seçin",
+      "coverage": "Avrupa Birliği, Kuzey ve Güney Amerika ve Steam'in tanıdığı her ülkede faaliyet gösteriyoruz. Nerede olduğunuzu paylaşın, gerisini biz hallederiz.",
+      "hubTagline": "Aynı gün güneşli hizmet",
+      "hubs": {
+        "berlin": "Berlin",
+        "prague": "Prag",
+        "istanbul": "İstanbul",
+        "newYork": "New York",
+        "toronto": "Toronto",
+        "saoPaulo": "São Paulo"
+      }
+    },
     "testimonials": {
       "title": "Müşterilerimiz Ne Diyor",
       "customer1": {
@@ -83,6 +111,13 @@
   "request": {
     "title": "Teslimat İste",
     "subtitle": "Bilgileri doldurun, sizin için mükemmel kuryeyi bulalım",
+    "banner": {
+      "globalTitle": "Küresel kapsama",
+      "city": "Kuryeleri {city} yakınlarına yönlendireceğiz.",
+      "country": "Sizi {country} içindeki güvenilir kuryelerle buluşturuyoruz.",
+      "global": "Yerel seçenekleri açmak için nerede olduğunuzu söyleyin.",
+      "change": "Konumu güncelle"
+    },
     "steps": {
       "pickup": "Alım Bilgileri",
       "delivery": "Teslimat Bilgileri",
@@ -138,6 +173,9 @@
       "previous": "Geri",
       "submit": "Teslimat İste"
     },
+    "trackButton": "Teslimatı takip et",
+    "trackingId": "Takip kodu",
+    "newRequest": "Yeni istek",
     "success": {
       "title": "Teslimat İstendi!",
       "message": "Takip kodunuz:",

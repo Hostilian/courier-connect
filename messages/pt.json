@@ -5,12 +5,23 @@
     "trackDelivery": "Rastrear Entrega",
     "requestDelivery": "Solicitar Entrega"
   },
+  "header": {
+    "taglineLocationCity": "Atendemos {country} · {city}",
+    "taglineLocationCountry": "Atendemos {country}",
+    "taglineDefault": "Rápido. Local. Gentil.",
+    "requestLink": "Solicitar",
+    "becomeCourier": "Seja estafeta"
+  },
   "home": {
     "hero": {
       "title": "Serviço de Entrega Rápido e Confiável",
       "subtitle": "Receba seus pacotes entregues de forma rápida e segura com nossa rede de estafetas confiáveis",
       "cta": "Solicitar Entrega",
-      "ctaSecondary": "Tornar-se Estafeta"
+      "ctaSecondary": "Tornar-se Estafeta",
+      "locationCity": "Estafetas locais em {city}",
+      "locationCountry": "Atendemos {country} com energia de sol",
+      "locationFallback": "Entregamos com um sorriso ensolarado no mundo todo",
+      "changeLocation": "Precisa de outro local?"
     },
     "stats": {
       "deliveries": "Entregas Ativas",
@@ -56,6 +67,23 @@
         "description": "Nossa equipe está sempre aqui para ajudá-lo"
       }
     },
+    "locations": {
+      "title": "Confiáveis onde você precisar",
+      "subtitle": "Dos boulevards históricos aos mercados costeiros, a Courier Connect leva energia de sol a cada porta.",
+      "global": "Cobertura mundial",
+      "activeCity": "Mostramos estafetas perto de {city}",
+      "activeGlobal": "Escolha um local para ver o clima de entregas locais",
+      "coverage": "Atuamos na União Europeia, nas Américas e em todos os países reconhecidos pelo Steam. Conte-nos onde você está e cuidaremos do resto.",
+      "hubTagline": "Serviço ensolarado no mesmo dia",
+      "hubs": {
+        "berlin": "Berlim",
+        "prague": "Praga",
+        "istanbul": "Istambul",
+        "newYork": "Nova Iorque",
+        "toronto": "Toronto",
+        "saoPaulo": "São Paulo"
+      }
+    },
     "testimonials": {
       "title": "O Que Nossos Clientes Dizem",
       "customer1": {
@@ -83,6 +111,13 @@
   "request": {
     "title": "Solicitar Entrega",
     "subtitle": "Preencha os detalhes e encontraremos o estafeta perfeito para você",
+    "banner": {
+      "globalTitle": "Cobertura mundial",
+      "city": "Direcionaremos estafetas para perto de {city}.",
+      "country": "Conectamos você a estafetas de confiança em {country}.",
+      "global": "Diga-nos onde você está para liberar opções locais.",
+      "change": "Atualizar localização"
+    },
     "steps": {
       "pickup": "Detalhes da Coleta",
       "delivery": "Detalhes da Entrega",
@@ -138,6 +173,9 @@
       "previous": "Anterior",
       "submit": "Solicitar Entrega"
     },
+    "trackButton": "Rastrear entrega",
+    "trackingId": "ID de rastreamento",
+    "newRequest": "Nova solicitação",
     "success": {
       "title": "Entrega Solicitada!",
       "message": "Seu código de rastreamento é:",

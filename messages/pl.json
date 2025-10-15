@@ -5,12 +5,23 @@
     "trackDelivery": "Śledź Przesyłkę",
     "requestDelivery": "Zamów Dostawę"
   },
+  "header": {
+    "taglineLocationCity": "Obsługujemy {country} · {city}",
+    "taglineLocationCountry": "Obsługujemy {country}",
+    "taglineDefault": "Szybko. Lokalnie. Przyjaźnie.",
+    "requestLink": "Zamów",
+    "becomeCourier": "Zostań kurierem"
+  },
   "home": {
     "hero": {
       "title": "Szybka i Niezawodna Usługa Dostawy",
       "subtitle": "Odbieraj swoje paczki szybko i bezpiecznie z naszą zaufaną siecią kurierów",
       "cta": "Zamów Dostawę",
-      "ctaSecondary": "Zostań Kurierem"
+      "ctaSecondary": "Zostań Kurierem",
+      "locationCity": "Lokalni kurierzy w {city}",
+      "locationCountry": "Obsługujemy {country} z energią słońca",
+      "locationFallback": "Dostarczamy ze słonecznym uśmiechem na całym świecie",
+      "changeLocation": "Potrzebujesz innej lokalizacji?"
     },
     "stats": {
       "deliveries": "Aktywne Dostawy",
@@ -56,6 +67,23 @@
         "description": "Nasz zespół jest zawsze tutaj, aby Ci pomóc"
       }
     },
+    "locations": {
+      "title": "Godni zaufania, gdziekolwiek nas potrzebujesz",
+      "subtitle": "Od historycznych bulwarów po nadmorskie targi Courier Connect dostarcza słoneczną energię pod każde drzwi.",
+      "global": "Globalny zasięg",
+      "activeCity": "Pokazujemy kurierów w pobliżu {city}",
+      "activeGlobal": "Wybierz lokalizację, aby zobaczyć lokalny klimat dostaw",
+      "coverage": "Działamy w Unii Europejskiej, obu Amerykach oraz w każdym kraju uznawanym przez Steam. Powiedz nam, gdzie jesteś, a my zajmiemy się resztą.",
+      "hubTagline": "Słoneczna dostawa tego samego dnia",
+      "hubs": {
+        "berlin": "Berlin",
+        "prague": "Praga",
+        "istanbul": "Stambuł",
+        "newYork": "Nowy Jork",
+        "toronto": "Toronto",
+        "saoPaulo": "São Paulo"
+      }
+    },
     "testimonials": {
       "title": "Co Mówią Nasi Klienci",
       "customer1": {
@@ -83,6 +111,13 @@
   "request": {
     "title": "Zamów Dostawę",
     "subtitle": "Wypełnij szczegóły, a znajdziemy idealnego kuriera dla Ciebie",
+    "banner": {
+      "globalTitle": "Globalny zasięg",
+      "city": "Kierujemy kurierów w okolice {city}.",
+      "country": "Łączymy Cię z zaufanymi kurierami w kraju {country}.",
+      "global": "Powiedz nam, gdzie jesteś, aby odblokować lokalne opcje.",
+      "change": "Zaktualizuj lokalizację"
+    },
     "steps": {
       "pickup": "Szczegóły Odbioru",
       "delivery": "Szczegóły Dostawy",
@@ -138,6 +173,9 @@
       "previous": "Wstecz",
       "submit": "Zamów Dostawę"
     },
+    "trackButton": "Śledź dostawę",
+    "trackingId": "Kod śledzenia",
+    "newRequest": "Nowe zamówienie",
     "success": {
       "title": "Dostawa Zamówiona!",
       "message": "Twój kod śledzenia to:",

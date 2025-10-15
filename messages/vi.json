@@ -5,12 +5,23 @@
     "trackDelivery": "Theo Dõi Đơn Hàng",
     "requestDelivery": "Đặt Giao Hàng"
   },
+  "header": {
+    "taglineLocationCity": "Phục vụ {country} · {city}",
+    "taglineLocationCountry": "Phục vụ {country}",
+    "taglineDefault": "Nhanh. Bản địa. Thân thiện.",
+    "requestLink": "Đặt",
+    "becomeCourier": "Trở thành shipper"
+  },
   "home": {
     "hero": {
       "title": "Dịch Vụ Giao Hàng Nhanh và Tin Cậy",
       "subtitle": "Nhận bưu kiện của bạn nhanh chóng và an toàn với mạng lưới shipper đáng tin cậy",
       "cta": "Đặt Giao Hàng",
-      "ctaSecondary": "Trở Thành Shipper"
+      "ctaSecondary": "Trở Thành Shipper",
+      "locationCity": "Shipper địa phương tại {city}",
+      "locationCountry": "Phục vụ {country} với năng lượng ngập tràn nắng",
+      "locationFallback": "Giao hàng với nụ cười nắng ở khắp nơi",
+      "changeLocation": "Cần vị trí khác?"
     },
     "stats": {
       "deliveries": "Đơn Hàng Đang Giao",
@@ -56,6 +67,23 @@
         "description": "Đội ngũ luôn sẵn sàng giúp đỡ bạn"
       }
     },
+    "locations": {
+      "title": "Đáng tin cậy ở bất cứ nơi nào bạn cần",
+      "subtitle": "Từ đại lộ lịch sử đến khu chợ ven biển, Courier Connect mang nguồn năng lượng rực nắng tới mọi cánh cửa.",
+      "global": "Phủ sóng toàn cầu",
+      "activeCity": "Hiển thị shipper gần {city}",
+      "activeGlobal": "Chọn vị trí để khám phá không khí giao hàng địa phương",
+      "coverage": "Chúng tôi hoạt động trên Liên minh Châu Âu, châu Mỹ và mọi quốc gia được Steam công nhận. Chia sẻ bạn đang ở đâu, phần còn lại để chúng tôi lo.",
+      "hubTagline": "Dịch vụ nắng trong ngày",
+      "hubs": {
+        "berlin": "Berlin",
+        "prague": "Praha",
+        "istanbul": "Istanbul",
+        "newYork": "New York",
+        "toronto": "Toronto",
+        "saoPaulo": "São Paulo"
+      }
+    },
     "testimonials": {
       "title": "Khách Hàng Nói Gì",
       "customer1": {
@@ -83,6 +111,13 @@
   "request": {
     "title": "Đặt Giao Hàng",
     "subtitle": "Điền thông tin và chúng tôi sẽ tìm shipper hoàn hảo cho bạn",
+    "banner": {
+      "globalTitle": "Phủ sóng toàn cầu",
+      "city": "Chúng tôi điều shipper đến gần {city}.",
+      "country": "Kết nối bạn với shipper đáng tin cậy tại {country}.",
+      "global": "Cho chúng tôi biết vị trí để mở khóa lựa chọn địa phương.",
+      "change": "Cập nhật vị trí"
+    },
     "steps": {
       "pickup": "Thông Tin Lấy Hàng",
       "delivery": "Thông Tin Giao Hàng",
@@ -138,6 +173,9 @@
       "previous": "Quay Lại",
       "submit": "Đặt Giao Hàng"
     },
+    "trackButton": "Theo dõi giao hàng",
+    "trackingId": "Mã theo dõi",
+    "newRequest": "Đơn mới",
     "success": {
       "title": "Đã Đặt Giao Hàng!",
       "message": "Mã theo dõi của bạn là:",

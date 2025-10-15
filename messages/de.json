@@ -5,12 +5,23 @@
     "trackDelivery": "Sendung Verfolgen",
     "requestDelivery": "Lieferung Anfordern"
   },
+  "header": {
+    "taglineLocationCity": "Wir bedienen {country} · {city}",
+    "taglineLocationCountry": "Wir bedienen {country}",
+    "taglineDefault": "Schnell. Lokal. Freundlich.",
+    "requestLink": "Anfordern",
+    "becomeCourier": "Kurier werden"
+  },
   "home": {
     "hero": {
       "title": "Schneller, Zuverlässiger Lieferservice",
       "subtitle": "Erhalten Sie Ihre Pakete schnell und sicher mit unserem vertrauenswürdigen Kuriernetzwerk geliefert",
       "cta": "Lieferung Anfordern",
-      "ctaSecondary": "Kurier Werden"
+      "ctaSecondary": "Kurier Werden",
+      "locationCity": "Lokale Kuriere in {city}",
+      "locationCountry": "Wir bedienen {country} mit Sonnenenergie",
+      "locationFallback": "Wir liefern mit Sonnenschein-Lächeln weltweit",
+      "changeLocation": "Brauchen Sie einen anderen Ort?"
     },
     "stats": {
       "deliveries": "Aktive Lieferungen",
@@ -56,6 +67,23 @@
         "description": "Unser Team ist immer für Sie da"
       }
     },
+    "locations": {
+      "title": "Verlässlich, wo immer Sie uns brauchen",
+      "subtitle": "Von historischen Boulevards bis zu Küstenmärkten bringt Courier Connect Sonnenenergie an jede Tür.",
+      "global": "Weltweite Abdeckung",
+      "activeCity": "Wir zeigen Kuriere in der Nähe von {city}",
+      "activeGlobal": "Wählen Sie einen Ort, um lokale Kurierstimmung zu sehen",
+      "coverage": "Wir sind in der Europäischen Union, Nord- und Südamerika sowie in jedem von Steam anerkannten Land aktiv. Teilen Sie uns mit, wo Sie sind, und wir kümmern uns um den Rest.",
+      "hubTagline": "Sonnenschein-Service am selben Tag",
+      "hubs": {
+        "berlin": "Berlin",
+        "prague": "Prag",
+        "istanbul": "Istanbul",
+        "newYork": "New York",
+        "toronto": "Toronto",
+        "saoPaulo": "São Paulo"
+      }
+    },
     "testimonials": {
       "title": "Was Unsere Kunden Sagen",
       "customer1": {
@@ -83,6 +111,13 @@
   "request": {
     "title": "Lieferung Anfordern",
     "subtitle": "Füllen Sie die Details aus und wir finden den perfekten Kurier für Sie",
+    "banner": {
+      "globalTitle": "Weltweite Abdeckung",
+      "city": "Wir lenken Kuriere in die Nähe von {city}.",
+      "country": "Wir verbinden Sie mit vertrauenswürdigen Kurieren in {country}.",
+      "global": "Sagen Sie uns, wo Sie sind, um lokale Optionen freizuschalten.",
+      "change": "Standort aktualisieren"
+    },
     "steps": {
       "pickup": "Abholdetails",
       "delivery": "Lieferdetails",
@@ -138,6 +173,9 @@
       "previous": "Zurück",
       "submit": "Lieferung Anfordern"
     },
+    "trackButton": "Lieferung verfolgen",
+    "trackingId": "Tracking-ID",
+    "newRequest": "Neue Anfrage",
     "success": {
       "title": "Lieferung Angefordert!",
       "message": "Ihr Tracking-Code ist:",
