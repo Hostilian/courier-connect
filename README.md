@@ -1,103 +1,87 @@
-# 🚀 Courier Connect - Peer-to-Peer Delivery Service
+# Courier Connect
 
-A modern, mobile-responsive platform connecting people who need items delivered with couriers ready to help.
+A modern, mobile-first platform for on-demand local deliveries.
 
-## ✨ Features
+## Project Overview
 
-### For Customers (No Registration Required!)
-- 📦 Post delivery requests instantly
-- 🗺️ Set pickup and delivery locations
-- 💰 Suggest your own price
-- 📱 Track deliveries in real-time
-- ⭐ Rate courier service
+Courier Connect is a Next.js application that facilitates a two-sided marketplace for deliveries:
+1.  **Customers** can quickly request a delivery without needing to register an account.
+2.  **Couriers** can register, log in, and accept pending delivery jobs from their dashboard.
 
-### For Couriers (Registration Required)
-- 💼 Flexible earning opportunities
-- 🎯 Browse available delivery requests
-- 📍 Choose deliveries on your route
-- 💳 Secure payment system
-- 🏆 Build your reputation
+The application is built with a focus on user experience, performance, and mobile-first design.
 
-## 🎯 Use Cases
-- 📨 Document & envelope delivery
-- 🎁 Gift delivery
-- 🛍️ Facebook Marketplace pickups
-- 📦 Package delivery
-- 🏃 Custom errands
+## Tech Stack
 
-## 🛠 Tech Stack
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Database**: MongoDB with Mongoose
-- **Authentication**: NextAuth.js
-- **Maps**: Google Maps API
-- **Deployment**: Vercel
+-   **Framework**: [Next.js](https://nextjs.org/) (App Router)
+-   **Language**: [TypeScript](https://www.typescriptlang.org/)
+-   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+-   **Database**: [MongoDB](https://www.mongodb.com/) with [Mongoose](https://mongoosejs.com/)
+-   **Authentication**: Custom JWT-based authentication
+-   **Validation**: [Zod](https://zod.dev/)
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-- Node.js 18+
-- MongoDB
-- Git
 
-### Installation
+-   Node.js (v18 or later)
+-   npm or yarn
+-   MongoDB instance (local or cloud-hosted)
 
-1. Clone the repository
-```bash
-git clone https://github.com/yourusername/courier-connect.git
-cd courier-connect
-```
+### Setup
 
-2. Install dependencies
-```bash
-npm install
-```
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/Hostilian/courier-connect.git
+    cd courier-connect
+    ```
 
-3. Set up environment variables
-```bash
-cp .env.example .env.local
-```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-4. Configure your `.env.local` file with:
-```
-MONGODB_URI=your_mongodb_connection_string
-NEXTAUTH_SECRET=your_secret_key
-NEXTAUTH_URL=http://localhost:3000
-GOOGLE_MAPS_API_KEY=your_google_maps_api_key
-```
+3.  **Set up environment variables:**
+    Create a `.env.local` file in the root of the project by copying the example file:
+    ```bash
+    cp .env.example .env.local
+    ```
+    Update the variables in `.env.local` with your own configuration:
+    -   `MONGODB_URI`: Your MongoDB connection string.
+    -   `JWT_SECRET`: A strong, unique secret for signing JWTs. You can generate one with `openssl rand -base64 32`.
+    -   `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY`: (Optional) Your Google Maps API key for map-related features.
 
-5. Run the development server
-```bash
-npm run dev
-```
+4.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+    The application will be available at [http://localhost:3000](http://localhost:3000).
 
-6. Open [http://localhost:3000](http://localhost:3000)
+## Core Features
 
-## 📱 Mobile Responsive
-Built with mobile-first approach, works perfectly on:
-- 📱 Smartphones (iOS & Android)
-- 📱 Tablets
-- 💻 Desktops
-- 🖥️ Large screens
+-   **Customer Flow**: Anonymously create delivery requests through a multi-step form. Receive a unique tracking ID upon submission.
+-   **Courier Flow**: Register for an account, log in, and view a dashboard of available deliveries. Accept jobs to see them assigned to you.
+-   **Real-time Tracking**: Customers can use their tracking ID to view the live status and timeline of their delivery.
+-   **Responsive Design**: The UI is fully responsive and optimized for mobile devices.
 
-## 🗺️ Roadmap
+## Available Scripts
 
-- [x] Phase 1: Project setup
-- [x] Phase 2: Landing page
-- [x] Phase 3: Customer request system
-- [x] Phase 4: Courier registration & dashboard
-- [x] Phase 5: Real-time tracking
-- [ ] Phase 6: Payment integration
-- [ ] Phase 7: Rating system
-- [ ] Phase 8: Chat feature
-- [ ] Phase 9: Mobile app (React Native)
+-   `npm run dev`: Starts the development server.
+-   `npm run build`: Creates a production-ready build of the application.
+-   `npm run start`: Starts the production server.
+-   `npm run lint`: Lints the codebase for issues.
 
-## 📄 License
-MIT License
+## Project Structure
 
-## 👥 Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
+-   `app/`: Contains the pages and API routes for the application (App Router).
+-   `components/`: Shared React components.
+-   `lib/`: Helper functions and libraries (e.g., database connection, auth).
+-   `models/`: Mongoose schemas for database models (`User`, `DeliveryRequest`).
+-   `public/`: Static assets.
+-   `pages/api/auth/`: API routes for authentication (Pages Router, for compatibility with some auth patterns).
+
+## Contributing
+
+Contributions are welcome! Please feel free to open an issue or submit a pull request.
 
 ## 📧 Contact
 For questions or support, please open an issue.
