@@ -1,15 +1,12 @@
-'use client'
+'use client';
 
-import { ReactNode } from 'react'
+import { LocationProvider } from '@/components/LocationProvider';
+import { ReactNode } from 'react';
 
 interface ProvidersProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export default function Providers({ children }: ProvidersProps) {
-  return (
-    <>
-      {children}
-    </>
-  )
+  return <LocationProvider>{children}</LocationProvider>;
 }

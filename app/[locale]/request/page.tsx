@@ -1,12 +1,12 @@
 'use client';
 
 import { getLanguageByCode } from '@/lib/languages';
+import { loadGoogleMaps } from '@/lib/maps';
 import { motion } from 'framer-motion';
 import { ArrowRight, MapPin, Package, User } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { loadGoogleMaps } from '@/lib/maps';
+import { useEffect, useRef, useState } from 'react';
 
 export default function RequestPage() {
   const t = useTranslations('request');
@@ -85,9 +85,33 @@ export default function RequestPage() {
 
   const [loading, setLoading] = useState(false);
   const [trackingId, setTrackingId] = useState('');
+  const [paymentLoading, setPaymentLoading] = useState(false);
 
   const handleChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handlePayment = async () => {
+    if (!trackingId) return;
+    setPaymentLoading(true);
+    try {
+      const res = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ trackingId }),
+      });
+      if (res.ok) {
+        const { url } = await res.json();
+        if (url) window.location.href = url;
+      } else {
+        alert('Payment failed. Please try again.');
+      }
+    } catch (err) {
+      console.error('Payment error:', err);
+      alert('Payment error. Please try again.');
+    } finally {
+      setPaymentLoading(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -143,6 +167,17 @@ export default function RequestPage() {
           <p className="text-sm text-muted-foreground mb-6">
             {t('success.save') || 'Save this tracking ID to check your delivery status anytime.'}
           </p>
+
+          <div className="flex flex-col gap-3 mb-4">
+            <button
+              onClick={handlePayment}
+              disabled={paymentLoading}
+              className="w-full px-4 py-3 rounded-lg font-medium transition-all disabled:opacity-50"
+              style={{ backgroundColor: '#10B981', color: 'white' }}
+            >
+              {paymentLoading ? 'Loading...' : '💳 Pay Now'}
+            </button>
+          </div>
 
           <div className="flex gap-3">
             <button

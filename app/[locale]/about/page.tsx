@@ -1,6 +1,6 @@
+import { Globe, Heart, Shield, Target, Users, Zap } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import { Users, Target, Heart, Shield, Globe, Zap } from 'lucide-react';
 
 export async function generateMetadata({ params }: { params: { locale: string } }) {
   const t = await getTranslations({ locale: params.locale });

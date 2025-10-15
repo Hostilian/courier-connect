@@ -1,5 +1,5 @@
+import { Clock, Mail, MapPin, MessageSquare, Phone } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import { Mail, Phone, MapPin, Clock, MessageSquare } from 'lucide-react';
 
 export async function generateMetadata({ params }: { params: { locale: string } }) {
   const t = await getTranslations({ locale: params.locale });

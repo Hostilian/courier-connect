@@ -1,7 +1,6 @@
-import { useTranslations } from 'next-intl';
+import { ChevronDown } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-import { ChevronDown } from 'lucide-react';
 
 export async function generateMetadata({ params }: { params: { locale: string } }) {
   const t = await getTranslations({ locale: params.locale });
