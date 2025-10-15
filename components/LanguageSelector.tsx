@@ -1,10 +1,10 @@
 'use client';
 
+import { localeLabels, locales, type Locale } from '@/i18n';
+import { ChevronDown } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
-import { locales, localeLabels, type Locale } from '@/i18n';
-import { useState, useRef, useEffect } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function LanguageSelector() {
   const locale = useLocale() as Locale;

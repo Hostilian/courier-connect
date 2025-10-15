@@ -1,9 +1,9 @@
+import Providers from '@/components/Providers';
 import { locales } from '@/i18n';
-import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import Providers from '@/components/Providers';
 import { Inter } from 'next/font/google';
+import { notFound } from 'next/navigation';
 import { Toaster } from 'react-hot-toast';
 import '../globals.css';
 
