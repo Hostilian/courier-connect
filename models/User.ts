@@ -123,7 +123,7 @@ const UserSchema: Schema = new Schema(
 );
 
 // Indexes for performance
-UserSchema.index({ email: 1 });
+// Note: email index is created automatically due to unique: true
 UserSchema.index({ city: 1 });
 UserSchema.index({ rating: -1 });
 

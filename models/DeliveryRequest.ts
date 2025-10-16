@@ -334,7 +334,7 @@ const DeliveryRequestSchema: Schema = new Schema(
 );
 
 // Indexes for performance
-DeliveryRequestSchema.index({ trackingId: 1 });
+// Note: trackingId index is created automatically due to unique: true
 DeliveryRequestSchema.index({ status: 1 });
 DeliveryRequestSchema.index({ courierId: 1 });
 DeliveryRequestSchema.index({ createdAt: -1 });
