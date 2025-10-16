@@ -1,5 +1,6 @@
 'use client';
 
+import { defaultLocale } from '@/i18n';
 import { WifiOff } from 'lucide-react';
 import Link from 'next/link';
 
@@ -42,7 +43,7 @@ export default function OfflinePage() {
         </button>
 
         <div className="mt-6">
-          <Link href="/" className="text-blue-600 hover:underline">
+          <Link href={`/${defaultLocale}`} className="text-blue-600 hover:underline">
             Go to Homepage
           </Link>
         </div>
