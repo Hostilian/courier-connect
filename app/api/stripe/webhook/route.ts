@@ -3,9 +3,12 @@ import DeliveryRequest from '@/models/DeliveryRequest';
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2023-10-16',
-});
+async function getStripe(): Promise<Stripe | null> {
+  const key = process.env.STRIPE_SECRET_KEY as string | undefined;
+  if (!key) return null;
+  const { default: StripeCtor } = await import('stripe');
+  return new StripeCtor(key, { apiVersion: '2023-10-16' });
+}
 
 export async function POST(request: NextRequest) {
   const body = await request.text();
@@ -18,6 +21,10 @@ export async function POST(request: NextRequest) {
   let event: Stripe.Event;
 
   try {
+    const stripe = await getStripe();
+    if (!stripe) {
+      return NextResponse.json({ error: 'Payment service not configured' }, { status: 503 });
+    }
     event = stripe.webhooks.constructEvent(
       body,
       sig,

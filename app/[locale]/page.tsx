@@ -2,9 +2,9 @@
 'use client';
 
 import LanguageSelector from '@/components/LanguageSelector';
-import QuickFlags from '@/components/QuickFlags';
 import { useLocationContext } from '@/components/LocationProvider';
 import LocationSelector from '@/components/LocationSelector';
+import QuickFlags from '@/components/QuickFlags';
 import { getCountryByCode } from '@/lib/countries';
 import { getLanguageByCode, getLocaleTheme } from '@/lib/languages';
 import { motion } from 'framer-motion';

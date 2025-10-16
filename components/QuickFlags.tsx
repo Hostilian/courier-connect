@@ -1,6 +1,6 @@
 'use client';
 
-import { locales, localeLabels, type Locale } from '@/i18n';
+import { localeLabels, type Locale } from '@/i18n';
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
 

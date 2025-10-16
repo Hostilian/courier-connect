@@ -3,9 +3,12 @@ import Stripe from 'stripe';
 import dbConnect from '@/lib/mongodb';
 import DeliveryRequest from '@/models/DeliveryRequest';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2023-10-16',
-});
+async function getStripe(): Promise<Stripe | null> {
+  const key = process.env.STRIPE_SECRET_KEY as string | undefined;
+  if (!key) return null;
+  const { default: StripeCtor } = await import('stripe');
+  return new StripeCtor(key, { apiVersion: '2023-10-16' });
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -27,6 +30,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Already paid' }, { status: 400 });
     }
 
+    const stripe = await getStripe();
+    if (!stripe) {
+      return NextResponse.json(
+        { error: 'Payment service not configured' },
+        { status: 503 }
+      );
+    }
     // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],

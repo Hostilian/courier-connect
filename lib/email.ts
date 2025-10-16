@@ -1,15 +1,30 @@
 // Email sending utility
-// Uses Resend for transactional emails
+// Uses Resend for transactional emails (lazily imported to avoid build-time issues)
 
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazily initialize the Resend client only when the API key is present to avoid build-time errors
+let _resend: any | null = null;
+async function getResend(): Promise<any | null> {
+  if (_resend) return _resend;
+  const key = process.env.RESEND_API_KEY;
+  if (!key) {
+    return null;
+  }
+  const mod = await import('resend');
+  const Resend = mod.Resend as any;
+  _resend = new Resend(key);
+  return _resend;
+}
 
 export async function sendVerificationEmail(email: string, token: string) {
   const verificationUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/verify?token=${token}`;
 
   try {
-    const data = await resend.emails.send({
+  const client = await getResend();
+    if (!client) {
+      console.warn('Resend API key is missing; skipping verification email.');
+      return { success: false, error: 'Email service not configured' };
+    }
+    const data = await client.emails.send({
       from: 'Courier Connect <noreply@hostilian.org>',
       to: email,
       subject: 'Verify your email - Courier Connect',
@@ -59,7 +74,12 @@ export async function sendPasswordResetEmail(email: string, token: string) {
   const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL}/courier/reset-password?token=${token}`;
 
   try {
-    const data = await resend.emails.send({
+  const client = await getResend();
+    if (!client) {
+      console.warn('Resend API key is missing; skipping password reset email.');
+      return { success: false, error: 'Email service not configured' };
+    }
+    const data = await client.emails.send({
       from: 'Courier Connect <noreply@hostilian.org>',
       to: email,
       subject: 'Reset your password - Courier Connect',
@@ -133,7 +153,12 @@ export async function sendDeliveryNotification(
   };
 
   try {
-    const data = await resend.emails.send({
+  const client = await getResend();
+    if (!client) {
+      console.warn('Resend API key is missing; skipping delivery notification email.');
+      return { success: false, error: 'Email service not configured' };
+    }
+    const data = await client.emails.send({
       from: 'Courier Connect <notifications@hostilian.org>',
       to: email,
       subject: `${subject} - ${trackingId}`,
