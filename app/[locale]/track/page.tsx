@@ -1,29 +1,60 @@
 'use client';
 
+import DeliveryMap from '@/components/DeliveryMap';
 import { getLanguageByCode } from '@/lib/languages';
 import { motion } from 'framer-motion';
-import { CheckCircle, Clock, MapPin, Package, Search, Truck } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, MessageSquare, Package, Search, Truck } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 interface DeliveryStatus {
   trackingId: string;
   status: 'pending' | 'accepted' | 'picked_up' | 'in_transit' | 'delivered' | 'cancelled';
   senderName: string;
+  senderAddress: string;
+  senderPhone?: string;
+  senderLocation?: { lat: number; lng: number };
   receiverName: string;
-  pickupAddress: string;
-  deliveryAddress: string;
+  receiverAddress: string;
+  receiverPhone?: string;
+  receiverLocation?: { lat: number; lng: number };
   packageType: string;
+  packageSize?: string;
+  packageDescription?: string;
   urgency: string;
+  pickupTime?: string;
   createdAt: string;
   updatedAt: string;
   courierName?: string;
   courierPhone?: string;
   estimatedDelivery?: string;
+  notes?: string;
+  serviceCity?: string;
+  serviceCountry?: string;
+  distance?: number;
+  distanceText?: string;
+  distanceEstimated?: boolean;
+  duration?: number;
+  durationText?: string;
+  routePolyline?: string;
+  price?: number;
+  courierEarnings?: number;
+  platformFee?: number;
+  basePrice?: number;
+  distancePrice?: number;
+  packageSizePrice?: number;
+  urgencyPrice?: number;
+  scheduledPrice?: number;
+  minimumAdjustment?: number;
+  minimumPriceApplied?: boolean;
+  scheduledPickupDate?: string;
+  scheduledDeliveryDate?: string;
 }
 
 export default function TrackPage() {
   const t = useTranslations('track');
+  const pricingT = useTranslations('pricing');
+  const mapsT = useTranslations('maps');
   const locale = useLocale();
   const theme = getLanguageByCode(locale)?.culturalTheme;
 
@@ -31,6 +62,48 @@ export default function TrackPage() {
   const [delivery, setDelivery] = useState<DeliveryStatus | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  const currencyFormatter = useMemo(
+    () =>
+      new Intl.NumberFormat(locale || 'en', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2,
+      }),
+    [locale]
+  );
+
+  const formatCurrency = (value?: number | null) =>
+    currencyFormatter.format(typeof value === 'number' ? value : 0);
+
+  const translatePackageSize = (size?: string | null) => {
+    if (!size) return null;
+    try {
+      return pricingT(`packageSizes.${size}`);
+    } catch (error) {
+      return size;
+    }
+  };
+
+  const translateUrgency = (value: string) => {
+    try {
+      return pricingT(`urgencyLevels.${value}`);
+    } catch (error) {
+      return value;
+    }
+  };
+
+  const formatDistanceLabel = (distance?: number) => {
+    const value = typeof distance === 'number' ? distance.toFixed(1) : '0';
+    try {
+      return pricingT('distancePrice', { distance: value });
+    } catch (error) {
+      return `Distance (${value} km)`;
+    }
+  };
+
+  const packageSizeFee = delivery?.packageSizePrice ?? 0;
+  const scheduledFee = delivery?.scheduledPrice ?? 0;
 
   const handleTrack = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -217,8 +290,57 @@ export default function TrackPage() {
               </div>
             </div>
 
+            {/* Map Preview */}
+            {delivery.senderLocation?.lat != null &&
+              delivery.senderLocation?.lng != null &&
+              delivery.receiverLocation?.lat != null &&
+              delivery.receiverLocation?.lng != null && (
+                <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+                  <div className="p-6 border-b border-gray-100 flex items-center justify-between">
+                    <div>
+                      <h3 className="text-lg font-bold flex items-center gap-2">
+                        <MapPin className="w-5 h-5" style={{ color: theme?.primary || '#3B82F6' }} />
+                        {mapsT('title') || 'Route Map'}
+                      </h3>
+                      {(delivery.distanceText || delivery.durationText) && (
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {[delivery.distanceText, delivery.durationText]
+                            .filter(Boolean)
+                            .join(' • ')}
+                        </p>
+                      )}
+                    </div>
+                    <span className="text-xs px-3 py-1 rounded-full bg-gray-100 text-gray-600">
+                      {mapsT('route') || 'Route'}
+                    </span>
+                  </div>
+                  <DeliveryMap
+                    origin={{
+                      lat: delivery.senderLocation.lat,
+                      lng: delivery.senderLocation.lng,
+                      address: delivery.senderAddress,
+                    }}
+                    destination={{
+                      lat: delivery.receiverLocation.lat,
+                      lng: delivery.receiverLocation.lng,
+                      address: delivery.receiverAddress,
+                    }}
+                    showRoute
+                    height="360px"
+                    className="h-full"
+                  />
+                  {delivery.distanceEstimated && (
+                    <div className="px-6 py-4 bg-gray-50 border-t border-gray-100">
+                      <p className="text-xs text-muted-foreground">
+                        {mapsT('estimatedNotice') || 'Distance shown is approximate based on current traffic.'}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+
             {/* Details Grid */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
               {/* Pickup Info */}
               <div className="bg-white rounded-xl shadow-lg p-6">
                 <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
@@ -227,7 +349,16 @@ export default function TrackPage() {
                 </h3>
                 <div className="space-y-2 text-sm">
                   <p><span className="font-medium">{t('from') || 'From'}:</span> {delivery.senderName}</p>
-                  <p className="text-muted-foreground">{delivery.pickupAddress}</p>
+                  <p className="text-muted-foreground">{delivery.senderAddress}</p>
+                  {delivery.senderPhone && (
+                    <p className="text-muted-foreground">{delivery.senderPhone}</p>
+                  )}
+                  {delivery.serviceCity && (
+                    <p className="text-xs text-muted-foreground uppercase tracking-wide">
+                      {delivery.serviceCity}
+                      {delivery.serviceCountry ? `, ${delivery.serviceCountry}` : ''}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -239,7 +370,10 @@ export default function TrackPage() {
                 </h3>
                 <div className="space-y-2 text-sm">
                   <p><span className="font-medium">{t('to') || 'To'}:</span> {delivery.receiverName}</p>
-                  <p className="text-muted-foreground">{delivery.deliveryAddress}</p>
+                  <p className="text-muted-foreground">{delivery.receiverAddress}</p>
+                  {delivery.receiverPhone && (
+                    <p className="text-muted-foreground">{delivery.receiverPhone}</p>
+                  )}
                 </div>
               </div>
 
@@ -251,7 +385,29 @@ export default function TrackPage() {
                 </h3>
                 <div className="space-y-2 text-sm">
                   <p><span className="font-medium">{t('type') || 'Type'}:</span> {delivery.packageType}</p>
-                  <p><span className="font-medium">{t('urgency') || 'Speed'}:</span> {delivery.urgency}</p>
+                  {delivery.packageSize && (
+                    <p>
+                      <span className="font-medium">{t('size') || 'Size'}:</span> {translatePackageSize(delivery.packageSize)}
+                    </p>
+                  )}
+                  {delivery.packageDescription && (
+                    <p className="text-muted-foreground">
+                      <span className="font-medium">{t('description') || 'Description'}:</span> {delivery.packageDescription}
+                    </p>
+                  )}
+                  <p>
+                    <span className="font-medium">{t('urgency') || 'Speed'}:</span> {translateUrgency(delivery.urgency)}
+                  </p>
+                  {delivery.pickupTime && (
+                    <p className="text-muted-foreground">
+                      {t('pickupTime') || 'Pickup Time'}: {delivery.pickupTime}
+                    </p>
+                  )}
+                  {delivery.scheduledPickupDate && (
+                    <p className="text-muted-foreground">
+                      {t('scheduledPickup') || 'Scheduled Pickup'}: {new Date(delivery.scheduledPickupDate).toLocaleString(locale)}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -266,6 +422,59 @@ export default function TrackPage() {
                     <p><span className="font-medium">{t('name') || 'Name'}:</span> {delivery.courierName}</p>
                     {delivery.courierPhone && (
                       <p><span className="font-medium">{t('phone') || 'Phone'}:</span> {delivery.courierPhone}</p>
+                    )}
+                    <p><span className="font-medium">{pricingT('courierEarnings') || 'Courier Earnings'}:</span> {formatCurrency(delivery.courierEarnings)}</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Pricing Breakdown */}
+              <div className="bg-white rounded-xl shadow-lg p-6">
+                <h3 className="text-lg font-bold mb-4">
+                  {pricingT('breakdown') || 'Price Breakdown'}
+                </h3>
+                <div className="space-y-2 text-sm">
+                  <p><span className="font-medium">{pricingT('total') || 'Total'}:</span> {formatCurrency(delivery.price)}</p>
+                  <p><span className="font-medium">{pricingT('courierEarnings') || 'Courier Earnings'}:</span> {formatCurrency(delivery.courierEarnings)}</p>
+                  <p><span className="font-medium">{pricingT('platformFee') || 'Platform Fee'}:</span> {formatCurrency(delivery.platformFee)}</p>
+                  <hr className="my-3" />
+                  <p><span className="font-medium">{pricingT('basePrice') || 'Base Price'}:</span> {formatCurrency(delivery.basePrice)}</p>
+                  <p>
+                    <span className="font-medium">{formatDistanceLabel(delivery.distance)}:</span> {formatCurrency(delivery.distancePrice)}
+                  </p>
+                  <p><span className="font-medium">{pricingT('urgencyPrice') || 'Urgency Fee'}:</span> {formatCurrency(delivery.urgencyPrice)}</p>
+                  {packageSizeFee > 0 && (
+                    <p><span className="font-medium">{pricingT('packageSizePrice') || 'Package Size Fee'}:</span> {formatCurrency(delivery.packageSizePrice)}</p>
+                  )}
+                  {scheduledFee > 0 && (
+                    <p><span className="font-medium">{pricingT('scheduledDiscount') || 'Scheduling'}:</span> {formatCurrency(delivery.scheduledPrice)}</p>
+                  )}
+                  {delivery.minimumPriceApplied && (
+                    <p className="text-xs text-amber-600">
+                      {pricingT('fairPricing') || 'Fair pricing: 70% goes to your courier'}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Route Summary */}
+              {(delivery.distanceText || delivery.durationText) && (
+                <div className="bg-white rounded-xl shadow-lg p-6">
+                  <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                    <Clock className="w-5 h-5" style={{ color: theme?.primary || '#3B82F6' }} />
+                    {mapsT('route') || 'Route'}
+                  </h3>
+                  <div className="space-y-2 text-sm">
+                    {delivery.distanceText && (
+                      <p><span className="font-medium">{mapsT('distance') || 'Distance'}:</span> {delivery.distanceText}</p>
+                    )}
+                    {delivery.durationText && (
+                      <p><span className="font-medium">{mapsT('duration') || 'Estimated Time'}:</span> {delivery.durationText}</p>
+                    )}
+                    {delivery.distanceEstimated && (
+                      <p className="text-xs text-muted-foreground">
+                        {mapsT('estimatedNotice') || 'Distance shown is approximate based on current traffic.'}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -310,6 +519,17 @@ export default function TrackPage() {
                 )}
               </div>
             </div>
+
+            {/* Notes */}
+            {delivery.notes && (
+              <div className="bg-white rounded-xl shadow-lg p-6">
+                <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
+                  <MessageSquare className="w-5 h-5" style={{ color: theme?.primary || '#3B82F6' }} />
+                  {t('notes') || 'Notes'}
+                </h3>
+                <p className="text-sm text-muted-foreground whitespace-pre-line">{delivery.notes}</p>
+              </div>
+            )}
           </motion.div>
         )}
 

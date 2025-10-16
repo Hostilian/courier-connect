@@ -5,24 +5,36 @@ import { motion } from 'framer-motion';
 import { CheckCircle, Clock, DollarSign, MapPin, Package, TrendingUp } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 interface Delivery {
   _id: string;
   trackingId: string;
   senderName: string;
+  senderAddress: string;
   receiverName: string;
-  pickupAddress: string;
-  deliveryAddress: string;
+  receiverAddress: string;
   packageType: string;
+  packageSize?: string;
   urgency: string;
   status: string;
   price: number;
+  courierEarnings?: number;
+  platformFee?: number;
+  distance?: number;
+  distanceText?: string;
+  duration?: number;
+  durationText?: string;
+  distanceEstimated?: boolean;
   createdAt: string;
+  serviceCity?: string;
+  serviceCountry?: string;
 }
 
 export default function CourierDashboardPage() {
   const t = useTranslations('courier.dashboard');
+  const pricingT = useTranslations('pricing');
+  const mapsT = useTranslations('maps');
   const locale = useLocale();
   const router = useRouter();
   const theme = getLanguageByCode(locale)?.culturalTheme;
@@ -36,6 +48,16 @@ export default function CourierDashboardPage() {
     rating: 4.8,
     activeDeliveries: 0,
   });
+
+  const currencyFormatter = useMemo(() => (
+    new Intl.NumberFormat(locale || 'en', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+    })
+  ), [locale]);
+
+  const formatCurrency = (value?: number) => currencyFormatter.format(value ?? 0);
 
   useEffect(() => {
     // Check authentication
@@ -140,7 +162,7 @@ export default function CourierDashboardPage() {
           >
             <div className="flex items-center justify-between mb-2">
               <DollarSign className="w-8 h-8" style={{ color: theme?.primary || '#10B981' }} />
-              <span className="text-2xl font-bold">${stats.totalEarnings}</span>
+              <span className="text-2xl font-bold">{formatCurrency(stats.totalEarnings)}</span>
             </div>
             <p className="text-sm text-muted-foreground">{t('totalEarnings') || 'Total Earnings'}</p>
           </motion.div>
@@ -223,7 +245,13 @@ export default function CourierDashboardPage() {
           </div>
         ) : (
           <div className="space-y-4">
-            {deliveries.map((delivery, idx) => (
+            {deliveries.map((delivery, idx) => {
+              const courierShare = delivery.courierEarnings ?? Number(((delivery.price ?? 0) * 0.7).toFixed(2));
+              const platformShareValue = delivery.platformFee ?? Math.max(Number(((delivery.price ?? 0) - courierShare).toFixed(2)), 0);
+              const distanceLabel = delivery.distanceText || (typeof delivery.distance === 'number' ? `${delivery.distance.toFixed(1)} km` : undefined);
+              const durationLabel = delivery.durationText || (typeof delivery.duration === 'number' ? `${delivery.duration} min` : undefined);
+
+              return (
               <motion.div
                 key={delivery._id}
                 initial={{ opacity: 0, y: 20 }}
@@ -233,19 +261,34 @@ export default function CourierDashboardPage() {
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
+                    <div className="flex flex-wrap items-center gap-3 mb-3">
                       <span className="px-3 py-1 rounded-full text-sm font-medium"
                         style={{ backgroundColor: `${theme?.primary || '#3B82F6'}20`, color: theme?.primary || '#3B82F6' }}
                       >
                         {delivery.trackingId}
                       </span>
                       <span className="px-3 py-1 rounded-full text-sm font-medium bg-green-50 text-green-600">
-                        ${delivery.price}
+                        {pricingT('courierEarnings')}: {formatCurrency(courierShare)}
+                      </span>
+                      <span className="px-3 py-1 rounded-full text-sm font-medium bg-blue-50 text-blue-600">
+                        {pricingT('total')}: {formatCurrency(delivery.price)}
                       </span>
                       <span className="text-sm text-muted-foreground flex items-center gap-1">
                         <Clock className="w-4 h-4" />
                         {delivery.urgency}
                       </span>
+                    </div>
+
+                    <div className="flex flex-wrap gap-4 text-xs text-muted-foreground mb-4">
+                      <span>
+                        {pricingT('platformFee')}: {formatCurrency(platformShareValue)}
+                      </span>
+                      {delivery.packageSize && (
+                        <span>{t('package') || 'Package'}: {delivery.packageSize}</span>
+                      )}
+                      {delivery.serviceCity && (
+                        <span>{delivery.serviceCity}{delivery.serviceCountry ? `, ${delivery.serviceCountry}` : ''}</span>
+                      )}
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-4 mb-4">
@@ -255,7 +298,7 @@ export default function CourierDashboardPage() {
                           {t('pickup') || 'Pickup'}
                         </p>
                         <p className="text-sm text-muted-foreground">{delivery.senderName}</p>
-                        <p className="text-sm text-muted-foreground">{delivery.pickupAddress}</p>
+                        <p className="text-sm text-muted-foreground">{delivery.senderAddress}</p>
                       </div>
 
                       <div>
@@ -264,14 +307,30 @@ export default function CourierDashboardPage() {
                           {t('delivery') || 'Delivery'}
                         </p>
                         <p className="text-sm text-muted-foreground">{delivery.receiverName}</p>
-                        <p className="text-sm text-muted-foreground">{delivery.deliveryAddress}</p>
+                        <p className="text-sm text-muted-foreground">{delivery.receiverAddress}</p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                       <span>{t('package') || 'Package'}: {delivery.packageType}</span>
                       <span>{t('created') || 'Created'}: {new Date(delivery.createdAt).toLocaleDateString(locale)}</span>
+                      {distanceLabel && (
+                        <span>
+                          {mapsT('distance')}: {distanceLabel}
+                        </span>
+                      )}
+                      {durationLabel && (
+                        <span>
+                          {mapsT('duration')}: {durationLabel}
+                        </span>
+                      )}
                     </div>
+
+                    {delivery.distanceEstimated && (
+                      <p className="mt-2 text-xs text-yellow-700 bg-yellow-50 border border-yellow-200 rounded-md px-3 py-2">
+                        {mapsT('estimatedNotice')}
+                      </p>
+                    )}
                   </div>
 
                   <div className="flex flex-col gap-2">
@@ -305,7 +364,8 @@ export default function CourierDashboardPage() {
                   </div>
                 </div>
               </motion.div>
-            ))}
+            );
+            })}
           </div>
         )}
       </div>

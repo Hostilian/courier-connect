@@ -22,19 +22,38 @@ export interface IDeliveryRequest extends Document {
   packageDescription: string;
   
   // Delivery Information
-  urgency: 'standard' | 'express' | 'urgent';
+  urgency: 'standard' | 'express' | 'urgent' | 'scheduled';
   pickupTime: string;
+  scheduledPickupDate?: Date;
+  scheduledDeliveryDate?: Date;
   notes?: string;
   serviceCountry?: string;
   serviceCity?: string;
+  
+  // Distance & Route
+  distance?: number; // in kilometers
+  duration?: number; // estimated duration in minutes
+  routePolyline?: string; // encoded polyline for map display
+  distanceText?: string;
+  durationText?: string;
+  distanceEstimated?: boolean;
   
   // Courier Assignment
   courierId?: mongoose.Types.ObjectId;
   courierName?: string;
   courierPhone?: string;
   
-  // Pricing & Timing
-  price: number;
+  // Pricing & Earnings (70/30 split)
+  price: number; // total price customer pays
+  courierEarnings: number; // 70% of price
+  platformFee: number; // 30% of price
+  basePrice: number; // base price before modifiers
+  distancePrice: number; // price component from distance
+  urgencyPrice: number; // price component from urgency
+  scheduledPrice: number; // price component for scheduled delivery
+  packageSizePrice: number; // price component for package size
+  minimumAdjustment?: number;
+  minimumPriceApplied?: boolean;
   estimatedDelivery?: Date;
   actualDelivery?: Date;
   // Payment
@@ -132,12 +151,18 @@ const DeliveryRequestSchema: Schema = new Schema(
     urgency: {
       type: String,
       required: [true, 'Urgency is required'],
-      enum: ['standard', 'express', 'urgent'],
+      enum: ['standard', 'express', 'urgent', 'scheduled'],
       default: 'standard',
     },
     pickupTime: {
       type: String,
       required: [true, 'Pickup time is required'],
+    },
+    scheduledPickupDate: {
+      type: Date,
+    },
+    scheduledDeliveryDate: {
+      type: Date,
     },
     notes: {
       type: String,
@@ -155,6 +180,31 @@ const DeliveryRequestSchema: Schema = new Schema(
       type: String,
       trim: true,
       maxlength: [120, 'City name cannot exceed 120 characters'],
+    },
+    
+    // Distance & Route
+    distance: {
+      type: Number,
+      min: 0,
+    },
+    duration: {
+      type: Number,
+      min: 0,
+    },
+    routePolyline: {
+      type: String,
+    },
+    distanceText: {
+      type: String,
+      trim: true,
+    },
+    durationText: {
+      type: String,
+      trim: true,
+    },
+    distanceEstimated: {
+      type: Boolean,
+      default: false,
     },
     
     // Courier Assignment
@@ -176,6 +226,50 @@ const DeliveryRequestSchema: Schema = new Schema(
       type: Number,
       required: [true, 'Price is required'],
       min: 0,
+    },
+    courierEarnings: {
+      type: Number,
+      required: [true, 'Courier earnings is required'],
+      min: 0,
+    },
+    platformFee: {
+      type: Number,
+      required: [true, 'Platform fee is required'],
+      min: 0,
+    },
+    basePrice: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    distancePrice: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    urgencyPrice: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    scheduledPrice: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    packageSizePrice: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    minimumAdjustment: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    minimumPriceApplied: {
+      type: Boolean,
+      default: false,
     },
     estimatedDelivery: {
       type: Date,

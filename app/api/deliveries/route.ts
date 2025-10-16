@@ -1,29 +1,21 @@
 import dbConnect from '@/lib/mongodb';
-
+import { calculateDeliveryPrice, getEstimatedDeliveryTime } from '@/lib/pricing';
 import DeliveryRequest from '@/models/DeliveryRequest';
 import { NextRequest, NextResponse } from 'next/server';
 
-// Generate unique tracking ID
-function generateTrackingId(): string {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let id = 'CC-';
-  for (let i = 0; i < 6; i++) {
-    id += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return id;
-}
+type UrgencyOption = 'standard' | 'express' | 'urgent' | 'scheduled';
+type PackageSizeOption = 'small' | 'medium' | 'large' | 'extra-large';
+type Coordinate = { lat: number; lng: number };
 
-// Calculate price based on urgency
-function calculatePrice(urgency: string): number {
-  switch (urgency) {
-    case 'urgent':
-      return 20;
-    case 'express':
-      return 10;
-    case 'standard':
-    default:
-      return 5;
-  }
+const ALLOWED_URGENCY: UrgencyOption[] = ['standard', 'express', 'urgent', 'scheduled'];
+const ALLOWED_PACKAGE_SIZES: PackageSizeOption[] = ['small', 'medium', 'large', 'extra-large'];
+const AVERAGE_SPEED_KMH = 30;
+
+interface RouteDetailsPayload {
+  distanceText?: string;
+  durationText?: string;
+  estimated?: boolean;
+  polyline?: string;
 }
 
 // POST /api/deliveries - Create new delivery request
@@ -50,29 +42,132 @@ export async function POST(request: NextRequest) {
       locale = 'en',
       serviceCountry,
       serviceCity,
+      distance,
+      duration,
+      routePolyline,
+      scheduledPickupDate,
+      scheduledPickupTime,
+      scheduledDeliveryDate,
+      scheduledDeliveryTime,
     } = body;
 
-    // Validate required fields
-    if (!senderName || !senderPhone || !senderAddress) {
+    const routeDetails = (body.routeDetails || {}) as RouteDetailsPayload;
+
+    // Validate required string fields
+    if (typeof senderName !== 'string' || !senderName.trim() ||
+        typeof senderPhone !== 'string' || !senderPhone.trim() ||
+        typeof senderAddress !== 'string' || !senderAddress.trim()) {
       return NextResponse.json(
         { error: 'Sender information is required' },
         { status: 400 }
       );
     }
 
-    if (!receiverName || !receiverPhone || !receiverAddress) {
+    if (typeof receiverName !== 'string' || !receiverName.trim() ||
+        typeof receiverPhone !== 'string' || !receiverPhone.trim() ||
+        typeof receiverAddress !== 'string' || !receiverAddress.trim()) {
       return NextResponse.json(
         { error: 'Receiver information is required' },
         { status: 400 }
       );
     }
 
-    if (!packageType || !packageSize) {
+    if (typeof packageType !== 'string' || !packageType.trim() ||
+        typeof packageSize !== 'string' || !packageSize.trim()) {
       return NextResponse.json(
         { error: 'Package information is required' },
         { status: 400 }
       );
     }
+
+    const urgencyCandidate = typeof urgency === 'string' ? urgency.trim() : 'standard';
+    const normalizedUrgency = (ALLOWED_URGENCY.includes(urgencyCandidate as UrgencyOption)
+      ? (urgencyCandidate as UrgencyOption)
+      : 'standard');
+
+    const packageSizeCandidate = typeof packageSize === 'string'
+      ? packageSize.trim().toLowerCase()
+      : 'small';
+    const normalizedPackageSize = (ALLOWED_PACKAGE_SIZES.includes(packageSizeCandidate as PackageSizeOption)
+      ? (packageSizeCandidate as PackageSizeOption)
+      : 'small');
+
+    const sanitizedPackageType = packageType.trim();
+    const sanitizedPickupTime = typeof pickupTime === 'string' && pickupTime.trim()
+      ? pickupTime.trim()
+      : (normalizedUrgency === 'scheduled' ? 'scheduled' : 'asap');
+
+    const sanitizedServiceCountry = typeof serviceCountry === 'string' && serviceCountry.trim()
+      ? serviceCountry.trim().toUpperCase()
+      : undefined;
+
+    const sanitizedServiceCity = typeof serviceCity === 'string' && serviceCity.trim()
+      ? serviceCity.trim()
+      : undefined;
+
+    // Distance & duration calculations
+    let computedDistance = typeof distance === 'number' && distance > 0 ? distance : undefined;
+    let distanceEstimated = routeDetails.estimated ?? false;
+
+    if (!computedDistance && isValidCoordinate(senderLocation) && isValidCoordinate(receiverLocation)) {
+      computedDistance = calculateStraightLineDistance(senderLocation, receiverLocation);
+      distanceEstimated = true;
+    }
+
+    if (!computedDistance || computedDistance <= 0) {
+      return NextResponse.json(
+        { error: 'Unable to determine distance for this delivery' },
+        { status: 400 }
+      );
+    }
+
+    let computedDuration = typeof duration === 'number' && duration > 0
+      ? Math.ceil(duration)
+      : Math.max(1, Math.ceil(computedDistance / AVERAGE_SPEED_KMH * 60));
+
+    const routeDistanceText = typeof routeDetails.distanceText === 'string'
+      ? routeDetails.distanceText
+      : typeof body.distanceText === 'string'
+        ? body.distanceText
+        : undefined;
+
+    const routeDurationText = typeof routeDetails.durationText === 'string'
+      ? routeDetails.durationText
+      : typeof body.durationText === 'string'
+        ? body.durationText
+        : undefined;
+
+    const polyline = typeof routePolyline === 'string'
+      ? routePolyline
+      : typeof routeDetails.polyline === 'string'
+        ? routeDetails.polyline
+        : undefined;
+
+    const scheduledPickup = combineDateAndTime(scheduledPickupDate, scheduledPickupTime);
+    const scheduledDelivery = combineDateAndTime(scheduledDeliveryDate, scheduledDeliveryTime);
+
+    const pricing = calculateDeliveryPrice({
+      distance: Number(computedDistance.toFixed(2)),
+      urgency: normalizedUrgency,
+      packageSize: normalizedPackageSize,
+      scheduledPickupDate: scheduledPickup,
+    });
+
+    const rawSubtotal =
+      pricing.basePrice +
+      pricing.distancePrice +
+      pricing.packageSizePrice +
+      pricing.urgencyPrice +
+      pricing.scheduledPrice;
+
+    const minimumAdjustment = Number((pricing.totalPrice - rawSubtotal).toFixed(2));
+    const minimumPriceApplied = minimumAdjustment > 0.009;
+
+    const estimatedDelivery = getEstimatedDeliveryTime(
+      Number(computedDistance.toFixed(2)),
+      normalizedUrgency,
+      scheduledDelivery ?? scheduledPickup
+    );
 
     // Generate unique tracking ID
     let trackingId = generateTrackingId();
@@ -84,31 +179,45 @@ export async function POST(request: NextRequest) {
       attempts++;
     }
 
-    // Calculate price
-    const price = calculatePrice(urgency);
-
-    // Create delivery request
     const delivery = await DeliveryRequest.create({
       trackingId,
       status: 'pending',
-      senderName,
-      senderPhone,
-      senderAddress,
-      senderLocation,
-      receiverName,
-      receiverPhone,
-      receiverAddress,
-      receiverLocation,
-      packageType,
-      packageSize,
-      packageDescription: packageDescription || '',
-      urgency,
-      pickupTime,
-      notes: notes || '',
-      price,
-      locale,
-      serviceCountry,
-      serviceCity,
+      senderName: senderName.trim(),
+      senderPhone: senderPhone.trim(),
+      senderAddress: senderAddress.trim(),
+      senderLocation: isValidCoordinate(senderLocation) ? senderLocation : undefined,
+      receiverName: receiverName.trim(),
+      receiverPhone: receiverPhone.trim(),
+      receiverAddress: receiverAddress.trim(),
+      receiverLocation: isValidCoordinate(receiverLocation) ? receiverLocation : undefined,
+      packageType: sanitizedPackageType,
+      packageSize: normalizedPackageSize,
+      packageDescription: typeof packageDescription === 'string' ? packageDescription : '',
+      urgency: normalizedUrgency,
+      pickupTime: sanitizedPickupTime,
+      scheduledPickupDate: scheduledPickup ?? undefined,
+      scheduledDeliveryDate: scheduledDelivery ?? undefined,
+      notes: typeof notes === 'string' ? notes : '',
+      serviceCountry: sanitizedServiceCountry,
+      serviceCity: sanitizedServiceCity,
+      distance: Number(computedDistance.toFixed(2)),
+      duration: computedDuration,
+      distanceText: routeDistanceText,
+      durationText: routeDurationText,
+      distanceEstimated: distanceEstimated,
+      routePolyline: polyline,
+      price: pricing.totalPrice,
+      courierEarnings: pricing.courierEarnings,
+      platformFee: pricing.platformFee,
+      basePrice: pricing.basePrice,
+      distancePrice: pricing.distancePrice,
+      urgencyPrice: pricing.urgencyPrice,
+      scheduledPrice: pricing.scheduledPrice,
+      packageSizePrice: pricing.packageSizePrice,
+      minimumAdjustment: minimumPriceApplied ? minimumAdjustment : 0,
+      minimumPriceApplied,
+      estimatedDelivery,
+      locale: typeof locale === 'string' && locale ? locale : 'en',
     });
 
     return NextResponse.json(
@@ -116,7 +225,10 @@ export async function POST(request: NextRequest) {
         success: true,
         trackingId: delivery.trackingId,
         price: delivery.price,
-        message: 'Delivery request created successfully',
+        pricing,
+        distance: delivery.distance,
+        duration: delivery.duration,
+        minimumPriceApplied,
       },
       { status: 201 }
     );
@@ -156,4 +268,58 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
+}
+
+// Helpers
+function generateTrackingId(): string {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let id = 'CC-';
+  for (let i = 0; i < 6; i++) {
+    id += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return id;
+}
+
+function combineDateAndTime(dateStr?: string, timeStr?: string): Date | undefined {
+  if (typeof dateStr !== 'string' || !dateStr) {
+    return undefined;
+  }
+
+  const safeTime = typeof timeStr === 'string' && timeStr ? timeStr : '12:00';
+  const isoString = `${dateStr}T${safeTime}`;
+  const parsed = new Date(isoString);
+  return isNaN(parsed.getTime()) ? undefined : parsed;
+}
+
+function isValidCoordinate(value: unknown): value is Coordinate {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+  const candidate = value as Record<string, unknown>;
+  return (
+    typeof candidate.lat === 'number' && !Number.isNaN(candidate.lat) &&
+    typeof candidate.lng === 'number' && !Number.isNaN(candidate.lng)
+  );
+}
+
+function calculateStraightLineDistance(point1: Coordinate, point2: Coordinate): number {
+  const R = 6371; // Earth's radius in km
+  const dLat = toRadians(point2.lat - point1.lat);
+  const dLon = toRadians(point2.lng - point1.lng);
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRadians(point1.lat)) *
+      Math.cos(toRadians(point2.lat)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distance = R * c;
+
+  return Number(distance.toFixed(2));
+}
+
+function toRadians(degrees: number): number {
+  return degrees * (Math.PI / 180);
 }
