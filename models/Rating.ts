@@ -47,8 +47,8 @@ const RatingSchema: Schema = new Schema(
 );
 
 // Indexes for performance
+// Note: deliveryId index is created automatically due to unique: true
 RatingSchema.index({ courierId: 1, createdAt: -1 });
-RatingSchema.index({ deliveryId: 1 });
 
 export default mongoose.models.Rating ||
   mongoose.model<IRating>('Rating', RatingSchema);
