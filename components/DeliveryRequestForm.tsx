@@ -2,7 +2,6 @@
 
 import DeliveryMap from '@/components/DeliveryMap';
 import { useLocationContext } from '@/components/LocationProvider';
-import { getCountryByCode } from '@/lib/countries';
 import { loadGoogleMaps } from '@/lib/maps';
 import type { PricingBreakdown } from '@/lib/pricing';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -14,10 +13,10 @@ import {
     Loader2,
     MapPin,
     Package,
-    User
+    User,
 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 type Coordinates = {
   lat: number;
@@ -34,15 +33,17 @@ interface RouteDetails {
 }
 
 interface DeliveryRequestFormProps {
-  onSuccess?: (trackingId: string) => void;
-  onCancel?: () => void;
+  onSuccess?: (payload: { trackingId: string; pricing?: PricingBreakdown | null }) => void;
 }
 
-export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryRequestFormProps) {
+export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormProps) {
   const t = useTranslations();
+  const requestT = useTranslations('request');
+  const pricingT = useTranslations('pricing');
+  const mapsT = useTranslations('maps');
+  const schedulingT = useTranslations('scheduling');
   const locale = useLocale();
   const { location } = useLocationContext();
-  const country = location.countryCode ? getCountryByCode(location.countryCode) : undefined;
 
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -82,11 +83,11 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
   const pickupRef = useRef<HTMLTextAreaElement | null>(null);
   const dropoffRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const currencyFormatter = new Intl.NumberFormat(locale || 'en', {
+  const currencyFormatter = useMemo(() => new Intl.NumberFormat(locale || 'en', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 2,
-  });
+  }), [locale]);
 
   const formatCurrency = (value?: number) => currencyFormatter.format(value ?? 0);
 
@@ -130,7 +131,7 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
         const destination = await geocodeAddress(formData.receiverAddress);
 
         if (!origin || !destination) {
-          setError(t('request.errors.invalidAddress'));
+          setError(requestT('error'));
           setCalculatingPrice(false);
           return;
         }
@@ -158,10 +159,10 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
           setRouteInfo(data.route);
           setPriceBreakdown(data.pricing);
         } else {
-          setError(t('request.errors.calculationFailed'));
+          setError(requestT('error'));
         }
       } catch (err) {
-        setError(t('request.errors.networkError'));
+  setError(requestT('error'));
       } finally {
         setCalculatingPrice(false);
       }
@@ -226,11 +227,11 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
           onSuccess(data.trackingId);
         }
       } else {
-        const errorData = await response.json();
-        setError(errorData.error || t('request.errors.submitFailed'));
+  const errorData = await response.json();
+  setError(errorData.error || requestT('error'));
       }
     } catch (err) {
-      setError(t('request.errors.networkError'));
+  setError(requestT('error'));
     } finally {
       setLoading(false);
     }
@@ -278,13 +279,13 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
           >
             <div className="flex items-center gap-3 mb-6">
               <User className="w-6 h-6 text-blue-600" />
-              <h2 className="text-2xl font-bold">{t('request.step1.title')}</h2>
+              <h2 className="text-2xl font-bold">{requestT('step1.title')}</h2>
             </div>
 
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  {t('request.sender.name')} *
+                  {requestT('senderName')} *
                 </label>
                 <input
                   type="text"
@@ -298,7 +299,7 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
 
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  {t('request.sender.phone')} *
+                  {requestT('senderPhone')} *
                 </label>
                 <input
                   type="tel"
@@ -312,7 +313,7 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
 
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  {t('request.sender.address')} *
+                  {requestT('pickupAddress')} *
                 </label>
                 <textarea
                   ref={pickupRef}
@@ -321,7 +322,7 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
                   onChange={handleChange}
                   rows={3}
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-                  placeholder={t('request.sender.addressPlaceholder')}
+                  placeholder={requestT('addressPlaceholder')}
                   required
                 />
               </div>
@@ -334,7 +335,7 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
                 disabled={!canProceedToStep2}
                 className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
               >
-                {t('request.next')}
+                {requestT('next')}
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
@@ -352,13 +353,13 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
           >
             <div className="flex items-center gap-3 mb-6">
               <MapPin className="w-6 h-6 text-blue-600" />
-              <h2 className="text-2xl font-bold">{t('request.step2.title')}</h2>
+              <h2 className="text-2xl font-bold">{requestT('step2.title')}</h2>
             </div>
 
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  {t('request.receiver.name')} *
+                  {requestT('receiverName')} *
                 </label>
                 <input
                   type="text"
@@ -372,7 +373,7 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
 
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  {t('request.receiver.phone')} *
+                  {requestT('receiverPhone')} *
                 </label>
                 <input
                   type="tel"
@@ -386,7 +387,7 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
 
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  {t('request.receiver.address')} *
+                  {requestT('deliveryAddress')} *
                 </label>
                 <textarea
                   ref={dropoffRef}
@@ -395,7 +396,7 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
                   onChange={handleChange}
                   rows={3}
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-                  placeholder={t('request.receiver.addressPlaceholder')}
+                  placeholder={requestT('addressPlaceholder')}
                   required
                 />
               </div>
@@ -408,7 +409,7 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
                 className="flex items-center gap-2 px-6 py-3 border rounded-lg hover:bg-gray-100 transition-all"
               >
                 <ArrowLeft className="w-5 h-5" />
-                {t('request.back')}
+                {requestT('back')}
               </button>
               <button
                 type="button"
@@ -416,7 +417,7 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
                 disabled={!canProceedToStep3}
                 className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
               >
-                {t('request.next')}
+                {requestT('next')}
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
@@ -435,14 +436,14 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
             <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
               <div className="flex items-center gap-3 mb-6">
                 <Package className="w-6 h-6 text-blue-600" />
-                <h2 className="text-2xl font-bold">{t('request.step3.title')}</h2>
+                <h2 className="text-2xl font-bold">{requestT('step3.title')}</h2>
               </div>
 
               <div className="space-y-4">
                 {/* Package Type */}
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    {t('request.package.type')} *
+                    {requestT('packageType')}
                   </label>
                   <select
                     name="packageType"
@@ -451,19 +452,18 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                     required
                   >
-                    <option value="envelope">{t('request.package.types.envelope')}</option>
-                    <option value="box">{t('request.package.types.box')}</option>
-                    <option value="bag">{t('request.package.types.bag')}</option>
-                    <option value="document">{t('request.package.types.document')}</option>
-                    <option value="food">{t('request.package.types.food')}</option>
-                    <option value="other">{t('request.package.types.other')}</option>
+                    <option value="envelope">{requestT('envelope')}</option>
+                    <option value="gift">{requestT('gift')}</option>
+                    <option value="marketplace">{requestT('marketplace')}</option>
+                    <option value="food">{requestT('food')}</option>
+                    <option value="other">{requestT('other')}</option>
                   </select>
                 </div>
 
                 {/* Package Size */}
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    {t('request.package.size')} *
+                    {requestT('packageSize')}
                   </label>
                   <select
                     name="packageSize"
@@ -472,17 +472,17 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                     required
                   >
-                    <option value="small">{t('request.package.sizes.small')}</option>
-                    <option value="medium">{t('request.package.sizes.medium')}</option>
-                    <option value="large">{t('request.package.sizes.large')}</option>
-                    <option value="extra-large">{t('request.package.sizes.extraLarge')}</option>
+                    <option value="small">{pricingT('packageSizes.small')}</option>
+                    <option value="medium">{pricingT('packageSizes.medium')}</option>
+                    <option value="large">{pricingT('packageSizes.large')}</option>
+                    <option value="extra-large">{`${pricingT('packageSizes.large')} +`}</option>
                   </select>
                 </div>
 
                 {/* Package Description */}
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    {t('request.package.description')}
+                    {requestT('packageDescription')}
                   </label>
                   <textarea
                     name="packageDescription"
@@ -491,14 +491,14 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
                     rows={2}
                     maxLength={500}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-                    placeholder={t('request.package.descriptionPlaceholder')}
+                    placeholder={requestT('descriptionPlaceholder')}
                   />
                 </div>
 
                 {/* Urgency */}
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    {t('request.delivery.urgency')} *
+                    {requestT('urgency')}
                   </label>
                   <select
                     name="urgency"
@@ -507,10 +507,10 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                     required
                   >
-                    <option value="standard">{t('request.delivery.urgencies.standard')}</option>
-                    <option value="express">{t('request.delivery.urgencies.express')}</option>
-                    <option value="urgent">{t('request.delivery.urgencies.urgent')}</option>
-                    <option value="scheduled">{t('request.delivery.urgencies.scheduled')}</option>
+                    <option value="standard">{pricingT('urgencyLevels.standard')}</option>
+                    <option value="express">{pricingT('urgencyLevels.express')}</option>
+                    <option value="urgent">{pricingT('urgencyLevels.urgent')}</option>
+                    <option value="scheduled">{pricingT('urgencyLevels.scheduled')}</option>
                   </select>
                 </div>
 
@@ -519,7 +519,7 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium mb-2">
-                        {t('request.delivery.pickupDate')} *
+                        {schedulingT('pickupDate')} *
                       </label>
                       <input
                         type="date"
@@ -533,7 +533,7 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2">
-                        {t('request.delivery.pickupTime')} *
+                        {schedulingT('pickupTime')} *
                       </label>
                       <input
                         type="time"
@@ -550,7 +550,7 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
                 {/* Notes */}
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    {t('request.delivery.notes')}
+                    {requestT('notes')}
                   </label>
                   <textarea
                     name="notes"
@@ -559,7 +559,7 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
                     rows={2}
                     maxLength={500}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-                    placeholder={t('request.delivery.notesPlaceholder')}
+                    placeholder={requestT('notesPlaceholder')}
                   />
                 </div>
               </div>
@@ -570,7 +570,7 @@ export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryReq
               <div className="bg-white rounded-xl shadow-lg p-6">
                 <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-blue-600" />
-                  {t('request.map.preview')}
+                  {mapsT('title')}
                 </h3>
                 <DeliveryMap
                   origin={{ ...originCoords, address: formData.senderAddress }}

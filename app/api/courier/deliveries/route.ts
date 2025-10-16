@@ -66,21 +66,99 @@ export async function GET(request: NextRequest) {
       .limit(50)
       .select('-__v');
 
-    // Get courier stats
+    // Get courier stats with enhanced earnings data
     const courier = await User.findById(decoded.userId);
-    const stats = courier
-      ? {
-          totalEarnings: courier.earnings || 0,
-          completedDeliveries: courier.completedDeliveries || 0,
-          rating: courier.rating || 5.0,
-          activeDeliveries: courier.activeDeliveries || 0,
-        }
-      : {
-          totalEarnings: 0,
-          completedDeliveries: 0,
-          rating: 5.0,
-          activeDeliveries: 0,
-        };
+    
+    // Calculate time-based earnings
+    const now = new Date();
+    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const weekStart = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+
+    // Aggregate earnings by time period
+    const earningsAggregation = await DeliveryRequest.aggregate([
+      {
+        $match: {
+          courierId: decoded.userId,
+          status: 'delivered',
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          totalEarnings: { $sum: '$courierEarnings' },
+          todayEarnings: {
+            $sum: {
+              $cond: [
+                { $gte: ['$actualDelivery', todayStart] },
+                '$courierEarnings',
+                0,
+              ],
+            },
+          },
+          weekEarnings: {
+            $sum: {
+              $cond: [
+                { $gte: ['$actualDelivery', weekStart] },
+                '$courierEarnings',
+                0,
+              ],
+            },
+          },
+          monthEarnings: {
+            $sum: {
+              $cond: [
+                { $gte: ['$actualDelivery', monthStart] },
+                '$courierEarnings',
+                0,
+              ],
+            },
+          },
+          completedCount: { $sum: 1 },
+          todayDeliveries: {
+            $sum: {
+              $cond: [
+                { $gte: ['$actualDelivery', todayStart] },
+                1,
+                0,
+              ],
+            },
+          },
+          totalPlatformFees: { $sum: '$platformFee' },
+        },
+      },
+    ]);
+
+    const earningsData = earningsAggregation[0] || {
+      totalEarnings: 0,
+      todayEarnings: 0,
+      weekEarnings: 0,
+      monthEarnings: 0,
+      completedCount: 0,
+      todayDeliveries: 0,
+      totalPlatformFees: 0,
+    };
+
+    // Count active deliveries
+    const activeCount = await DeliveryRequest.countDocuments({
+      courierId: decoded.userId,
+      status: { $in: ['accepted', 'picked_up', 'in_transit'] },
+    });
+
+    const stats = {
+      totalEarnings: Number(earningsData.totalEarnings.toFixed(2)),
+      todayEarnings: Number(earningsData.todayEarnings.toFixed(2)),
+      weekEarnings: Number(earningsData.weekEarnings.toFixed(2)),
+      monthEarnings: Number(earningsData.monthEarnings.toFixed(2)),
+      completedDeliveries: earningsData.completedCount,
+      todayDeliveries: earningsData.todayDeliveries,
+      activeDeliveries: activeCount,
+      averageEarningsPerDelivery: earningsData.completedCount > 0
+        ? Number((earningsData.totalEarnings / earningsData.completedCount).toFixed(2))
+        : 0,
+      platformFeesTotal: Number(earningsData.totalPlatformFees.toFixed(2)),
+      rating: courier?.rating || 5.0,
+    };
 
     return NextResponse.json({
       success: true,

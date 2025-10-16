@@ -18,14 +18,17 @@ export interface IDeliveryRequest extends Document {
   
   // Package Information
   packageType: string;
-  packageSize: string;
+  packageSize: 'small' | 'medium' | 'large' | 'extra-large';
   packageDescription: string;
   
-  // Delivery Information
+  // Delivery Information & Scheduling
   urgency: 'standard' | 'express' | 'urgent' | 'scheduled';
   pickupTime: string;
   scheduledPickupDate?: Date;
+  scheduledPickupTime?: string;
   scheduledDeliveryDate?: Date;
+  scheduledDeliveryTime?: string;
+  isScheduled: boolean;
   notes?: string;
   serviceCountry?: string;
   serviceCity?: string;
@@ -56,6 +59,8 @@ export interface IDeliveryRequest extends Document {
   minimumPriceApplied?: boolean;
   estimatedDelivery?: Date;
   actualDelivery?: Date;
+  courierRating?: number; // Rating from customer (1-5)
+  
   // Payment
   paymentStatus?: 'unpaid' | 'paid' | 'refunded';
   paymentIntentId?: string;
@@ -139,6 +144,8 @@ const DeliveryRequestSchema: Schema = new Schema(
     packageSize: {
       type: String,
       required: [true, 'Package size is required'],
+      enum: ['small', 'medium', 'large', 'extra-large'],
+      default: 'small',
       trim: true,
     },
     packageDescription: {
@@ -147,7 +154,7 @@ const DeliveryRequestSchema: Schema = new Schema(
       maxlength: [500, 'Description cannot exceed 500 characters'],
     },
     
-    // Delivery Information
+    // Delivery Information & Scheduling
     urgency: {
       type: String,
       required: [true, 'Urgency is required'],
@@ -161,8 +168,21 @@ const DeliveryRequestSchema: Schema = new Schema(
     scheduledPickupDate: {
       type: Date,
     },
+    scheduledPickupTime: {
+      type: String,
+      trim: true,
+    },
     scheduledDeliveryDate: {
       type: Date,
+    },
+    scheduledDeliveryTime: {
+      type: String,
+      trim: true,
+    },
+    isScheduled: {
+      type: Boolean,
+      default: false,
+      index: true,
     },
     notes: {
       type: String,
@@ -276,6 +296,11 @@ const DeliveryRequestSchema: Schema = new Schema(
     },
     actualDelivery: {
       type: Date,
+    },
+    courierRating: {
+      type: Number,
+      min: 1,
+      max: 5,
     },
     paymentStatus: {
       type: String,

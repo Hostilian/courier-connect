@@ -118,3 +118,39 @@ function toRadians(degrees: number): number {
   return degrees * (Math.PI / 180);
 }
 
+/**
+ * Estimate duration based on distance
+ * Fallback when actual route duration is not available
+ */
+export function estimateDuration(distance: number): number {
+  // Average city speed: 30 km/h
+  const averageSpeed = 30;
+  const hours = distance / averageSpeed;
+  const minutes = Math.ceil(hours * 60);
+  
+  return minutes;
+}
+
+/**
+ * Format distance for display
+ */
+export function formatDistance(kilometers: number, locale: string = 'en'): string {
+  if (kilometers < 1) {
+    return `${Math.round(kilometers * 1000)} m`;
+  }
+  return `${kilometers.toFixed(1)} km`;
+}
+
+/**
+ * Format duration for display
+ */
+export function formatDuration(minutes: number, locale: string = 'en'): string {
+  if (minutes < 60) {
+    return `${minutes} min`;
+  }
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  return mins > 0 ? `${hours}h ${mins}min` : `${hours}h`;
+}
+
+

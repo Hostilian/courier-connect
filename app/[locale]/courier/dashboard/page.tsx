@@ -44,7 +44,13 @@ export default function CourierDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
     totalEarnings: 0,
+    todayEarnings: 0,
+    weekEarnings: 0,
+    monthEarnings: 0,
     completedDeliveries: 0,
+    todayDeliveries: 0,
+    averageEarningsPerDelivery: 0,
+    platformFeesTotal: 0,
     rating: 4.8,
     activeDeliveries: 0,
   });
@@ -154,7 +160,10 @@ export default function CourierDashboardPage() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
+        <CourierEarnings data={stats} />
+
+        {/* Legacy Stats Grid (can be removed if desired) */}
+        <div className="grid md:grid-cols-4 gap-6 mb-8 mt-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
