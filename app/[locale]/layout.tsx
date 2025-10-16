@@ -43,9 +43,16 @@ export async function generateMetadata({
     description: descriptions[locale as keyof typeof descriptions] || descriptions.en,
     keywords: 'delivery, courier, tracking, fast shipping, local delivery',
     authors: [{ name: 'Courier Connect Team' }],
-    viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
-    themeColor: '#FBBF24',
     manifest: '/manifest.json',
+  };
+}
+
+export function generateViewport() {
+  return {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    themeColor: '#FBBF24',
   };
 }
 
