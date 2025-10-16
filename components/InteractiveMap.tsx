@@ -200,7 +200,7 @@ export default function InteractiveMap({
         if (!isMounted) return;
 
         const mapInstance = new google.maps.Map(mapRef.current!, {
-          center: origin || destination || { lat: 50.0755, lng: 14.4378 }, // Prague default
+          center: initialOrigin || initialDestination || { lat: 50.0755, lng: 14.4378 }, // Prague default
           zoom: 12,
           mapTypeControl: true,
           streetViewControl: true,
@@ -232,7 +232,7 @@ export default function InteractiveMap({
     return () => {
       isMounted = false;
     };
-  }, [handleMapClick]);
+  }, [handleMapClick, initialOrigin, initialDestination]);
 
     // Update markers and route when origin/destination changes
   useEffect(() => {
@@ -241,9 +241,9 @@ export default function InteractiveMap({
     const updateMapElements = async () => {
       const google = await loadGoogleMaps();
 
-      // Clear existing route
+            // Clear existing route
       if (directionsRendererRef.current) {
-        directionsRendererRef.current.setDirections({ routes: [] });
+        directionsRendererRef.current.setDirections(null);
       }
       setRouteInfo(null);
 

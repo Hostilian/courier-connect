@@ -5,16 +5,13 @@ import { useLocationContext } from '@/components/LocationProvider';
 import { loadGoogleMaps } from '@/lib/maps';
 import type { PricingBreakdown } from '@/lib/pricing';
 import { AnimatePresence, motion } from 'framer-motion';
+// ...existing code...
 import {
-    ArrowLeft,
-    ArrowRight,
-    DollarSign,
-    Info,
-    Loader2,
-    MapPin,
-    Package,
-    User,
-} from 'lucide-react';
+  ArrowLeft,
+  ArrowRight,
+  DollarSign,
+// ...existing code...
+
 import { useLocale, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
@@ -64,12 +61,8 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
 
     // Delivery info
     urgency: 'standard',
-    pickupTime: 'asap',
-    scheduledPickupDate: '',
-    scheduledPickupTime: '',
-    scheduledDeliveryDate: '',
-    scheduledDeliveryTime: '',
     notes: '',
+    scheduledDateTime: null as Date | null,
   });
 
   const [routeInfo, setRouteInfo] = useState<RouteDetails | null>(null);
@@ -148,9 +141,7 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
             destination,
             urgency: formData.urgency,
             packageSize: formData.packageSize,
-            scheduledPickupDate: formData.scheduledPickupDate
-              ? new Date(`${formData.scheduledPickupDate}T${formData.scheduledPickupTime || '00:00'}`)
-              : undefined,
+            scheduledDateTime: formData.scheduledDateTime,
           }),
         });
 
@@ -175,8 +166,7 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
     formData.receiverAddress,
     formData.urgency,
     formData.packageSize,
-    formData.scheduledPickupDate,
-    formData.scheduledPickupTime,
+    formData.scheduledDateTime,
     geocodeAddress,
     requestT,
   ]);
@@ -513,55 +503,11 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
                     <option value="scheduled">{pricingT('urgencyLevels.scheduled')}</option>
                   </select>
                 </div>
-
-                {/* Scheduled Pickup (if urgency is scheduled) */}
-                {formData.urgency === 'scheduled' && (
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">
-                        {schedulingT('pickupDate')} *
-                      </label>
-                      <input
-                        type="date"
-                        name="scheduledPickupDate"
-                        value={formData.scheduledPickupDate}
-                        onChange={handleChange}
-                        min={new Date().toISOString().split('T')[0]}
-                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">
-                        {schedulingT('pickupTime')} *
-                      </label>
-                      <input
-                        type="time"
-                        name="scheduledPickupTime"
-                        value={formData.scheduledPickupTime}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-                        required
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {/* Notes */}
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    {requestT('notes')}
-                  </label>
-                  <textarea
-                    name="notes"
-                    value={formData.notes}
-                    onChange={handleChange}
-                    rows={2}
-                    maxLength={500}
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-                    placeholder={requestT('notesPlaceholder')}
-                  />
-                </div>
+                <SchedulePicker
+                  onScheduleChange={(date) =>
+                    setFormData((prev) => ({ ...prev, scheduledDateTime: date }))
+                  }
+                />
               </div>
             </div>
 
