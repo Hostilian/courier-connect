@@ -1,5 +1,6 @@
 import { Home, Package } from 'lucide-react';
 import Link from 'next/link';
+import { defaultLocale } from '@/i18n';
 
 export default function RootNotFound() {
   return (
@@ -29,7 +30,7 @@ export default function RootNotFound() {
               </p>
 
               <Link
-                href="/en"
+                href={`/${defaultLocale}`}
                 className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-yellow-500 rounded-xl hover:bg-yellow-600 transition-all transform hover:scale-105 shadow-lg"
               >
                 <Home className="mr-2 w-5 h-5" />
@@ -37,11 +38,11 @@ export default function RootNotFound() {
               </Link>
 
               <div className="mt-12 flex items-center justify-center space-x-3 text-4xl">
-                <span>🇬🇧</span>
-                <span>🇨🇿</span>
-                <span>🇺🇦</span>
-                <span>🇻🇳</span>
-                <span>🇹🇷</span>
+                <Link aria-label="English" href="/en" className="hover:scale-110 transition-transform">🇬🇧</Link>
+                <Link aria-label="Čeština" href="/cs" className="hover:scale-110 transition-transform">🇨🇿</Link>
+                <Link aria-label="Українська" href="/uk" className="hover:scale-110 transition-transform">🇺🇦</Link>
+                <Link aria-label="Tiếng Việt" href="/vi" className="hover:scale-110 transition-transform">🇻🇳</Link>
+                <Link aria-label="Türkçe" href="/tr" className="hover:scale-110 transition-transform">🇹🇷</Link>
               </div>
             </div>
           </div>
