@@ -1,0 +1,218 @@
+═══════════════════════════════════════════════════════════════
+   📱 COURIER CONNECT - MOBILE QA QUICK CHECKLIST
+═══════════════════════════════════════════════════════════════
+
+Date: ___________  Tester: ___________  Device: ___________
+
+┌─────────────────────────────────────────────────────────────┐
+│ 1. LANGUAGE SWITCHING (5 min)                               │
+└─────────────────────────────────────────────────────────────┘
+
+Visit: http://localhost:3000
+
+[ ] QuickFlags visible on home page
+[ ] Tap Czech 🇨🇿 → URL changes to /cs
+[ ] Content switches to Czech language
+[ ] Tap Ukrainian 🇺🇦 → URL changes to /uk
+[ ] Tap Turkish 🇹🇷 → URL changes to /tr
+[ ] Tap Vietnamese 🇻🇳 → URL changes to /vi
+[ ] Back button returns to previous language
+[ ] Language persists across page navigation
+
+┌─────────────────────────────────────────────────────────────┐
+│ 2. RTL VERIFICATION (3 min)                                 │
+└─────────────────────────────────────────────────────────────┘
+
+Visit: http://localhost:3000/ar
+
+[ ] Layout mirrors (text flows right-to-left)
+[ ] Header nav is on left (logo on right)
+[ ] Buttons align right
+[ ] Flags DON'T mirror
+[ ] Numbers stay LTR (123 not ٣٢١)
+[ ] Forms work correctly
+
+┌─────────────────────────────────────────────────────────────┐
+│ 3. REQUEST FLOW (Czech) (10 min)                           │
+└─────────────────────────────────────────────────────────────┘
+
+Visit: http://localhost:3000/cs/request
+
+STEP 1: Pickup Info
+[ ] Form is single-column (no side-by-side on mobile)
+[ ] Name input auto-focuses
+[ ] Phone input shows numeric keyboard
+[ ] Email input shows email keyboard (@)
+[ ] Address autocomplete shows dropdown
+[ ] Next button is easy to tap (≥ 44px)
+
+STEP 2: Delivery Info
+[ ] All inputs work same as Step 1
+[ ] Notes textarea expands on focus
+[ ] Keyboard doesn't obscure submit button
+
+STEP 3: Preferences
+[ ] Package type selector is tappable
+[ ] Selected state is clear
+[ ] Urgency dropdown works
+[ ] Submit button shows loading state
+
+SUCCESS SCREEN
+[ ] Tracking code is displayed large
+[ ] Copy button works (toast appears)
+[ ] "Track Delivery" button works
+[ ] "New Request" button works
+
+┌─────────────────────────────────────────────────────────────┐
+│ 4. TRACK DELIVERY (Ukrainian) (5 min)                      │
+└─────────────────────────────────────────────────────────────┘
+
+Visit: http://localhost:3000/uk/track
+
+[ ] Input is large (≥ 48px height)
+[ ] Numeric keyboard appears
+[ ] Submit button is full-width
+[ ] Loading spinner appears
+[ ] Status timeline is vertical (not horizontal)
+[ ] Map (if shown) is responsive
+
+┌─────────────────────────────────────────────────────────────┐
+│ 5. COURIER LOGIN (Turkish) (5 min)                         │
+└─────────────────────────────────────────────────────────────┘
+
+Visit: http://localhost:3000/tr/courier/login
+
+[ ] Email input triggers email keyboard
+[ ] Password has show/hide toggle 👁
+[ ] "Remember Me" checkbox is large
+[ ] Login button is full-width
+[ ] "Forgot Password?" link works
+[ ] "Register here" link works
+
+┌─────────────────────────────────────────────────────────────┐
+│ 6. COURIER REGISTER (Vietnamese) (10 min)                  │
+└─────────────────────────────────────────────────────────────┘
+
+Visit: http://localhost:3000/vi/courier/register
+
+STEP 1: Credentials
+[ ] First/Last name inputs work
+[ ] Email keyboard for email input
+[ ] Tel keyboard for phone input
+[ ] Password strength indicator shows
+[ ] Terms checkbox is tappable
+
+STEP 2: Vehicle
+[ ] Vehicle type icons in 2×2 grid
+[ ] Selected state is clear
+[ ] License plate input works
+[ ] Insurance textarea expands
+
+STEP 3: Verification
+[ ] File upload button triggers camera/picker
+[ ] Thumbnail shows after upload
+[ ] Delete/replace button works
+[ ] Agreement checkbox works
+[ ] Submit button shows loading
+
+┌─────────────────────────────────────────────────────────────┐
+│ 7. MOBILE UX (All Languages) (10 min)                      │
+└─────────────────────────────────────────────────────────────┘
+
+Test at:
+[ ] 375px (iPhone)
+[ ] 412px (Android)
+[ ] 768px (iPad)
+
+RESPONSIVE CHECKS:
+[ ] No horizontal scroll
+[ ] All text is readable (≥ 12px)
+[ ] All buttons are tappable (≥ 44px)
+[ ] Images load and scale
+[ ] Forms don't zoom on input focus
+[ ] Footer is accessible
+
+PERFORMANCE:
+[ ] Page loads in < 3 seconds
+[ ] No layout shift (CLS)
+[ ] Images lazy-load
+[ ] Smooth scrolling
+
+┌─────────────────────────────────────────────────────────────┐
+│ 8. CULTURAL THEMES (5 min)                                 │
+└─────────────────────────────────────────────────────────────┘
+
+Czech /cs:
+[ ] Primary red (#DC2626)
+[ ] Blue accent visible
+[ ] Gradient on hero: red→blue→white
+
+Ukrainian /uk:
+[ ] Primary yellow (#FFD500)
+[ ] Blue secondary (#0057B7)
+[ ] Gradient: blue→yellow
+
+Vietnamese /vi:
+[ ] Primary red (#DA251D)
+[ ] Yellow accent
+[ ] Gradient: red→yellow→red
+
+Turkish /tr:
+[ ] Primary red (#E30A17)
+[ ] White/gold accents
+[ ] Gradient: red→white→red
+
+┌─────────────────────────────────────────────────────────────┐
+│ 9. ACCESSIBILITY (5 min)                                    │
+└─────────────────────────────────────────────────────────────┘
+
+[ ] Tab key navigates through all buttons
+[ ] Focus indicator is visible
+[ ] Alt text on images
+[ ] Form labels are associated
+[ ] Color contrast is good
+[ ] Screen reader announces changes
+
+┌─────────────────────────────────────────────────────────────┐
+│ 10. CROSS-BROWSER (10 min)                                 │
+└─────────────────────────────────────────────────────────────┘
+
+[ ] Safari iOS (latest)
+[ ] Chrome Android (latest)
+[ ] Firefox Android (latest)
+[ ] Samsung Internet (optional)
+
+═══════════════════════════════════════════════════════════════
+
+TOTAL TIME: ~60 minutes
+
+ISSUES FOUND:
+1. ___________________________________________________________
+2. ___________________________________________________________
+3. ___________________________________________________________
+
+PRIORITY:  [ ] Low  [ ] Medium  [ ] High  [ ] Critical
+
+OVERALL STATUS:  [ ] Pass  [ ] Pass with notes  [ ] Fail
+
+═══════════════════════════════════════════════════════════════
+
+AUTOMATED TESTS:
+[ ] npm run qa:mobile (Puppeteer tests)
+[ ] npm run qa:lighthouse:mobile (Performance audit)
+[ ] npm run type-check (TypeScript check)
+[ ] npm run lint (ESLint check)
+[ ] npm run build (Production build)
+
+═══════════════════════════════════════════════════════════════
+
+SIGN-OFF:
+
+Tester: _________________  Date: _________  ✓ Approved  ✗ Reject
+
+Notes:
+
+
+
+
+═══════════════════════════════════════════════════════════════

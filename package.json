@@ -12,7 +12,10 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "type-check": "tsc --noEmit",
-    "clean": "if exist .next rmdir /s /q .next && if exist node_modules rmdir /s /q node_modules"
+    "clean": "if exist .next rmdir /s /q .next && if exist node_modules rmdir /s /q node_modules",
+    "qa:mobile": "node scripts/mobile-qa-test.js",
+    "qa:lighthouse": "lighthouse http://localhost:3000 --view --preset=desktop",
+    "qa:lighthouse:mobile": "lighthouse http://localhost:3000 --view --emulated-form-factor=mobile"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.2",
