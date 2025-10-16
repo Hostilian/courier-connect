@@ -26,10 +26,5 @@ export default async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Match only internationalized pathnames
-  // Use a broad matcher so all routes (except static assets and API) are locale-aware
-  matcher: [
-    '/',
-    '/((?!api|_next|_vercel|.*\\..*).*)',
-  ],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)']
 };
