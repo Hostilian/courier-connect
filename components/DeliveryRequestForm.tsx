@@ -1,0 +1,688 @@
+'use client';
+
+import DeliveryMap from '@/components/DeliveryMap';
+import { useLocationContext } from '@/components/LocationProvider';
+import { getCountryByCode } from '@/lib/countries';
+import { loadGoogleMaps } from '@/lib/maps';
+import type { PricingBreakdown } from '@/lib/pricing';
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+    ArrowLeft,
+    ArrowRight,
+    DollarSign,
+    Info,
+    Loader2,
+    MapPin,
+    Package,
+    User
+} from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+type Coordinates = {
+  lat: number;
+  lng: number;
+};
+
+interface RouteDetails {
+  distance: number;
+  duration: number;
+  distanceText?: string;
+  durationText?: string;
+  estimated?: boolean;
+  polyline?: string;
+}
+
+interface DeliveryRequestFormProps {
+  onSuccess?: (trackingId: string) => void;
+  onCancel?: () => void;
+}
+
+export default function DeliveryRequestForm({ onSuccess, onCancel }: DeliveryRequestFormProps) {
+  const t = useTranslations();
+  const locale = useLocale();
+  const { location } = useLocationContext();
+  const country = location.countryCode ? getCountryByCode(location.countryCode) : undefined;
+
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    // Sender info
+    senderName: '',
+    senderPhone: '',
+    senderAddress: '',
+
+    // Receiver info
+    receiverName: '',
+    receiverPhone: '',
+    receiverAddress: '',
+
+    // Package info
+    packageType: 'envelope',
+    packageSize: 'small',
+    packageDescription: '',
+
+    // Delivery info
+    urgency: 'standard',
+    pickupTime: 'asap',
+    scheduledPickupDate: '',
+    scheduledPickupTime: '',
+    scheduledDeliveryDate: '',
+    scheduledDeliveryTime: '',
+    notes: '',
+  });
+
+  const [routeInfo, setRouteInfo] = useState<RouteDetails | null>(null);
+  const [priceBreakdown, setPriceBreakdown] = useState<PricingBreakdown | null>(null);
+  const [originCoords, setOriginCoords] = useState<Coordinates | null>(null);
+  const [destinationCoords, setDestinationCoords] = useState<Coordinates | null>(null);
+  const [calculatingPrice, setCalculatingPrice] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const pickupRef = useRef<HTMLTextAreaElement | null>(null);
+  const dropoffRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const currencyFormatter = new Intl.NumberFormat(locale || 'en', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  });
+
+  const formatCurrency = (value?: number) => currencyFormatter.format(value ?? 0);
+
+  // Geocode address to coordinates
+  const geocodeAddress = useCallback(async (address: string): Promise<Coordinates | null> => {
+    if (!address.trim()) return null;
+    try {
+      const google = await loadGoogleMaps();
+      return await new Promise<Coordinates | null>((resolve) => {
+        const geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ address }, (results, status) => {
+          if (status === 'OK' && results && results[0]?.geometry?.location) {
+            const location = results[0].geometry.location;
+            resolve({ lat: location.lat(), lng: location.lng() });
+          } else {
+            resolve(null);
+          }
+        });
+      });
+    } catch (error) {
+      console.error('Geocode error:', error);
+      return null;
+    }
+  }, []);
+
+  // Calculate route and price when addresses change
+  useEffect(() => {
+    const calculateRouteAndPrice = async () => {
+      if (!formData.senderAddress || !formData.receiverAddress) {
+        setRouteInfo(null);
+        setPriceBreakdown(null);
+        return;
+      }
+
+      setCalculatingPrice(true);
+      setError(null);
+
+      try {
+        // Geocode addresses
+        const origin = await geocodeAddress(formData.senderAddress);
+        const destination = await geocodeAddress(formData.receiverAddress);
+
+        if (!origin || !destination) {
+          setError(t('request.errors.invalidAddress'));
+          setCalculatingPrice(false);
+          return;
+        }
+
+        setOriginCoords(origin);
+        setDestinationCoords(destination);
+
+        // Calculate route and price via API
+        const response = await fetch('/api/deliveries/calculate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            origin,
+            destination,
+            urgency: formData.urgency,
+            packageSize: formData.packageSize,
+            scheduledPickupDate: formData.scheduledPickupDate
+              ? new Date(`${formData.scheduledPickupDate}T${formData.scheduledPickupTime || '00:00'}`)
+              : undefined,
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setRouteInfo(data.route);
+          setPriceBreakdown(data.pricing);
+        } else {
+          setError(t('request.errors.calculationFailed'));
+        }
+      } catch (err) {
+        setError(t('request.errors.networkError'));
+      } finally {
+        setCalculatingPrice(false);
+      }
+    };
+
+    const debounceTimer = setTimeout(calculateRouteAndPrice, 800);
+    return () => clearTimeout(debounceTimer);
+  }, [
+    formData.senderAddress,
+    formData.receiverAddress,
+    formData.urgency,
+    formData.packageSize,
+    formData.scheduledPickupDate,
+    formData.scheduledPickupTime,
+    geocodeAddress,
+    t,
+  ]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      const payload = {
+        ...formData,
+        senderLocation: originCoords,
+        receiverLocation: destinationCoords,
+        distance: routeInfo?.distance,
+        duration: routeInfo?.duration,
+        routePolyline: routeInfo?.polyline,
+        distanceText: routeInfo?.distanceText,
+        durationText: routeInfo?.durationText,
+        distanceEstimated: routeInfo?.estimated,
+        price: priceBreakdown?.totalPrice,
+        courierEarnings: priceBreakdown?.courierEarnings,
+        platformFee: priceBreakdown?.platformFee,
+        basePrice: priceBreakdown?.basePrice,
+        distancePrice: priceBreakdown?.distancePrice,
+        urgencyPrice: priceBreakdown?.urgencyPrice,
+        scheduledPrice: priceBreakdown?.scheduledPrice,
+        packageSizePrice: priceBreakdown?.packageSizePrice,
+        locale,
+        serviceCountry: location.countryCode,
+        serviceCity: location.city,
+      };
+
+      const response = await fetch('/api/deliveries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (onSuccess) {
+          onSuccess(data.trackingId);
+        }
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error || t('request.errors.submitFailed'));
+      }
+    } catch (err) {
+      setError(t('request.errors.networkError'));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const canProceedToStep2 = formData.senderName && formData.senderPhone && formData.senderAddress;
+  const canProceedToStep3 = canProceedToStep2 && formData.receiverName && formData.receiverPhone && formData.receiverAddress;
+  const canSubmit = canProceedToStep3 && formData.packageType && formData.packageSize && priceBreakdown;
+
+  return (
+    <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
+      {/* Step Indicator */}
+      <div className="flex items-center justify-center mb-8">
+        {[1, 2, 3].map((s) => (
+          <div key={s} className="flex items-center">
+            <div
+              className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${
+                step >= s
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-200 text-gray-500'
+              }`}
+            >
+              {s}
+            </div>
+            {s < 3 && (
+              <div
+                className={`w-16 h-1 mx-2 transition-all ${
+                  step > s ? 'bg-blue-600' : 'bg-gray-200'
+                }`}
+              />
+            )}
+          </div>
+        ))}
+      </div>
+
+      <AnimatePresence mode="wait">
+        {/* Step 1: Sender Information */}
+        {step === 1 && (
+          <motion.div
+            key="step1"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            className="bg-white rounded-xl shadow-lg p-6 md:p-8"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <User className="w-6 h-6 text-blue-600" />
+              <h2 className="text-2xl font-bold">{t('request.step1.title')}</h2>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  {t('request.sender.name')} *
+                </label>
+                <input
+                  type="text"
+                  name="senderName"
+                  value={formData.senderName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  {t('request.sender.phone')} *
+                </label>
+                <input
+                  type="tel"
+                  name="senderPhone"
+                  value={formData.senderPhone}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  {t('request.sender.address')} *
+                </label>
+                <textarea
+                  ref={pickupRef}
+                  name="senderAddress"
+                  value={formData.senderAddress}
+                  onChange={handleChange}
+                  rows={3}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  placeholder={t('request.sender.addressPlaceholder')}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-end mt-6">
+              <button
+                type="button"
+                onClick={() => setStep(2)}
+                disabled={!canProceedToStep2}
+                className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              >
+                {t('request.next')}
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Step 2: Receiver Information */}
+        {step === 2 && (
+          <motion.div
+            key="step2"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            className="bg-white rounded-xl shadow-lg p-6 md:p-8"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <MapPin className="w-6 h-6 text-blue-600" />
+              <h2 className="text-2xl font-bold">{t('request.step2.title')}</h2>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  {t('request.receiver.name')} *
+                </label>
+                <input
+                  type="text"
+                  name="receiverName"
+                  value={formData.receiverName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  {t('request.receiver.phone')} *
+                </label>
+                <input
+                  type="tel"
+                  name="receiverPhone"
+                  value={formData.receiverPhone}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  {t('request.receiver.address')} *
+                </label>
+                <textarea
+                  ref={dropoffRef}
+                  name="receiverAddress"
+                  value={formData.receiverAddress}
+                  onChange={handleChange}
+                  rows={3}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  placeholder={t('request.receiver.addressPlaceholder')}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-between mt-6">
+              <button
+                type="button"
+                onClick={() => setStep(1)}
+                className="flex items-center gap-2 px-6 py-3 border rounded-lg hover:bg-gray-100 transition-all"
+              >
+                <ArrowLeft className="w-5 h-5" />
+                {t('request.back')}
+              </button>
+              <button
+                type="button"
+                onClick={() => setStep(3)}
+                disabled={!canProceedToStep3}
+                className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              >
+                {t('request.next')}
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Step 3: Package & Delivery Details with Live Pricing */}
+        {step === 3 && (
+          <motion.div
+            key="step3"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            className="space-y-6"
+          >
+            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <Package className="w-6 h-6 text-blue-600" />
+                <h2 className="text-2xl font-bold">{t('request.step3.title')}</h2>
+              </div>
+
+              <div className="space-y-4">
+                {/* Package Type */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    {t('request.package.type')} *
+                  </label>
+                  <select
+                    name="packageType"
+                    value={formData.packageType}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                    required
+                  >
+                    <option value="envelope">{t('request.package.types.envelope')}</option>
+                    <option value="box">{t('request.package.types.box')}</option>
+                    <option value="bag">{t('request.package.types.bag')}</option>
+                    <option value="document">{t('request.package.types.document')}</option>
+                    <option value="food">{t('request.package.types.food')}</option>
+                    <option value="other">{t('request.package.types.other')}</option>
+                  </select>
+                </div>
+
+                {/* Package Size */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    {t('request.package.size')} *
+                  </label>
+                  <select
+                    name="packageSize"
+                    value={formData.packageSize}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                    required
+                  >
+                    <option value="small">{t('request.package.sizes.small')}</option>
+                    <option value="medium">{t('request.package.sizes.medium')}</option>
+                    <option value="large">{t('request.package.sizes.large')}</option>
+                    <option value="extra-large">{t('request.package.sizes.extraLarge')}</option>
+                  </select>
+                </div>
+
+                {/* Package Description */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    {t('request.package.description')}
+                  </label>
+                  <textarea
+                    name="packageDescription"
+                    value={formData.packageDescription}
+                    onChange={handleChange}
+                    rows={2}
+                    maxLength={500}
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                    placeholder={t('request.package.descriptionPlaceholder')}
+                  />
+                </div>
+
+                {/* Urgency */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    {t('request.delivery.urgency')} *
+                  </label>
+                  <select
+                    name="urgency"
+                    value={formData.urgency}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                    required
+                  >
+                    <option value="standard">{t('request.delivery.urgencies.standard')}</option>
+                    <option value="express">{t('request.delivery.urgencies.express')}</option>
+                    <option value="urgent">{t('request.delivery.urgencies.urgent')}</option>
+                    <option value="scheduled">{t('request.delivery.urgencies.scheduled')}</option>
+                  </select>
+                </div>
+
+                {/* Scheduled Pickup (if urgency is scheduled) */}
+                {formData.urgency === 'scheduled' && (
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
+                        {t('request.delivery.pickupDate')} *
+                      </label>
+                      <input
+                        type="date"
+                        name="scheduledPickupDate"
+                        value={formData.scheduledPickupDate}
+                        onChange={handleChange}
+                        min={new Date().toISOString().split('T')[0]}
+                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
+                        {t('request.delivery.pickupTime')} *
+                      </label>
+                      <input
+                        type="time"
+                        name="scheduledPickupTime"
+                        value={formData.scheduledPickupTime}
+                        onChange={handleChange}
+                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                        required
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Notes */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    {t('request.delivery.notes')}
+                  </label>
+                  <textarea
+                    name="notes"
+                    value={formData.notes}
+                    onChange={handleChange}
+                    rows={2}
+                    maxLength={500}
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                    placeholder={t('request.delivery.notesPlaceholder')}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Live Map Preview */}
+            {originCoords && destinationCoords && (
+              <div className="bg-white rounded-xl shadow-lg p-6">
+                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                  <MapPin className="w-5 h-5 text-blue-600" />
+                  {t('request.map.preview')}
+                </h3>
+                <DeliveryMap
+                  origin={{ ...originCoords, address: formData.senderAddress }}
+                  destination={{ ...destinationCoords, address: formData.receiverAddress }}
+                  showRoute={true}
+                  height="300px"
+                />
+              </div>
+            )}
+
+            {/* Live Price Breakdown */}
+            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
+              <div className="flex items-center gap-3 mb-4">
+                <DollarSign className="w-6 h-6 text-green-600" />
+                <h3 className="text-xl font-bold">{t('request.pricing.title')}</h3>
+              </div>
+
+              {calculatingPrice ? (
+                <div className="flex items-center justify-center py-8">
+                  <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+                  <span className="ml-3 text-gray-600">{t('request.pricing.calculating')}</span>
+                </div>
+              ) : priceBreakdown ? (
+                <div className="space-y-3">
+                  <div className="flex justify-between text-sm">
+                    <span>{t('request.pricing.base')}</span>
+                    <span>{formatCurrency(priceBreakdown.basePrice)}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span>{t('request.pricing.distance')} ({routeInfo?.distanceText})</span>
+                    <span>{formatCurrency(priceBreakdown.distancePrice)}</span>
+                  </div>
+                  {priceBreakdown.packageSizePrice > 0 && (
+                    <div className="flex justify-between text-sm">
+                      <span>{t('request.pricing.packageSize')}</span>
+                      <span>{formatCurrency(priceBreakdown.packageSizePrice)}</span>
+                    </div>
+                  )}
+                  {priceBreakdown.urgencyPrice !== 0 && (
+                    <div className="flex justify-between text-sm">
+                      <span>{t('request.pricing.urgency')}</span>
+                      <span>{formatCurrency(priceBreakdown.urgencyPrice)}</span>
+                    </div>
+                  )}
+                  {priceBreakdown.scheduledPrice !== 0 && (
+                    <div className="flex justify-between text-sm text-green-600">
+                      <span>{t('request.pricing.scheduled')}</span>
+                      <span>{formatCurrency(priceBreakdown.scheduledPrice)}</span>
+                    </div>
+                  )}
+                  <div className="border-t pt-3 flex justify-between font-bold text-lg">
+                    <span>{t('request.pricing.total')}</span>
+                    <span className="text-blue-600">{formatCurrency(priceBreakdown.totalPrice)}</span>
+                  </div>
+                  <div className="bg-blue-50 rounded-lg p-3 mt-4">
+                    <div className="flex items-start gap-2">
+                      <Info className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                      <p className="text-sm text-blue-900">
+                        {t('request.pricing.courierInfo', {
+                          amount: formatCurrency(priceBreakdown.courierEarnings),
+                        })}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ) : error ? (
+                <div className="text-center py-4 text-red-600">{error}</div>
+              ) : (
+                <div className="text-center py-4 text-gray-500">
+                  {t('request.pricing.enterAddresses')}
+                </div>
+              )}
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex justify-between">
+              <button
+                type="button"
+                onClick={() => setStep(2)}
+                className="flex items-center gap-2 px-6 py-3 border rounded-lg hover:bg-gray-100 transition-all"
+              >
+                <ArrowLeft className="w-5 h-5" />
+                {t('request.back')}
+              </button>
+              <button
+                type="submit"
+                disabled={!canSubmit || loading}
+                className="flex items-center gap-2 px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-semibold"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    {t('request.submitting')}
+                  </>
+                ) : (
+                  <>
+                    {t('request.submit')}
+                    <ArrowRight className="w-5 h-5" />
+                  </>
+                )}
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Global Error Display */}
+      {error && step !== 3 && (
+        <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
+          {error}
+        </div>
+      )}
+    </form>
+  );
+}
