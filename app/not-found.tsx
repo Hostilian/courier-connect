@@ -1,15 +1,24 @@
 import { defaultLocale } from '@/i18n';
-import { Home, Package } from 'lucide-react';
+import { languages } from '@/lib/languages';
+import { Home, Package, Search } from 'lucide-react';
 import Link from 'next/link';
 
 export default function RootNotFound() {
+  // Get all language flags for display
+  const languageOptions = languages.map(lang => ({
+    code: lang.code,
+    flag: lang.flag,
+    name: lang.name,
+    nativeName: lang.nativeName
+  }));
+
   return (
     <html>
       <body>
         <div className="min-h-screen bg-gradient-to-br from-yellow-400 via-orange-300 to-red-400 flex items-center justify-center px-4">
           <div className="max-w-2xl w-full">
             <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 sm:p-12 text-center">
-              <div className="inline-flex items-center justify-center w-32 h-32 rounded-full bg-yellow-400/20 mb-8">
+              <div className="inline-flex items-center justify-center w-32 h-32 rounded-full bg-yellow-400/20 mb-8 animate-pulse">
                 <Package className="w-16 h-16 text-yellow-600" />
               </div>
 
@@ -29,20 +38,35 @@ export default function RootNotFound() {
                 The page you're looking for doesn't exist or has been moved.
               </p>
 
-              <Link
-                href={`/${defaultLocale}`}
-                className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-yellow-500 rounded-xl hover:bg-yellow-600 transition-all transform hover:scale-105 shadow-lg"
-              >
-                <Home className="mr-2 w-5 h-5" />
-                Go to Homepage
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href={`/${defaultLocale}`}
+                  className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-yellow-500 rounded-xl hover:bg-yellow-600 transition-all transform hover:scale-105 shadow-lg"
+                >
+                  <Home className="mr-2 w-5 h-5" />
+                  Go to Homepage
+                </Link>
+                
+                <Link
+                  href={`/${defaultLocale}/track`}
+                  className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-orange-500 rounded-xl hover:bg-orange-600 transition-all transform hover:scale-105 shadow-lg"
+                >
+                  <Search className="mr-2 w-5 h-5" />
+                  Track a Package
+                </Link>
+              </div>
 
-              <div className="mt-12 flex items-center justify-center space-x-3 text-4xl">
-                <Link aria-label="English" href="/en" className="hover:scale-110 transition-transform">🇬🇧</Link>
-                <Link aria-label="Čeština" href="/cs" className="hover:scale-110 transition-transform">🇨🇿</Link>
-                <Link aria-label="Українська" href="/uk" className="hover:scale-110 transition-transform">🇺🇦</Link>
-                <Link aria-label="Tiếng Việt" href="/vi" className="hover:scale-110 transition-transform">🇻🇳</Link>
-                <Link aria-label="Türkçe" href="/tr" className="hover:scale-110 transition-transform">🇹🇷</Link>
+              <div className="mt-12 flex flex-wrap items-center justify-center gap-3 text-4xl">
+                {languageOptions.map(lang => (
+                  <Link 
+                    key={lang.code}
+                    aria-label={lang.name}
+                    href={`/${lang.code}`}
+                    className="hover:scale-110 transition-transform"
+                  >
+                    {lang.flag}
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
