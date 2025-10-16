@@ -2,6 +2,7 @@
 'use client';
 
 import LanguageSelector from '@/components/LanguageSelector';
+import QuickFlags from '@/components/QuickFlags';
 import { useLocationContext } from '@/components/LocationProvider';
 import LocationSelector from '@/components/LocationSelector';
 import { getCountryByCode } from '@/lib/countries';
@@ -181,6 +182,10 @@ export default function HomePage() {
               >
                 {t('home.hero.ctaSecondary')}
               </Link>
+            </div>
+
+            <div className="mt-8">
+              <QuickFlags />
             </div>
           </motion.div>
         </div>

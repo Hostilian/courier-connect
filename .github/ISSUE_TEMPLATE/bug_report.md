@@ -1,35 +1,19 @@
 ---
-name: Bug Report
-about: Something isn't working right
-title: "[BUG] "
+name: Bug report
+about: Create a report to help us improve
 labels: bug
-assignees: ''
 ---
 
-## What's Wrong?
+### Describe the bug
 
-<!-- Describe what's not working in simple terms -->
+### Steps to reproduce
 
-## Steps to Reproduce
+### Expected behavior
 
-1. Go to...
-2. Click on...
-3. See the problem...
+### Screenshots
 
-## What Should Happen?
+### Environment
+- Browser:
+- Device:
 
-<!-- What did you expect to see instead? -->
-
-## Your Setup
-
-- **Device**: (e.g., iPhone 12, Windows laptop)
-- **Browser**: (e.g., Chrome, Safari)
-- **Language**: (e.g., English, Czech)
-
-## Screenshots
-
-<!-- If applicable, add screenshots to help explain the problem -->
-
-## Additional Context
-
-<!-- Anything else we should know? -->
+### Additional context
