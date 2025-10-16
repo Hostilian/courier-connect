@@ -2,7 +2,7 @@
 // But hey, who am I to judge? Maybe in ancient Greece, they had a god of package delivery. Hermes, probably.
 'use client'
 
-import { motion } from 'framer-motion' // Wiggle library strikes again
+import { motion } from 'framer-motion'; // Wiggle library strikes again
 import { ArrowRight, MapPin, Package } from 'lucide-react'
 import Link from 'next/link'
 

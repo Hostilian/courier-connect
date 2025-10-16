@@ -1,26 +1,35 @@
+// Deliveries API. Where delivery requests are born. It's a beautiful thing, really.
+// People send us data, we validate it, calculate prices, and save it to a database.
+// Then we return a tracking ID. The circle of life, but for packages.
 import dbConnect from '@/lib/mongodb';
 import { calculateDeliveryPrice, getEstimatedDeliveryTime } from '@/lib/pricing';
 import DeliveryRequest from '@/models/DeliveryRequest';
 import { NextRequest, NextResponse } from 'next/server';
 
-type UrgencyOption = 'standard' | 'express' | 'urgent' | 'scheduled';
-type PackageSizeOption = 'small' | 'medium' | 'large' | 'extra-large';
-type Coordinate = { lat: number; lng: number };
+// Type definitions. Because TypeScript demands we label everything like it's kindergarten.
+type UrgencyOption = 'standard' | 'express' | 'urgent' | 'scheduled'; // How fast you want it. Spoiler: you always want it urgent.
+type PackageSizeOption = 'small' | 'medium' | 'large' | 'extra-large'; // Size. Matters. Allegedly.
+type Coordinate = { lat: number; lng: number }; // GPS coordinates. Latitude, longitude. Like finding buried treasure, but boring.
 
-const ALLOWED_URGENCY: UrgencyOption[] = ['standard', 'express', 'urgent', 'scheduled'];
-const ALLOWED_PACKAGE_SIZES: PackageSizeOption[] = ['small', 'medium', 'large', 'extra-large'];
-const AVERAGE_SPEED_KMH = 30;
+// Allowed values. Because people will send you ANYTHING if you don't stop them.
+const ALLOWED_URGENCY: UrgencyOption[] = ['standard', 'express', 'urgent', 'scheduled']; // The four horsemen of delivery speed
+const ALLOWED_PACKAGE_SIZES: PackageSizeOption[] = ['small', 'medium', 'large', 'extra-large']; // Four sizes. That's it. Pick one.
+const AVERAGE_SPEED_KMH = 30; // 30 km/h average speed. In a city. Optimistic, if you ask me.
 
+// Route details. What the map API tells us. Or what we make up. Depends on the day.
 interface RouteDetailsPayload {
-  distanceText?: string;
-  durationText?: string;
-  estimated?: boolean;
-  polyline?: string;
+  distanceText?: string; // "5.3 km" - distance but with words
+  durationText?: string; // "12 min" - time but with words
+  estimated?: boolean; // Translation: "We're guessing"
+  polyline?: string; // Encoded route line. Looks like gibberish. It's not gibberish. It's map data.
 }
 
-// POST /api/deliveries - Create new delivery request
+// POST endpoint. This is where delivery requests come to be born.
+// People send us a bunch of data, we validate it like we're the TSA, then save it.
 export async function POST(request: NextRequest) {
   try {
+    // First, connect to the database. Can't save anything if we're not connected.
+    // It's like trying to write a letter without paper. Doesn't work.
     await dbConnect();
 
     const body = await request.json();
