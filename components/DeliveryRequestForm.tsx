@@ -2,16 +2,20 @@
 
 import DeliveryMap from '@/components/DeliveryMap';
 import { useLocationContext } from '@/components/LocationProvider';
+import SchedulePicker from '@/components/SchedulePicker';
 import { loadGoogleMaps } from '@/lib/maps';
 import type { PricingBreakdown } from '@/lib/pricing';
 import { AnimatePresence, motion } from 'framer-motion';
-// ...existing code...
 import {
   ArrowLeft,
   ArrowRight,
   DollarSign,
-// ...existing code...
-
+  Info,
+  Loader2,
+  MapPin,
+  Package,
+  User
+} from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
@@ -504,9 +508,13 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
                   </select>
                 </div>
                 <SchedulePicker
-                  onScheduleChange={(date) =>
-                    setFormData((prev) => ({ ...prev, scheduledDateTime: date }))
-                  }
+                  onScheduleChange={(schedule) => {
+                    // Convert schedule strings to Date object
+                    const dateTime = schedule.pickupDate && schedule.pickupTime 
+                      ? new Date(`${schedule.pickupDate}T${schedule.pickupTime}`)
+                      : null;
+                    setFormData((prev) => ({ ...prev, scheduledDateTime: dateTime }));
+                  }}
                 />
               </div>
             </div>

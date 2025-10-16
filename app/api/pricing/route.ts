@@ -1,6 +1,6 @@
 // Here we are, the pricing API route. It's a lonely job, being an API route. You just sit here and wait for someone to call you. And when they do, you just do your little dance and give them what they want. It's not a bad life, I guess. Better than working for a living.
 
-import { calculatePrice } from '@/lib/pricing';
+import { calculateDeliveryPrice } from '@/lib/pricing';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
@@ -14,12 +14,12 @@ export async function POST(request: NextRequest) {
     }
 
     // The main event. The reason we're all here. The calculation.
-    const pricing = calculatePrice(
+    const pricing = calculateDeliveryPrice({
       distance,
       urgency,
       packageSize,
-      scheduledDateTime ? new Date(scheduledDateTime) : null
-    );
+      scheduledPickupDate: scheduledDateTime ? new Date(scheduledDateTime) : undefined,
+    });
 
     // And then you send it back. It's like a game of catch, but with data. And you never know who's on the other end. Could be a guy in his underwear for all I know.
     return NextResponse.json(pricing);
