@@ -1,7 +1,7 @@
 'use client';
 
 import { loadGoogleMaps } from '@/lib/maps';
-import { Loader2, MapPin, Package, Phone, User } from 'lucide-react';
+import { Loader2, MapPin, Phone, User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 
