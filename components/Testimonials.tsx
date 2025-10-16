@@ -6,16 +6,23 @@ import { Quote, Star } from 'lucide-react'
 export default function Testimonials() {
   const testimonials = [
     {
+      name: 'Business Owner',
+      role: 'Prague',
       rating: 5,
+      text: "Urgent documents delivered across the city in under 2 hours. The courier was professional and kept me updated throughout. Exactly what we needed!",
+      avatar: '�'
     },
     {
+      name: 'Online Seller',
+      role: 'Istanbul',
       rating: 5,
+      text: "Sold a guitar online but couldn't deliver it myself. The courier handled it with care and the buyer was very happy. Great service!",
       avatar: '🎸'
     },
     {
+      name: 'Customer',
+      role: 'Kyiv',
       rating: 5,
-      text: "Between work and kids, I had no time to get a birthday gift. Courier Connect came through and made my daughter's friend so happy. Thank you!",
-      avatar: '👩‍👧'
       text: "Needed a gift delivered for a birthday party. Fast, reliable, and the courier was so friendly. Will definitely use again!",
       avatar: '🎁'
     }
@@ -26,9 +33,9 @@ export default function Testimonials() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            Real Deliveries, Real People
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Real people sharing how Courier Connect helped them out when they needed it most.
             See how Courier Connect helps people get deliveries done.
           </p>
         </div>

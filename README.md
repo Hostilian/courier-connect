@@ -1,5 +1,7 @@
-
 # Courier Connect
+
+![CI](https://github.com/Hostilian/courier-connect/workflows/CI/badge.svg)
+![Deploy](https://github.com/Hostilian/courier-connect/workflows/Deploy%20to%20Production/badge.svg)
 
 **Local Delivery Platform**
 
@@ -7,14 +9,23 @@ Courier Connect is a multilingual delivery service platform connecting customers
 
 ## Features
 
-- No login required for customers
-- 14+ languages with instant switching
-- Mobile-first responsive design
-- Real-time delivery tracking
-- Secure Stripe payments
-- Email notifications
-- Google Maps integration
-- RTL support for Arabic and other languages
+- ✅ No login required for customers
+- 🌍 14+ languages with instant switching
+- 📱 Mobile-first responsive design
+- 📍 Real-time delivery tracking
+- 💳 Secure Stripe payments
+- 📧 Email notifications
+- 🗺️ Google Maps integration
+- 🌐 RTL support for Arabic and other languages
+
+## Quick Links
+
+- 🚀 [Contributing Guidelines](CONTRIBUTING.md)
+- 📖 [Development Workflows](DEVELOPMENT.md)
+- 🛠️ [DevOps Guide](DEVOPS.md)
+- 📋 [Deployment Guide](DEPLOYMENT.md)
+- 🤝 [Code of Conduct](CODE_OF_CONDUCT.md)
+- 🤖 [AI Agent Instructions](.github/copilot-instructions.md)
 
 ## Getting Started
 
@@ -97,15 +108,47 @@ See DEPLOYMENT.md for details.
 
 ## Technology
 
-- Next.js 14
-- MongoDB
+- Next.js 14 (App Router)
+- MongoDB with Mongoose
 - TypeScript
-- Stripe
-- Resend
-- Google Maps
-- next-intl
+- Tailwind CSS & Framer Motion
+- next-intl (14+ languages)
+- Stripe (payments)
+- Resend (emails)
+- Google Maps API
+
+## Contributing
+
+We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting a PR.
+
+### Development Workflow
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes following our [code conventions](CONTRIBUTING.md)
+4. Test thoroughly (see [Development Guide](DEVELOPMENT.md))
+5. Commit your changes (`git commit -m 'feat: Add amazing feature'`)
+6. Push to your fork (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
+
+See [DEVELOPMENT.md](DEVELOPMENT.md) for detailed workflows including:
+- Database migrations
+- Testing procedures
+- Internationalization workflow
+- Feature development process
+
+## Community
+
+- 🐛 [Report a Bug](.github/ISSUE_TEMPLATE/bug_report.yml)
+- ✨ [Request a Feature](.github/ISSUE_TEMPLATE/feature_request.yml)
+- 🌍 [Translation Issue](.github/ISSUE_TEMPLATE/translation_issue.yml)
+- 💬 [Discussions](https://github.com/Hostilian/courier-connect/discussions)
 
 ## License
 
 MIT License
+
+---
+
+**Made with ❤️ by the Courier Connect Team**
 

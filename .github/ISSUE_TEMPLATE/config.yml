@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 General Discussion
+    url: https://github.com/Hostilian/courier-connect/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 📖 Documentation
+    url: https://github.com/Hostilian/courier-connect/blob/main/README.md
+    about: Read the project documentation
+  - name: 🔒 Security Issue
+    url: https://github.com/Hostilian/courier-connect/security/advisories/new
+    about: Report a security vulnerability (private)

@@ -1,0 +1,129 @@
+name: 🐛 Bug Report
+description: Report a bug or unexpected behavior
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the form below.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: What happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: I expected...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: Instead...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language/Locale
+      description: Which language were you using when the bug occurred?
+      options:
+        - English (en)
+        - Czech (cs)
+        - German (de)
+        - Spanish (es)
+        - French (fr)
+        - Italian (it)
+        - Polish (pl)
+        - Portuguese (pt)
+        - Russian (ru)
+        - Turkish (tr)
+        - Ukrainian (uk)
+        - Vietnamese (vi)
+        - Arabic (ar)
+        - Chinese (zh)
+        - Not applicable
+    validations:
+      required: true
+
+  - type: dropdown
+    id: usertype
+    attributes:
+      label: User Type
+      description: Were you using the platform as a customer or courier?
+      options:
+        - Customer (no registration)
+        - Courier (logged in)
+        - Not applicable
+    validations:
+      required: true
+
+  - type: dropdown
+    id: device
+    attributes:
+      label: Device Type
+      description: What device were you using?
+      options:
+        - Desktop/Laptop
+        - Mobile Phone
+        - Tablet
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser & Version
+      description: e.g., Chrome 120, Safari 17, Firefox 121
+      placeholder: Chrome 120
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or Videos
+      description: If applicable, add screenshots or videos to help explain the problem
+      placeholder: Drag and drop or paste images here
+
+  - type: textarea
+    id: console
+    attributes:
+      label: Console Errors
+      description: If applicable, paste any console errors (Right-click > Inspect > Console tab)
+      placeholder: Paste console errors here
+      render: shell
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here
+      placeholder: Any additional information...
