@@ -45,7 +45,7 @@ export default function ContactPage() {
                       name="name"
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                      placeholder="John Doe"
+                      placeholder="Your Full Name"
                     />
                   </div>
                   <div>

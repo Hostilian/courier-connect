@@ -65,7 +65,7 @@ export default function CourierDashboardPage() {
         if (data.stats) setStats(data.stats);
       }
     } catch (error) {
-      console.error('Fetch error:', error);
+      // Fetch error occurred
     } finally {
       setLoading(false);
     }
@@ -85,7 +85,7 @@ export default function CourierDashboardPage() {
         fetchDashboardData();
       }
     } catch (error) {
-      console.error('Accept error:', error);
+      // Accept error occurred
     }
   };
 
@@ -105,7 +105,7 @@ export default function CourierDashboardPage() {
         fetchDashboardData();
       }
     } catch (error) {
-      console.error('Update error:', error);
+      // Update error occurred
     }
   };
 

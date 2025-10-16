@@ -5,24 +5,24 @@ import { motion } from 'framer-motion'
 export default function Stats() {
   const stats = [
     {
-      number: '10,000+',
-      label: 'Happy Deliveries',
-      description: 'Items safely delivered with care'
+      number: 'Fast',
+      label: 'Same-Day Delivery',
+      description: 'Most items delivered within hours'
     },
     {
-      number: '500+',
-      label: 'Trusted Helpers',
-      description: 'Verified and friendly neighbors'
+      number: 'Safe',
+      label: 'Verified Couriers',
+      description: 'Background-checked helpers'
     },
     {
       number: '4.9★',
-      label: 'Community Rating',
-      description: 'Loved by thousands of users'
+      label: 'Customer Rating',
+      description: 'Highly rated service'
     },
     {
       number: '< 2hrs',
       label: 'Average Time',
-      description: 'From pickup to happy delivery'
+      description: 'From pickup to delivery'
     }
   ]
 

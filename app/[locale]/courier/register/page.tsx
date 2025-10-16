@@ -100,7 +100,7 @@ export default function CourierRegisterPage() {
           </div>
           <h1 className="text-4xl font-bold mb-2">{t('title') || 'Become a Courier'}</h1>
           <p className="text-lg text-muted-foreground">
-            {t('subtitle') || 'Earn money helping your neighbors. Flexible hours, great pay!'}
+            {t('subtitle') || 'Earn money delivering packages. Flexible hours, competitive pay.'}
           </p>
         </motion.div>
 
@@ -114,7 +114,7 @@ export default function CourierRegisterPage() {
           {[
             { icon: '💰', title: t('benefit1') || 'Good Pay', desc: t('benefit1Desc') || '$5-20 per delivery' },
             { icon: '⏰', title: t('benefit2') || 'Flexible', desc: t('benefit2Desc') || 'Work when you want' },
-            { icon: '🤝', title: t('benefit3') || 'Community', desc: t('benefit3Desc') || 'Help neighbors' },
+            { icon: '🤝', title: t('benefit3') || 'Local Work', desc: t('benefit3Desc') || 'Deliver in your area' },
           ].map((benefit, idx) => (
             <div key={idx} className="bg-white rounded-lg p-4 text-center shadow-sm">
               <div className="text-3xl mb-2">{benefit.icon}</div>
@@ -151,7 +151,7 @@ export default function CourierRegisterPage() {
                   value={formData.name}
                   onChange={(e) => handleChange('name', e.target.value)}
                   className="w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 transition-all"
-                  placeholder={t('namePlaceholder') || 'John Doe'}
+                  placeholder={t('namePlaceholder') || 'Full Name'}
                 />
               </div>
             </div>

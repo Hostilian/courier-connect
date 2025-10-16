@@ -39,7 +39,7 @@ function readInitialLocation(): UserLocation {
       return JSON.parse(stored) as UserLocation;
     }
   } catch (error) {
-    console.warn('Failed to parse stored location', error);
+    // Failed to parse stored location
   }
 
   const legacyCountry = window.localStorage.getItem(LEGACY_COUNTRY_KEY);
@@ -66,7 +66,7 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
         }
       }
     } catch (storageError) {
-      console.warn('Unable to persist location', storageError);
+      // Unable to persist location
     }
   }, [location]);
 
@@ -128,7 +128,7 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
               }
             }
           } catch (geoError) {
-            console.warn('Reverse geocoding failed', geoError);
+            // Reverse geocoding failed
           }
 
           setLocationState((prev) => {
@@ -139,7 +139,7 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
           resolve();
         },
         (geoError) => {
-          console.warn('Geolocation error', geoError);
+          // Geolocation error
           setError('We could not detect your location. Please choose it manually.');
           setLoading(false);
           resolve();

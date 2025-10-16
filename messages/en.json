@@ -19,8 +19,8 @@
       "cta": "Request Delivery",
       "ctaSecondary": "Become a Courier",
       "locationCity": "Local couriers in {city}",
-      "locationCountry": "Serving {country} with sunshine energy",
-      "locationFallback": "Delivering with a sunshine smile worldwide",
+      "locationCountry": "Serving {country}",
+      "locationFallback": "Delivering worldwide",
       "changeLocation": "Need a different spot?"
     },
     "stats": {
@@ -69,12 +69,12 @@
     },
     "locations": {
       "title": "Trusted wherever you need us",
-      "subtitle": "From historic boulevards to coastal markets, Courier Connect brings sunshine energy to every doorstep.",
+      "subtitle": "From city centers to local neighborhoods, Courier Connect delivers to every doorstep.",
       "global": "Worldwide coverage",
       "activeCity": "Showing nearby couriers in {city}",
-      "activeGlobal": "Pick a location to see local courier vibes",
+      "activeGlobal": "Select a location to see local couriers",
       "coverage": "We operate across the European Union, North and South America, and every country Steam recognizes. Tap the selector to share where you are, and we will handle the hand-off.",
-      "hubTagline": "Same-day sunshine service",
+      "hubTagline": "Same-day delivery service",
       "hubs": {
         "berlin": "Berlin",
         "prague": "Prague",
@@ -87,19 +87,19 @@
     "testimonials": {
       "title": "What Our Customers Say",
       "customer1": {
-        "name": "Sarah Johnson",
-        "role": "Small Business Owner",
-        "quote": "Excellent service! My packages always arrive on time and in perfect condition."
+        "name": "Business Owner",
+        "role": "Prague",
+        "quote": "Urgent documents delivered across the city in under 2 hours. Professional and reliable service."
       },
       "customer2": {
-        "name": "Michael Chen",
-        "role": "Online Shopper",
-        "quote": "The real-time tracking gives me peace of mind. Highly recommended!"
+        "name": "Online Seller",
+        "role": "Istanbul",
+        "quote": "Sold items online and needed delivery. The courier handled everything with care. Great service!"
       },
       "customer3": {
-        "name": "Emma Rodriguez",
-        "role": "Freelancer",
-        "quote": "Affordable rates and reliable couriers. This is my go-to delivery service."
+        "name": "Customer",
+        "role": "Kyiv",
+        "quote": "Fast delivery for a birthday gift. Reliable and professional. Will use again."
       }
     },
     "cta": {
@@ -125,7 +125,7 @@
     "submit": "Submit Request",
     "step1": { "title": "Pickup Details" },
     "senderName": "Your Name",
-    "senderNamePlaceholder": "John Doe",
+    "senderNamePlaceholder": "Full Name",
     "senderPhone": "Your Phone",
     "pickupAddress": "Pickup Address",
     "addressPlaceholder": "Street, City, Postal Code",
@@ -136,7 +136,7 @@
     "scheduled": "Schedule for later",
     "step2": { "title": "Delivery Details" },
     "receiverName": "Recipient Name",
-    "receiverNamePlaceholder": "Jane Smith",
+    "receiverNamePlaceholder": "Recipient Full Name",
     "receiverPhone": "Recipient Phone",
     "deliveryAddress": "Delivery Address",
     "step3": { "title": "Package Details" },
@@ -166,11 +166,11 @@
     "pickup": {
       "title": "Pickup Information",
       "name": "Your Name",
-      "namePlaceholder": "John Doe",
+      "namePlaceholder": "Full Name",
       "phone": "Phone Number",
       "phonePlaceholder": "+1 234 567 8900",
       "email": "Email (optional)",
-      "emailPlaceholder": "john@example.com",
+      "emailPlaceholder": "your.email@example.com",
       "address": "Pickup Address",
       "street": "Street Address",
       "city": "City",

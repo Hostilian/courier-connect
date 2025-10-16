@@ -25,17 +25,17 @@ export default function Hero() {
           >
             <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Package className="w-4 h-4" />
-              <span>Supporting Your Local Community</span>
+              <span>Fast Local Delivery Service</span>
             </div>
             
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 text-balance">
-              Helping Your Community,{' '}
-              <span className="text-blue-600">One Delivery at a Time</span>
+              Local Couriers,{' '}
+              <span className="text-blue-600">Local Deliveries</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Connect with trusted neighbors who can help deliver your packages, gifts, or marketplace finds. 
-              Simple, friendly, and local—no account needed to get started!
+              Connect with local couriers for fast, reliable delivery. 
+              Send packages, gifts, or marketplace items—no account needed to get started.
             </p>
           </motion.div>
 

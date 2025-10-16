@@ -13,8 +13,10 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log error to error reporting service
-    console.error('Application error:', error);
+    // Error logged for monitoring
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Application error:', error);
+    }
   }, [error]);
 
   return (
@@ -125,14 +127,14 @@ export default function Error({
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center text-sm">
                   <a
-                    href="mailto:support@hostilian.org"
+                    href="mailto:support@courier-connect.com"
                     className="text-blue-600 hover:text-blue-800 font-medium"
                   >
-                    support@hostilian.org
+                    support@courier-connect.com
                   </a>
                   <span className="hidden sm:inline text-gray-400">|</span>
                   <span className="text-gray-600">
-                    24/7 Support Available
+                    Support Available
                   </span>
                 </div>
               </motion.div>

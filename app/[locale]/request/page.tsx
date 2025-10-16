@@ -309,7 +309,7 @@ export default function RequestPage() {
                     value={formData.senderName}
                     onChange={(e) => handleChange('senderName', e.target.value)}
                     className="w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all"
-                    placeholder={t('senderNamePlaceholder') || 'John Doe'}
+                    placeholder={t('senderNamePlaceholder') || 'Full Name'}
                   />
                 </div>
 
@@ -386,7 +386,7 @@ export default function RequestPage() {
                     value={formData.receiverName}
                     onChange={(e) => handleChange('receiverName', e.target.value)}
                     className="w-full px-4 py-3 border rounded-lg focus:ring-2 transition-all"
-                    placeholder={t('receiverNamePlaceholder') || 'Jane Smith'}
+                    placeholder={t('receiverNamePlaceholder') || 'Recipient Full Name'}
                   />
                 </div>
 

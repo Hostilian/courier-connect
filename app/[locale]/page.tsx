@@ -75,10 +75,10 @@ export default function HomePage() {
     : country
     ? t('home.hero.locationCountry', {
         country: country.name,
-        defaultMessage: 'Serving {country} with sunshine energy',
+        defaultMessage: 'Serving {country}',
       })
     : t('home.hero.locationFallback', {
-        defaultMessage: 'Delivering with a sunshine smile worldwide',
+        defaultMessage: 'Delivering worldwide',
       });
 
   return (
@@ -147,7 +147,7 @@ export default function HomePage() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 text-white text-sm font-medium mb-6">
               <Sparkles className="w-4 h-4" />
-              <span>{language?.culturalTheme.description || 'Sunshine-fast deliveries'}</span>
+              <span>{language?.culturalTheme.description || 'Fast local deliveries'}</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 drop-shadow-lg">
@@ -297,7 +297,7 @@ export default function HomePage() {
                   {t('home.locations.subtitle', {
                     city: location.city || '',
                     country: country?.name || '',
-                    defaultMessage: 'From historic boulevards to coastal markets, Courier Connect brings sunshine energy to every doorstep.',
+                    defaultMessage: 'From city centers to local neighborhoods, Courier Connect delivers to every doorstep.',
                   })}
                 </p>
                 <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -348,7 +348,7 @@ export default function HomePage() {
                       </p>
                       <p className="text-xs text-gray-500">
                         {t('home.locations.hubTagline', {
-                          defaultMessage: 'Same-day sunshine service',
+                          defaultMessage: 'Same-day delivery service',
                         })}
                       </p>
                     </div>

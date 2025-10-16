@@ -3,7 +3,7 @@
  * No Redux bloat, just clean state handling
  */
 
-import { useState, useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 export interface CourierRegistrationData {
   name: string;

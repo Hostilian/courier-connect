@@ -25,20 +25,20 @@ export default function CTA() {
         >
           <div className="max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Ready to Get Started?
+              Ready to Send or Deliver?
             </h2>
             <p className="text-xl md:text-2xl mb-8 text-blue-100">
-              Join a community of helpful neighbors making local deliveries easier for everyone.
+              Join couriers and customers using Courier Connect for local deliveries.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
             <div className="text-center">
-              <h3 className="text-2xl font-bold mb-2">Need Help With a Delivery?</h3>
-              <p className="text-blue-100 mb-4">No sign-up needed—just ask!</p>
+              <h3 className="text-2xl font-bold mb-2">Need a Delivery?</h3>
+              <p className="text-blue-100 mb-4">Request pickup and delivery now</p>
               <Link href="/request" className="btn-secondary text-lg px-8 py-4 inline-flex items-center bg-white text-blue-600 hover:bg-gray-50">
                 <Package className="w-5 h-5 mr-2" />
-                Request Help
+                Send Package
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
             </div>
@@ -46,11 +46,11 @@ export default function CTA() {
             <div className="hidden sm:block w-px h-24 bg-blue-400" />
 
             <div className="text-center">
-              <h3 className="text-2xl font-bold mb-2">Want to Help & Earn?</h3>
-              <p className="text-blue-100 mb-4">Become a friendly courier</p>
+              <h3 className="text-2xl font-bold mb-2">Want to Earn as a Courier?</h3>
+              <p className="text-blue-100 mb-4">Start delivering in your area</p>
               <Link href="/courier/register" className="btn-primary text-lg px-8 py-4 inline-flex items-center bg-blue-800 hover:bg-blue-900">
                 <Smartphone className="w-5 h-5 mr-2" />
-                Join Our Team
+                Become a Courier
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
             </div>
@@ -59,16 +59,16 @@ export default function CTA() {
           <div className="max-w-2xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
               <div>
-                <div className="text-2xl font-bold text-blue-200">Free</div>
-                <div className="text-sm text-blue-100">Customer registration</div>
+                <div className="text-2xl font-bold text-blue-200">Easy</div>
+                <div className="text-sm text-blue-100">Simple request process</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-blue-200">24/7</div>
-                <div className="text-sm text-blue-100">Customer support</div>
+                <div className="text-sm text-blue-100">Available anytime</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-blue-200">Instant</div>
-                <div className="text-sm text-blue-100">Courier matching</div>
+                <div className="text-2xl font-bold text-blue-200">Fast</div>
+                <div className="text-sm text-blue-100">Quick courier matching</div>
               </div>
             </div>
           </div>

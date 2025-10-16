@@ -21,11 +21,11 @@ export async function sendVerificationEmail(email: string, token: string) {
   try {
   const client = await getResend();
     if (!client) {
-      console.warn('Resend API key is missing; skipping verification email.');
+      // Email service not configured
       return { success: false, error: 'Email service not configured' };
     }
     const data = await client.emails.send({
-      from: 'Courier Connect <noreply@hostilian.org>',
+      from: 'Courier Connect <noreply@courier-connect.com>',
       to: email,
       subject: 'Verify your email - Courier Connect',
       html: `
@@ -65,7 +65,7 @@ export async function sendVerificationEmail(email: string, token: string) {
 
     return { success: true, data };
   } catch (error) {
-    console.error('Email send error:', error);
+    // Email send failed
     return { success: false, error };
   }
 }
@@ -76,11 +76,11 @@ export async function sendPasswordResetEmail(email: string, token: string) {
   try {
   const client = await getResend();
     if (!client) {
-      console.warn('Resend API key is missing; skipping password reset email.');
+      // Email service not configured
       return { success: false, error: 'Email service not configured' };
     }
     const data = await client.emails.send({
-      from: 'Courier Connect <noreply@hostilian.org>',
+      from: 'Courier Connect <noreply@courier-connect.com>',
       to: email,
       subject: 'Reset your password - Courier Connect',
       html: `
@@ -120,7 +120,7 @@ export async function sendPasswordResetEmail(email: string, token: string) {
 
     return { success: true, data };
   } catch (error) {
-    console.error('Email send error:', error);
+    // Email send failed
     return { success: false, error };
   }
 }
@@ -155,11 +155,11 @@ export async function sendDeliveryNotification(
   try {
   const client = await getResend();
     if (!client) {
-      console.warn('Resend API key is missing; skipping delivery notification email.');
+      // Email service not configured
       return { success: false, error: 'Email service not configured' };
     }
     const data = await client.emails.send({
-      from: 'Courier Connect <notifications@hostilian.org>',
+      from: 'Courier Connect <notifications@courier-connect.com>',
       to: email,
       subject: `${subject} - ${trackingId}`,
       html: `
@@ -185,7 +185,7 @@ export async function sendDeliveryNotification(
               </a>
               <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
               <p style="font-size: 12px; color: #9ca3af;">
-                Need help? Contact us at support@hostilian.org
+                Need help? Contact us at support@courier-connect.com
               </p>
             </div>
           </body>
@@ -195,7 +195,7 @@ export async function sendDeliveryNotification(
 
     return { success: true, data };
   } catch (error) {
-    console.error('Email send error:', error);
+    // Email send failed
     return { success: false, error };
   }
 }
