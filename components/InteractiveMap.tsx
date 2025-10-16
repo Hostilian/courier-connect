@@ -232,14 +232,20 @@ export default function InteractiveMap({
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [handleMapClick]);
 
-  // Update markers when origin/destination changes
+    // Update markers and route when origin/destination changes
   useEffect(() => {
     if (!map) return;
 
-    const updateMarkers = async () => {
+    const updateMapElements = async () => {
       const google = await loadGoogleMaps();
+
+      // Clear existing route
+      if (directionsRendererRef.current) {
+        directionsRendererRef.current.setDirections({ routes: [] });
+      }
+      setRouteInfo(null);
 
       // Origin marker
       if (origin) {
@@ -249,14 +255,15 @@ export default function InteractiveMap({
           originMarkerRef.current = new google.maps.Marker({
             position: origin,
             map,
-            title: t('origin'),
-            label: 'A',
-            animation: google.maps.Animation.DROP,
+            title: 'Origin',
             icon: {
               url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
             },
           });
         }
+      } else {
+        originMarkerRef.current?.setMap(null);
+        originMarkerRef.current = null;
       }
 
       // Destination marker
@@ -267,24 +274,35 @@ export default function InteractiveMap({
           destinationMarkerRef.current = new google.maps.Marker({
             position: destination,
             map,
-            title: t('destination'),
-            label: 'B',
-            animation: google.maps.Animation.DROP,
+            title: 'Destination',
             icon: {
               url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
             },
           });
         }
+      } else {
+        destinationMarkerRef.current?.setMap(null);
+        destinationMarkerRef.current = null;
       }
 
-      // Calculate route if both points are set
+      // Calculate route if both are set
       if (origin && destination) {
         calculateRoute();
+        
+        // Fit map to bounds
+        const bounds = new google.maps.LatLngBounds();
+        bounds.extend(new google.maps.LatLng(origin.lat, origin.lng));
+        bounds.extend(new google.maps.LatLng(destination.lat, destination.lng));
+        map.fitBounds(bounds);
+      } else if (origin) {
+        map.panTo(origin);
+      } else if (destination) {
+        map.panTo(destination);
       }
     };
 
-    updateMarkers();
-  }, [map, origin, destination, calculateRoute, t]);
+    updateMapElements();
+  }, [origin, destination, map, calculateRoute]);
 
   // Update my location marker
   useEffect(() => {

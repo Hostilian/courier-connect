@@ -1,12 +1,15 @@
+'use client';
+
 import { WifiOff } from 'lucide-react';
 import Link from 'next/link';
 
-export const metadata = {
-  title: 'Offline | Courier Connect',
-  description: 'You are currently offline',
-};
-
 export default function OfflinePage() {
+  const handleReload = () => {
+    if (typeof window !== 'undefined') {
+      window.location.reload();
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center px-4">
       <div className="text-center max-w-md">
@@ -32,7 +35,7 @@ export default function OfflinePage() {
         </div>
 
         <button
-          onClick={() => window.location.reload()}
+          onClick={handleReload}
           className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition transform hover:scale-105"
         >
           Try Again

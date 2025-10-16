@@ -1,5 +1,6 @@
 'use client';
 
+import CourierEarnings from '@/components/CourierEarnings';
 import { getLanguageByCode } from '@/lib/languages';
 import { motion } from 'framer-motion';
 import { CheckCircle, Clock, DollarSign, MapPin, Package, TrendingUp } from 'lucide-react';

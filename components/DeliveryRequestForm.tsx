@@ -178,7 +178,7 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
     formData.scheduledPickupDate,
     formData.scheduledPickupTime,
     geocodeAddress,
-    t,
+    requestT,
   ]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
