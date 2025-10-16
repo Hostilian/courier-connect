@@ -66,39 +66,38 @@ export default function CourierDashboardPage() {
 
   const formatCurrency = (value?: number) => currencyFormatter.format(value ?? 0);
 
-  useEffect(() => {
-    // Check authentication
-    const token = localStorage.getItem('cc_token');
-    if (!token) {
-      router.push(`/${locale}/courier/login`);
-      return;
-    }
+    const fetchDashboardData = useCallback(async () => {
+        setLoading(true);
+        try {
+            const token = localStorage.getItem('cc_token');
+            if (!token) {
+                router.push(`/${locale}/courier/login`);
+                return;
+            }
 
-    fetchDashboardData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab]);
+            const response = await fetch(`/api/courier/deliveries?status=${activeTab}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
 
-  const fetchDashboardData = async () => {
-    setLoading(true);
-    try {
-      const token = localStorage.getItem('cc_token');
-      const response = await fetch(`/api/courier/deliveries?status=${activeTab}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+            if (response.ok) {
+                const data = await response.json();
+                setDeliveries(data.deliveries || []);
+                if (data.stats) setStats(data.stats);
+            } else if (response.status === 401) {
+                router.push(`/${locale}/courier/login`);
+            }
+        } catch (error) {
+            // Fetch error occurred
+        } finally {
+            setLoading(false);
+        }
+    }, [activeTab, locale, router]);
 
-      if (response.ok) {
-        const data = await response.json();
-        setDeliveries(data.deliveries || []);
-        if (data.stats) setStats(data.stats);
-      }
-    } catch (error) {
-      // Fetch error occurred
-    } finally {
-      setLoading(false);
-    }
-  };
+    useEffect(() => {
+        fetchDashboardData();
+    }, [fetchDashboardData]);
 
   const handleAccept = async (deliveryId: string) => {
     try {
