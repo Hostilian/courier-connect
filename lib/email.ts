@@ -144,3 +144,29 @@ export async function sendRatingReceivedEmail({
     `,
   });
 }
+
+// Email to user for password reset
+export async function sendPasswordResetEmail(email: string, token: string) {
+  const resetUrl = `${appUrl}/reset-password?token=${token}`;
+  
+  return await sendEmail({
+    to: email,
+    subject: 'Reset Your Courier Connect Password',
+    html: `
+      <h1>Password Reset Request</h1>
+      <p>Hello there,</p>
+      <p>You requested to reset your password. Click the button below to set a new password:</p>
+      
+      <a href="${resetUrl}" style="display: inline-block; background-color: #3B82F6; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; margin: 15px 0;">
+        Reset Your Password
+      </a>
+      
+      <p>This link will expire in 1 hour.</p>
+      
+      <p>If you didn't request this password reset, you can safely ignore this email.</p>
+      
+      <hr/>
+      <p>The Courier Connect Team</p>
+    `,
+  });
+}
