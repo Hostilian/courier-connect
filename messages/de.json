@@ -10,6 +10,7 @@
     "taglineLocationCountry": "Wir bedienen {country}",
     "taglineDefault": "Schnell. Lokal. Freundlich.",
     "requestLink": "Anfordern",
+    "findCourier": "Kurier Finden",
     "becomeCourier": "Kurier werden"
   },
   "home": {
@@ -210,10 +211,35 @@
       "status": "Aktueller Status"
     },
     "notFound": {
-      "title": "Tracking-Code Nicht Gefunden",
-      "message": "Bitte überprüfen Sie Ihren Tracking-Code und versuchen Sie es erneut.",
+      "title": "Nicht Gefunden",
+      "message": "Wir konnten keine Lieferung mit diesem Code finden. Bitte überprüfen Sie den Code und versuchen Sie es erneut.",
       "button": "Erneut Versuchen"
-    }
+    },
+    "rateDelivery": "Bewerten Sie Ihre Liefererfahrung"
+  },
+  "ratings": {
+    "fetchError": "Bewertungen konnten nicht geladen werden",
+    "noRatings": "Noch keine Bewertungen",
+    "basedOn": "{count, plural, =1 {# Bewertung} other {# Bewertungen}}",
+    "ratingDistribution": "Bewertungsverteilung",
+    "recentReviews": "Aktuelle Bewertungen"
+  },
+  "feedback": {
+    "title": "Bewerten Sie Ihre Liefererfahrung",
+    "ratingLabel": "Wie war Ihre Erfahrung?",
+    "commentLabel": "Ihr Kommentar (optional)",
+    "commentPlaceholder": "Erzählen Sie uns von Ihrer Erfahrung...",
+    "nameLabel": "Ihr Name (optional)",
+    "namePlaceholder": "Max Mustermann",
+    "emailLabel": "Ihre E-Mail (optional)",
+    "emailPlaceholder": "sie@beispiel.de",
+    "submitting": "Wird gesendet...",
+    "submitFeedback": "Bewertung Abschicken",
+    "ratingRequired": "Bitte wählen Sie eine Bewertung aus",
+    "thankYou": "Vielen Dank für Ihre Bewertung!",
+    "thankYouTitle": "Bewertung gesendet!",
+    "feedbackReceived": "Ihr Feedback hilft uns, unseren Service zu verbessern.",
+    "error": "Etwas ist schiefgegangen. Bitte versuchen Sie es erneut."
   },
   "courier": {
     "register": {

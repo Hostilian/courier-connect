@@ -10,6 +10,7 @@
     "taglineLocationCountry": "Serving {country}",
     "taglineDefault": "Fast. Local. Friendly.",
     "requestLink": "Request",
+    "findCourier": "Find Courier",
     "becomeCourier": "Become a courier"
   },
   "home": {
@@ -273,7 +274,8 @@
       "title": "Not Found",
       "message": "The tracking ID you entered was not found. Please check the ID and try again.",
       "button": "Try Again"
-    }
+    },
+    "rateDelivery": "Rate Your Delivery Experience"
   },
   "courier": {
     "register": {
@@ -343,6 +345,55 @@
         "in_transit": "Mark as In Transit",
         "delivered": "Mark as Delivered"
       }
+    },
+    "rating": "Rating",
+    "completedDeliveries": "Completed Deliveries",
+    "member": "Member since",
+    "experienceExpert": "Expert Courier",
+    "experienceAdvanced": "Advanced Courier",
+    "experienceIntermediate": "Intermediate Courier",
+    "experienceBeginner": "Beginner Courier",
+    "experienceLevel": "Experience Level",
+    "ratingsAndReviews": "Ratings & Reviews",
+    "serviceArea": "Service Area",
+    "serviceRadius": "Service radius of {radius} km",
+    "transportDetails": "Transport Details",
+    "vehicle": "Vehicle",
+    "acceptedPackages": "Accepted Package Types",
+    "packageTypes": {
+      "small": "Small Package",
+      "medium": "Medium Package",
+      "large": "Large Package",
+      "documents": "Documents"
+    },
+    "detailedRatings": "Detailed Ratings",
+    "backToResults": "Back to results",
+    "profileNotFound": "Courier profile not found",
+    "profileError": "Error loading profile",
+    "fetchError": "Failed to load data",
+    "returnHome": "Return to Homepage",
+    "search": {
+      "title": "Find a Courier",
+      "subtitle": "Search for verified couriers in your area",
+      "searchPlaceholder": "Enter city or courier name...",
+      "search": "Search",
+      "filters": "Filters",
+      "filterBy": "Filter by",
+      "minRating": "Minimum Rating",
+      "any": "Any",
+      "activeFilters": "Active filters",
+      "clearAll": "Clear all",
+      "searching": "Searching...",
+      "resultsCount": "{count, plural, =0 {No couriers found} =1 {1 courier found} other {# couriers found}}",
+      "retry": "Retry",
+      "noResults": "No couriers found",
+      "noResultsMessage": "Try adjusting your filters or search for a different location",
+      "clearFilters": "Clear Filters",
+      "rating": "Rating",
+      "completedDeliveries": "Deliveries",
+      "viewProfile": "View Profile",
+      "previous": "Previous",
+      "next": "Next"
     }
   },
   "common": {
@@ -445,8 +496,9 @@
     "viewMap": "View on Map",
     "enterAddress": "Enter address",
     "searchAddress": "Search for an address...",
-    "searchOrigin": "Search pickup location...",
-    "searchDestination": "Search delivery location...",
+    "searchOrigin": "Search pickup location..."
+  },
+  "map": {
     "selectLocation": "Select location on map",
     "selectOrigin": "Click on the map to select pickup location",
     "selectDestination": "Click on the map to select delivery location",
@@ -464,17 +516,41 @@
       "searchOrClick": "Search for an address or click on the map"
     }
   },
-    "earnings": {
-      "title": "Your Earnings",
-      "totalEarnings": "Total Earnings",
-      "totalDeliveries": "Total Deliveries",
-      "avgPerDelivery": "Avg. Per Delivery",
-      "recentDeliveries": "Recent Deliveries",
-      "noRecentDeliveries": "No deliveries in this period.",
-      "7d": "7 Days",
-      "30d": "30 Days",
-      "90d": "90 Days"
-    },
+  "ratings": {
+    "fetchError": "Couldn't load ratings",
+    "noRatings": "No ratings yet",
+    "basedOn": "{count, plural, =1 {# rating} other {# ratings}}",
+    "ratingDistribution": "Rating distribution",
+    "recentReviews": "Recent reviews"
+  },
+  "feedback": {
+    "title": "Rate your delivery experience",
+    "ratingLabel": "How was your experience?",
+    "commentLabel": "Your feedback (optional)",
+    "commentPlaceholder": "Tell us about your experience...",
+    "nameLabel": "Your name (optional)",
+    "namePlaceholder": "John Doe",
+    "emailLabel": "Your email (optional)",
+    "emailPlaceholder": "you@example.com",
+    "submitting": "Submitting...",
+    "submitFeedback": "Submit Feedback",
+    "ratingRequired": "Please select a rating",
+    "thankYou": "Thank you for your feedback!",
+    "thankYouTitle": "Feedback submitted!",
+    "feedbackReceived": "Your feedback helps us improve our service.",
+    "error": "Something went wrong. Please try again."
+  },
+  "earnings": {
+    "title": "Your Earnings",
+    "totalEarnings": "Total Earnings",
+    "totalDeliveries": "Total Deliveries",
+    "avgPerDelivery": "Avg. Per Delivery",
+    "recentDeliveries": "Recent Deliveries",
+    "noRecentDeliveries": "No deliveries in this period.",
+    "7d": "7 Days",
+    "30d": "30 Days",
+    "90d": "90 Days"
+  },
   "preferences": {
     "packageDetails": "Package Details",
     "packageValue": "Package Value (Optional)",

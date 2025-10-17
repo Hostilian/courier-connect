@@ -42,6 +42,9 @@ export default function SimpleHeader() {
           <Link href={`/${locale}/request`} className="px-3 py-2 bg-blue-600 text-white rounded-md text-sm">
             {t('requestLink', { defaultMessage: 'Request' })}
           </Link>
+          <Link href={`/${locale}/couriers`} className="px-3 py-2 border border-blue-200 text-blue-600 rounded-md text-sm hover:bg-blue-50">
+            {t('findCourier', { defaultMessage: 'Find Courier' })}
+          </Link>
           <Link href={`/${locale}/courier/register`} className="px-3 py-2 border rounded-md text-sm">
             {t('becomeCourier', { defaultMessage: 'Become a courier' })}
           </Link>
