@@ -2,18 +2,23 @@
 
 import { motion } from 'framer-motion'
 import { ArrowRight, Package, Smartphone } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function CTA() {
   return (
     <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-700 text-white relative overflow-hidden">
-      {/* Background decoration */}
+      {/* Background decoration with optimized image */}
       <div className="absolute inset-0 bg-blue-800 opacity-20">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-          backgroundSize: '30px 30px',
-          opacity: 0.1
-        }} />
+        <div className="absolute inset-0 w-full h-full">
+          <Image
+            src="/images/hero-pattern.svg"
+            alt="Background Pattern" 
+            fill
+            className="object-cover opacity-10"
+            sizes="100vw"
+          />
+        </div>
       </div>
 
       <div className="relative container mx-auto px-4 text-center">
@@ -23,6 +28,18 @@ export default function CTA() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
+          {/* Courier city illustration */}
+          <div className="relative w-full max-w-lg mx-auto mb-8 h-48">
+            <Image
+              src="/images/courier-city.svg"
+              alt="Courier in the city"
+              fill
+              className="object-contain"
+              priority
+              sizes="(max-width: 768px) 100vw, 600px"
+            />
+          </div>
+          
           <div className="max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Ready to Send or Deliver?

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <style>
+    .st0{fill:#3B82F6;} /* blue-500 */
+    .st1{fill:#60A5FA;} /* blue-400 */
+    .st2{fill:#2563EB;} /* blue-600 */
+    .st3{fill:#F3F4F6;} /* gray-100 */
+    .st4{fill:#9CA3AF;} /* gray-400 */
+  </style>
+  <circle class="st0" cx="32" cy="32" r="28"/>
+  <circle class="st2" cx="32" cy="32" r="20"/>
+  <circle class="st1" cx="32" cy="32" r="16"/>
+  <rect class="st3" x="26" y="26" width="12" height="12" rx="2"/>
+  <path class="st2" d="M26,30 L32,32 L38,30"/>
+  <path class="st2" d="M32,32 L32,38"/>
+</svg>

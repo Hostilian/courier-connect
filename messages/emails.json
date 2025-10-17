@@ -1,0 +1,48 @@
+{
+  "emails": {
+    "common": {
+      "trackingId": "Tracking ID",
+      "pickup": "Pickup",
+      "delivery": "Delivery",
+      "trackButton": "Track Delivery",
+      "thanks": "Thanks for using Courier Connect!"
+    },
+    "confirmation": {
+      "subject": "Delivery Request Confirmed: {trackingId}",
+      "title": "Your Delivery Request is Confirmed!",
+      "intro": "Hi {name},",
+      "details": "We've received your delivery request and are now searching for a nearby courier. Here are your details:",
+      "trackInstruction": "You can track your delivery status using the button below:"
+    },
+    "accepted": {
+      "subject": "A courier is on the way! ({trackingId})",
+      "title": "Good News! A Courier is On The Way!",
+      "intro": "Hi {name},",
+      "details": "{courierName} has accepted your delivery request and is heading to the pickup location.",
+      "trackInstruction": "Follow their progress in real-time:"
+    },
+    "completed": {
+      "subject": "Your delivery is complete! ({trackingId})",
+      "title": "Delivery Completed!",
+      "intro": "Hi {name},",
+      "details": "Your package has been successfully delivered.",
+      "rateInstruction": "We'd love to hear your feedback. Please take a moment to rate your courier:",
+      "rateButton": "Rate Your Courier"
+    },
+    "newJob": {
+      "subject": "New Delivery Available in {city}",
+      "title": "New Delivery Available!",
+      "intro": "Hi {name},",
+      "details": "A new delivery is available for pickup in {city}. Details below:",
+      "earnings": "Potential Earnings",
+      "viewButton": "View on Dashboard"
+    },
+    "verification": {
+      "subject": "Verify Your Courier Connect Account",
+      "title": "Welcome to Courier Connect!",
+      "intro": "Please verify your email address to complete your registration and start accepting deliveries.",
+      "button": "Verify Email Address",
+      "linkInstruction": "If the button doesn't work, copy and paste this link into your browser:"
+    }
+  }
+}

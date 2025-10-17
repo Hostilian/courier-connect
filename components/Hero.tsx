@@ -3,8 +3,9 @@
 'use client'
 
 import { motion } from 'framer-motion'; // Wiggle library strikes again
-import { ArrowRight, MapPin, Package } from 'lucide-react'
-import Link from 'next/link'
+import { ArrowRight, MapPin, Package } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 // This is the hero. The big banner. The first thing people see. No pressure.
 export default function TheGrandShowoffSection() {
@@ -12,11 +13,17 @@ export default function TheGrandShowoffSection() {
     <section className="relative pt-24 pb-20 bg-gradient-to-br from-blue-50 via-white to-blue-50 overflow-hidden">
       {/* Background decoration. Because plain backgrounds are for quitters. */}
       <div className="absolute inset-0 opacity-5">
-        {/* Dots. Just dots. Everywhere. Very avant-garde. */}
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(156, 163, 175) 1px, transparent 0)',
-          backgroundSize: '20px 20px' // 20 pixels apart. The golden ratio of dots, apparently.
-        }} />
+        {/* Using Next.js Image for optimized background pattern */}
+        <div className="absolute inset-0 w-full h-full">
+          <Image
+            src="/images/hero-pattern.svg"
+            alt="Background Pattern"
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
       </div>
       
       <div className="relative container mx-auto px-4">

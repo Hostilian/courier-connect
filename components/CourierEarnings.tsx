@@ -2,35 +2,59 @@
 
 import { getLanguageByCode } from '@/lib/languages';
 import { motion } from 'framer-motion';
-import { Calendar, DollarSign, Package, TrendingUp } from 'lucide-react';
+import { Calendar, DollarSign, Loader2, Package, TrendingUp } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+
+interface Delivery {
+  id: string;
+  date: string;
+  amount: number;
+  status: 'delivered' | 'cancelled';
+}
 
 interface EarningsData {
   totalEarnings: number;
-  todayEarnings: number;
-  weekEarnings: number;
-  monthEarnings: number;
-  completedDeliveries: number;
-  todayDeliveries: number;
-  averageEarningsPerDelivery: number;
-  platformFeesTotal: number;
+  totalDeliveries: number;
+  averageEarningPerDelivery: number;
+  earningsTrend: { name: string; earnings: number }[];
+  recentDeliveries: Delivery[];
 }
 
-interface CourierEarningsProps {
-  data: EarningsData;
-}
+const fetchEarningsData = async (period: string): Promise<EarningsData> => {
+  const token = localStorage.getItem('cc_token');
+  if (!token) {
+    // Handle unauthenticated state, maybe redirect or show an error
+    throw new Error('Not authenticated');
+  }
 
-export default function CourierEarnings({ data }: CourierEarningsProps) {
+  const response = await fetch(`/api/courier/earnings?period=${period}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    // Handle API errors
+    throw new Error('Failed to fetch earnings data');
+  }
+
+  return response.json();
+};
+
+export default function CourierEarnings() {
   const t = useTranslations('courier.earnings');
   const locale = useLocale();
   const theme = getLanguageByCode(locale)?.culturalTheme;
+  const [period, setPeriod] = useState('30d');
+  const [data, setData] = useState<EarningsData | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const currencyFormatter = useMemo(
     () =>
       new Intl.NumberFormat(locale || 'en', {
         style: 'currency',
-        currency: 'USD',
+        currency: 'USD', // This should probably be dynamic based on courier's country
         minimumFractionDigits: 2,
       }),
     [locale]
@@ -38,119 +62,103 @@ export default function CourierEarnings({ data }: CourierEarningsProps) {
 
   const formatCurrency = (value: number) => currencyFormatter.format(value);
 
-  const stats = [
-    {
-      label: t('total'),
-      value: formatCurrency(data.totalEarnings),
-      icon: DollarSign,
-      color: 'text-green-600',
-      bg: 'bg-green-50',
-    },
-    {
-      label: t('today'),
-      value: formatCurrency(data.todayEarnings),
-      icon: Calendar,
-      color: 'text-blue-600',
-      bg: 'bg-blue-50',
-    },
-    {
-      label: t('week'),
-      value: formatCurrency(data.weekEarnings),
-      icon: TrendingUp,
-      color: 'text-purple-600',
-      bg: 'bg-purple-50',
-    },
-    {
-      label: t('month'),
-      value: formatCurrency(data.monthEarnings),
-      icon: Package,
-      color: 'text-orange-600',
-      bg: 'bg-orange-50',
-    },
-  ];
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      const earningsData = await fetchEarningsData(period);
+      setData(earningsData);
+      setLoading(false);
+    };
+    loadData();
+  }, [period]);
+
+  const StatCard = ({ icon: Icon, title, value, change }: { icon: React.ElementType, title: string, value: string, change?: string }) => (
+    <motion.div 
+      className="bg-white p-6 rounded-xl shadow-md"
+      whileHover={{ translateY: -5, boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)' }}
+      style={{ borderTop: `4px solid ${theme?.primary || '#3B82F6'}` }}
+    >
+      <div className="flex items-center">
+        <div className="p-3 rounded-full" style={{ backgroundColor: `${theme?.primary || '#3B82F6'}20`}}>
+          <Icon className="w-6 h-6" style={{ color: theme?.primary || '#3B82F6' }} />
+        </div>
+        <div className="ml-4">
+          <p className="text-sm font-medium text-gray-500">{title}</p>
+          <p className="text-2xl font-bold text-gray-800">{value}</p>
+        </div>
+      </div>
+      {change && <p className="text-sm text-green-500 mt-2">{change}</p>}
+    </motion.div>
+  );
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-96">
+        <Loader2 className="w-10 h-10 animate-spin" style={{ color: theme?.primary || '#3B82F6' }} />
+      </div>
+    );
+  }
+
+  if (!data) return null;
 
   return (
-    <div className="space-y-6">
-      {/* Main Earnings Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map((stat, index) => (
-          <motion.div
-            key={stat.label}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className={`${stat.bg} rounded-xl p-6 border border-gray-100`}
-          >
-            <div className="flex items-center justify-between mb-3">
-              <stat.icon className={`w-8 h-8 ${stat.color}`} />
-            </div>
-            <p className="text-2xl font-bold mb-1">{stat.value}</p>
-            <p className="text-sm text-gray-600">{stat.label}</p>
-          </motion.div>
-        ))}
+    <div className="p-4 md:p-6 bg-gray-50/50 rounded-2xl">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+        <h2 className="text-3xl font-bold text-gray-800 mb-2 md:mb-0">{t('title')}</h2>
+        <div className="flex items-center gap-2 bg-white p-1 rounded-full shadow-sm">
+          {['7d', '30d', '90d'].map(p => (
+            <button
+              key={p}
+              onClick={() => setPeriod(p)}
+              className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-300 ${
+                period === p ? 'text-white' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+              style={{
+                backgroundColor: period === p ? theme?.primary || '#3B82F6' : 'transparent'
+              }}
+            >
+              {t(p)}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Additional Metrics */}
-      <motion.div
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <StatCard icon={DollarSign} title={t('totalEarnings')} value={formatCurrency(data.totalEarnings)} />
+        <StatCard icon={Package} title={t('totalDeliveries')} value={String(data.totalDeliveries)} />
+        <StatCard icon={TrendingUp} title={t('avgPerDelivery')} value={formatCurrency(data.averageEarningPerDelivery)} />
+      </div>
+      
+      <motion.div 
+        className="bg-white p-6 rounded-xl shadow-md"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-        className="bg-white rounded-xl shadow-lg p-6"
+        transition={{ delay: 0.2 }}
       >
-        <h3 className="text-lg font-semibold mb-4">{t('performance')}</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div>
-            <p className="text-sm text-gray-600 mb-1">{t('completedDeliveries')}</p>
-            <p className="text-2xl font-bold" style={{ color: theme?.primary || '#3B82F6' }}>
-              {data.completedDeliveries}
-            </p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-600 mb-1">{t('todayDeliveries')}</p>
-            <p className="text-2xl font-bold" style={{ color: theme?.primary || '#3B82F6' }}>
-              {data.todayDeliveries}
-            </p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-600 mb-1">{t('averagePerDelivery')}</p>
-            <p className="text-2xl font-bold" style={{ color: theme?.primary || '#3B82F6' }}>
-              {formatCurrency(data.averageEarningsPerDelivery)}
-            </p>
-          </div>
+        <h3 className="text-xl font-semibold mb-4 text-gray-800">{t('recentDeliveries')}</h3>
+        <div className="space-y-4">
+          {data.recentDeliveries.length > 0 ? (
+            data.recentDeliveries.map((delivery: Delivery) => (
+              <div key={delivery.id} className="flex justify-between items-center p-3 rounded-lg hover:bg-gray-50/80 transition-colors">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-green-100 rounded-full">
+                    <DollarSign className="w-5 h-5 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-700">{delivery.id}</p>
+                    <p className="text-sm text-gray-500 flex items-center gap-1">
+                      <Calendar className="w-3 h-3" />
+                      {new Date(delivery.date).toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' })}
+                    </p>
+                  </div>
+                </div>
+                <p className="font-bold text-lg text-green-600">+{formatCurrency(delivery.amount)}</p>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-500 text-center py-4">{t('noRecentDeliveries')}</p>
+          )}
         </div>
-      </motion.div>
-
-      {/* Earnings Breakdown */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-        className="bg-white rounded-xl shadow-lg p-6"
-      >
-        <h3 className="text-lg font-semibold mb-4">{t('breakdown')}</h3>
-        <div className="space-y-3">
-          <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
-            <span className="text-sm font-medium text-green-700">{t('yourEarnings')}</span>
-            <span className="text-lg font-bold text-green-700">
-              {formatCurrency(data.totalEarnings)}
-            </span>
-          </div>
-          <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-            <span className="text-sm font-medium text-gray-700">{t('platformFees')}</span>
-            <span className="text-lg font-bold text-gray-700">
-              {formatCurrency(data.platformFeesTotal)}
-            </span>
-          </div>
-          <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg border-2 border-blue-200">
-            <span className="text-sm font-medium text-blue-700">{t('totalRevenue')}</span>
-            <span className="text-lg font-bold text-blue-700">
-              {formatCurrency(data.totalEarnings + data.platformFeesTotal)}
-            </span>
-          </div>
-        </div>
-        <p className="text-xs text-gray-500 mt-4 text-center">
-          {t('split')} (70% {t('courier')} / 30% {t('platform')})
-        </p>
       </motion.div>
     </div>
   );

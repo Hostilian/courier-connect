@@ -1,201 +1,146 @@
-// Email sending utility
-// Uses Resend for transactional emails (lazily imported to avoid build-time issues)
+import { IDeliveryRequest } from '@/models/DeliveryRequest';
+import { IUser } from '@/models/User';
+import { Resend } from 'resend';
 
-// Lazily initialize the Resend client only when the API key is present to avoid build-time errors
-let _resend: any | null = null;
-async function getResend(): Promise<any | null> {
-  if (_resend) return _resend;
-  const key = process.env.RESEND_API_KEY;
-  if (!key) {
-    return null;
+const resend = new Resend(process.env.RESEND_API_KEY);
+const fromEmail = process.env.FROM_EMAIL || 'noreply@courierconnect.com';
+const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+
+async function sendEmail(options: { to: string | string[]; subject: string; html: string; }) {
+  if (!process.env.RESEND_API_KEY || process.env.NODE_ENV === 'test') {
+    console.log('RESEND_API_KEY not set or in test environment, skipping email.');
+    return Promise.resolve({ id: 'test_email_id' });
   }
-  const mod = await import('resend');
-  const Resend = mod.Resend as any;
-  _resend = new Resend(key);
-  return _resend;
-}
-
-export async function sendVerificationEmail(email: string, token: string) {
-  const verificationUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/verify?token=${token}`;
 
   try {
-  const client = await getResend();
-    if (!client) {
-      // Email service not configured
-      return { success: false, error: 'Email service not configured' };
-    }
-    const data = await client.emails.send({
-      from: 'Courier Connect <noreply@courier-connect.com>',
-      to: email,
-      subject: 'Verify your email - Courier Connect',
-      html: `
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          </head>
-          <body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 10px 10px 0 0;">
-              <h1 style="color: white; margin: 0;">Welcome to Courier Connect!</h1>
-            </div>
-            <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px;">
-              <p style="font-size: 16px; color: #374151; margin-bottom: 20px;">
-                Thanks for signing up as a courier! Please verify your email address to start accepting deliveries.
-              </p>
-              <a href="${verificationUrl}" style="display: inline-block; background: #667eea; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: 600; margin: 20px 0;">
-                Verify Email Address
-              </a>
-              <p style="font-size: 14px; color: #6b7280; margin-top: 30px;">
-                Or copy this link: <br>
-                <span style="color: #667eea; word-break: break-all;">${verificationUrl}</span>
-              </p>
-              <p style="font-size: 14px; color: #6b7280; margin-top: 30px;">
-                This link expires in 24 hours.
-              </p>
-              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
-              <p style="font-size: 12px; color: #9ca3af;">
-                If you didn't sign up for Courier Connect, you can safely ignore this email.
-              </p>
-            </div>
-          </body>
-        </html>
-      `,
+    const { data, error } = await resend.emails.send({
+      from: `Courier Connect <${fromEmail}>`,
+      ...options,
     });
 
-    return { success: true, data };
+    if (error) {
+      console.error(`Resend error for subject "${options.subject}":`, error.message);
+    }
+    return data;
   } catch (error) {
-    // Email send failed
-    return { success: false, error };
+    console.error('Generic error sending email:', error);
   }
 }
 
-export async function sendPasswordResetEmail(email: string, token: string) {
-  const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL}/courier/reset-password?token=${token}`;
 
-  try {
-  const client = await getResend();
-    if (!client) {
-      // Email service not configured
-      return { success: false, error: 'Email service not configured' };
-    }
-    const data = await client.emails.send({
-      from: 'Courier Connect <noreply@courier-connect.com>',
-      to: email,
-      subject: 'Reset your password - Courier Connect',
+// Email to customer when they create a new delivery request
+export async function sendDeliveryConfirmationEmail(delivery: IDeliveryRequest) {
+  const trackingUrl = `${appUrl}/track?id=${delivery.trackingId}`;
+  
+  await sendEmail({
+      to: delivery.senderEmail,
+      subject: `Your Courier Connect Delivery Confirmation (ID: ${delivery.trackingId})`,
       html: `
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          </head>
-          <body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 10px 10px 0 0;">
-              <h1 style="color: white; margin: 0;">Reset Your Password</h1>
-            </div>
-            <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px;">
-              <p style="font-size: 16px; color: #374151; margin-bottom: 20px;">
-                We received a request to reset your password. Click the button below to create a new password.
-              </p>
-              <a href="${resetUrl}" style="display: inline-block; background: #667eea; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: 600; margin: 20px 0;">
-                Reset Password
-              </a>
-              <p style="font-size: 14px; color: #6b7280; margin-top: 30px;">
-                Or copy this link: <br>
-                <span style="color: #667eea; word-break: break-all;">${resetUrl}</span>
-              </p>
-              <p style="font-size: 14px; color: #6b7280; margin-top: 30px;">
-                This link expires in 1 hour.
-              </p>
-              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
-              <p style="font-size: 12px; color: #9ca3af;">
-                If you didn't request a password reset, you can safely ignore this email. Your password will not be changed.
-              </p>
-            </div>
-          </body>
-        </html>
+        <h1>Thank you for your delivery request!</h1>
+        <p>Your delivery has been scheduled. You can track its progress using the link below.</p>
+        <p><strong>Tracking ID:</strong> ${delivery.trackingId}</p>
+        <p><strong>Status:</strong> ${delivery.status}</p>
+        <p><strong>From:</strong> ${delivery.senderAddress}</p>
+        <p><strong>To:</strong> ${delivery.receiverAddress}</p>
+        <p><strong>Price:</strong> $${delivery.price.toFixed(2)}</p>
+        <a href="${trackingUrl}">Track Your Delivery</a>
+        <hr/>
+        <p>Thank you for using Courier Connect.</p>
       `,
     });
-
-    return { success: true, data };
-  } catch (error) {
-    // Email send failed
-    return { success: false, error };
-  }
 }
 
-export async function sendDeliveryNotification(
-  email: string,
-  trackingId: string,
-  status: string
-) {
-  const trackingUrl = `${process.env.NEXT_PUBLIC_APP_URL}/track?id=${trackingId}`;
+// Email to customer when a courier accepts the delivery
+export async function sendDeliveryAcceptedEmail(delivery: IDeliveryRequest, courier: IUser) {
+    const trackingUrl = `${appUrl}/track?id=${delivery.trackingId}`;
 
-  const statusMessages: Record<string, { subject: string; message: string }> = {
-    accepted: {
-      subject: 'Your delivery has been accepted',
-      message: 'A courier has accepted your delivery and will pick it up soon.',
-    },
-    picked_up: {
-      subject: 'Your package has been picked up',
-      message: 'The courier has picked up your package and is on the way.',
-    },
-    delivered: {
-      subject: 'Your package has been delivered',
-      message: 'Your package has been successfully delivered!',
-    },
-  };
-
-  const { subject, message } = statusMessages[status] || {
-    subject: 'Delivery status update',
-    message: 'Your delivery status has been updated.',
-  };
-
-  try {
-  const client = await getResend();
-    if (!client) {
-      // Email service not configured
-      return { success: false, error: 'Email service not configured' };
-    }
-    const data = await client.emails.send({
-      from: 'Courier Connect <notifications@courier-connect.com>',
-      to: email,
-      subject: `${subject} - ${trackingId}`,
-      html: `
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          </head>
-          <body style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 10px 10px 0 0;">
-              <h1 style="color: white; margin: 0;">Delivery Update</h1>
-            </div>
-            <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px;">
-              <p style="font-size: 16px; color: #374151; margin-bottom: 20px;">
-                ${message}
-              </p>
-              <p style="font-size: 14px; color: #6b7280; margin: 15px 0;">
-                <strong>Tracking ID:</strong> ${trackingId}
-              </p>
-              <a href="${trackingUrl}" style="display: inline-block; background: #667eea; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: 600; margin: 20px 0;">
-                Track Your Delivery
-              </a>
-              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
-              <p style="font-size: 12px; color: #9ca3af;">
-                Need help? Contact us at support@courier-connect.com
-              </p>
-            </div>
-          </body>
-        </html>
-      `,
+    await sendEmail({
+        to: delivery.senderEmail,
+        subject: `A courier is on the way! (ID: ${delivery.trackingId})`,
+        html: `
+            <h1>Great news!</h1>
+            <p>A courier, ${courier.name}, has accepted your delivery request and is on the way to pick it up.</p>
+            <p>You can track the delivery in real-time using your tracking link:</p>
+            <a href="${trackingUrl}">Track Your Delivery</a>
+            <hr/>
+            <p>Thank you for using Courier Connect.</p>
+        `,
     });
+}
 
-    return { success: true, data };
-  } catch (error) {
-    // Email send failed
-    return { success: false, error };
-  }
+// Email to customer when the package is delivered
+export async function sendDeliveryCompletedEmail(delivery: IDeliveryRequest) {
+    const trackingUrl = `${appUrl}/track?id=${delivery.trackingId}`;
+
+    await sendEmail({
+        to: [delivery.senderEmail, delivery.receiverEmail], // Notify both sender and receiver
+        subject: `Your package has been delivered! (ID: ${delivery.trackingId})`,
+        html: `
+            <h1>Delivery Completed!</h1>
+            <p>Your package from <strong>${delivery.senderAddress}</strong> to <strong>${delivery.receiverAddress}</strong> has been successfully delivered.</p>
+            <p>View the final delivery details here:</p>
+            <a href="${trackingUrl}">View Delivery Details</a>
+            <p>Please consider rating your courier to help us improve our service.</p>
+            <hr/>
+            <p>Thank you for using Courier Connect.</p>
+        `,
+    });
+}
+
+// Email to courier when they register
+export async function sendCourierWelcomeEmail(courier: IUser) {
+    const loginUrl = `${appUrl}/courier/login`;
+    await sendEmail({
+        to: courier.email,
+        subject: 'Welcome to Courier Connect!',
+        html: `
+            <h1>Welcome aboard, ${courier.name}!</h1>
+            <p>Your Courier Connect account has been successfully created.</p>
+            <p>You can now log in to your dashboard to find and accept available delivery jobs in your area.</p>
+            <a href="${loginUrl}">Go to Your Dashboard</a>
+            <hr/>
+            <p>The Courier Connect Team</p>
+        `,
+    });
+}
+
+// Email to courier when they receive a new rating
+export async function sendRatingReceivedEmail({
+  to,
+  name,
+  rating,
+  comment,
+  trackingId,
+}: {
+  to: string;
+  name: string;
+  rating: number;
+  comment?: string;
+  trackingId: string;
+}) {
+  const loginUrl = `${appUrl}/courier/login`;
+  const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+  
+  await sendEmail({
+    to,
+    subject: `You've Received a ${rating}-Star Rating!`,
+    html: `
+      <h1>You've Received a Rating!</h1>
+      <p>Hello ${name},</p>
+      <p>Good news! You've received a new rating for delivery <strong>${trackingId}</strong>.</p>
+      <div style="font-size: 24px; color: #FFB400; margin: 15px 0;">
+        ${stars} (${rating}/5)
+      </div>
+      ${comment ? `
+        <div style="background-color: #F9FAFB; border-left: 4px solid #3B82F6; padding: 12px; margin: 15px 0;">
+          <p style="margin: 0; font-style: italic;">"${comment}"</p>
+        </div>
+      ` : ''}
+      <p>Positive ratings help improve your profile and increase your chances of getting more delivery requests.</p>
+      <p>Thank you for being a valued courier partner!</p>
+      <a href="${loginUrl}" style="display: inline-block; background-color: #3B82F6; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; margin-top: 15px;">View Your Ratings</a>
+      <hr/>
+      <p>The Courier Connect Team</p>
+    `,
+  });
 }

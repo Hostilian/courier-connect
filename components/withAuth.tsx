@@ -15,7 +15,7 @@ export default function withAuth(ComponentThatThinksTooHighlyOfItself: React.Com
 
     // This runs when the component loads. Like a security check at the airport, but faster.
     useEffect(() => {
-      const token = localStorage.getItem('token') // Check the hall pass
+      const token = localStorage.getItem('cc_token') // Check the hall pass
       if (!token) {
         // No token? Back to login with you. No soup for you!
         router.push('/courier/login')

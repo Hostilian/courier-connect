@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <style>
+    .st0{fill:#10B981;} /* emerald-500 */
+    .st1{fill:#34D399;} /* emerald-400 */
+    .st2{fill:#059669;} /* emerald-600 */
+  </style>
+  <circle class="st0" cx="32" cy="32" r="28"/>
+  <circle class="st2" cx="32" cy="32" r="20"/>
+  <circle class="st1" cx="32" cy="32" r="16"/>
+</svg>

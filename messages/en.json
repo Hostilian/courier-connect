@@ -234,98 +234,77 @@
     "searching": "Searching...",
     "trackingId": "Tracking ID",
     "status": {
+      "title": "Status",
       "pending": "Pending",
-      "pendingDesc": "Waiting for a courier to accept",
+      "pendingDesc": "We've received your request and are looking for a courier.",
       "accepted": "Accepted",
-      "acceptedDesc": "Courier is on the way to pickup",
+      "acceptedDesc": "A courier has accepted your request and is on their way to pick it up.",
       "pickedUp": "Picked Up",
-      "pickedUpDesc": "Package collected from sender",
+      "pickedUpDesc": "Your package has been collected and is on its way.",
       "inTransit": "In Transit",
-      "inTransitDesc": "On the way to delivery address",
+      "inTransitDesc": "The courier is en route to the delivery destination.",
       "delivered": "Delivered",
-      "deliveredDesc": "Successfully delivered!",
+      "deliveredDesc": "Your package has been successfully delivered.",
       "cancelled": "Cancelled",
-      "cancelledDesc": "Delivery request was cancelled"
+      "cancelledDesc": "The delivery request has been cancelled."
     },
     "pickup": "Pickup",
     "from": "From",
     "delivery": "Delivery",
     "to": "To",
-    "package": "Package",
+    "package": "Package Info",
     "type": "Type",
     "size": "Size",
     "description": "Description",
-    "urgency": "Speed",
+    "urgency": "Urgency",
     "pickupTime": "Pickup Time",
     "scheduledPickup": "Scheduled Pickup",
-    "courier": "Your Courier",
+    "courier": "Courier Details",
     "name": "Name",
     "phone": "Phone",
-    "timeline": "Timeline",
+    "timeline": "Delivery Timeline",
     "created": "Request Created",
     "lastUpdate": "Last Update",
     "estimated": "Estimated Delivery",
     "notes": "Notes",
-    "help": "Need help? Your tracking ID was sent when you created the request.",
-    "format": "Format: CC-XXXXXX (e.g., CC-123456)",
+    "help": "Need help? Your tracking ID was provided when you created the request.",
+    "format": "Format: CC-XXXXXX",
     "notFound": {
-      "title": "Tracking ID Not Found",
-      "message": "Tracking ID not found. Please check and try again.",
+      "title": "Not Found",
+      "message": "The tracking ID you entered was not found. Please check the ID and try again.",
       "button": "Try Again"
     }
   },
   "courier": {
     "register": {
-      "title": "Become a Courier",
-      "subtitle": "Start earning by delivering packages in your city",
-      "steps": {
-        "credentials": "Account",
-        "vehicle": "Vehicle",
-        "verification": "Verification"
-      },
-      "credentials": {
-        "title": "Create Your Account",
-        "firstName": "First Name",
-        "lastName": "Last Name",
+      "pageTitle": "Become a Courier",
+      "pageSubtitle": "Join our team and start earning on your own schedule.",
+      "title": "Courier Application",
+      "subtitle": "Fill out the form below to get started.",
+      "fields": {
+        "name": "Full Name",
         "email": "Email Address",
-        "phone": "Phone Number",
         "password": "Password",
         "confirmPassword": "Confirm Password",
-        "terms": "I agree to the Terms of Service and Privacy Policy"
-      },
-      "vehicle": {
-        "title": "Vehicle Information",
+        "phone": "Phone Number",
+        "city": "Your City",
         "vehicleType": "Vehicle Type",
-        "vehicleTypes": {
-          "bike": "Bicycle",
-          "motorcycle": "Motorcycle",
-          "car": "Car",
-          "van": "Van"
-        },
-        "licensePlate": "License Plate (if applicable)",
-        "insurance": "Insurance Information",
-        "insurancePlaceholder": "Policy number or details"
+        "agreeTerms": "I agree to the <link>Terms and Conditions</link>"
       },
-      "verification": {
-        "title": "Verification Documents",
-        "idDocument": "ID Document",
-        "driversLicense": "Driver's License (if applicable)",
-        "insurance": "Insurance Certificate",
-        "photo": "Profile Photo",
-        "uploadInstructions": "Upload clear photos of your documents",
-        "agreement": "I confirm that all information provided is accurate"
+      "vehicles": {
+        "bike": "Bike",
+        "scooter": "Scooter",
+        "motorcycle": "Motorcycle",
+        "car": "Car",
+        "van": "Van"
       },
-      "buttons": {
-        "next": "Next",
-        "previous": "Previous",
-        "submit": "Submit Application"
-      },
-      "success": {
-        "title": "Application Submitted!",
-        "message": "We'll review your application within 24-48 hours.",
-        "info": "You'll receive an email once your account is verified.",
-        "login": "Go to Login"
-      }
+      "submitting": "Submitting...",
+      "submit": "Create Account",
+      "alreadyHaveAccount": "Already have an account? <link>Log in</link>",
+      "validationError": "Please fix the errors in the form.",
+      "success": "Application submitted successfully! You will be redirected to login.",
+      "error": "Registration failed. Please try again.",
+      "networkError": "A network error occurred. Please try again later."
     },
     "login": {
       "title": "Courier Login",
@@ -335,32 +314,29 @@
       "remember": "Remember me",
       "forgotPassword": "Forgot password?",
       "loginButton": "Sign In",
-      "noAccount": "Don't have an account?",
-      "register": "Register here"
+      "noAccount": "Don't have an account? <link>Register here</link>",
+      "success": "Login successful!",
+      "error": "Invalid email or password.",
+      "networkError": "A network error occurred. Please try again later.",
+      "loading": "Signing in..."
     },
     "dashboard": {
       "title": "Courier Dashboard",
-      "welcome": "Welcome back",
-      "stats": {
-        "available": "Available Jobs",
-        "active": "Active Deliveries",
-        "completed": "Completed Today",
-        "earnings": "Today's Earnings"
-      },
       "availableJobs": {
         "title": "Available Deliveries",
-        "noJobs": "No available deliveries at the moment",
-        "distance": "km away",
+        "noJobs": "No available deliveries right now. Check back soon!",
+        "distance": "{distance} km away",
         "accept": "Accept Job",
-        "viewDetails": "View Details"
+        "viewDetails": "View Details",
+        "pickup": "Pickup",
+        "delivery": "Delivery"
       },
       "activeDeliveries": {
         "title": "Your Active Deliveries",
+        "noJobs": "You have no active deliveries. Go accept one.",
         "pickup": "Pickup",
         "delivery": "Delivery",
-        "updateStatus": "Update Status",
-        "complete": "Complete Delivery",
-        "cancel": "Cancel"
+        "complete": "Complete Delivery"
       },
       "statusUpdate": {
         "picked_up": "Mark as Picked Up",
@@ -488,46 +464,17 @@
       "searchOrClick": "Search for an address or click on the map"
     }
   },
-  "earnings": {
-    "title": "Your Earnings",
-    "total": "Total Earnings",
-    "today": "Today",
-    "week": "This Week",
-    "thisWeek": "This Week",
-    "month": "This Month",
-    "thisMonth": "This Month",
-    "performance": "Performance Metrics",
-    "breakdown": "Earnings Breakdown",
-    "yourEarnings": "Your Earnings (70%)",
-    "platformFees": "Platform Fees (30%)",
-    "totalRevenue": "Total Revenue",
-    "split": "Split",
-    "courier": "Courier",
-    "platform": "Platform",
-    "completedDeliveries": "Completed Deliveries",
-    "todayDeliveries": "Today's Deliveries",
-    "averagePerDelivery": "Average per Delivery",
-    "deliveries": "Deliveries",
-    "courierShare": "Your Share (70%)",
-    "platformShare": "Platform Fee (30%)",
-    "grossRevenue": "Gross Revenue",
-    "netEarnings": "Net Earnings",
-    "pending": "Pending",
-    "completed": "Completed",
-    "history": {
-      "title": "Earnings History",
-      "date": "Date",
-      "amount": "Amount",
-      "delivery": "Delivery",
-      "status": "Status"
-    },
-    "summary": {
+    "earnings": {
+      "title": "Your Earnings",
+      "totalEarnings": "Total Earnings",
       "totalDeliveries": "Total Deliveries",
-      "successRate": "Success Rate",
-      "averageRating": "Average Rating",
-      "totalDistance": "Total Distance Covered"
-    }
-  },
+      "avgPerDelivery": "Avg. Per Delivery",
+      "recentDeliveries": "Recent Deliveries",
+      "noRecentDeliveries": "No deliveries in this period.",
+      "7d": "7 Days",
+      "30d": "30 Days",
+      "90d": "90 Days"
+    },
   "preferences": {
     "packageDetails": "Package Details",
     "packageValue": "Package Value (Optional)",

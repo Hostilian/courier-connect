@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 export default function Stats() {
   const stats = [
@@ -29,6 +30,16 @@ export default function Stats() {
   return (
     <section className="py-16 bg-white border-t border-gray-100">
       <div className="container mx-auto px-4">
+        <div className="relative w-full max-w-xs mx-auto mb-8 h-32 md:hidden">
+          <Image
+            src="/images/delivery-clock.svg"
+            alt="Delivery Speed"
+            fill
+            className="object-contain"
+            sizes="(max-width: 768px) 100vw, 240px"
+          />
+        </div>
+        
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <motion.div

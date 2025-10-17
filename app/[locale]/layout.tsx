@@ -1,3 +1,4 @@
+import { AuthProvider } from '@/components/AuthProvider';
 import Providers from '@/components/Providers';
 import SimpleFooter from '@/components/SimpleFooter';
 import SimpleHeader from '@/components/SimpleHeader';
@@ -76,22 +77,24 @@ export default async function LocaleLayout({
     <html lang={locale} dir={isRtl ? 'rtl' : 'ltr'} className="scroll-smooth">
       <body className={`${inter.className} antialiased bg-gray-50 min-h-screen flex flex-col`}>
         <NextIntlClientProvider messages={messages}>
-          <Providers>
-            <WelcomeModal />
-            <SimpleHeader />
-            <main className="flex-1 w-full">{children}</main>
-            <SimpleFooter />
-            <Toaster
-              position="top-center"
-              toastOptions={{
-                duration: 4000,
-                style: {
-                  background: '#363636',
-                  color: '#fff',
-                },
-              }}
-            />
-          </Providers>
+          <AuthProvider>
+            <Providers>
+              <WelcomeModal />
+              <SimpleHeader />
+              <main className="flex-1 w-full">{children}</main>
+              <SimpleFooter />
+              <Toaster
+                position="top-center"
+                toastOptions={{
+                  duration: 4000,
+                  style: {
+                    background: '#363636',
+                    color: '#fff',
+                  },
+                }}
+              />
+            </Providers>
+          </AuthProvider>
         </NextIntlClientProvider>
       </body>
     </html>

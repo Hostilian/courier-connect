@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { CheckCircle, MapPin, Package, Truck } from 'lucide-react'
+import Image from 'next/image'
 
 export default function HowItWorks() {
   const steps = [
@@ -39,6 +40,17 @@ export default function HowItWorks() {
           </p>
         </div>
 
+        {/* Optimized Illustration */}
+        <div className="relative w-full max-w-lg mx-auto mb-16 h-40">
+          <Image 
+            src="/images/delivery-process.svg"
+            alt="Delivery Process"
+            fill
+            className="object-contain"
+            sizes="(max-width: 768px) 100vw, 720px"
+          />
+        </div>
+        
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step, index) => (

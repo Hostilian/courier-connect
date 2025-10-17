@@ -14,6 +14,8 @@ export interface IUser extends Document {
   verificationTokenExpires?: Date;
   resetPasswordToken?: string;
   resetPasswordExpires?: Date;
+  totalRating: number;
+  ratingCount: number;
   rating: number;
   totalDeliveries: number;
   completedDeliveries: number;
@@ -90,6 +92,14 @@ const UserSchema: Schema = new Schema(
       type: Date,
       select: false,
     },
+    totalRating: {
+      type: Number,
+      default: 0,
+    },
+    ratingCount: {
+      type: Number,
+      default: 0,
+    },
     rating: {
       type: Number,
       default: 5.0,
@@ -126,6 +136,18 @@ const UserSchema: Schema = new Schema(
 // Note: email index is created automatically due to unique: true
 UserSchema.index({ city: 1 });
 UserSchema.index({ rating: -1 });
+
+// Recalculate average rating before saving
+UserSchema.pre<IUser>('save', function (next) {
+  if (this.isModified('totalRating') || this.isModified('ratingCount')) {
+    if (this.ratingCount > 0) {
+      this.rating = this.totalRating / this.ratingCount;
+    } else {
+      this.rating = 5.0; // Default rating if no ratings yet
+    }
+  }
+  next();
+});
 
 export default mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
 

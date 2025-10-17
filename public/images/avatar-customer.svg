@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <style>
+    .st0{fill:#10B981;} /* emerald-500 */
+    .st1{fill:#34D399;} /* emerald-400 */
+    .st2{fill:#F3F4F6;} /* gray-100 */
+    .st3{fill:#1F2937;} /* gray-800 */
+  </style>
+  <circle class="st2" cx="64" cy="64" r="64"/>
+  <circle class="st0" cx="64" cy="64" r="50"/>
+  <circle class="st1" cx="64" cy="50" r="20"/>
+  <path class="st2" d="M30,100 Q64,80 98,100 V128 H30 Z"/>
+</svg>

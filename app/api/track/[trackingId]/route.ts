@@ -1,61 +1,70 @@
+// File: app/api/track/[trackingId]/route.ts
+// So, a customer wants to know where their box is. Fair enough.
+// This public endpoint is their window into that world. No login required.
+// Just a magic string of characters.
+
+import { getErrorResponse } from '@/lib/helpers';
 import dbConnect from '@/lib/mongodb';
-import DeliveryRequest from '@/models/DeliveryRequest';
+import DeliveryRequest, { IDeliveryRequest } from '@/models/DeliveryRequest';
+import User from '@/models/User'; // We need this to get the courier's name.
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest, { params }: { params: { trackingId: string } }) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { trackingId: string } }
+) {
   try {
-    await dbConnect();
     const { trackingId } = params;
-    if (!trackingId) return NextResponse.json({ error: 'Tracking ID required' }, { status: 400 });
-    const doc = await DeliveryRequest.findOne({ trackingId: trackingId.toUpperCase() });
-    if (!doc) return NextResponse.json({ error: 'Not found' }, { status: 404 });
 
-    const record = doc.toObject();
+    // Basic validation. A tracking ID should look like a tracking ID.
+    if (!trackingId || !trackingId.startsWith('CC-')) {
+      return getErrorResponse(400, 'Invalid tracking ID format.');
+    }
 
-    return NextResponse.json({
-      trackingId: record.trackingId,
-      status: record.status,
-      senderName: record.senderName,
-      senderAddress: record.senderAddress,
-      senderPhone: record.senderPhone,
-      senderLocation: record.senderLocation,
-      receiverName: record.receiverName,
-      receiverAddress: record.receiverAddress,
-      receiverPhone: record.receiverPhone,
-      receiverLocation: record.receiverLocation,
-      packageType: record.packageType,
-      packageSize: record.packageSize,
-      packageDescription: record.packageDescription,
-      urgency: record.urgency,
-      pickupTime: record.pickupTime,
-      notes: record.notes,
-      serviceCity: record.serviceCity,
-      serviceCountry: record.serviceCountry,
-      distance: record.distance,
-      distanceText: record.distanceText,
-      distanceEstimated: record.distanceEstimated,
-      duration: record.duration,
-      durationText: record.durationText,
-      routePolyline: record.routePolyline,
-      price: record.price,
-      courierEarnings: record.courierEarnings,
-      platformFee: record.platformFee,
-      basePrice: record.basePrice,
-      distancePrice: record.distancePrice,
-      urgencyPrice: record.urgencyPrice,
-      scheduledPrice: record.scheduledPrice,
-      packageSizePrice: record.packageSizePrice,
-      minimumAdjustment: record.minimumAdjustment,
-      minimumPriceApplied: record.minimumPriceApplied,
-      scheduledPickupDate: record.scheduledPickupDate,
-      scheduledDeliveryDate: record.scheduledDeliveryDate,
-      createdAt: record.createdAt,
-      updatedAt: record.updatedAt,
-      courierName: record.courierName,
-      courierPhone: record.courierPhone,
-      estimatedDelivery: record.estimatedDelivery,
-    });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    await dbConnect(); // Let's talk to the database.
+
+    // Find the delivery. The trackingId is supposed to be unique. Supposed to be.
+    const delivery = await DeliveryRequest.findOne<IDeliveryRequest>({ trackingId: trackingId.toUpperCase() }).lean();
+
+    if (!delivery) {
+      return getErrorResponse(404, 'Delivery not found.');
+    }
+
+    let courierName = null;
+    let courierRating = null;
+    // If a courier has claimed this sacred duty, let's find out who they are.
+    if (delivery.courierId) {
+      const courier = await User.findById(delivery.courierId).select('name rating');
+      if (courier) {
+        courierName = courier.name;
+        courierRating = courier.rating;
+      }
+    }
+
+    // We don't want to send everything to the client. That's how you get hacked.
+    // Just the important stuff.
+    const publicDeliveryData = {
+      trackingId: delivery.trackingId,
+      status: delivery.status,
+      senderAddress: delivery.senderAddress,
+      receiverAddress: delivery.receiverAddress,
+      packageType: delivery.packageType,
+      packageSize: delivery.packageSize,
+      urgency: delivery.urgency,
+      createdAt: delivery.createdAt,
+      updatedAt: delivery.updatedAt,
+      deliveredAt: delivery.deliveredAt,
+      courierName: courierName, // May be null, and that's okay.
+      courierRating: courierRating,
+      estimatedDelivery: delivery.estimatedDelivery,
+      senderLocation: delivery.senderLocation,
+      receiverLocation: delivery.receiverLocation,
+      routePolyline: delivery.routePolyline,
+    };
+
+    return NextResponse.json(publicDeliveryData);
+  } catch (error) {
+    console.error(`Error fetching tracking info for ${params.trackingId}:`, error);
+    return getErrorResponse(500, 'An unexpected error occurred. The server might be napping.');
   }
 }

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Quote, Star } from 'lucide-react'
+import Image from 'next/image'
 
 export default function Testimonials() {
   const testimonials = [
@@ -10,21 +11,21 @@ export default function Testimonials() {
       role: 'Prague',
       rating: 5,
       text: "Urgent documents delivered across the city in under 2 hours. The courier was professional and kept me updated throughout. Exactly what we needed!",
-      avatar: '�'
+      avatar: '/images/avatar-business.svg'
     },
     {
       name: 'Online Seller',
       role: 'Istanbul',
       rating: 5,
       text: "Sold a guitar online but couldn't deliver it myself. The courier handled it with care and the buyer was very happy. Great service!",
-      avatar: '🎸'
+      avatar: '/images/avatar-seller.svg'
     },
     {
       name: 'Customer',
       role: 'Kyiv',
       rating: 5,
       text: "Needed a gift delivered for a birthday party. Fast, reliable, and the courier was so friendly. Will definitely use again!",
-      avatar: '🎁'
+      avatar: '/images/avatar-customer.svg'
     }
   ]
 
@@ -66,8 +67,14 @@ export default function Testimonials() {
               </div>
 
               <div className="flex items-center space-x-3">
-                <div className="text-2xl">
-                  {testimonial.avatar}
+                <div className="relative w-12 h-12">
+                  <Image
+                    src={testimonial.avatar}
+                    alt={`${testimonial.name} avatar`}
+                    width={48}
+                    height={48}
+                    className="rounded-full"
+                  />
                 </div>
                 <div>
                   <div className="font-semibold text-gray-900">

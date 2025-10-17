@@ -1,5 +1,6 @@
 'use client';
 
+import ImageOptimizationDemo from '@/components/ImageOptimizationDemo';
 import LanguageSelector from '@/components/LanguageSelector';
 import { useLocationContext } from '@/components/LocationProvider';
 import LocationSelector from '@/components/LocationSelector';
@@ -424,6 +425,8 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
+
+      <ImageOptimizationDemo />
 
       <footer className="bg-gray-50 border-t border-gray-200 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
