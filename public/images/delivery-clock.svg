@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+  <style>
+    .st0{fill:#3B82F6;} /* blue-500 */
+    .st1{fill:#93C5FD;} /* blue-300 */
+    .st2{fill:#2563EB;} /* blue-600 */
+    .st3{fill:#F3F4F6;} /* gray-100 */
+    .st4{fill:#9CA3AF;} /* gray-400 */
+    .st5{fill:#1F2937;} /* gray-800 */
+  </style>
+  <g>
+    <circle class="st3" cx="120" cy="120" r="110"/>
+    <circle class="st0" cx="120" cy="120" r="90"/>
+    <circle class="st2" cx="120" cy="120" r="70"/>
+    <circle class="st1" cx="120" cy="120" r="50"/>
+    <path class="st5" d="M120,70v50h50"/>
+    <circle class="st5" cx="120" cy="120" r="5"/>
+  </g>
+</svg>

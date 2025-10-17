@@ -1,5 +1,7 @@
 'use client';
 
+import FeedbackForm from '@/components/FeedbackForm';
+import LiveTrackingMap from '@/components/LiveTrackingMap';
 import TrackingTimeline from '@/components/TrackingTimeline';
 import { getLanguageByCode } from '@/lib/languages';
 import { motion } from 'framer-motion';
@@ -11,10 +13,11 @@ import { Suspense, useMemo, useState } from 'react';
 // This is what a delivery looks like from the outside.
 // No secrets here. Just the facts, ma'am.
 interface PublicDeliveryInfo {
+  id: string;
   trackingId: string;
   status: 'pending' | 'accepted' | 'picked_up' | 'in_transit' | 'delivered' | 'cancelled';
   senderAddress: string;
-  deliveryAddress: string;
+  receiverAddress: string;
   packageType: string;
   packageSize?: string;
   urgency: string;
@@ -22,8 +25,13 @@ interface PublicDeliveryInfo {
   updatedAt: string;
   deliveredAt?: string;
   courierName?: string;
+  courierId?: string;
   courierRating?: number;
   estimatedDelivery?: string;
+  senderEmail?: string;
+  senderLocation?: { lat: number; lng: number };
+  receiverLocation?: { lat: number; lng: number };
+  routePolyline?: string;
 }
 
 // A little helper to show a loading spinner while the page is thinking.
@@ -156,6 +164,23 @@ export default function TrackPage() {
             </motion.div>
           )}
 
+          {/* Live Map */}
+          {delivery && delivery.status !== 'pending' && delivery.status !== 'delivered' && delivery.status !== 'cancelled' && delivery.senderLocation && delivery.receiverLocation && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="mb-8"
+            >
+              <LiveTrackingMap 
+                trackingId={delivery.trackingId}
+                origin={delivery.senderLocation}
+                destination={delivery.receiverLocation}
+                routePolyline={delivery.routePolyline}
+              />
+            </motion.div>
+          )}
+
           {/* Delivery Info */}
           {delivery && (
             <motion.div
@@ -226,6 +251,23 @@ export default function TrackPage() {
             >
               <p>{t('help')}</p>
               <p className="text-sm font-mono mt-1">{t('format')}</p>
+            </motion.div>
+          )}
+
+          {/* Rating Form for Completed Deliveries */}
+          {delivery && delivery.status === 'delivered' && delivery.courierName && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-12"
+            >
+              <h2 className="text-2xl font-bold mb-4 text-center">{t('rateDelivery')}</h2>
+              <FeedbackForm 
+                deliveryId={delivery.id} 
+                trackingId={delivery.trackingId}
+                courierId={delivery.courierId}
+                customerEmail={delivery.senderEmail}
+              />
             </motion.div>
           )}
         </div>

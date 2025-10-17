@@ -103,3 +103,44 @@ export async function sendCourierWelcomeEmail(courier: IUser) {
         `,
     });
 }
+
+// Email to courier when they receive a new rating
+export async function sendRatingReceivedEmail({
+  to,
+  name,
+  rating,
+  comment,
+  trackingId,
+}: {
+  to: string;
+  name: string;
+  rating: number;
+  comment?: string;
+  trackingId: string;
+}) {
+  const loginUrl = `${appUrl}/courier/login`;
+  const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+  
+  await sendEmail({
+    to,
+    subject: `You've Received a ${rating}-Star Rating!`,
+    html: `
+      <h1>You've Received a Rating!</h1>
+      <p>Hello ${name},</p>
+      <p>Good news! You've received a new rating for delivery <strong>${trackingId}</strong>.</p>
+      <div style="font-size: 24px; color: #FFB400; margin: 15px 0;">
+        ${stars} (${rating}/5)
+      </div>
+      ${comment ? `
+        <div style="background-color: #F9FAFB; border-left: 4px solid #3B82F6; padding: 12px; margin: 15px 0;">
+          <p style="margin: 0; font-style: italic;">"${comment}"</p>
+        </div>
+      ` : ''}
+      <p>Positive ratings help improve your profile and increase your chances of getting more delivery requests.</p>
+      <p>Thank you for being a valued courier partner!</p>
+      <a href="${loginUrl}" style="display: inline-block; background-color: #3B82F6; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; margin-top: 15px;">View Your Ratings</a>
+      <hr/>
+      <p>The Courier Connect Team</p>
+    `,
+  });
+}

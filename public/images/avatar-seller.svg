@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <style>
+    .st0{fill:#F59E0B;} /* amber-500 */
+    .st1{fill:#FBBF24;} /* amber-400 */
+    .st2{fill:#F3F4F6;} /* gray-100 */
+    .st3{fill:#1F2937;} /* gray-800 */
+    .st4{fill:#D97706;} /* amber-600 */
+  </style>
+  <circle class="st2" cx="64" cy="64" r="64"/>
+  <circle class="st0" cx="64" cy="64" r="50"/>
+  <circle class="st1" cx="64" cy="50" r="20"/>
+  <path class="st2" d="M30,100 Q64,80 98,100 V128 H30 Z"/>
+  <path class="st4" d="M42,70 L48,90 L64,95 L80,90 L86,70 Q64,60 42,70 Z"/>
+</svg>

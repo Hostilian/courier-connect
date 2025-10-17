@@ -54,7 +54,7 @@ echo ║                                                      ║
 echo ╚══════════════════════════════════════════════════════╝
 echo.
 
-call npm run test:e2e:ui
+call npm run test:e2e
 
 echo.
 echo Tests completed!

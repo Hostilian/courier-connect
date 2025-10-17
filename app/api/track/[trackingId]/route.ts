@@ -57,7 +57,9 @@ export async function GET(
       courierName: courierName, // May be null, and that's okay.
       courierRating: courierRating,
       estimatedDelivery: delivery.estimatedDelivery,
-      // We'll add courier location later if the status is 'in_transit'
+      senderLocation: delivery.senderLocation,
+      receiverLocation: delivery.receiverLocation,
+      routePolyline: delivery.routePolyline,
     };
 
     return NextResponse.json(publicDeliveryData);
