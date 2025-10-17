@@ -198,12 +198,14 @@ export function useSocket(options: UseSocketOptions = {}): UseSocketReturn {
 
   // Auto-connect on mount if enabled
   useEffect(() => {
-    if (autoConnect) {
+    if (ready && autoConnect && !socket && !connecting) {
       connect();
     }
+  }, [ready, autoConnect, connect, socket, connecting]);
 
-    // Cleanup on unmount
-    // Good coding hygiene. Like washing your hands, but for sockets.
+  // Cleanup on unmount
+  // Good coding hygiene. Like washing your hands, but for sockets.
+  useEffect(() => {
     return () => {
       if (socketRef.current) {
         socketRef.current.disconnect();
