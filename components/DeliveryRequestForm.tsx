@@ -212,7 +212,7 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
         basePrice: priceBreakdown?.basePrice,
         distancePrice: priceBreakdown?.distancePrice,
         urgencyPrice: priceBreakdown?.urgencyPrice,
-        scheduledPrice: priceBreakdown?.scheduledPrice,
+        scheduledDiscount: priceBreakdown?.scheduledDiscount,
         packageSizePrice: priceBreakdown?.packageSizePrice,
         locale,
         serviceCountry: location.countryCode,
@@ -495,12 +495,9 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
                   </select>
                 </div>
                 <SchedulePicker
-                  onScheduleChange={(schedule) => {
-                    // Convert schedule strings to Date object
-                    const dateTime = schedule.pickupDate && schedule.pickupTime 
-                      ? new Date(`${schedule.pickupDate}T${schedule.pickupTime}`)
-                      : null;
-                    setFormData((prev) => ({ ...prev, pickupDateTime: dateTime }));
+                  label={schedulingT('pickupSchedule')}
+                  onDateTimeChange={(date) => {
+                    setFormData((prev) => ({ ...prev, pickupDateTime: date }));
                   }}
                 />
               </div>
@@ -556,10 +553,16 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
                       <span>{formatCurrency(priceBreakdown.urgencyPrice)}</span>
                     </div>
                   )}
-                  {priceBreakdown.scheduledPrice !== 0 && (
+                  {priceBreakdown.scheduledDiscount > 0 && (
                     <div className="flex justify-between text-sm text-green-600">
-                      <span>{t('request.pricing.scheduled')}</span>
-                      <span>{formatCurrency(priceBreakdown.scheduledPrice)}</span>
+                      <span>{pricingT('scheduledDiscount')}</span>
+                      <span>-{formatCurrency(priceBreakdown.scheduledDiscount)}</span>
+                    </div>
+                  )}
+                  {priceBreakdown.scheduledFee > 0 && (
+                    <div className="flex justify-between text-sm">
+                      <span>{pricingT('scheduledFee')}</span>
+                      <span>{formatCurrency(priceBreakdown.scheduledFee)}</span>
                     </div>
                   )}
                   <div className="border-t pt-3 flex justify-between font-bold text-lg">

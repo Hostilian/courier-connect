@@ -21,37 +21,25 @@ interface EarningsData {
   recentDeliveries: Delivery[];
 }
 
-// This is a mock function. In a real app, you'd fetch this from your API.
 const fetchEarningsData = async (period: string): Promise<EarningsData> => {
-  console.log(`Fetching data for period: ${period}`);
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  const token = localStorage.getItem('cc_token');
+  if (!token) {
+    // Handle unauthenticated state, maybe redirect or show an error
+    throw new Error('Not authenticated');
+  }
 
-  // Generate some fake data based on the period
-  const days = period === '7d' ? 7 : period === '30d' ? 30 : 90;
-  const totalDeliveries = Math.floor(Math.random() * 20 * (days / 7)) + 5;
-  const totalEarnings = totalDeliveries * (Math.random() * 15 + 20);
-  const averageEarningPerDelivery = totalEarnings / totalDeliveries;
+  const response = await fetch(`/api/courier/earnings?period=${period}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
 
-  const recentDeliveries: Delivery[] = Array.from({ length: Math.min(totalDeliveries, 5) }, (_, i) => ({
-    id: `CC-${Math.random().toString(36).substring(2, 8).toUpperCase()}`,
-    date: new Date(Date.now() - i * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-    amount: Math.random() * 30 + 15,
-    status: 'delivered',
-  }));
+  if (!response.ok) {
+    // Handle API errors
+    throw new Error('Failed to fetch earnings data');
+  }
 
-  const earningsTrend = Array.from({ length: days }, (_, i) => ({
-    name: new Date(Date.now() - (days - i - 1) * 24 * 60 * 60 * 1000).toLocaleDateString(undefined, { weekday: 'short' }),
-    earnings: Math.random() * (totalEarnings / days) * 2,
-  }));
-
-  return {
-    totalEarnings,
-    totalDeliveries,
-    averageEarningPerDelivery,
-    earningsTrend,
-    recentDeliveries,
-  };
+  return response.json();
 };
 
 export default function CourierEarnings() {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useLocationContext } from '@/components/LocationProvider';
+import { useLocationContext, UserLocation } from '@/components/LocationProvider';
 import { countries, getCountryByCode, searchCountries } from '@/lib/countries';
 import { Compass, Crosshair, Globe2, MapPin, X } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -60,7 +60,14 @@ export default function LocationSelector({ onChange }: Props) {
   }, [query]);
 
   function selectCountry(code: string, city?: string) {
-    setLocation({ countryCode: code, city });
+    const newLocation: Partial<UserLocation> = { countryCode: code };
+    if (city) {
+      newLocation.city = city;
+    } else {
+      // When changing country, clear the city unless it's a quick selection
+      newLocation.city = undefined;
+    }
+    setLocation(newLocation);
     setOpen(false);
     setQuery('');
   }

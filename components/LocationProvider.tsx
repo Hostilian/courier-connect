@@ -30,24 +30,30 @@ const LEGACY_COUNTRY_KEY = 'cc_country';
 
 function readInitialLocation(): UserLocation {
   if (typeof window === 'undefined') {
-    return {};
+    return { countryCode: 'US' }; // Default to US on server
   }
 
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored) {
-      return JSON.parse(stored) as UserLocation;
+      const parsed = JSON.parse(stored) as UserLocation;
+      // Basic validation to ensure we have at least a country code
+      if (parsed.countryCode && getCountryByCode(parsed.countryCode)) {
+        return parsed;
+      }
     }
   } catch (error) {
-    // Failed to parse stored location
+    console.error("Failed to parse stored location:", error);
   }
 
+  // Fallback for legacy or invalid data
   const legacyCountry = window.localStorage.getItem(LEGACY_COUNTRY_KEY);
-  if (legacyCountry) {
+  if (legacyCountry && getCountryByCode(legacyCountry)) {
     return { countryCode: legacyCountry };
   }
 
-  return {};
+  // If all else fails, default to a sensible value
+  return { countryCode: 'US' };
 }
 
 export function LocationProvider({ children }: { children: React.ReactNode }) {
@@ -70,11 +76,12 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
     }
   }, [location]);
 
-  const setLocation = useCallback((value: UserLocation) => {
+  const setLocation = useCallback((value: Partial<UserLocation>) => {
     setLocationState((prev) => {
       const next = { ...prev, ...value };
-      if (!value.countryCode) {
-        next.countryCode = prev.countryCode;
+      // Ensure countryCode is always valid
+      if (!next.countryCode || !getCountryByCode(next.countryCode)) {
+        next.countryCode = prev.countryCode || 'US'; // Fallback to previous or US
       }
       return next;
     });

@@ -21,6 +21,7 @@ export interface PricingBreakdown {
   timeOfDayPrice: number; // Rush hour? That'll cost you.
   dayOfWeekPrice: number; // Weekend delivery? Oh yeah, that's extra.
   scheduledFee: number; // Fee for scheduling. Planning costs extra apparently.
+  scheduledDiscount: number; // Discount for booking way in advance.
   packageSizePrice: number; // Big box, big bucks. Economics 101.
   totalPrice: number; // The final damage. What you actually pay.
   courierEarnings: number; // 70% - What the courier gets. Before taxes. Ha!
@@ -71,6 +72,9 @@ const PRICING_CONFIG = {
 
   // Scheduled delivery fee. Planning is great, but it also complicates things.
   SCHEDULED_FEE: 1.5, // A buck fifty. For the luxury of choice.
+
+  // Discount for booking in advance. Because we love planners.
+  ADVANCE_BOOKING_DISCOUNT: 0.1, // 10% discount
 
   // The split. The money division. The moment of truth.
   COURIER_PERCENTAGE: 0.7, // 70% to courier. They do the work, they get most of the money. Fair's fair.
@@ -126,11 +130,18 @@ export function calculateDeliveryPrice(input: PricingInput): PricingBreakdown {
   const urgencyPrice = subtotal * (urgencyMultiplier - 1);
   subtotal += urgencyPrice;
 
-  // Step 7: Scheduled delivery fee. If you're planning, that's a special service.
+  // Step 7: Scheduled delivery fee or discount.
   let scheduledFee = 0;
+  let scheduledDiscount = 0;
   if (pickupDateTime) {
-    scheduledFee = PRICING_CONFIG.SCHEDULED_FEE;
-    subtotal += scheduledFee;
+    const hoursDifference = (pickupDateTime.getTime() - new Date().getTime()) / (1000 * 60 * 60);
+    if (hoursDifference >= 24) {
+      scheduledDiscount = subtotal * PRICING_CONFIG.ADVANCE_BOOKING_DISCOUNT;
+      subtotal -= scheduledDiscount;
+    } else {
+      scheduledFee = PRICING_CONFIG.SCHEDULED_FEE;
+      subtotal += scheduledFee;
+    }
   }
 
   // Step 8: Minimum price check. Can't be too cheap. We have an image to maintain.
@@ -149,6 +160,7 @@ export function calculateDeliveryPrice(input: PricingInput): PricingBreakdown {
     timeOfDayPrice,
     dayOfWeekPrice,
     scheduledFee,
+    scheduledDiscount,
     totalPrice: finalPrice,
     courierEarnings,
     platformFee,
