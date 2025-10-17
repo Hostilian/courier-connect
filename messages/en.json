@@ -273,7 +273,8 @@
       "title": "Not Found",
       "message": "The tracking ID you entered was not found. Please check the ID and try again.",
       "button": "Try Again"
-    }
+    },
+    "rateDelivery": "Rate Your Delivery Experience"
   },
   "courier": {
     "register": {
@@ -445,8 +446,9 @@
     "viewMap": "View on Map",
     "enterAddress": "Enter address",
     "searchAddress": "Search for an address...",
-    "searchOrigin": "Search pickup location...",
-    "searchDestination": "Search delivery location...",
+    "searchOrigin": "Search pickup location..."
+  },
+  "map": {
     "selectLocation": "Select location on map",
     "selectOrigin": "Click on the map to select pickup location",
     "selectDestination": "Click on the map to select delivery location",
@@ -464,17 +466,41 @@
       "searchOrClick": "Search for an address or click on the map"
     }
   },
-    "earnings": {
-      "title": "Your Earnings",
-      "totalEarnings": "Total Earnings",
-      "totalDeliveries": "Total Deliveries",
-      "avgPerDelivery": "Avg. Per Delivery",
-      "recentDeliveries": "Recent Deliveries",
-      "noRecentDeliveries": "No deliveries in this period.",
-      "7d": "7 Days",
-      "30d": "30 Days",
-      "90d": "90 Days"
-    },
+  "ratings": {
+    "fetchError": "Couldn't load ratings",
+    "noRatings": "No ratings yet",
+    "basedOn": "{count, plural, =1 {# rating} other {# ratings}}",
+    "ratingDistribution": "Rating distribution",
+    "recentReviews": "Recent reviews"
+  },
+  "feedback": {
+    "title": "Rate your delivery experience",
+    "ratingLabel": "How was your experience?",
+    "commentLabel": "Your feedback (optional)",
+    "commentPlaceholder": "Tell us about your experience...",
+    "nameLabel": "Your name (optional)",
+    "namePlaceholder": "John Doe",
+    "emailLabel": "Your email (optional)",
+    "emailPlaceholder": "you@example.com",
+    "submitting": "Submitting...",
+    "submitFeedback": "Submit Feedback",
+    "ratingRequired": "Please select a rating",
+    "thankYou": "Thank you for your feedback!",
+    "thankYouTitle": "Feedback submitted!",
+    "feedbackReceived": "Your feedback helps us improve our service.",
+    "error": "Something went wrong. Please try again."
+  },
+  "earnings": {
+    "title": "Your Earnings",
+    "totalEarnings": "Total Earnings",
+    "totalDeliveries": "Total Deliveries",
+    "avgPerDelivery": "Avg. Per Delivery",
+    "recentDeliveries": "Recent Deliveries",
+    "noRecentDeliveries": "No deliveries in this period.",
+    "7d": "7 Days",
+    "30d": "30 Days",
+    "90d": "90 Days"
+  },
   "preferences": {
     "packageDetails": "Package Details",
     "packageValue": "Package Value (Optional)",
