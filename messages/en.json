@@ -10,6 +10,7 @@
     "taglineLocationCountry": "Serving {country}",
     "taglineDefault": "Fast. Local. Friendly.",
     "requestLink": "Request",
+    "findCourier": "Find Courier",
     "becomeCourier": "Become a courier"
   },
   "home": {
@@ -344,6 +345,55 @@
         "in_transit": "Mark as In Transit",
         "delivered": "Mark as Delivered"
       }
+    },
+    "rating": "Rating",
+    "completedDeliveries": "Completed Deliveries",
+    "member": "Member since",
+    "experienceExpert": "Expert Courier",
+    "experienceAdvanced": "Advanced Courier",
+    "experienceIntermediate": "Intermediate Courier",
+    "experienceBeginner": "Beginner Courier",
+    "experienceLevel": "Experience Level",
+    "ratingsAndReviews": "Ratings & Reviews",
+    "serviceArea": "Service Area",
+    "serviceRadius": "Service radius of {radius} km",
+    "transportDetails": "Transport Details",
+    "vehicle": "Vehicle",
+    "acceptedPackages": "Accepted Package Types",
+    "packageTypes": {
+      "small": "Small Package",
+      "medium": "Medium Package",
+      "large": "Large Package",
+      "documents": "Documents"
+    },
+    "detailedRatings": "Detailed Ratings",
+    "backToResults": "Back to results",
+    "profileNotFound": "Courier profile not found",
+    "profileError": "Error loading profile",
+    "fetchError": "Failed to load data",
+    "returnHome": "Return to Homepage",
+    "search": {
+      "title": "Find a Courier",
+      "subtitle": "Search for verified couriers in your area",
+      "searchPlaceholder": "Enter city or courier name...",
+      "search": "Search",
+      "filters": "Filters",
+      "filterBy": "Filter by",
+      "minRating": "Minimum Rating",
+      "any": "Any",
+      "activeFilters": "Active filters",
+      "clearAll": "Clear all",
+      "searching": "Searching...",
+      "resultsCount": "{count, plural, =0 {No couriers found} =1 {1 courier found} other {# couriers found}}",
+      "retry": "Retry",
+      "noResults": "No couriers found",
+      "noResultsMessage": "Try adjusting your filters or search for a different location",
+      "clearFilters": "Clear Filters",
+      "rating": "Rating",
+      "completedDeliveries": "Deliveries",
+      "viewProfile": "View Profile",
+      "previous": "Previous",
+      "next": "Next"
     }
   },
   "common": {

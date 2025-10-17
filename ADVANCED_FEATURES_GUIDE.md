@@ -81,7 +81,7 @@ This document describes the comprehensive set of advanced features added to Cour
 **Usage:**
 ```tsx
 <LiveTrackingMap
-  delivery={{
+  delivery={ {
     trackingId: "CC-ABC123",
     status: "in_transit",
     senderName: "John Doe",
