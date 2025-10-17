@@ -28,12 +28,12 @@ export const languages: Language[] = [
     flag: '🇬🇧',
     rtl: false,
     culturalTheme: {
-      primary: '#FBBF24',
-      secondary: '#FF6B6B',
-      accent: '#3B82F6',
-      gradient: 'from-yellow-400 via-orange-300 to-red-400',
-      pattern: 'geometric',
-      description: 'Warm and professional with geometric patterns'
+      primary: '#002664', // Dark Blue
+      secondary: '#C8102E', // Red
+      accent: '#F1F1F1', // Light Grey
+      gradient: 'from-blue-800 via-gray-200 to-red-700',
+      pattern: 'regal-lion',
+      description: 'A distinguished and modern theme using the colors of the Union Jack.'
     }
   },
   {
@@ -163,12 +163,12 @@ export const languages: Language[] = [
     flag: '🇨🇿',
     rtl: false,
     culturalTheme: {
-      primary: '#DC2626',
-      secondary: '#1E40AF',
-      accent: '#FFFFFF',
-      gradient: 'from-red-600 via-blue-600 to-white',
-      pattern: 'bohemian',
-      description: 'Bohemian crystal patterns with national colors'
+      primary: '#D52B1E', // Red
+      secondary: '#0039A6', // Blue
+      accent: '#FFFFFF', // White
+      gradient: 'from-white via-blue-600 to-red-600',
+      pattern: 'cubism',
+      description: 'Bold, geometric patterns inspired by Czech Cubism, using the national colors.'
     }
   },
   {
@@ -178,12 +178,12 @@ export const languages: Language[] = [
     flag: '🇺🇦',
     rtl: false,
     culturalTheme: {
-      primary: '#FFD500',
-      secondary: '#0057B7',
-      accent: '#FFD500',
-      gradient: 'from-blue-600 via-blue-500 to-yellow-400',
-      pattern: 'embroidery',
-      description: 'Traditional Ukrainian embroidery patterns'
+      primary: '#005BBB', // Royal Blue
+      secondary: '#FFD500', // Golden Yellow
+      accent: '#000000', // Black
+      gradient: 'from-blue-600 via-yellow-400 to-blue-700',
+      pattern: 'sunflower-embroidery',
+      description: 'Vibrant blue and yellow inspired by sunflowers and traditional embroidery.'
     }
   },
   {
@@ -193,12 +193,12 @@ export const languages: Language[] = [
     flag: '🇹🇷',
     rtl: false,
     culturalTheme: {
-      primary: '#E30A17',
-      secondary: '#FFFFFF',
-      accent: '#FDB913',
-      gradient: 'from-red-600 via-white to-red-600',
-      pattern: 'tulip',
-      description: 'Ottoman tulip motifs with crescent accents'
+      primary: '#E30A17', // Turkish Red
+      secondary: '#FFFFFF', // White
+      accent: '#00A99D', // Turquoise
+      gradient: 'from-red-600 via-white to-red-700',
+      pattern: 'iznik-tile',
+      description: 'Bold red and white with turquoise accents, inspired by Iznik tiles and tulip motifs.'
     }
   },
   {
@@ -375,12 +375,12 @@ export const languages: Language[] = [
     flag: '🇻🇳',
     rtl: false,
     culturalTheme: {
-      primary: '#DA251D',
-      secondary: '#FFCD00',
-      accent: '#DA251D',
-      gradient: 'from-red-600 via-yellow-500 to-red-600',
-      pattern: 'lantern',
-      description: 'Lantern and lotus flower patterns'
+      primary: '#DA251D', // Coquelicot Red
+      secondary: '#FFCD00', // Golden Yellow
+      accent: '#006A4E', // Dark Green
+      gradient: 'from-red-600 via-yellow-400 to-red-700',
+      pattern: 'dong-son-drum',
+      description: 'Vibrant red and yellow, reminiscent of the national flag, with patterns from ancient Đông Sơn drums.'
     }
   },
   {

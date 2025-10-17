@@ -7,14 +7,14 @@ import { loadGoogleMaps } from '@/lib/maps';
 import type { PricingBreakdown } from '@/lib/pricing';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
-  ArrowLeft,
-  ArrowRight,
-  DollarSign,
-  Info,
-  Loader2,
-  MapPin,
-  Package,
-  User
+    ArrowLeft,
+    ArrowRight,
+    DollarSign,
+    Info,
+    Loader2,
+    MapPin,
+    Package,
+    User
 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -66,7 +66,8 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
     // Delivery info
     urgency: 'standard',
     notes: '',
-    scheduledDateTime: null as Date | null,
+    pickupDateTime: null as Date | null,
+    deliveryDateTime: null as Date | null,
   });
 
   const [routeInfo, setRouteInfo] = useState<RouteDetails | null>(null);
@@ -76,6 +77,7 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
   const [calculatingPrice, setCalculatingPrice] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isScheduling, setIsScheduling] = useState(false);
 
   const pickupRef = useRef<HTMLTextAreaElement | null>(null);
   const dropoffRef = useRef<HTMLTextAreaElement | null>(null);
@@ -145,7 +147,7 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
             destination,
             urgency: formData.urgency,
             packageSize: formData.packageSize,
-            scheduledDateTime: formData.scheduledDateTime,
+            pickupDateTime: formData.pickupDateTime,
           }),
         });
 
@@ -170,7 +172,7 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
     formData.receiverAddress,
     formData.urgency,
     formData.packageSize,
-    formData.scheduledDateTime,
+    formData.pickupDateTime,
     geocodeAddress,
     requestT,
   ]);
@@ -178,6 +180,14 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSchedulePickup = (date: Date | null) => {
+    setFormData(prev => ({ ...prev, pickupDateTime: date }));
+  };
+
+  const handleScheduleDelivery = (date: Date | null) => {
+    setFormData(prev => ({ ...prev, deliveryDateTime: date }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -235,35 +245,10 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
   const canProceedToStep3 = canProceedToStep2 && formData.receiverName && formData.receiverPhone && formData.receiverAddress;
   const canSubmit = canProceedToStep3 && formData.packageType && formData.packageSize && priceBreakdown;
 
-  return (
-    <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
-      {/* Step Indicator */}
-      <div className="flex items-center justify-center mb-8">
-        {[1, 2, 3].map((s) => (
-          <div key={s} className="flex items-center">
-            <div
-              className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${
-                step >= s
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-200 text-gray-500'
-              }`}
-            >
-              {s}
-            </div>
-            {s < 3 && (
-              <div
-                className={`w-16 h-1 mx-2 transition-all ${
-                  step > s ? 'bg-blue-600' : 'bg-gray-200'
-                }`}
-              />
-            )}
-          </div>
-        ))}
-      </div>
-
-      <AnimatePresence mode="wait">
-        {/* Step 1: Sender Information */}
-        {step === 1 && (
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return (
           <motion.div
             key="step1"
             initial={{ opacity: 0, x: 20 }}
@@ -295,14 +280,18 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
                 <label className="block text-sm font-medium mb-2">
                   {requestT('senderPhone')} *
                 </label>
-                <input
-                  type="tel"
-                  name="senderPhone"
-                  value={formData.senderPhone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-                  required
-                />
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <input
+                    type="tel"
+                    name="senderPhone"
+                    value={formData.senderPhone}
+                    onChange={handleChange}
+                    placeholder={requestT('sender.phonePlaceholder')}
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    required
+                  />
+                </div>
               </div>
 
               <div>
@@ -334,10 +323,9 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
               </button>
             </div>
           </motion.div>
-        )}
-
-        {/* Step 2: Receiver Information */}
-        {step === 2 && (
+        );
+      case 2:
+        return (
           <motion.div
             key="step2"
             initial={{ opacity: 0, x: 20 }}
@@ -416,10 +404,9 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
               </button>
             </div>
           </motion.div>
-        )}
-
-        {/* Step 3: Package & Delivery Details with Live Pricing */}
-        {step === 3 && (
+        );
+      case 3:
+        return (
           <motion.div
             key="step3"
             initial={{ opacity: 0, x: 20 }}
@@ -513,7 +500,7 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
                     const dateTime = schedule.pickupDate && schedule.pickupTime 
                       ? new Date(`${schedule.pickupDate}T${schedule.pickupTime}`)
                       : null;
-                    setFormData((prev) => ({ ...prev, scheduledDateTime: dateTime }));
+                    setFormData((prev) => ({ ...prev, pickupDateTime: dateTime }));
                   }}
                 />
               </div>
@@ -628,7 +615,38 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
               </button>
             </div>
           </motion.div>
-        )}
+        );
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
+      {/* Step Indicator */}
+      <div className="flex items-center justify-center mb-8">
+        {[1, 2, 3].map((s) => (
+          <div key={s} className="flex items-center">
+            <div
+              className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${
+                step >= s
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-200 text-gray-500'
+              }`}
+            >
+              {s}
+            </div>
+            {s < 3 && (
+              <div
+                className={`w-16 h-1 mx-2 transition-all ${
+                  step > s ? 'bg-blue-600' : 'bg-gray-200'
+                }`}
+              />
+            )}
+          </div>
+        ))}
+      </div>
+
+      <AnimatePresence mode="wait">
+        {renderStep()}
       </AnimatePresence>
 
       {/* Global Error Display */}

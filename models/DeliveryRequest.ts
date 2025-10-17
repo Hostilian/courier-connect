@@ -26,13 +26,9 @@ export interface IDeliveryRequest extends Document {
   packageDescription: string; // What they CLAIM is inside. Emphasis on "claim."
   
   // Delivery Information & Scheduling - When and how fast
-  urgency: 'standard' | 'express' | 'urgent' | 'scheduled'; // How fast they want it. Spoiler: always "urgent"
-  pickupTime: string; // When to grab it. Probably "ASAP"
-  scheduledPickupDate?: Date; // For people who plan ahead. Rare species.
-  scheduledPickupTime?: string; // Specific time. Good luck with that.
-  scheduledDeliveryDate?: Date; // When they want it delivered. Dreams are free.
-  scheduledDeliveryTime?: string; // Exact delivery time. Even bigger dreams.
-  isScheduled: boolean; // Did they schedule it or just wing it? Usually the latter.
+  urgency: 'standard' | 'express' | 'urgent'; // How fast they want it. Spoiler: always "urgent"
+  pickupDateTime: Date | null; // For people who plan ahead. Rare species.
+  deliveryDateTime: Date | null; // When they want it delivered. Dreams are free.
   notes?: string; // Special instructions. Usually something impossible like "leave with the non-existent doorman"
   serviceCountry?: string; // What country. Important for legal reasons, allegedly.
   serviceCity?: string; // What city. For when the country isn't specific enough.
@@ -167,36 +163,24 @@ const DeliveryRequestSchema: Schema = new Schema(
     urgency: {
       type: String,
       required: [true, 'Urgency is required'],
-      enum: ['standard', 'express', 'urgent', 'scheduled'],
+      enum: ['standard', 'express', 'urgent'],
       default: 'standard',
     },
-    pickupTime: {
-      type: String,
-      required: [true, 'Pickup time is required'],
-    },
-    scheduledPickupDate: {
+    
+    // Scheduling - For the meticulous planner
+    pickupDateTime: {
       type: Date,
+      default: null,
     },
-    scheduledPickupTime: {
-      type: String,
-      trim: true,
-    },
-    scheduledDeliveryDate: {
+    deliveryDateTime: {
       type: Date,
+      default: null,
     },
-    scheduledDeliveryTime: {
-      type: String,
-      trim: true,
-    },
-    isScheduled: {
-      type: Boolean,
-      default: false,
-      index: true,
-    },
+
+    // Notes - The "anything else?" field
     notes: {
       type: String,
       trim: true,
-      maxlength: [500, 'Notes cannot exceed 500 characters'],
     },
     serviceCountry: {
       type: String,

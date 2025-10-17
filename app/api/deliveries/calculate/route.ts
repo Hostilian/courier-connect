@@ -1,12 +1,13 @@
+import { loadGoogleMaps } from '@/lib/maps';
 import { calculateDeliveryPrice } from '@/lib/pricing';
 import { NextRequest, NextResponse } from 'next/server';
 
 interface CalculateRequest {
   origin: { lat: number; lng: number };
   destination: { lat: number; lng: number };
-  urgency: 'standard' | 'express' | 'urgent' | 'scheduled';
+  urgency: 'standard' | 'express' | 'urgent';
   packageSize: 'small' | 'medium' | 'large' | 'extra-large';
-  scheduledPickupDate?: string;
+  pickupDateTime?: string | null;
 }
 
 /**
@@ -16,7 +17,7 @@ interface CalculateRequest {
 export async function POST(request: NextRequest) {
   try {
     const body: CalculateRequest = await request.json();
-    const { origin, destination, urgency, packageSize, scheduledPickupDate } = body;
+    const { origin, destination, urgency, packageSize, pickupDateTime } = body;
 
     // Validate inputs
     if (!origin?.lat || !origin?.lng || !destination?.lat || !destination?.lng) {
@@ -26,39 +27,44 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Calculate straight-line distance (Haversine formula)
-    const distance = calculateHaversineDistance(origin, destination);
+    const google = await loadGoogleMaps();
+    const directionsService = new google.maps.DirectionsService();
 
-    // Add 40% to account for roads (rough estimate without actual route calculation)
-    const estimatedDistance = distance * 1.4;
-    
-    // Estimate duration: 30 km/h average city speed
-    const estimatedDuration = Math.ceil((estimatedDistance / 30) * 60); // minutes
+    const directionsRequest: google.maps.DirectionsRequest = {
+      origin: new google.maps.LatLng(origin.lat, origin.lng),
+      destination: new google.maps.LatLng(destination.lat, destination.lng),
+      travelMode: google.maps.TravelMode.DRIVING,
+    };
+
+    const directionsResult = await directionsService.route(directionsRequest);
+    const route = directionsResult.routes?.[0]?.legs?.[0];
+
+    if (!route || !route.distance || !route.duration) {
+      return NextResponse.json(
+        { error: 'Could not calculate route between the addresses.' },
+        { status: 400 }
+      );
+    }
+
+    const distanceInKm = route.distance.value / 1000;
+    const durationInSeconds = route.duration.value;
 
     // Calculate pricing
     const pricing = calculateDeliveryPrice({
-      distance: estimatedDistance,
+      distance: distanceInKm,
       urgency,
       packageSize,
-      scheduledPickupDate: scheduledPickupDate ? new Date(scheduledPickupDate) : undefined,
+      pickupDateTime: pickupDateTime ? new Date(pickupDateTime) : undefined,
     });
-
-    // Format distance and duration text
-    const distanceText = estimatedDistance >= 1 
-      ? `${estimatedDistance.toFixed(1)} km`
-      : `${Math.round(estimatedDistance * 1000)} m`;
-    
-    const durationText = estimatedDuration >= 60
-      ? `${Math.floor(estimatedDuration / 60)}h ${estimatedDuration % 60}m`
-      : `${estimatedDuration}m`;
 
     return NextResponse.json({
       route: {
-        distance: estimatedDistance,
-        duration: estimatedDuration,
-        distanceText,
-        durationText,
-        estimated: true,
+        distance: distanceInKm,
+        duration: durationInSeconds,
+        distanceText: route.distance.text,
+        durationText: route.duration.text,
+        polyline: directionsResult.routes?.[0]?.overview_polyline,
+        estimated: false,
       },
       pricing,
     });
@@ -69,33 +75,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-}
-
-/**
- * Calculate distance between two points using Haversine formula
- * Returns distance in kilometers
- */
-function calculateHaversineDistance(
-  point1: { lat: number; lng: number },
-  point2: { lat: number; lng: number }
-): number {
-  const R = 6371; // Earth's radius in km
-  const dLat = toRadians(point2.lat - point1.lat);
-  const dLon = toRadians(point2.lng - point1.lng);
-
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(toRadians(point1.lat)) *
-      Math.cos(toRadians(point2.lat)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
-
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  const distance = R * c;
-
-  return Number(distance.toFixed(2));
-}
-
-function toRadians(degrees: number): number {
-  return degrees * (Math.PI / 180);
 }
