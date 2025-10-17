@@ -1,0 +1,450 @@
+{
+  "nav": {
+    "home": "Головна",
+    "forCouriers": "Для Кур'єрів",
+    "trackDelivery": "Відстежити Доставку",
+    "requestDelivery": "Замовити Доставку"
+  },
+  "header": {
+    "taglineLocationCity": "Обслуговуємо {country} · {city}",
+    "taglineLocationCountry": "Обслуговуємо {country}",
+    "taglineDefault": "Швидко. Локально. Привітно.",
+    "requestLink": "Замовити",
+    "becomeCourier": "Стати кур'єром"
+  },
+  "home": {
+    "hero": {
+      "title": "Швидка та Надійна Служба Доставки",
+      "subtitle": "Отримуйте свої посилки швидко та безпечно з нашою довіреною мережею кур'єрів",
+      "cta": "Замовити Доставку",
+      "ctaSecondary": "Стати Кур'єром",
+      "locationCity": "Локальні кур'єри у {city}",
+      "locationCountry": "Обслуговуємо {country} з сонячною енергією",
+      "locationFallback": "Доставляємо з сонячною усмішкою по всьому світу",
+      "changeLocation": "Потрібна інша локація?"
+    },
+    "stats": {
+      "deliveries": "Активні Доставки",
+      "couriers": "Перевірені Кур'єри",
+      "cities": "Охоплені Міста",
+      "rating": "Рейтинг Клієнтів"
+    },
+    "howItWorks": {
+      "title": "Як Це Працює",
+      "step1": {
+        "title": "Замовте Доставку",
+        "description": "Введіть дані про отримання та доставку"
+      },
+      "step2": {
+        "title": "Знайдемо Кур'єра",
+        "description": "Наша система знайде найкращого кур'єра"
+      },
+      "step3": {
+        "title": "Відстежуйте В Реальному Часі",
+        "description": "Стежте за своєю доставкою на кожному кроці"
+      },
+      "step4": {
+        "title": "Отримайте Посилку",
+        "description": "Отримайте свою посилку безпечно доставленою"
+      }
+    },
+    "features": {
+      "title": "Чому Обрати Нас",
+      "fast": {
+        "title": "Блискавично Швидко",
+        "description": "Доставка в той же день доступна у більшості міст"
+      },
+      "secure": {
+        "title": "100% Безпечно",
+        "description": "Ваші посилки повністю застраховані та відстежуються"
+      },
+      "affordable": {
+        "title": "Доступні Ціни",
+        "description": "Прозорі ціни без прихованих комісій"
+      },
+      "support": {
+        "title": "Підтримка 24/7",
+        "description": "Наша команда завжди готова допомогти вам"
+      }
+    },
+    "locations": {
+      "title": "Надійні там, де ви нас потребуєте",
+      "subtitle": "Від історичних бульварів до прибережних ринків Courier Connect приносить сонячну енергію до кожних дверей.",
+      "global": "Глобальне покриття",
+      "activeCity": "Показуємо кур'єрів поблизу {city}",
+      "activeGlobal": "Обирайте локацію, щоб побачити локальний настрій доставки",
+      "coverage": "Ми працюємо в Європейському Союзі, Північній і Південній Америці та кожній країні, яку визнає Steam. Повідомте, де ви, і ми подбаємо про решту.",
+      "hubTagline": "Сонячна доставка в той самий день",
+      "hubs": {
+        "berlin": "Берлін",
+        "prague": "Прага",
+        "istanbul": "Стамбул",
+        "newYork": "Нью-Йорк",
+        "toronto": "Торонто",
+        "saoPaulo": "Сан-Паулу"
+      }
+    },
+    "testimonials": {
+      "title": "Що Кажуть Наші Клієнти",
+      "customer1": {
+        "name": "Сара Джонсон",
+        "role": "Власниця Малого Бізнесу",
+        "quote": "Чудовий сервіс! Мої посилки завжди прибувають вчасно та в ідеальному стані."
+      },
+      "customer2": {
+        "name": "Майкл Чен",
+        "role": "Онлайн Покупець",
+        "quote": "Відстеження в реальному часі дає мені спокій. Дуже рекомендую!"
+      },
+      "customer3": {
+        "name": "Емма Родрігес",
+        "role": "Фрілансер",
+        "quote": "Доступні ціни та надійні кур'єри. Це моя улюблена служба доставки."
+      }
+    },
+    "cta": {
+      "title": "Готові Почати?",
+      "subtitle": "Приєднуйтесь до тисяч задоволених клієнтів",
+      "button": "Замовити Доставку Зараз"
+    }
+  },
+  "request": {
+    "title": "Замовити Доставку",
+    "subtitle": "Заповніть дані, і ми знайдемо ідеального кур'єра для вас",
+    "banner": {
+      "globalTitle": "Глобальне покриття",
+      "city": "Спрямовуємо кур'єрів поблизу {city}.",
+      "country": "З'єднуємо вас із надійними кур'єрами в {country}.",
+      "global": "Скажіть, де ви, щоб відкрити локальні опції.",
+      "change": "Оновити локацію"
+    },
+    "steps": {
+      "pickup": "Дані про Отримання",
+      "delivery": "Дані про Доставку",
+      "preferences": "Налаштування"
+    },
+    "pickup": {
+      "title": "Інформація про Отримання",
+      "name": "Ваше Ім'я",
+      "namePlaceholder": "Іван Петренко",
+      "phone": "Номер Телефону",
+      "phonePlaceholder": "+380 12 345 6789",
+      "email": "Email (необов'язково)",
+      "emailPlaceholder": "ivan@priklad.ua",
+      "address": "Адреса Отримання",
+      "street": "Вулиця",
+      "city": "Місто",
+      "zipCode": "Поштовий Індекс"
+    },
+    "delivery": {
+      "title": "Інформація про Доставку",
+      "recipientName": "Ім'я Одержувача",
+      "recipientPhone": "Телефон Одержувача",
+      "address": "Адреса Доставки",
+      "street": "Вулиця",
+      "city": "Місто",
+      "zipCode": "Поштовий Індекс",
+      "notes": "Примітки до Доставки (необов'язково)",
+      "notesPlaceholder": "Подзвонити, залишити біля дверей, тощо"
+    },
+    "preferences": {
+      "title": "Посилка та Налаштування",
+      "packageType": "Тип Посилки",
+      "packageTypes": {
+        "documents": "Документи",
+        "small": "Мала Посилка",
+        "medium": "Середня Посилка",
+        "large": "Велика Посилка"
+      },
+      "weight": "Вага (кг)",
+      "dimensions": "Розміри (необов'язково)",
+      "dimensionsPlaceholder": "Д x Ш x В (см)",
+      "specialInstructions": "Спеціальні Інструкції",
+      "specialInstructionsPlaceholder": "Крихке, Тримати вертикально, тощо",
+      "urgency": "Терміновість Доставки",
+      "urgencyTypes": {
+        "standard": "Стандартна (2-3 години)",
+        "express": "Експрес (1 година)",
+        "scheduled": "Заплановано"
+      }
+    },
+    "buttons": {
+      "next": "Далі",
+      "previous": "Назад",
+      "submit": "Замовити Доставку"
+    },
+    "trackButton": "Відстежити доставку",
+    "trackingId": "Код відстеження",
+    "newRequest": "Нове замовлення",
+    "success": {
+      "title": "Доставку Замовлено!",
+      "message": "Ваш код відстеження:",
+      "info": "Ми шукаємо найкращого кур'єра для вас. Ви отримаєте оновлення через SMS та email.",
+      "track": "Відстежити Доставку",
+      "newRequest": "Нове Замовлення"
+    },
+    "scheduledOption": "📅 Scheduled (Choose date & time)"
+  },
+  "track": {
+    "title": "Відстежити Вашу Доставку",
+    "subtitle": "Введіть свій код відстеження для перегляду оновлень у реальному часі",
+    "trackingCode": "Код Відстеження",
+    "trackingCodePlaceholder": "Введіть 10-значний код відстеження",
+    "trackButton": "Відстежити Посилку",
+    "status": {
+      "pending": "Очікування Кур'єра",
+      "accepted": "Кур'єра Призначено",
+      "picked_up": "Посилку Отримано",
+      "in_transit": "У Дорозі",
+      "delivered": "Доставлено",
+      "cancelled": "Скасовано"
+    },
+    "details": {
+      "title": "Деталі Доставки",
+      "from": "Від",
+      "to": "Кому",
+      "courier": "Кур'єр",
+      "estimatedTime": "Очікувана Доставка",
+      "actualTime": "Доставлено О",
+      "packageType": "Тип Посилки",
+      "status": "Поточний Статус"
+    },
+    "notFound": {
+      "title": "Код Відстеження Не Знайдено",
+      "message": "Будь ласка, перевірте свій код відстеження та спробуйте знову.",
+      "button": "Спробувати Знову"
+    }
+  },
+  "courier": {
+    "register": {
+      "title": "Стати Кур'єром",
+      "subtitle": "Почніть заробляти, доставляючи посилки у вашому місті",
+      "steps": {
+        "credentials": "Обліковий Запис",
+        "vehicle": "Транспорт",
+        "verification": "Перевірка"
+      },
+      "credentials": {
+        "title": "Створіть Свій Обліковий Запис",
+        "firstName": "Ім'я",
+        "lastName": "Прізвище",
+        "email": "Електронна Адреса",
+        "phone": "Номер Телефону",
+        "password": "Пароль",
+        "confirmPassword": "Підтвердіть Пароль",
+        "terms": "Я погоджуюсь з Умовами Використання та Політикою Конфіденційності"
+      },
+      "vehicle": {
+        "title": "Інформація про Транспорт",
+        "vehicleType": "Тип Транспорту",
+        "vehicleTypes": {
+          "bike": "Велосипед",
+          "motorcycle": "Мотоцикл",
+          "car": "Автомобіль",
+          "van": "Фургон"
+        },
+        "licensePlate": "Номерний Знак (якщо застосовно)",
+        "insurance": "Інформація про Страхування",
+        "insurancePlaceholder": "Номер полісу або деталі"
+      },
+      "verification": {
+        "title": "Документи для Перевірки",
+        "idDocument": "Документ Особистості",
+        "driversLicense": "Водійські Права (якщо застосовно)",
+        "insurance": "Сертифікат Страхування",
+        "photo": "Фото Профілю",
+        "uploadInstructions": "Завантажте чіткі фото ваших документів",
+        "agreement": "Підтверджую, що вся надана інформація точна"
+      },
+      "buttons": {
+        "next": "Далі",
+        "previous": "Назад",
+        "submit": "Надіслати Заявку"
+      },
+      "success": {
+        "title": "Заявку Надіслано!",
+        "message": "Ми розглянемо вашу заявку протягом 24-48 годин.",
+        "info": "Ви отримаєте email, коли ваш обліковий запис буде перевірено.",
+        "login": "Перейти до Входу"
+      }
+    },
+    "login": {
+      "title": "Вхід Кур'єра",
+      "subtitle": "Увійдіть для доступу до вашої панелі",
+      "email": "Електронна Адреса",
+      "password": "Пароль",
+      "remember": "Запам'ятати мене",
+      "forgotPassword": "Забули пароль?",
+      "loginButton": "Увійти",
+      "noAccount": "Не маєте облікового запису?",
+      "register": "Зареєструватися тут"
+    },
+    "dashboard": {
+      "title": "Панель Кур'єра",
+      "welcome": "Ласкаво просимо назад",
+      "stats": {
+        "available": "Доступні Роботи",
+        "active": "Активні Доставки",
+        "completed": "Виконано Сьогодні",
+        "earnings": "Сьогоднішній Заробіток"
+      },
+      "availableJobs": {
+        "title": "Доступні Доставки",
+        "noJobs": "На даний момент немає доступних доставок",
+        "distance": "км від вас",
+        "accept": "Прийняти Роботу",
+        "viewDetails": "Переглянути Деталі"
+      },
+      "activeDeliveries": {
+        "title": "Ваші Активні Доставки",
+        "pickup": "Отримання",
+        "delivery": "Доставка",
+        "updateStatus": "Оновити Статус",
+        "complete": "Завершити Доставку",
+        "cancel": "Скасувати"
+      },
+      "statusUpdate": {
+        "picked_up": "Позначити як Отримано",
+        "in_transit": "Позначити як У Дорозі",
+        "delivered": "Позначити як Доставлено"
+      }
+    }
+  },
+  "common": {
+    "loading": "Завантаження...",
+    "error": "Сталася помилка",
+    "tryAgain": "Спробувати Знову",
+    "cancel": "Скасувати",
+    "confirm": "Підтвердити",
+    "save": "Зберегти",
+    "close": "Закрити",
+    "required": "Обов'язково",
+    "optional": "Необов'язково"
+  },
+  "scheduling": {
+    "title": "Schedule Your Delivery",
+    "pickupDate": "Pickup Date",
+    "pickupTime": "Pickup Time",
+    "deliveryDate": "Delivery Date",
+    "deliveryTime": "Delivery Time",
+    "selectDate": "Select date",
+    "selectTime": "Select time",
+    "asap": "As soon as possible",
+    "scheduled": "Schedule for later",
+    "advanceBooking": "Book in advance for 10% discount",
+    "minimumNotice": "Minimum 2 hours notice required",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "timeSlots": {
+      "morning": "Morning (8 AM - 12 PM)",
+      "afternoon": "Afternoon (12 PM - 5 PM)",
+      "evening": "Evening (5 PM - 9 PM)"
+    },
+    "errors": {
+      "pastDate": "Cannot schedule for past dates",
+      "tooSoon": "Pickup time must be at least 2 hours from now",
+      "invalidTime": "Please select a valid time slot"
+    }
+  },
+  "pricing": {
+    "title": "Pricing Details",
+    "calculating": "Calculating price...",
+    "estimate": "Estimated Price",
+    "breakdown": "Price Breakdown",
+    "basePrice": "Base Price",
+    "distancePrice": "Distance ({distance} km)",
+    "urgencyPrice": "Urgency Fee",
+    "packageSizePrice": "Package Size Fee",
+    "scheduledDiscount": "Advance Booking Discount",
+    "subtotal": "Subtotal",
+    "platformFee": "Platform Fee (30%)",
+    "courierEarnings": "Courier Earnings (70%)",
+    "total": "Total Price",
+    "courierWillReceive": "Courier will receive",
+    "youPay": "You pay",
+    "perKm": "per km",
+    "priceFactors": {
+      "title": "What affects the price?",
+      "distance": "Distance between pickup and delivery",
+      "urgency": "How fast you need it delivered",
+      "packageSize": "Size of your package",
+      "scheduling": "When you schedule the delivery"
+    },
+    "urgencyLevels": {
+      "standard": "Standard (2-4 hours)",
+      "express": "Express (1-2 hours)",
+      "urgent": "Urgent (< 1 hour)",
+      "scheduled": "Scheduled"
+    },
+    "packageSizes": {
+      "small": "Small (< 5kg)",
+      "medium": "Medium (5-15kg)",
+      "large": "Large (> 15kg)"
+    },
+    "config": {
+      "basePrice": "Base price",
+      "pricePerKm": "Per kilometer",
+      "platformFeePercentage": "Platform fee",
+      "courierEarningsPercentage": "Courier receives"
+    },
+    "savingsNotice": "💰 Save 10% by scheduling 24+ hours in advance!",
+    "fairPricing": "Fair pricing: 70% goes to your courier"
+  },
+  "maps": {
+    "title": "Route Map",
+    "loading": "Loading map...",
+    "calculating": "Calculating route...",
+    "origin": "Pickup Location",
+    "destination": "Delivery Location",
+    "distance": "Distance",
+    "duration": "Estimated Time",
+    "estimatedNotice": "Distance shown is approximate based on current traffic.",
+    "route": "Route",
+    "viewMap": "View on Map",
+    "enterAddress": "Enter address",
+    "searchAddress": "Search for an address...",
+    "selectLocation": "Select location on map",
+    "useCurrentLocation": "Use my current location",
+    "confirmLocation": "Confirm location",
+    "errors": {
+      "noRoute": "Could not calculate route. Please check addresses.",
+      "apiError": "Map service temporarily unavailable",
+      "geolocationDenied": "Location access denied",
+      "invalidAddress": "Invalid address. Please try again."
+    },
+    "instructions": {
+      "clickMap": "Click on the map to select a location",
+      "dragMarker": "Drag the marker to adjust position",
+      "searchOrClick": "Search for an address or click on the map"
+    }
+  },
+  "earnings": {
+    "title": "Your Earnings",
+    "total": "Total Earnings",
+    "today": "Today",
+    "thisWeek": "This Week",
+    "thisMonth": "This Month",
+    "breakdown": "Earnings Breakdown",
+    "deliveries": "Deliveries",
+    "averagePerDelivery": "Average per Delivery",
+    "courierShare": "Your Share (70%)",
+    "platformShare": "Platform Fee (30%)",
+    "grossRevenue": "Gross Revenue",
+    "netEarnings": "Net Earnings",
+    "pending": "Pending",
+    "completed": "Completed",
+    "history": {
+      "title": "Earnings History",
+      "date": "Date",
+      "amount": "Amount",
+      "delivery": "Delivery",
+      "status": "Status"
+    },
+    "summary": {
+      "totalDeliveries": "Total Deliveries",
+      "successRate": "Success Rate",
+      "averageRating": "Average Rating",
+      "totalDistance": "Total Distance Covered"
+    }
+  }
+}

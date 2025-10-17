@@ -1,0 +1,450 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "forCouriers": "للمُوصلين",
+    "trackDelivery": "تتبع التوصيل",
+    "requestDelivery": "طلب توصيل"
+  },
+  "header": {
+    "taglineLocationCity": "نخدم {country} · {city}",
+    "taglineLocationCountry": "نخدم {country}",
+    "taglineDefault": "سريع. محلي. ودود.",
+    "requestLink": "طلب",
+    "becomeCourier": "كن مُوصِّلًا"
+  },
+  "home": {
+    "hero": {
+      "title": "خدمة توصيل سريعة وموثوقة",
+      "subtitle": "احصل على طرودك مُوصَّلة بسرعة وأمان مع شبكتنا الموثوقة من المُوصِّلين",
+      "cta": "طلب توصيل",
+      "ctaSecondary": "كن مُوصِّلاً",
+      "locationCity": "مُوصِّلون محليون في {city}",
+      "locationCountry": "نخدم {country} بطاقة مفعمة بالشمس",
+      "locationFallback": "نوصّل بابتسامة مشمسة حول العالم",
+      "changeLocation": "هل تحتاج موقعًا آخر؟"
+    },
+    "stats": {
+      "deliveries": "التوصيلات النشطة",
+      "couriers": "المُوصِّلون المُعتمَدون",
+      "cities": "المدن المُغطّاة",
+      "rating": "تقييم العملاء"
+    },
+    "howItWorks": {
+      "title": "كيف يعمل",
+      "step1": {
+        "title": "طلب التوصيل",
+        "description": "أدخل تفاصيل الاستلام والتسليم"
+      },
+      "step2": {
+        "title": "إيجاد المُوصِّل",
+        "description": "نظامنا يجد أفضل مُوصِّل"
+      },
+      "step3": {
+        "title": "التتبع الفوري",
+        "description": "راقب توصيلك في كل خطوة"
+      },
+      "step4": {
+        "title": "استلام الطرد",
+        "description": "احصل على طردك مُوصَّلاً بأمان"
+      }
+    },
+    "features": {
+      "title": "لماذا تختارنا",
+      "fast": {
+        "title": "سريع البرق",
+        "description": "التوصيل في نفس اليوم متاح في معظم المدن"
+      },
+      "secure": {
+        "title": "آمن 100%",
+        "description": "طرودك مؤمَّنة ومُتتبَّعة بالكامل"
+      },
+      "affordable": {
+        "title": "أسعار معقولة",
+        "description": "أسعار شفافة بدون رسوم خفية"
+      },
+      "support": {
+        "title": "دعم 24/7",
+        "description": "فريقنا دائماً هنا لمساعدتك"
+      }
+    },
+    "locations": {
+      "title": "ثقة أينما كنت",
+      "subtitle": "من الشوارع التاريخية إلى الأسواق الساحلية، Courier Connect تجلب طاقة الشمس إلى كل باب.",
+      "global": "تغطية عالمية",
+      "activeCity": "نعرض مُوصِّلين قريبين في {city}",
+      "activeGlobal": "اختر موقعًا لتظهر لك أجواء التوصيل المحلية",
+      "coverage": "نعمل عبر الاتحاد الأوروبي وأمريكا الشمالية والجنوبية وكل دولة يعترف بها Steam. شاركنا موقعك وسنتولى الباقي.",
+      "hubTagline": "خدمة مشمسة في نفس اليوم",
+      "hubs": {
+        "berlin": "برلين",
+        "prague": "براغ",
+        "istanbul": "إسطنبول",
+        "newYork": "نيويورك",
+        "toronto": "تورنتو",
+        "saoPaulo": "ساو باولو"
+      }
+    },
+    "testimonials": {
+      "title": "ماذا يقول عملاؤنا",
+      "customer1": {
+        "name": "سارة جونسون",
+        "role": "صاحبة مشروع صغير",
+        "quote": "خدمة ممتازة! طرودي تصل دائماً في الوقت المحدد وبحالة مثالية."
+      },
+      "customer2": {
+        "name": "مايكل تشين",
+        "role": "مُتسوِّق عبر الإنترنت",
+        "quote": "التتبع الفوري يمنحني راحة البال. أوصي به بشدة!"
+      },
+      "customer3": {
+        "name": "إيما رودريغيز",
+        "role": "عاملة حرة",
+        "quote": "أسعار معقولة ومُوصِّلون موثوقون. هذه خدمة التوصيل المفضلة لدي."
+      }
+    },
+    "cta": {
+      "title": "مستعد للبدء؟",
+      "subtitle": "انضم إلى آلاف العملاء الراضين",
+      "button": "اطلب التوصيل الآن"
+    }
+  },
+  "request": {
+    "title": "طلب توصيل",
+    "subtitle": "املأ التفاصيل وسنجد المُوصِّل المثالي لك",
+    "banner": {
+      "globalTitle": "تغطية عالمية",
+      "city": "سنُوجّه المُوصِّلين بالقرب من {city}.",
+      "country": "نربطك بمُوصِّلين موثوقين في {country}.",
+      "global": "أخبرنا بموقعك لفتح خيارات محلية.",
+      "change": "تحديث الموقع"
+    },
+    "steps": {
+      "pickup": "تفاصيل الاستلام",
+      "delivery": "تفاصيل التسليم",
+      "preferences": "التفضيلات"
+    },
+    "pickup": {
+      "title": "معلومات الاستلام",
+      "name": "اسمك",
+      "namePlaceholder": "أحمد محمد",
+      "phone": "رقم الهاتف",
+      "phonePlaceholder": "+966 50 000 0000",
+      "email": "البريد الإلكتروني (اختياري)",
+      "emailPlaceholder": "ahmad@example.com",
+      "address": "عنوان الاستلام",
+      "street": "الشارع",
+      "city": "المدينة",
+      "zipCode": "الرمز البريدي"
+    },
+    "delivery": {
+      "title": "معلومات التسليم",
+      "recipientName": "اسم المُستلِم",
+      "recipientPhone": "هاتف المُستلِم",
+      "address": "عنوان التسليم",
+      "street": "الشارع",
+      "city": "المدينة",
+      "zipCode": "الرمز البريدي",
+      "notes": "ملاحظات التسليم (اختياري)",
+      "notesPlaceholder": "دق الجرس، اترك عند الباب، إلخ"
+    },
+    "preferences": {
+      "title": "الطرد والتفضيلات",
+      "packageType": "نوع الطرد",
+      "packageTypes": {
+        "documents": "مستندات",
+        "small": "طرد صغير",
+        "medium": "طرد متوسط",
+        "large": "طرد كبير"
+      },
+      "weight": "الوزن (كجم)",
+      "dimensions": "الأبعاد (اختياري)",
+      "dimensionsPlaceholder": "الطول × العرض × الارتفاع (سم)",
+      "specialInstructions": "تعليمات خاصة",
+      "specialInstructionsPlaceholder": "قابل للكسر، احتفظ به عمودياً، إلخ",
+      "urgency": "أولوية التوصيل",
+      "urgencyTypes": {
+        "standard": "قياسي (2-3 ساعات)",
+        "express": "سريع (ساعة واحدة)",
+        "scheduled": "مُجدوَل"
+      }
+    },
+    "buttons": {
+      "next": "التالي",
+      "previous": "السابق",
+      "submit": "طلب التوصيل"
+    },
+    "trackButton": "تتبع التوصيل",
+    "trackingId": "رمز التتبع",
+    "newRequest": "طلب جديد",
+    "success": {
+      "title": "تم طلب التوصيل!",
+      "message": "رمز التتبع الخاص بك:",
+      "info": "نحن نبحث عن أفضل مُوصِّل لك. ستتلقى تحديثات عبر الرسائل النصية والبريد الإلكتروني.",
+      "track": "تتبع التوصيل",
+      "newRequest": "طلب جديد"
+    },
+    "scheduledOption": "📅 Scheduled (Choose date & time)"
+  },
+  "track": {
+    "title": "تتبع توصيلك",
+    "subtitle": "أدخل رمز التتبع لرؤية التحديثات الفورية",
+    "trackingCode": "رمز التتبع",
+    "trackingCodePlaceholder": "أدخل رمز التتبع المكوَّن من 10 أرقام",
+    "trackButton": "تتبع الطرد",
+    "status": {
+      "pending": "في انتظار المُوصِّل",
+      "accepted": "تم تعيين المُوصِّل",
+      "picked_up": "تم استلام الطرد",
+      "in_transit": "في الطريق",
+      "delivered": "تم التسليم",
+      "cancelled": "مُلغى"
+    },
+    "details": {
+      "title": "تفاصيل التوصيل",
+      "from": "من",
+      "to": "إلى",
+      "courier": "المُوصِّل",
+      "estimatedTime": "التسليم المُقدَّر",
+      "actualTime": "تم التسليم في",
+      "packageType": "نوع الطرد",
+      "status": "الحالة الحالية"
+    },
+    "notFound": {
+      "title": "رمز التتبع غير موجود",
+      "message": "يُرجى التحقق من رمز التتبع والمحاولة مرة أخرى.",
+      "button": "حاول مرة أخرى"
+    }
+  },
+  "courier": {
+    "register": {
+      "title": "كن مُوصِّلاً",
+      "subtitle": "ابدأ في الكسب من خلال توصيل الطرود في مدينتك",
+      "steps": {
+        "credentials": "الحساب",
+        "vehicle": "المركبة",
+        "verification": "التحقق"
+      },
+      "credentials": {
+        "title": "أنشئ حسابك",
+        "firstName": "الاسم الأول",
+        "lastName": "اسم العائلة",
+        "email": "عنوان البريد الإلكتروني",
+        "phone": "رقم الهاتف",
+        "password": "كلمة المرور",
+        "confirmPassword": "تأكيد كلمة المرور",
+        "terms": "أوافق على شروط الخدمة وسياسة الخصوصية"
+      },
+      "vehicle": {
+        "title": "معلومات المركبة",
+        "vehicleType": "نوع المركبة",
+        "vehicleTypes": {
+          "bike": "دراجة",
+          "motorcycle": "دراجة نارية",
+          "car": "سيارة",
+          "van": "شاحنة صغيرة"
+        },
+        "licensePlate": "لوحة الترخيص (إن وُجِدت)",
+        "insurance": "معلومات التأمين",
+        "insurancePlaceholder": "رقم البوليصة أو التفاصيل"
+      },
+      "verification": {
+        "title": "مستندات التحقق",
+        "idDocument": "مستند الهوية",
+        "driversLicense": "رخصة القيادة (إن وُجِدت)",
+        "insurance": "شهادة التأمين",
+        "photo": "صورة الملف الشخصي",
+        "uploadInstructions": "ارفع صوراً واضحة لمستنداتك",
+        "agreement": "أؤكد أن جميع المعلومات المُقدَّمة دقيقة"
+      },
+      "buttons": {
+        "next": "التالي",
+        "previous": "السابق",
+        "submit": "إرسال الطلب"
+      },
+      "success": {
+        "title": "تم إرسال الطلب!",
+        "message": "سنُراجع طلبك خلال 24-48 ساعة.",
+        "info": "ستتلقى بريداً إلكترونياً بمجرد التحقق من حسابك.",
+        "login": "اذهب إلى تسجيل الدخول"
+      }
+    },
+    "login": {
+      "title": "تسجيل دخول المُوصِّل",
+      "subtitle": "سجّل الدخول للوصول إلى لوحة التحكم",
+      "email": "عنوان البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "remember": "تذكرني",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "loginButton": "تسجيل الدخول",
+      "noAccount": "ليس لديك حساب؟",
+      "register": "سجّل هنا"
+    },
+    "dashboard": {
+      "title": "لوحة تحكم المُوصِّل",
+      "welcome": "مرحباً بعودتك",
+      "stats": {
+        "available": "الوظائف المُتاحة",
+        "active": "التوصيلات النشطة",
+        "completed": "تم إنجازه اليوم",
+        "earnings": "أرباح اليوم"
+      },
+      "availableJobs": {
+        "title": "التوصيلات المُتاحة",
+        "noJobs": "لا توجد توصيلات مُتاحة في الوقت الحالي",
+        "distance": "كم",
+        "accept": "قبول الوظيفة",
+        "viewDetails": "عرض التفاصيل"
+      },
+      "activeDeliveries": {
+        "title": "توصيلاتك النشطة",
+        "pickup": "الاستلام",
+        "delivery": "التسليم",
+        "updateStatus": "تحديث الحالة",
+        "complete": "إكمال التوصيل",
+        "cancel": "إلغاء"
+      },
+      "statusUpdate": {
+        "picked_up": "وضع علامة كمُستلَم",
+        "in_transit": "وضع علامة كفي الطريق",
+        "delivered": "وضع علامة كمُسلَّم"
+      }
+    }
+  },
+  "common": {
+    "loading": "جارٍ التحميل...",
+    "error": "حدث خطأ",
+    "tryAgain": "حاول مرة أخرى",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "save": "حفظ",
+    "close": "إغلاق",
+    "required": "مطلوب",
+    "optional": "اختياري"
+  },
+  "scheduling": {
+    "title": "Schedule Your Delivery",
+    "pickupDate": "Pickup Date",
+    "pickupTime": "Pickup Time",
+    "deliveryDate": "Delivery Date",
+    "deliveryTime": "Delivery Time",
+    "selectDate": "Select date",
+    "selectTime": "Select time",
+    "asap": "As soon as possible",
+    "scheduled": "Schedule for later",
+    "advanceBooking": "Book in advance for 10% discount",
+    "minimumNotice": "Minimum 2 hours notice required",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "timeSlots": {
+      "morning": "Morning (8 AM - 12 PM)",
+      "afternoon": "Afternoon (12 PM - 5 PM)",
+      "evening": "Evening (5 PM - 9 PM)"
+    },
+    "errors": {
+      "pastDate": "Cannot schedule for past dates",
+      "tooSoon": "Pickup time must be at least 2 hours from now",
+      "invalidTime": "Please select a valid time slot"
+    }
+  },
+  "pricing": {
+    "title": "Pricing Details",
+    "calculating": "Calculating price...",
+    "estimate": "Estimated Price",
+    "breakdown": "Price Breakdown",
+    "basePrice": "Base Price",
+    "distancePrice": "Distance ({distance} km)",
+    "urgencyPrice": "Urgency Fee",
+    "packageSizePrice": "Package Size Fee",
+    "scheduledDiscount": "Advance Booking Discount",
+    "subtotal": "Subtotal",
+    "platformFee": "Platform Fee (30%)",
+    "courierEarnings": "Courier Earnings (70%)",
+    "total": "Total Price",
+    "courierWillReceive": "Courier will receive",
+    "youPay": "You pay",
+    "perKm": "per km",
+    "priceFactors": {
+      "title": "What affects the price?",
+      "distance": "Distance between pickup and delivery",
+      "urgency": "How fast you need it delivered",
+      "packageSize": "Size of your package",
+      "scheduling": "When you schedule the delivery"
+    },
+    "urgencyLevels": {
+      "standard": "Standard (2-4 hours)",
+      "express": "Express (1-2 hours)",
+      "urgent": "Urgent (< 1 hour)",
+      "scheduled": "Scheduled"
+    },
+    "packageSizes": {
+      "small": "Small (< 5kg)",
+      "medium": "Medium (5-15kg)",
+      "large": "Large (> 15kg)"
+    },
+    "config": {
+      "basePrice": "Base price",
+      "pricePerKm": "Per kilometer",
+      "platformFeePercentage": "Platform fee",
+      "courierEarningsPercentage": "Courier receives"
+    },
+    "savingsNotice": "💰 Save 10% by scheduling 24+ hours in advance!",
+    "fairPricing": "Fair pricing: 70% goes to your courier"
+  },
+  "maps": {
+    "title": "Route Map",
+    "loading": "Loading map...",
+    "calculating": "Calculating route...",
+    "origin": "Pickup Location",
+    "destination": "Delivery Location",
+    "distance": "Distance",
+    "duration": "Estimated Time",
+    "estimatedNotice": "Distance shown is approximate based on current traffic.",
+    "route": "Route",
+    "viewMap": "View on Map",
+    "enterAddress": "Enter address",
+    "searchAddress": "Search for an address...",
+    "selectLocation": "Select location on map",
+    "useCurrentLocation": "Use my current location",
+    "confirmLocation": "Confirm location",
+    "errors": {
+      "noRoute": "Could not calculate route. Please check addresses.",
+      "apiError": "Map service temporarily unavailable",
+      "geolocationDenied": "Location access denied",
+      "invalidAddress": "Invalid address. Please try again."
+    },
+    "instructions": {
+      "clickMap": "Click on the map to select a location",
+      "dragMarker": "Drag the marker to adjust position",
+      "searchOrClick": "Search for an address or click on the map"
+    }
+  },
+  "earnings": {
+    "title": "Your Earnings",
+    "total": "Total Earnings",
+    "today": "Today",
+    "thisWeek": "This Week",
+    "thisMonth": "This Month",
+    "breakdown": "Earnings Breakdown",
+    "deliveries": "Deliveries",
+    "averagePerDelivery": "Average per Delivery",
+    "courierShare": "Your Share (70%)",
+    "platformShare": "Platform Fee (30%)",
+    "grossRevenue": "Gross Revenue",
+    "netEarnings": "Net Earnings",
+    "pending": "Pending",
+    "completed": "Completed",
+    "history": {
+      "title": "Earnings History",
+      "date": "Date",
+      "amount": "Amount",
+      "delivery": "Delivery",
+      "status": "Status"
+    },
+    "summary": {
+      "totalDeliveries": "Total Deliveries",
+      "successRate": "Success Rate",
+      "averageRating": "Average Rating",
+      "totalDistance": "Total Distance Covered"
+    }
+  }
+}

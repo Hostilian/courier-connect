@@ -1,0 +1,450 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "forCouriers": "Pour les Coursiers",
+    "trackDelivery": "Suivre la Livraison",
+    "requestDelivery": "Demander une Livraison"
+  },
+  "header": {
+    "taglineLocationCity": "Nous desservons {country} · {city}",
+    "taglineLocationCountry": "Nous desservons {country}",
+    "taglineDefault": "Rapide. Local. Sympathique.",
+    "requestLink": "Demander",
+    "becomeCourier": "Devenir coursier"
+  },
+  "home": {
+    "hero": {
+      "title": "Service de Livraison Rapide et Fiable",
+      "subtitle": "Recevez vos colis livrés rapidement et en toute sécurité avec notre réseau de coursiers de confiance",
+      "cta": "Demander une Livraison",
+      "ctaSecondary": "Devenir Coursier",
+      "locationCity": "Coursiers locaux à {city}",
+      "locationCountry": "Nous desservons {country} avec une énergie solaire",
+      "locationFallback": "Nous livrons avec le sourire partout dans le monde",
+      "changeLocation": "Besoin d'un autre endroit ?"
+    },
+    "stats": {
+      "deliveries": "Livraisons Actives",
+      "couriers": "Coursiers Vérifiés",
+      "cities": "Villes Couvertes",
+      "rating": "Note Client"
+    },
+    "howItWorks": {
+      "title": "Comment Ça Marche",
+      "step1": {
+        "title": "Demander une Livraison",
+        "description": "Entrez les détails de collecte et de livraison"
+      },
+      "step2": {
+        "title": "Trouver un Coursier",
+        "description": "Notre système trouve le meilleur coursier"
+      },
+      "step3": {
+        "title": "Suivre en Temps Réel",
+        "description": "Surveillez votre livraison à chaque étape"
+      },
+      "step4": {
+        "title": "Recevoir le Colis",
+        "description": "Recevez votre colis livré en toute sécurité"
+      }
+    },
+    "features": {
+      "title": "Pourquoi Nous Choisir",
+      "fast": {
+        "title": "Ultra Rapide",
+        "description": "Livraison le jour même disponible dans la plupart des villes"
+      },
+      "secure": {
+        "title": "100% Sécurisé",
+        "description": "Vos colis sont entièrement assurés et suivis"
+      },
+      "affordable": {
+        "title": "Tarifs Abordables",
+        "description": "Prix transparents sans frais cachés"
+      },
+      "support": {
+        "title": "Support 24/7",
+        "description": "Notre équipe est toujours là pour vous aider"
+      }
+    },
+    "locations": {
+      "title": "Fiable où que vous soyez",
+      "subtitle": "Des boulevards historiques aux marchés côtiers, Courier Connect apporte une énergie solaire à chaque porte.",
+      "global": "Couverture mondiale",
+      "activeCity": "Coursiers disponibles autour de {city}",
+      "activeGlobal": "Choisissez un lieu pour découvrir nos vibes locales",
+      "coverage": "Nous opérons dans l'Union européenne, en Amérique du Nord et du Sud et dans tous les pays reconnus par Steam. Indiquez-nous où vous êtes et nous nous occupons du reste.",
+      "hubTagline": "Service solaire dans la journée",
+      "hubs": {
+        "berlin": "Berlin",
+        "prague": "Prague",
+        "istanbul": "Istanbul",
+        "newYork": "New York",
+        "toronto": "Toronto",
+        "saoPaulo": "São Paulo"
+      }
+    },
+    "testimonials": {
+      "title": "Ce Que Disent Nos Clients",
+      "customer1": {
+        "name": "Sarah Johnson",
+        "role": "Propriétaire de Petite Entreprise",
+        "quote": "Excellent service ! Mes colis arrivent toujours à temps et en parfait état."
+      },
+      "customer2": {
+        "name": "Michael Chen",
+        "role": "Acheteur en Ligne",
+        "quote": "Le suivi en temps réel me donne la tranquillité d'esprit. Hautement recommandé !"
+      },
+      "customer3": {
+        "name": "Emma Rodriguez",
+        "role": "Freelance",
+        "quote": "Tarifs abordables et coursiers fiables. C'est mon service de livraison préféré."
+      }
+    },
+    "cta": {
+      "title": "Prêt à Commencer ?",
+      "subtitle": "Rejoignez des milliers de clients satisfaits",
+      "button": "Demander une Livraison Maintenant"
+    }
+  },
+  "request": {
+    "title": "Demander une Livraison",
+    "subtitle": "Remplissez les détails et nous trouverons le coursier parfait pour vous",
+    "banner": {
+      "globalTitle": "Couverture mondiale",
+      "city": "Nous dépêcherons des coursiers près de {city}.",
+      "country": "Nous vous mettons en relation avec des coursiers de confiance en {country}.",
+      "global": "Dites-nous où vous êtes pour débloquer des options locales.",
+      "change": "Mettre à jour la localisation"
+    },
+    "steps": {
+      "pickup": "Détails de Collecte",
+      "delivery": "Détails de Livraison",
+      "preferences": "Préférences"
+    },
+    "pickup": {
+      "title": "Informations de Collecte",
+      "name": "Votre Nom",
+      "namePlaceholder": "Jean Dupont",
+      "phone": "Numéro de Téléphone",
+      "phonePlaceholder": "+33 6 00 00 00 00",
+      "email": "Email (optionnel)",
+      "emailPlaceholder": "jean@exemple.com",
+      "address": "Adresse de Collecte",
+      "street": "Adresse",
+      "city": "Ville",
+      "zipCode": "Code Postal"
+    },
+    "delivery": {
+      "title": "Informations de Livraison",
+      "recipientName": "Nom du Destinataire",
+      "recipientPhone": "Téléphone du Destinataire",
+      "address": "Adresse de Livraison",
+      "street": "Adresse",
+      "city": "Ville",
+      "zipCode": "Code Postal",
+      "notes": "Notes de Livraison (optionnel)",
+      "notesPlaceholder": "Sonner, laisser à la porte, etc."
+    },
+    "preferences": {
+      "title": "Colis et Préférences",
+      "packageType": "Type de Colis",
+      "packageTypes": {
+        "documents": "Documents",
+        "small": "Petit Colis",
+        "medium": "Colis Moyen",
+        "large": "Grand Colis"
+      },
+      "weight": "Poids (kg)",
+      "dimensions": "Dimensions (optionnel)",
+      "dimensionsPlaceholder": "L x l x H (cm)",
+      "specialInstructions": "Instructions Spéciales",
+      "specialInstructionsPlaceholder": "Fragile, Garder vertical, etc.",
+      "urgency": "Urgence de Livraison",
+      "urgencyTypes": {
+        "standard": "Standard (2-3 heures)",
+        "express": "Express (1 heure)",
+        "scheduled": "Programmée"
+      }
+    },
+    "buttons": {
+      "next": "Suivant",
+      "previous": "Précédent",
+      "submit": "Demander une Livraison"
+    },
+    "trackButton": "Suivre la Livraison",
+    "trackingId": "Code de suivi",
+    "newRequest": "Nouvelle demande",
+    "success": {
+      "title": "Livraison Demandée !",
+      "message": "Votre code de suivi est :",
+      "info": "Nous recherchons le meilleur coursier pour vous. Vous recevrez des mises à jour par SMS et email.",
+      "track": "Suivre la Livraison",
+      "newRequest": "Nouvelle Demande"
+    },
+    "scheduledOption": "📅 Scheduled (Choose date & time)"
+  },
+  "track": {
+    "title": "Suivre Votre Livraison",
+    "subtitle": "Entrez votre code de suivi pour voir les mises à jour en temps réel",
+    "trackingCode": "Code de Suivi",
+    "trackingCodePlaceholder": "Entrez le code de suivi à 10 chiffres",
+    "trackButton": "Suivre le Colis",
+    "status": {
+      "pending": "En Attente de Coursier",
+      "accepted": "Coursier Assigné",
+      "picked_up": "Colis Collecté",
+      "in_transit": "En Transit",
+      "delivered": "Livré",
+      "cancelled": "Annulé"
+    },
+    "details": {
+      "title": "Détails de la Livraison",
+      "from": "De",
+      "to": "À",
+      "courier": "Coursier",
+      "estimatedTime": "Livraison Estimée",
+      "actualTime": "Livré À",
+      "packageType": "Type de Colis",
+      "status": "État Actuel"
+    },
+    "notFound": {
+      "title": "Code de Suivi Non Trouvé",
+      "message": "Veuillez vérifier votre code de suivi et réessayer.",
+      "button": "Réessayer"
+    }
+  },
+  "courier": {
+    "register": {
+      "title": "Devenir Coursier",
+      "subtitle": "Commencez à gagner en livrant des colis dans votre ville",
+      "steps": {
+        "credentials": "Compte",
+        "vehicle": "Véhicule",
+        "verification": "Vérification"
+      },
+      "credentials": {
+        "title": "Créez Votre Compte",
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "email": "Adresse Email",
+        "phone": "Numéro de Téléphone",
+        "password": "Mot de Passe",
+        "confirmPassword": "Confirmer le Mot de Passe",
+        "terms": "J'accepte les Conditions d'Utilisation et la Politique de Confidentialité"
+      },
+      "vehicle": {
+        "title": "Informations sur le Véhicule",
+        "vehicleType": "Type de Véhicule",
+        "vehicleTypes": {
+          "bike": "Vélo",
+          "motorcycle": "Moto",
+          "car": "Voiture",
+          "van": "Camionnette"
+        },
+        "licensePlate": "Plaque d'Immatriculation (si applicable)",
+        "insurance": "Informations d'Assurance",
+        "insurancePlaceholder": "Numéro de police ou détails"
+      },
+      "verification": {
+        "title": "Documents de Vérification",
+        "idDocument": "Document d'Identité",
+        "driversLicense": "Permis de Conduire (si applicable)",
+        "insurance": "Certificat d'Assurance",
+        "photo": "Photo de Profil",
+        "uploadInstructions": "Téléchargez des photos claires de vos documents",
+        "agreement": "Je confirme que toutes les informations fournies sont exactes"
+      },
+      "buttons": {
+        "next": "Suivant",
+        "previous": "Précédent",
+        "submit": "Soumettre la Candidature"
+      },
+      "success": {
+        "title": "Candidature Soumise !",
+        "message": "Nous examinerons votre candidature dans les 24-48 heures.",
+        "info": "Vous recevrez un email une fois votre compte vérifié.",
+        "login": "Aller à la Connexion"
+      }
+    },
+    "login": {
+      "title": "Connexion Coursier",
+      "subtitle": "Connectez-vous pour accéder à votre tableau de bord",
+      "email": "Adresse Email",
+      "password": "Mot de Passe",
+      "remember": "Se souvenir de moi",
+      "forgotPassword": "Mot de passe oublié ?",
+      "loginButton": "Se Connecter",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "register": "Inscrivez-vous ici"
+    },
+    "dashboard": {
+      "title": "Tableau de Bord Coursier",
+      "welcome": "Bon retour",
+      "stats": {
+        "available": "Travaux Disponibles",
+        "active": "Livraisons Actives",
+        "completed": "Complétées Aujourd'hui",
+        "earnings": "Gains d'Aujourd'hui"
+      },
+      "availableJobs": {
+        "title": "Livraisons Disponibles",
+        "noJobs": "Aucune livraison disponible pour le moment",
+        "distance": "km",
+        "accept": "Accepter le Travail",
+        "viewDetails": "Voir les Détails"
+      },
+      "activeDeliveries": {
+        "title": "Vos Livraisons Actives",
+        "pickup": "Collecte",
+        "delivery": "Livraison",
+        "updateStatus": "Mettre à Jour le Statut",
+        "complete": "Compléter la Livraison",
+        "cancel": "Annuler"
+      },
+      "statusUpdate": {
+        "picked_up": "Marquer comme Collecté",
+        "in_transit": "Marquer comme En Transit",
+        "delivered": "Marquer comme Livré"
+      }
+    }
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "tryAgain": "Réessayer",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "save": "Enregistrer",
+    "close": "Fermer",
+    "required": "Requis",
+    "optional": "Optionnel"
+  },
+  "scheduling": {
+    "title": "Schedule Your Delivery",
+    "pickupDate": "Pickup Date",
+    "pickupTime": "Pickup Time",
+    "deliveryDate": "Delivery Date",
+    "deliveryTime": "Delivery Time",
+    "selectDate": "Select date",
+    "selectTime": "Select time",
+    "asap": "As soon as possible",
+    "scheduled": "Schedule for later",
+    "advanceBooking": "Book in advance for 10% discount",
+    "minimumNotice": "Minimum 2 hours notice required",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "timeSlots": {
+      "morning": "Morning (8 AM - 12 PM)",
+      "afternoon": "Afternoon (12 PM - 5 PM)",
+      "evening": "Evening (5 PM - 9 PM)"
+    },
+    "errors": {
+      "pastDate": "Cannot schedule for past dates",
+      "tooSoon": "Pickup time must be at least 2 hours from now",
+      "invalidTime": "Please select a valid time slot"
+    }
+  },
+  "pricing": {
+    "title": "Pricing Details",
+    "calculating": "Calculating price...",
+    "estimate": "Estimated Price",
+    "breakdown": "Price Breakdown",
+    "basePrice": "Base Price",
+    "distancePrice": "Distance ({distance} km)",
+    "urgencyPrice": "Urgency Fee",
+    "packageSizePrice": "Package Size Fee",
+    "scheduledDiscount": "Advance Booking Discount",
+    "subtotal": "Subtotal",
+    "platformFee": "Platform Fee (30%)",
+    "courierEarnings": "Courier Earnings (70%)",
+    "total": "Total Price",
+    "courierWillReceive": "Courier will receive",
+    "youPay": "You pay",
+    "perKm": "per km",
+    "priceFactors": {
+      "title": "What affects the price?",
+      "distance": "Distance between pickup and delivery",
+      "urgency": "How fast you need it delivered",
+      "packageSize": "Size of your package",
+      "scheduling": "When you schedule the delivery"
+    },
+    "urgencyLevels": {
+      "standard": "Standard (2-4 hours)",
+      "express": "Express (1-2 hours)",
+      "urgent": "Urgent (< 1 hour)",
+      "scheduled": "Scheduled"
+    },
+    "packageSizes": {
+      "small": "Small (< 5kg)",
+      "medium": "Medium (5-15kg)",
+      "large": "Large (> 15kg)"
+    },
+    "config": {
+      "basePrice": "Base price",
+      "pricePerKm": "Per kilometer",
+      "platformFeePercentage": "Platform fee",
+      "courierEarningsPercentage": "Courier receives"
+    },
+    "savingsNotice": "💰 Save 10% by scheduling 24+ hours in advance!",
+    "fairPricing": "Fair pricing: 70% goes to your courier"
+  },
+  "maps": {
+    "title": "Route Map",
+    "loading": "Loading map...",
+    "calculating": "Calculating route...",
+    "origin": "Pickup Location",
+    "destination": "Delivery Location",
+    "distance": "Distance",
+    "duration": "Estimated Time",
+    "estimatedNotice": "Distance shown is approximate based on current traffic.",
+    "route": "Route",
+    "viewMap": "View on Map",
+    "enterAddress": "Enter address",
+    "searchAddress": "Search for an address...",
+    "selectLocation": "Select location on map",
+    "useCurrentLocation": "Use my current location",
+    "confirmLocation": "Confirm location",
+    "errors": {
+      "noRoute": "Could not calculate route. Please check addresses.",
+      "apiError": "Map service temporarily unavailable",
+      "geolocationDenied": "Location access denied",
+      "invalidAddress": "Invalid address. Please try again."
+    },
+    "instructions": {
+      "clickMap": "Click on the map to select a location",
+      "dragMarker": "Drag the marker to adjust position",
+      "searchOrClick": "Search for an address or click on the map"
+    }
+  },
+  "earnings": {
+    "title": "Your Earnings",
+    "total": "Total Earnings",
+    "today": "Today",
+    "thisWeek": "This Week",
+    "thisMonth": "This Month",
+    "breakdown": "Earnings Breakdown",
+    "deliveries": "Deliveries",
+    "averagePerDelivery": "Average per Delivery",
+    "courierShare": "Your Share (70%)",
+    "platformShare": "Platform Fee (30%)",
+    "grossRevenue": "Gross Revenue",
+    "netEarnings": "Net Earnings",
+    "pending": "Pending",
+    "completed": "Completed",
+    "history": {
+      "title": "Earnings History",
+      "date": "Date",
+      "amount": "Amount",
+      "delivery": "Delivery",
+      "status": "Status"
+    },
+    "summary": {
+      "totalDeliveries": "Total Deliveries",
+      "successRate": "Success Rate",
+      "averageRating": "Average Rating",
+      "totalDistance": "Total Distance Covered"
+    }
+  }
+}

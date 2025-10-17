@@ -1,38 +1,87 @@
-name: Feature Request ✨
-description: Suggest a new feature
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement
 title: "[Feature]: "
-labels: ["enhancement"]
+labels: ["enhancement", "needs-triage"]
 body:
   - type: markdown
     attributes:
       value: |
-        We love new ideas! Thanks for suggesting a feature. 🚀
-  
+        Thanks for suggesting a new feature! Please fill out the form below.
+
   - type: textarea
     id: problem
     attributes:
-      label: Problem to solve
-      description: What problem does this feature solve?
-      placeholder: I'm always frustrated when...
+      label: Problem Statement
+      description: Is your feature request related to a problem? Please describe.
+      placeholder: I'm frustrated when...
     validations:
       required: true
-  
+
   - type: textarea
     id: solution
     attributes:
-      label: Proposed solution
-      description: How should this feature work?
+      label: Proposed Solution
+      description: Describe the solution you'd like
+      placeholder: I would like to see...
     validations:
       required: true
-  
+
+  - type: dropdown
+    id: usertype
+    attributes:
+      label: User Type
+      description: Who would benefit from this feature?
+      options:
+        - Customers
+        - Couriers
+        - Both
+        - Administrators
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature to you?
+      options:
+        - Critical - Blocking core functionality
+        - High - Significant improvement
+        - Medium - Nice to have
+        - Low - Minor enhancement
+    validations:
+      required: true
+
   - type: textarea
     id: alternatives
     attributes:
-      label: Alternatives considered
-      description: What other solutions have you thought about?
-  
+      label: Alternative Solutions
+      description: Describe any alternative solutions or features you've considered
+      placeholder: Alternatively, we could...
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples
+      description: Provide examples from other platforms or mockups if applicable
+      placeholder: Similar to how [platform] does it...
+
+  - type: dropdown
+    id: localization
+    attributes:
+      label: Localization Needs
+      description: Does this feature require translations?
+      options:
+        - "Yes - All languages"
+        - "Yes - Specific languages only"
+        - "No - Language independent"
+        - "Not sure"
+    validations:
+      required: true
+
   - type: textarea
     id: additional
     attributes:
-      label: Additional context
-      description: Any mockups, examples, or other context?
+      label: Additional Context
+      description: Add any other context, screenshots, or mockups about the feature request
+      placeholder: Any additional information...

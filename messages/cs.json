@@ -1,0 +1,450 @@
+{
+  "nav": {
+    "home": "Domů",
+    "forCouriers": "Pro Kurýry",
+    "trackDelivery": "Sledovat Dodávku",
+    "requestDelivery": "Objednat Dodávku"
+  },
+  "header": {
+    "taglineLocationCity": "Obsluhujeme {country} · {city}",
+    "taglineLocationCountry": "Obsluhujeme {country}",
+    "taglineDefault": "Rychle. Lokálně. Přátelsky.",
+    "requestLink": "Objednat",
+    "becomeCourier": "Staňte se kurýrem"
+  },
+  "home": {
+    "hero": {
+      "title": "Rychlá a Spolehlivá Doručovací Služba",
+      "subtitle": "Nechte si balíčky doručit rychle a bezpečně s naší důvěryhodnou sítí kurýrů",
+      "cta": "Objednat Dodávku",
+      "ctaSecondary": "Staňte se Kurýrem",
+      "locationCity": "Místní kurýři ve městě {city}",
+      "locationCountry": "Obsluhujeme {country} se slunečnou energií",
+      "locationFallback": "Doručujeme s úsměvem po celém světě",
+      "changeLocation": "Potřebujete jinou lokalitu?"
+    },
+    "stats": {
+      "deliveries": "Aktivní Dodávky",
+      "couriers": "Ověření Kurýři",
+      "cities": "Pokrytá Města",
+      "rating": "Hodnocení Zákazníků"
+    },
+    "howItWorks": {
+      "title": "Jak To Funguje",
+      "step1": {
+        "title": "Objednejte Dodávku",
+        "description": "Zadejte údaje o vyzvednutí a doručení"
+      },
+      "step2": {
+        "title": "Najdeme Kurýra",
+        "description": "Náš systém najde nejlepšího kurýra"
+      },
+      "step3": {
+        "title": "Sledujte V Reálném Čase",
+        "description": "Sledujte svou dodávku v každém kroku"
+      },
+      "step4": {
+        "title": "Přijměte Balíček",
+        "description": "Získejte svůj balíček bezpečně doručený"
+      }
+    },
+    "features": {
+      "title": "Proč Si Vybrat Nás",
+      "fast": {
+        "title": "Bleskově Rychlé",
+        "description": "Doručení tentýž den dostupné ve většině měst"
+      },
+      "secure": {
+        "title": "100% Bezpečné",
+        "description": "Vaše balíčky jsou plně pojištěné a sledované"
+      },
+      "affordable": {
+        "title": "Dostupné Ceny",
+        "description": "Transparentní ceny bez skrytých poplatků"
+      },
+      "support": {
+        "title": "Podpora 24/7",
+        "description": "Náš tým je vždy připraven vám pomoci"
+      }
+    },
+    "locations": {
+      "title": "Důvěryhodní kdekoli nás potřebujete",
+      "subtitle": "Od historických bulvárů až po pobřežní trhy přináší Courier Connect slunečnou energii ke každým dveřím.",
+      "global": "Celosvětové pokrytí",
+      "activeCity": "Zobrazujeme kurýry poblíž {city}",
+      "activeGlobal": "Vyberte lokalitu a objevte místní atmosféru doručování",
+      "coverage": "Působíme v Evropské unii, Severní i Jižní Americe a v každé zemi uznávané službou Steam. Sdělte nám, kde jste, a zbytek zařídíme.",
+      "hubTagline": "Sluneční doručení ještě dnes",
+      "hubs": {
+        "berlin": "Berlín",
+        "prague": "Praha",
+        "istanbul": "Istanbul",
+        "newYork": "New York",
+        "toronto": "Toronto",
+        "saoPaulo": "São Paulo"
+      }
+    },
+    "testimonials": {
+      "title": "Co Říkají Naši Zákazníci",
+      "customer1": {
+        "name": "Sarah Johnson",
+        "role": "Majitelka Malého Podniku",
+        "quote": "Vynikající služba! Moje balíčky vždy dorazí včas a v perfektním stavu."
+      },
+      "customer2": {
+        "name": "Michael Chen",
+        "role": "Online Nakupující",
+        "quote": "Sledování v reálném čase mi dává klid. Velmi doporučuji!"
+      },
+      "customer3": {
+        "name": "Emma Rodriguez",
+        "role": "Freelancer",
+        "quote": "Dostupné ceny a spolehliví kurýři. Toto je moje oblíbená doručovací služba."
+      }
+    },
+    "cta": {
+      "title": "Jste Připraveni Začít?",
+      "subtitle": "Připojte se k tisícům spokojených zákazníků",
+      "button": "Objednat Dodávku Nyní"
+    }
+  },
+  "request": {
+    "title": "Objednat Dodávku",
+    "subtitle": "Vyplňte údaje a my najdeme perfektního kurýra pro vás",
+    "banner": {
+      "globalTitle": "Celosvětové pokrytí",
+      "city": "Nasadíme kurýry poblíž města {city}.",
+      "country": "Propojíme vás s důvěryhodnými kurýry v zemi {country}.",
+      "global": "Řekněte nám, kde jste, a zpřístupníme místní možnosti.",
+      "change": "Aktualizovat polohu"
+    },
+    "steps": {
+      "pickup": "Údaje o Vyzvednutí",
+      "delivery": "Údaje o Doručení",
+      "preferences": "Preference"
+    },
+    "pickup": {
+      "title": "Informace o Vyzvednutí",
+      "name": "Vaše Jméno",
+      "namePlaceholder": "Jan Novák",
+      "phone": "Telefonní Číslo",
+      "phonePlaceholder": "+420 123 456 789",
+      "email": "Email (volitelné)",
+      "emailPlaceholder": "jan@priklad.cz",
+      "address": "Adresa Vyzvednutí",
+      "street": "Ulice",
+      "city": "Město",
+      "zipCode": "PSČ"
+    },
+    "delivery": {
+      "title": "Informace o Doručení",
+      "recipientName": "Jméno Příjemce",
+      "recipientPhone": "Telefon Příjemce",
+      "address": "Adresa Doručení",
+      "street": "Ulice",
+      "city": "Město",
+      "zipCode": "PSČ",
+      "notes": "Poznámky k Doručení (volitelné)",
+      "notesPlaceholder": "Zazvonit, nechat u dveří, atd."
+    },
+    "preferences": {
+      "title": "Balíček a Preference",
+      "packageType": "Typ Balíčku",
+      "packageTypes": {
+        "documents": "Dokumenty",
+        "small": "Malý Balíček",
+        "medium": "Střední Balíček",
+        "large": "Velký Balíček"
+      },
+      "weight": "Hmotnost (kg)",
+      "dimensions": "Rozměry (volitelné)",
+      "dimensionsPlaceholder": "D x Š x V (cm)",
+      "specialInstructions": "Speciální Instrukce",
+      "specialInstructionsPlaceholder": "Křehké, Držet vzpřímené, atd.",
+      "urgency": "Naléhavost Doručení",
+      "urgencyTypes": {
+        "standard": "Standardní (2-3 hodiny)",
+        "express": "Expresní (1 hodina)",
+        "scheduled": "Plánované"
+      }
+    },
+    "buttons": {
+      "next": "Další",
+      "previous": "Předchozí",
+      "submit": "Objednat Dodávku"
+    },
+    "trackButton": "Sledovat dodávku",
+    "trackingId": "Sledovací kód",
+    "newRequest": "Nová objednávka",
+    "success": {
+      "title": "Dodávka Objednána!",
+      "message": "Váš sledovací kód je:",
+      "info": "Hledáme nejlepšího kurýra pro vás. Budete dostávat aktualizace přes SMS a email.",
+      "track": "Sledovat Dodávku",
+      "newRequest": "Nová Objednávka"
+    },
+    "scheduledOption": "📅 Scheduled (Choose date & time)"
+  },
+  "track": {
+    "title": "Sledovat Vaši Dodávku",
+    "subtitle": "Zadejte svůj sledovací kód pro zobrazení aktualizací v reálném čase",
+    "trackingCode": "Sledovací Kód",
+    "trackingCodePlaceholder": "Zadejte 10-místný sledovací kód",
+    "trackButton": "Sledovat Balíček",
+    "status": {
+      "pending": "Čeká na Kurýra",
+      "accepted": "Kurýr Přiřazen",
+      "picked_up": "Balíček Vyzvednut",
+      "in_transit": "V Přepravě",
+      "delivered": "Doručeno",
+      "cancelled": "Zrušeno"
+    },
+    "details": {
+      "title": "Detaily Dodávky",
+      "from": "Od",
+      "to": "Komu",
+      "courier": "Kurýr",
+      "estimatedTime": "Odhadované Doručení",
+      "actualTime": "Doručeno V",
+      "packageType": "Typ Balíčku",
+      "status": "Aktuální Stav"
+    },
+    "notFound": {
+      "title": "Sledovací Kód Nenalezen",
+      "message": "Zkontrolujte prosím svůj sledovací kód a zkuste to znovu.",
+      "button": "Zkusit Znovu"
+    }
+  },
+  "courier": {
+    "register": {
+      "title": "Staňte se Kurýrem",
+      "subtitle": "Začněte vydělávat doručováním balíčků ve vašem městě",
+      "steps": {
+        "credentials": "Účet",
+        "vehicle": "Vozidlo",
+        "verification": "Ověření"
+      },
+      "credentials": {
+        "title": "Vytvořte Svůj Účet",
+        "firstName": "Jméno",
+        "lastName": "Příjmení",
+        "email": "Emailová Adresa",
+        "phone": "Telefonní Číslo",
+        "password": "Heslo",
+        "confirmPassword": "Potvrdit Heslo",
+        "terms": "Souhlasím s Podmínkami Služby a Zásadami Ochrany Osobních Údajů"
+      },
+      "vehicle": {
+        "title": "Informace o Vozidle",
+        "vehicleType": "Typ Vozidla",
+        "vehicleTypes": {
+          "bike": "Kolo",
+          "motorcycle": "Motocykl",
+          "car": "Auto",
+          "van": "Dodávka"
+        },
+        "licensePlate": "SPZ (pokud je k dispozici)",
+        "insurance": "Informace o Pojištění",
+        "insurancePlaceholder": "Číslo pojistky nebo detaily"
+      },
+      "verification": {
+        "title": "Ověřovací Dokumenty",
+        "idDocument": "Doklad Totožnosti",
+        "driversLicense": "Řidičský Průkaz (pokud je k dispozici)",
+        "insurance": "Pojistný Certifikát",
+        "photo": "Profilová Fotka",
+        "uploadInstructions": "Nahrajte jasné fotky vašich dokumentů",
+        "agreement": "Potvrzuji, že všechny poskytnuté informace jsou přesné"
+      },
+      "buttons": {
+        "next": "Další",
+        "previous": "Předchozí",
+        "submit": "Odeslat Žádost"
+      },
+      "success": {
+        "title": "Žádost Odeslána!",
+        "message": "Vaši žádost zkontrolujeme do 24-48 hodin.",
+        "info": "Obdržíte email, jakmile bude váš účet ověřen.",
+        "login": "Přejít na Přihlášení"
+      }
+    },
+    "login": {
+      "title": "Přihlášení Kurýra",
+      "subtitle": "Přihlaste se pro přístup k vaší nástěnce",
+      "email": "Emailová Adresa",
+      "password": "Heslo",
+      "remember": "Zapamatovat si mě",
+      "forgotPassword": "Zapomněli jste heslo?",
+      "loginButton": "Přihlásit Se",
+      "noAccount": "Nemáte účet?",
+      "register": "Zaregistrujte se zde"
+    },
+    "dashboard": {
+      "title": "Nástěnka Kurýra",
+      "welcome": "Vítejte zpět",
+      "stats": {
+        "available": "Dostupné Práce",
+        "active": "Aktivní Dodávky",
+        "completed": "Dokončeno Dnes",
+        "earnings": "Dnešní Výdělek"
+      },
+      "availableJobs": {
+        "title": "Dostupné Dodávky",
+        "noJobs": "Momentálně nejsou k dispozici žádné dodávky",
+        "distance": "km daleko",
+        "accept": "Přijmout Práci",
+        "viewDetails": "Zobrazit Detaily"
+      },
+      "activeDeliveries": {
+        "title": "Vaše Aktivní Dodávky",
+        "pickup": "Vyzvednutí",
+        "delivery": "Doručení",
+        "updateStatus": "Aktualizovat Stav",
+        "complete": "Dokončit Dodávku",
+        "cancel": "Zrušit"
+      },
+      "statusUpdate": {
+        "picked_up": "Označit jako Vyzvednuté",
+        "in_transit": "Označit jako V Přepravě",
+        "delivered": "Označit jako Doručené"
+      }
+    }
+  },
+  "common": {
+    "loading": "Načítání...",
+    "error": "Došlo k chybě",
+    "tryAgain": "Zkusit Znovu",
+    "cancel": "Zrušit",
+    "confirm": "Potvrdit",
+    "save": "Uložit",
+    "close": "Zavřít",
+    "required": "Povinné",
+    "optional": "Volitelné"
+  },
+  "scheduling": {
+    "title": "Schedule Your Delivery",
+    "pickupDate": "Pickup Date",
+    "pickupTime": "Pickup Time",
+    "deliveryDate": "Delivery Date",
+    "deliveryTime": "Delivery Time",
+    "selectDate": "Select date",
+    "selectTime": "Select time",
+    "asap": "As soon as possible",
+    "scheduled": "Schedule for later",
+    "advanceBooking": "Book in advance for 10% discount",
+    "minimumNotice": "Minimum 2 hours notice required",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "timeSlots": {
+      "morning": "Morning (8 AM - 12 PM)",
+      "afternoon": "Afternoon (12 PM - 5 PM)",
+      "evening": "Evening (5 PM - 9 PM)"
+    },
+    "errors": {
+      "pastDate": "Cannot schedule for past dates",
+      "tooSoon": "Pickup time must be at least 2 hours from now",
+      "invalidTime": "Please select a valid time slot"
+    }
+  },
+  "pricing": {
+    "title": "Pricing Details",
+    "calculating": "Calculating price...",
+    "estimate": "Estimated Price",
+    "breakdown": "Price Breakdown",
+    "basePrice": "Base Price",
+    "distancePrice": "Distance ({distance} km)",
+    "urgencyPrice": "Urgency Fee",
+    "packageSizePrice": "Package Size Fee",
+    "scheduledDiscount": "Advance Booking Discount",
+    "subtotal": "Subtotal",
+    "platformFee": "Platform Fee (30%)",
+    "courierEarnings": "Courier Earnings (70%)",
+    "total": "Total Price",
+    "courierWillReceive": "Courier will receive",
+    "youPay": "You pay",
+    "perKm": "per km",
+    "priceFactors": {
+      "title": "What affects the price?",
+      "distance": "Distance between pickup and delivery",
+      "urgency": "How fast you need it delivered",
+      "packageSize": "Size of your package",
+      "scheduling": "When you schedule the delivery"
+    },
+    "urgencyLevels": {
+      "standard": "Standard (2-4 hours)",
+      "express": "Express (1-2 hours)",
+      "urgent": "Urgent (< 1 hour)",
+      "scheduled": "Scheduled"
+    },
+    "packageSizes": {
+      "small": "Small (< 5kg)",
+      "medium": "Medium (5-15kg)",
+      "large": "Large (> 15kg)"
+    },
+    "config": {
+      "basePrice": "Base price",
+      "pricePerKm": "Per kilometer",
+      "platformFeePercentage": "Platform fee",
+      "courierEarningsPercentage": "Courier receives"
+    },
+    "savingsNotice": "💰 Save 10% by scheduling 24+ hours in advance!",
+    "fairPricing": "Fair pricing: 70% goes to your courier"
+  },
+  "maps": {
+    "title": "Route Map",
+    "loading": "Loading map...",
+    "calculating": "Calculating route...",
+    "origin": "Pickup Location",
+    "destination": "Delivery Location",
+    "distance": "Distance",
+    "duration": "Estimated Time",
+    "estimatedNotice": "Distance shown is approximate based on current traffic.",
+    "route": "Route",
+    "viewMap": "View on Map",
+    "enterAddress": "Enter address",
+    "searchAddress": "Search for an address...",
+    "selectLocation": "Select location on map",
+    "useCurrentLocation": "Use my current location",
+    "confirmLocation": "Confirm location",
+    "errors": {
+      "noRoute": "Could not calculate route. Please check addresses.",
+      "apiError": "Map service temporarily unavailable",
+      "geolocationDenied": "Location access denied",
+      "invalidAddress": "Invalid address. Please try again."
+    },
+    "instructions": {
+      "clickMap": "Click on the map to select a location",
+      "dragMarker": "Drag the marker to adjust position",
+      "searchOrClick": "Search for an address or click on the map"
+    }
+  },
+  "earnings": {
+    "title": "Your Earnings",
+    "total": "Total Earnings",
+    "today": "Today",
+    "thisWeek": "This Week",
+    "thisMonth": "This Month",
+    "breakdown": "Earnings Breakdown",
+    "deliveries": "Deliveries",
+    "averagePerDelivery": "Average per Delivery",
+    "courierShare": "Your Share (70%)",
+    "platformShare": "Platform Fee (30%)",
+    "grossRevenue": "Gross Revenue",
+    "netEarnings": "Net Earnings",
+    "pending": "Pending",
+    "completed": "Completed",
+    "history": {
+      "title": "Earnings History",
+      "date": "Date",
+      "amount": "Amount",
+      "delivery": "Delivery",
+      "status": "Status"
+    },
+    "summary": {
+      "totalDeliveries": "Total Deliveries",
+      "successRate": "Success Rate",
+      "averageRating": "Average Rating",
+      "totalDistance": "Total Distance Covered"
+    }
+  }
+}

@@ -1,0 +1,450 @@
+{
+  "nav": {
+    "home": "Trang Chủ",
+    "forCouriers": "Dành Cho Shipper",
+    "trackDelivery": "Theo Dõi Đơn Hàng",
+    "requestDelivery": "Đặt Giao Hàng"
+  },
+  "header": {
+    "taglineLocationCity": "Phục vụ {country} · {city}",
+    "taglineLocationCountry": "Phục vụ {country}",
+    "taglineDefault": "Nhanh. Bản địa. Thân thiện.",
+    "requestLink": "Đặt",
+    "becomeCourier": "Trở thành shipper"
+  },
+  "home": {
+    "hero": {
+      "title": "Dịch Vụ Giao Hàng Nhanh và Tin Cậy",
+      "subtitle": "Nhận bưu kiện của bạn nhanh chóng và an toàn với mạng lưới shipper đáng tin cậy",
+      "cta": "Đặt Giao Hàng",
+      "ctaSecondary": "Trở Thành Shipper",
+      "locationCity": "Shipper địa phương tại {city}",
+      "locationCountry": "Phục vụ {country} với năng lượng ngập tràn nắng",
+      "locationFallback": "Giao hàng với nụ cười nắng ở khắp nơi",
+      "changeLocation": "Cần vị trí khác?"
+    },
+    "stats": {
+      "deliveries": "Đơn Hàng Đang Giao",
+      "couriers": "Shipper Đã Xác Minh",
+      "cities": "Thành Phố Phủ Sóng",
+      "rating": "Đánh Giá Khách Hàng"
+    },
+    "howItWorks": {
+      "title": "Cách Thức Hoạt Động",
+      "step1": {
+        "title": "Đặt Giao Hàng",
+        "description": "Nhập thông tin lấy và giao hàng"
+      },
+      "step2": {
+        "title": "Tìm Shipper",
+        "description": "Hệ thống tìm shipper phù hợp nhất"
+      },
+      "step3": {
+        "title": "Theo Dõi Thời Gian Thực",
+        "description": "Giám sát đơn hàng từng bước"
+      },
+      "step4": {
+        "title": "Nhận Bưu Kiện",
+        "description": "Nhận bưu kiện được giao an toàn"
+      }
+    },
+    "features": {
+      "title": "Tại Sao Chọn Chúng Tôi",
+      "fast": {
+        "title": "Siêu Nhanh",
+        "description": "Giao hàng trong ngày tại hầu hết các thành phố"
+      },
+      "secure": {
+        "title": "100% An Toàn",
+        "description": "Bưu kiện được bảo hiểm và theo dõi đầy đủ"
+      },
+      "affordable": {
+        "title": "Giá Cả Phải Chăng",
+        "description": "Giá minh bạch không phí ẩn"
+      },
+      "support": {
+        "title": "Hỗ Trợ 24/7",
+        "description": "Đội ngũ luôn sẵn sàng giúp đỡ bạn"
+      }
+    },
+    "locations": {
+      "title": "Đáng tin cậy ở bất cứ nơi nào bạn cần",
+      "subtitle": "Từ đại lộ lịch sử đến khu chợ ven biển, Courier Connect mang nguồn năng lượng rực nắng tới mọi cánh cửa.",
+      "global": "Phủ sóng toàn cầu",
+      "activeCity": "Hiển thị shipper gần {city}",
+      "activeGlobal": "Chọn vị trí để khám phá không khí giao hàng địa phương",
+      "coverage": "Chúng tôi hoạt động trên Liên minh Châu Âu, châu Mỹ và mọi quốc gia được Steam công nhận. Chia sẻ bạn đang ở đâu, phần còn lại để chúng tôi lo.",
+      "hubTagline": "Dịch vụ nắng trong ngày",
+      "hubs": {
+        "berlin": "Berlin",
+        "prague": "Praha",
+        "istanbul": "Istanbul",
+        "newYork": "New York",
+        "toronto": "Toronto",
+        "saoPaulo": "São Paulo"
+      }
+    },
+    "testimonials": {
+      "title": "Khách Hàng Nói Gì",
+      "customer1": {
+        "name": "Sarah Johnson",
+        "role": "Chủ Doanh Nghiệp Nhỏ",
+        "quote": "Dịch vụ tuyệt vời! Bưu kiện luôn đến đúng giờ và trong tình trạng hoàn hảo."
+      },
+      "customer2": {
+        "name": "Michael Chen",
+        "role": "Người Mua Hàng Online",
+        "quote": "Theo dõi thời gian thực cho tôi yên tâm. Rất đáng giới thiệu!"
+      },
+      "customer3": {
+        "name": "Emma Rodriguez",
+        "role": "Freelancer",
+        "quote": "Giá cả phải chăng và shipper đáng tin cậy. Đây là dịch vụ giao hàng ưa thích của tôi."
+      }
+    },
+    "cta": {
+      "title": "Sẵn Sàng Bắt Đầu?",
+      "subtitle": "Tham gia cùng hàng nghìn khách hàng hài lòng",
+      "button": "Đặt Giao Hàng Ngay"
+    }
+  },
+  "request": {
+    "title": "Đặt Giao Hàng",
+    "subtitle": "Điền thông tin và chúng tôi sẽ tìm shipper hoàn hảo cho bạn",
+    "banner": {
+      "globalTitle": "Phủ sóng toàn cầu",
+      "city": "Chúng tôi điều shipper đến gần {city}.",
+      "country": "Kết nối bạn với shipper đáng tin cậy tại {country}.",
+      "global": "Cho chúng tôi biết vị trí để mở khóa lựa chọn địa phương.",
+      "change": "Cập nhật vị trí"
+    },
+    "steps": {
+      "pickup": "Thông Tin Lấy Hàng",
+      "delivery": "Thông Tin Giao Hàng",
+      "preferences": "Tùy Chọn"
+    },
+    "pickup": {
+      "title": "Thông Tin Lấy Hàng",
+      "name": "Tên Của Bạn",
+      "namePlaceholder": "Nguyễn Văn A",
+      "phone": "Số Điện Thoại",
+      "phonePlaceholder": "+84 123 456 789",
+      "email": "Email (tùy chọn)",
+      "emailPlaceholder": "nguyen@vidu.vn",
+      "address": "Địa Chỉ Lấy Hàng",
+      "street": "Địa Chỉ",
+      "city": "Thành Phố",
+      "zipCode": "Mã Bưu Chính"
+    },
+    "delivery": {
+      "title": "Thông Tin Giao Hàng",
+      "recipientName": "Tên Người Nhận",
+      "recipientPhone": "Số Điện Thoại Người Nhận",
+      "address": "Địa Chỉ Giao Hàng",
+      "street": "Địa Chỉ",
+      "city": "Thành Phố",
+      "zipCode": "Mã Bưu Chính",
+      "notes": "Ghi Chú Giao Hàng (tùy chọn)",
+      "notesPlaceholder": "Bấm chuông, để ở cửa, v.v."
+    },
+    "preferences": {
+      "title": "Bưu Kiện và Tùy Chọn",
+      "packageType": "Loại Bưu Kiện",
+      "packageTypes": {
+        "documents": "Tài Liệu",
+        "small": "Bưu Kiện Nhỏ",
+        "medium": "Bưu Kiện Trung Bình",
+        "large": "Bưu Kiện Lớn"
+      },
+      "weight": "Cân Nặng (kg)",
+      "dimensions": "Kích Thước (tùy chọn)",
+      "dimensionsPlaceholder": "D x R x C (cm)",
+      "specialInstructions": "Hướng Dẫn Đặc Biệt",
+      "specialInstructionsPlaceholder": "Dễ vỡ, Để thẳng đứng, v.v.",
+      "urgency": "Độ Khẩn Cấp",
+      "urgencyTypes": {
+        "standard": "Tiêu Chuẩn (2-3 giờ)",
+        "express": "Hỏa Tốc (1 giờ)",
+        "scheduled": "Đã Lên Lịch"
+      }
+    },
+    "buttons": {
+      "next": "Tiếp Theo",
+      "previous": "Quay Lại",
+      "submit": "Đặt Giao Hàng"
+    },
+    "trackButton": "Theo dõi giao hàng",
+    "trackingId": "Mã theo dõi",
+    "newRequest": "Đơn mới",
+    "success": {
+      "title": "Đã Đặt Giao Hàng!",
+      "message": "Mã theo dõi của bạn là:",
+      "info": "Chúng tôi đang tìm shipper tốt nhất cho bạn. Bạn sẽ nhận cập nhật qua SMS và email.",
+      "track": "Theo Dõi Đơn Hàng",
+      "newRequest": "Đơn Mới"
+    },
+    "scheduledOption": "📅 Scheduled (Choose date & time)"
+  },
+  "track": {
+    "title": "Theo Dõi Đơn Hàng Của Bạn",
+    "subtitle": "Nhập mã theo dõi để xem cập nhật thời gian thực",
+    "trackingCode": "Mã Theo Dõi",
+    "trackingCodePlaceholder": "Nhập mã theo dõi 10 chữ số",
+    "trackButton": "Theo Dõi Bưu Kiện",
+    "status": {
+      "pending": "Đang Chờ Shipper",
+      "accepted": "Đã Giao Shipper",
+      "picked_up": "Đã Lấy Hàng",
+      "in_transit": "Đang Vận Chuyển",
+      "delivered": "Đã Giao",
+      "cancelled": "Đã Hủy"
+    },
+    "details": {
+      "title": "Chi Tiết Giao Hàng",
+      "from": "Từ",
+      "to": "Đến",
+      "courier": "Shipper",
+      "estimatedTime": "Thời Gian Dự Kiến",
+      "actualTime": "Đã Giao Lúc",
+      "packageType": "Loại Bưu Kiện",
+      "status": "Trạng Thái Hiện Tại"
+    },
+    "notFound": {
+      "title": "Không Tìm Thấy Mã Theo Dõi",
+      "message": "Vui lòng kiểm tra mã theo dõi và thử lại.",
+      "button": "Thử Lại"
+    }
+  },
+  "courier": {
+    "register": {
+      "title": "Trở Thành Shipper",
+      "subtitle": "Bắt đầu kiếm tiền bằng cách giao hàng trong thành phố của bạn",
+      "steps": {
+        "credentials": "Tài Khoản",
+        "vehicle": "Phương Tiện",
+        "verification": "Xác Minh"
+      },
+      "credentials": {
+        "title": "Tạo Tài Khoản Của Bạn",
+        "firstName": "Tên",
+        "lastName": "Họ",
+        "email": "Địa Chỉ Email",
+        "phone": "Số Điện Thoại",
+        "password": "Mật Khẩu",
+        "confirmPassword": "Xác Nhận Mật Khẩu",
+        "terms": "Tôi đồng ý với Điều Khoản Dịch Vụ và Chính Sách Bảo Mật"
+      },
+      "vehicle": {
+        "title": "Thông Tin Phương Tiện",
+        "vehicleType": "Loại Phương Tiện",
+        "vehicleTypes": {
+          "bike": "Xe Đạp",
+          "motorcycle": "Xe Máy",
+          "car": "Ô Tô",
+          "van": "Xe Tải"
+        },
+        "licensePlate": "Biển Số Xe (nếu có)",
+        "insurance": "Thông Tin Bảo Hiểm",
+        "insurancePlaceholder": "Số hợp đồng hoặc chi tiết"
+      },
+      "verification": {
+        "title": "Tài Liệu Xác Minh",
+        "idDocument": "Giấy Tờ Tùy Thân",
+        "driversLicense": "Bằng Lái Xe (nếu có)",
+        "insurance": "Giấy Chứng Nhận Bảo Hiểm",
+        "photo": "Ảnh Đại Diện",
+        "uploadInstructions": "Tải lên ảnh rõ ràng các tài liệu của bạn",
+        "agreement": "Tôi xác nhận rằng tất cả thông tin được cung cấp là chính xác"
+      },
+      "buttons": {
+        "next": "Tiếp Theo",
+        "previous": "Quay Lại",
+        "submit": "Gửi Đơn Đăng Ký"
+      },
+      "success": {
+        "title": "Đã Gửi Đơn Đăng Ký!",
+        "message": "Chúng tôi sẽ xem xét đơn của bạn trong vòng 24-48 giờ.",
+        "info": "Bạn sẽ nhận được email khi tài khoản được xác minh.",
+        "login": "Đến Trang Đăng Nhập"
+      }
+    },
+    "login": {
+      "title": "Đăng Nhập Shipper",
+      "subtitle": "Đăng nhập để truy cập bảng điều khiển",
+      "email": "Địa Chỉ Email",
+      "password": "Mật Khẩu",
+      "remember": "Ghi nhớ đăng nhập",
+      "forgotPassword": "Quên mật khẩu?",
+      "loginButton": "Đăng Nhập",
+      "noAccount": "Chưa có tài khoản?",
+      "register": "Đăng ký tại đây"
+    },
+    "dashboard": {
+      "title": "Bảng Điều Khiển Shipper",
+      "welcome": "Chào mừng trở lại",
+      "stats": {
+        "available": "Việc Có Sẵn",
+        "active": "Đơn Đang Giao",
+        "completed": "Hoàn Thành Hôm Nay",
+        "earnings": "Thu Nhập Hôm Nay"
+      },
+      "availableJobs": {
+        "title": "Đơn Hàng Có Sẵn",
+        "noJobs": "Hiện tại không có đơn hàng nào",
+        "distance": "km",
+        "accept": "Nhận Việc",
+        "viewDetails": "Xem Chi Tiết"
+      },
+      "activeDeliveries": {
+        "title": "Đơn Hàng Đang Giao",
+        "pickup": "Lấy Hàng",
+        "delivery": "Giao Hàng",
+        "updateStatus": "Cập Nhật Trạng Thái",
+        "complete": "Hoàn Thành",
+        "cancel": "Hủy"
+      },
+      "statusUpdate": {
+        "picked_up": "Đánh Dấu Đã Lấy Hàng",
+        "in_transit": "Đánh Dấu Đang Vận Chuyển",
+        "delivered": "Đánh Dấu Đã Giao"
+      }
+    }
+  },
+  "common": {
+    "loading": "Đang tải...",
+    "error": "Đã xảy ra lỗi",
+    "tryAgain": "Thử Lại",
+    "cancel": "Hủy",
+    "confirm": "Xác Nhận",
+    "save": "Lưu",
+    "close": "Đóng",
+    "required": "Bắt buộc",
+    "optional": "Tùy chọn"
+  },
+  "scheduling": {
+    "title": "Schedule Your Delivery",
+    "pickupDate": "Pickup Date",
+    "pickupTime": "Pickup Time",
+    "deliveryDate": "Delivery Date",
+    "deliveryTime": "Delivery Time",
+    "selectDate": "Select date",
+    "selectTime": "Select time",
+    "asap": "As soon as possible",
+    "scheduled": "Schedule for later",
+    "advanceBooking": "Book in advance for 10% discount",
+    "minimumNotice": "Minimum 2 hours notice required",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "timeSlots": {
+      "morning": "Morning (8 AM - 12 PM)",
+      "afternoon": "Afternoon (12 PM - 5 PM)",
+      "evening": "Evening (5 PM - 9 PM)"
+    },
+    "errors": {
+      "pastDate": "Cannot schedule for past dates",
+      "tooSoon": "Pickup time must be at least 2 hours from now",
+      "invalidTime": "Please select a valid time slot"
+    }
+  },
+  "pricing": {
+    "title": "Pricing Details",
+    "calculating": "Calculating price...",
+    "estimate": "Estimated Price",
+    "breakdown": "Price Breakdown",
+    "basePrice": "Base Price",
+    "distancePrice": "Distance ({distance} km)",
+    "urgencyPrice": "Urgency Fee",
+    "packageSizePrice": "Package Size Fee",
+    "scheduledDiscount": "Advance Booking Discount",
+    "subtotal": "Subtotal",
+    "platformFee": "Platform Fee (30%)",
+    "courierEarnings": "Courier Earnings (70%)",
+    "total": "Total Price",
+    "courierWillReceive": "Courier will receive",
+    "youPay": "You pay",
+    "perKm": "per km",
+    "priceFactors": {
+      "title": "What affects the price?",
+      "distance": "Distance between pickup and delivery",
+      "urgency": "How fast you need it delivered",
+      "packageSize": "Size of your package",
+      "scheduling": "When you schedule the delivery"
+    },
+    "urgencyLevels": {
+      "standard": "Standard (2-4 hours)",
+      "express": "Express (1-2 hours)",
+      "urgent": "Urgent (< 1 hour)",
+      "scheduled": "Scheduled"
+    },
+    "packageSizes": {
+      "small": "Small (< 5kg)",
+      "medium": "Medium (5-15kg)",
+      "large": "Large (> 15kg)"
+    },
+    "config": {
+      "basePrice": "Base price",
+      "pricePerKm": "Per kilometer",
+      "platformFeePercentage": "Platform fee",
+      "courierEarningsPercentage": "Courier receives"
+    },
+    "savingsNotice": "💰 Save 10% by scheduling 24+ hours in advance!",
+    "fairPricing": "Fair pricing: 70% goes to your courier"
+  },
+  "maps": {
+    "title": "Route Map",
+    "loading": "Loading map...",
+    "calculating": "Calculating route...",
+    "origin": "Pickup Location",
+    "destination": "Delivery Location",
+    "distance": "Distance",
+    "duration": "Estimated Time",
+    "estimatedNotice": "Distance shown is approximate based on current traffic.",
+    "route": "Route",
+    "viewMap": "View on Map",
+    "enterAddress": "Enter address",
+    "searchAddress": "Search for an address...",
+    "selectLocation": "Select location on map",
+    "useCurrentLocation": "Use my current location",
+    "confirmLocation": "Confirm location",
+    "errors": {
+      "noRoute": "Could not calculate route. Please check addresses.",
+      "apiError": "Map service temporarily unavailable",
+      "geolocationDenied": "Location access denied",
+      "invalidAddress": "Invalid address. Please try again."
+    },
+    "instructions": {
+      "clickMap": "Click on the map to select a location",
+      "dragMarker": "Drag the marker to adjust position",
+      "searchOrClick": "Search for an address or click on the map"
+    }
+  },
+  "earnings": {
+    "title": "Your Earnings",
+    "total": "Total Earnings",
+    "today": "Today",
+    "thisWeek": "This Week",
+    "thisMonth": "This Month",
+    "breakdown": "Earnings Breakdown",
+    "deliveries": "Deliveries",
+    "averagePerDelivery": "Average per Delivery",
+    "courierShare": "Your Share (70%)",
+    "platformShare": "Platform Fee (30%)",
+    "grossRevenue": "Gross Revenue",
+    "netEarnings": "Net Earnings",
+    "pending": "Pending",
+    "completed": "Completed",
+    "history": {
+      "title": "Earnings History",
+      "date": "Date",
+      "amount": "Amount",
+      "delivery": "Delivery",
+      "status": "Status"
+    },
+    "summary": {
+      "totalDeliveries": "Total Deliveries",
+      "successRate": "Success Rate",
+      "averageRating": "Average Rating",
+      "totalDistance": "Total Distance Covered"
+    }
+  }
+}

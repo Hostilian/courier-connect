@@ -1,43 +1,19 @@
-import Providers from '@/components/Providers'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import { Toaster } from 'react-hot-toast'
-import './globals.css'
-
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
-  title: 'Courier Connect - Neighbors Helping Neighbors',
-  description: 'A friendly local delivery service connecting neighbors who need help with trusted couriers. No sign-up needed to request deliveries!',
-  keywords: 'local delivery, community courier, neighbor help, package delivery, friendly service',
-  authors: [{ name: 'Courier Connect Team' }],
-  viewport: 'width=device-width, initial-scale=1',
-  themeColor: '#3B82F6',
-  manifest: '/manifest.json',
-}
+// Root layout base shell; per-locale layout handles providers and chrome
+import './globals.css';
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} antialiased bg-gray-50 min-h-screen`}>
-        <Providers>
-          {children}
-          <Toaster 
-            position="top-center"
-            toastOptions={{
-              duration: 4000,
-              style: {
-                background: '#363636',
-                color: '#fff',
-              },
-            }}
-          />
-        </Providers>
+    <html lang="en">
+      <head>
+        <meta name="description" content="Courier Connect — local couriers connecting people. Request pickups or become a courier. Fast, friendly service." />
+      </head>
+      <body className="bg-white text-slate-900 antialiased min-h-screen">
+        {children}
       </body>
     </html>
-  )
+  );
 }

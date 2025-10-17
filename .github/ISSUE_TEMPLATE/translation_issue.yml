@@ -1,0 +1,99 @@
+name: 🌍 Translation/Localization Issue
+description: Report issues with translations or suggest improvements
+title: "[i18n]: "
+labels: ["i18n", "translation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve our translations! Please fill out the form below.
+
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      description: Which language is affected?
+      options:
+        - English (en)
+        - Czech (cs)
+        - German (de)
+        - Spanish (es)
+        - French (fr)
+        - Italian (it)
+        - Polish (pl)
+        - Portuguese (pt)
+        - Russian (ru)
+        - Turkish (tr)
+        - Ukrainian (uk)
+        - Vietnamese (vi)
+        - Arabic (ar)
+        - Chinese (zh)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issuetype
+    attributes:
+      label: Issue Type
+      description: What type of translation issue is this?
+      options:
+        - Incorrect translation
+        - Missing translation
+        - Grammar/spelling error
+        - Cultural adaptation needed
+        - RTL layout issue (Arabic/Hebrew)
+        - Suggestion for improvement
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Page/Component Location
+      description: Where did you find this issue?
+      placeholder: e.g., Homepage hero section, Courier dashboard, Request form
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: Current Translation
+      description: What is currently shown?
+      placeholder: Current text...
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested
+    attributes:
+      label: Suggested Translation
+      description: What should it say instead?
+      placeholder: Suggested text...
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context/Reasoning
+      description: Why is this change needed? Provide cultural context if relevant.
+      placeholder: This translation is incorrect because...
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: native
+    attributes:
+      label: Native Speaker
+      description: Are you a native speaker of this language?
+      options:
+        - label: "Yes, I am a native speaker"
+        - label: "No, but I am fluent"
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add screenshots or any other context
+      placeholder: Any additional information...

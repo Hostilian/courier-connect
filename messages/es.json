@@ -1,0 +1,450 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "forCouriers": "Para Mensajeros",
+    "trackDelivery": "Rastrear Entrega",
+    "requestDelivery": "Solicitar Entrega"
+  },
+  "header": {
+    "taglineLocationCity": "Sirviendo {country} · {city}",
+    "taglineLocationCountry": "Sirviendo {country}",
+    "taglineDefault": "Rápido. Local. Amigable.",
+    "requestLink": "Solicitar",
+    "becomeCourier": "Hazte mensajero"
+  },
+  "home": {
+    "hero": {
+      "title": "Servicio de Entrega Rápido y Confiable",
+      "subtitle": "Recibe tus paquetes entregados de forma rápida y segura con nuestra red de mensajeros de confianza",
+      "cta": "Solicitar Entrega",
+      "ctaSecondary": "Ser Mensajero",
+      "locationCity": "Mensajeros locales en {city}",
+      "locationCountry": "Sirviendo a {country} con energía soleada",
+      "locationFallback": "Entregando con una sonrisa soleada en todo el mundo",
+      "changeLocation": "¿Necesitas otro lugar?"
+    },
+    "stats": {
+      "deliveries": "Entregas Activas",
+      "couriers": "Mensajeros Verificados",
+      "cities": "Ciudades Cubiertas",
+      "rating": "Valoración de Clientes"
+    },
+    "howItWorks": {
+      "title": "Cómo Funciona",
+      "step1": {
+        "title": "Solicitar Entrega",
+        "description": "Ingresa los detalles de recogida y entrega"
+      },
+      "step2": {
+        "title": "Encontrar Mensajero",
+        "description": "Nuestro sistema encuentra el mejor mensajero"
+      },
+      "step3": {
+        "title": "Rastrear en Tiempo Real",
+        "description": "Monitorea tu entrega en cada paso"
+      },
+      "step4": {
+        "title": "Recibir Paquete",
+        "description": "Recibe tu paquete entregado de forma segura"
+      }
+    },
+    "features": {
+      "title": "Por Qué Elegirnos",
+      "fast": {
+        "title": "Súper Rápido",
+        "description": "Entrega el mismo día disponible en la mayoría de las ciudades"
+      },
+      "secure": {
+        "title": "100% Seguro",
+        "description": "Tus paquetes están completamente asegurados y rastreados"
+      },
+      "affordable": {
+        "title": "Tarifas Económicas",
+        "description": "Precios transparentes sin cargos ocultos"
+      },
+      "support": {
+        "title": "Soporte 24/7",
+        "description": "Nuestro equipo siempre está aquí para ayudarte"
+      }
+    },
+    "locations": {
+      "title": "De confianza donde nos necesites",
+      "subtitle": "Desde bulevares históricos hasta mercados costeros, Courier Connect lleva energía soleada a cada puerta.",
+      "global": "Cobertura mundial",
+      "activeCity": "Mostrando mensajeros cercanos en {city}",
+      "activeGlobal": "Elige una ubicación para ver el ambiente local de mensajería",
+      "coverage": "Operamos en la Unión Europea, América del Norte y del Sur, y en cada país reconocido por Steam. Toca el selector para decirnos dónde estás y nos encargamos del resto.",
+      "hubTagline": "Servicio soleado en el mismo día",
+      "hubs": {
+        "berlin": "Berlín",
+        "prague": "Praga",
+        "istanbul": "Estambul",
+        "newYork": "Nueva York",
+        "toronto": "Toronto",
+        "saoPaulo": "São Paulo"
+      }
+    },
+    "testimonials": {
+      "title": "Lo Que Dicen Nuestros Clientes",
+      "customer1": {
+        "name": "Sarah Johnson",
+        "role": "Propietaria de Pequeño Negocio",
+        "quote": "¡Excelente servicio! Mis paquetes siempre llegan a tiempo y en perfectas condiciones."
+      },
+      "customer2": {
+        "name": "Michael Chen",
+        "role": "Comprador en Línea",
+        "quote": "El rastreo en tiempo real me da tranquilidad. ¡Muy recomendado!"
+      },
+      "customer3": {
+        "name": "Emma Rodriguez",
+        "role": "Freelancer",
+        "quote": "Tarifas económicas y mensajeros confiables. Este es mi servicio de entrega preferido."
+      }
+    },
+    "cta": {
+      "title": "¿Listo Para Comenzar?",
+      "subtitle": "Únete a miles de clientes satisfechos",
+      "button": "Solicitar Entrega Ahora"
+    }
+  },
+  "request": {
+    "title": "Solicitar Entrega",
+    "subtitle": "Completa los detalles y encontraremos el mensajero perfecto para ti",
+    "banner": {
+      "globalTitle": "Cobertura mundial",
+      "city": "Enviaremos mensajeros cerca de {city}.",
+      "country": "Te conectamos con mensajeros de confianza en {country}.",
+      "global": "Cuéntanos dónde estás para desbloquear opciones locales.",
+      "change": "Actualizar ubicación"
+    },
+    "steps": {
+      "pickup": "Detalles de Recogida",
+      "delivery": "Detalles de Entrega",
+      "preferences": "Preferencias"
+    },
+    "pickup": {
+      "title": "Información de Recogida",
+      "name": "Tu Nombre",
+      "namePlaceholder": "Juan Pérez",
+      "phone": "Número de Teléfono",
+      "phonePlaceholder": "+34 600 000 000",
+      "email": "Correo Electrónico (opcional)",
+      "emailPlaceholder": "juan@ejemplo.com",
+      "address": "Dirección de Recogida",
+      "street": "Dirección",
+      "city": "Ciudad",
+      "zipCode": "Código Postal"
+    },
+    "delivery": {
+      "title": "Información de Entrega",
+      "recipientName": "Nombre del Destinatario",
+      "recipientPhone": "Teléfono del Destinatario",
+      "address": "Dirección de Entrega",
+      "street": "Dirección",
+      "city": "Ciudad",
+      "zipCode": "Código Postal",
+      "notes": "Notas de Entrega (opcional)",
+      "notesPlaceholder": "Tocar el timbre, dejar en la puerta, etc."
+    },
+    "preferences": {
+      "title": "Paquete y Preferencias",
+      "packageType": "Tipo de Paquete",
+      "packageTypes": {
+        "documents": "Documentos",
+        "small": "Paquete Pequeño",
+        "medium": "Paquete Mediano",
+        "large": "Paquete Grande"
+      },
+      "weight": "Peso (kg)",
+      "dimensions": "Dimensiones (opcional)",
+      "dimensionsPlaceholder": "Largo x Ancho x Alto (cm)",
+      "specialInstructions": "Instrucciones Especiales",
+      "specialInstructionsPlaceholder": "Frágil, Mantener vertical, etc.",
+      "urgency": "Urgencia de Entrega",
+      "urgencyTypes": {
+        "standard": "Estándar (2-3 horas)",
+        "express": "Express (1 hora)",
+        "scheduled": "Programada"
+      }
+    },
+    "buttons": {
+      "next": "Siguiente",
+      "previous": "Anterior",
+      "submit": "Solicitar Entrega"
+    },
+    "trackButton": "Rastrear entrega",
+    "trackingId": "ID de rastreo",
+    "newRequest": "Nueva solicitud",
+    "success": {
+      "title": "¡Entrega Solicitada!",
+      "message": "Tu código de rastreo es:",
+      "info": "Estamos encontrando el mejor mensajero para ti. Recibirás actualizaciones por SMS y correo electrónico.",
+      "track": "Rastrear Entrega",
+      "newRequest": "Nueva Solicitud"
+    },
+    "scheduledOption": "📅 Scheduled (Choose date & time)"
+  },
+  "track": {
+    "title": "Rastrear Tu Entrega",
+    "subtitle": "Ingresa tu código de rastreo para ver actualizaciones en tiempo real",
+    "trackingCode": "Código de Rastreo",
+    "trackingCodePlaceholder": "Ingresa el código de rastreo de 10 dígitos",
+    "trackButton": "Rastrear Paquete",
+    "status": {
+      "pending": "Esperando Mensajero",
+      "accepted": "Mensajero Asignado",
+      "picked_up": "Paquete Recogido",
+      "in_transit": "En Tránsito",
+      "delivered": "Entregado",
+      "cancelled": "Cancelado"
+    },
+    "details": {
+      "title": "Detalles de la Entrega",
+      "from": "Desde",
+      "to": "Hasta",
+      "courier": "Mensajero",
+      "estimatedTime": "Entrega Estimada",
+      "actualTime": "Entregado A Las",
+      "packageType": "Tipo de Paquete",
+      "status": "Estado Actual"
+    },
+    "notFound": {
+      "title": "Código de Rastreo No Encontrado",
+      "message": "Por favor verifica tu código de rastreo e intenta de nuevo.",
+      "button": "Intentar de Nuevo"
+    }
+  },
+  "courier": {
+    "register": {
+      "title": "Ser Mensajero",
+      "subtitle": "Comienza a ganar entregando paquetes en tu ciudad",
+      "steps": {
+        "credentials": "Cuenta",
+        "vehicle": "Vehículo",
+        "verification": "Verificación"
+      },
+      "credentials": {
+        "title": "Crea Tu Cuenta",
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "email": "Correo Electrónico",
+        "phone": "Número de Teléfono",
+        "password": "Contraseña",
+        "confirmPassword": "Confirmar Contraseña",
+        "terms": "Acepto los Términos de Servicio y Política de Privacidad"
+      },
+      "vehicle": {
+        "title": "Información del Vehículo",
+        "vehicleType": "Tipo de Vehículo",
+        "vehicleTypes": {
+          "bike": "Bicicleta",
+          "motorcycle": "Motocicleta",
+          "car": "Automóvil",
+          "van": "Furgoneta"
+        },
+        "licensePlate": "Matrícula (si aplica)",
+        "insurance": "Información del Seguro",
+        "insurancePlaceholder": "Número de póliza o detalles"
+      },
+      "verification": {
+        "title": "Documentos de Verificación",
+        "idDocument": "Documento de Identidad",
+        "driversLicense": "Licencia de Conducir (si aplica)",
+        "insurance": "Certificado de Seguro",
+        "photo": "Foto de Perfil",
+        "uploadInstructions": "Sube fotos claras de tus documentos",
+        "agreement": "Confirmo que toda la información proporcionada es precisa"
+      },
+      "buttons": {
+        "next": "Siguiente",
+        "previous": "Anterior",
+        "submit": "Enviar Solicitud"
+      },
+      "success": {
+        "title": "¡Solicitud Enviada!",
+        "message": "Revisaremos tu solicitud en 24-48 horas.",
+        "info": "Recibirás un correo electrónico una vez que tu cuenta sea verificada.",
+        "login": "Ir a Iniciar Sesión"
+      }
+    },
+    "login": {
+      "title": "Inicio de Sesión de Mensajero",
+      "subtitle": "Inicia sesión para acceder a tu panel",
+      "email": "Correo Electrónico",
+      "password": "Contraseña",
+      "remember": "Recuérdame",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "loginButton": "Iniciar Sesión",
+      "noAccount": "¿No tienes una cuenta?",
+      "register": "Regístrate aquí"
+    },
+    "dashboard": {
+      "title": "Panel de Mensajero",
+      "welcome": "Bienvenido de nuevo",
+      "stats": {
+        "available": "Trabajos Disponibles",
+        "active": "Entregas Activas",
+        "completed": "Completadas Hoy",
+        "earnings": "Ganancias de Hoy"
+      },
+      "availableJobs": {
+        "title": "Entregas Disponibles",
+        "noJobs": "No hay entregas disponibles en este momento",
+        "distance": "km de distancia",
+        "accept": "Aceptar Trabajo",
+        "viewDetails": "Ver Detalles"
+      },
+      "activeDeliveries": {
+        "title": "Tus Entregas Activas",
+        "pickup": "Recogida",
+        "delivery": "Entrega",
+        "updateStatus": "Actualizar Estado",
+        "complete": "Completar Entrega",
+        "cancel": "Cancelar"
+      },
+      "statusUpdate": {
+        "picked_up": "Marcar como Recogido",
+        "in_transit": "Marcar como En Tránsito",
+        "delivered": "Marcar como Entregado"
+      }
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "tryAgain": "Intentar de Nuevo",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "save": "Guardar",
+    "close": "Cerrar",
+    "required": "Requerido",
+    "optional": "Opcional"
+  },
+  "scheduling": {
+    "title": "Schedule Your Delivery",
+    "pickupDate": "Pickup Date",
+    "pickupTime": "Pickup Time",
+    "deliveryDate": "Delivery Date",
+    "deliveryTime": "Delivery Time",
+    "selectDate": "Select date",
+    "selectTime": "Select time",
+    "asap": "As soon as possible",
+    "scheduled": "Schedule for later",
+    "advanceBooking": "Book in advance for 10% discount",
+    "minimumNotice": "Minimum 2 hours notice required",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "timeSlots": {
+      "morning": "Morning (8 AM - 12 PM)",
+      "afternoon": "Afternoon (12 PM - 5 PM)",
+      "evening": "Evening (5 PM - 9 PM)"
+    },
+    "errors": {
+      "pastDate": "Cannot schedule for past dates",
+      "tooSoon": "Pickup time must be at least 2 hours from now",
+      "invalidTime": "Please select a valid time slot"
+    }
+  },
+  "pricing": {
+    "title": "Pricing Details",
+    "calculating": "Calculating price...",
+    "estimate": "Estimated Price",
+    "breakdown": "Price Breakdown",
+    "basePrice": "Base Price",
+    "distancePrice": "Distance ({distance} km)",
+    "urgencyPrice": "Urgency Fee",
+    "packageSizePrice": "Package Size Fee",
+    "scheduledDiscount": "Advance Booking Discount",
+    "subtotal": "Subtotal",
+    "platformFee": "Platform Fee (30%)",
+    "courierEarnings": "Courier Earnings (70%)",
+    "total": "Total Price",
+    "courierWillReceive": "Courier will receive",
+    "youPay": "You pay",
+    "perKm": "per km",
+    "priceFactors": {
+      "title": "What affects the price?",
+      "distance": "Distance between pickup and delivery",
+      "urgency": "How fast you need it delivered",
+      "packageSize": "Size of your package",
+      "scheduling": "When you schedule the delivery"
+    },
+    "urgencyLevels": {
+      "standard": "Standard (2-4 hours)",
+      "express": "Express (1-2 hours)",
+      "urgent": "Urgent (< 1 hour)",
+      "scheduled": "Scheduled"
+    },
+    "packageSizes": {
+      "small": "Small (< 5kg)",
+      "medium": "Medium (5-15kg)",
+      "large": "Large (> 15kg)"
+    },
+    "config": {
+      "basePrice": "Base price",
+      "pricePerKm": "Per kilometer",
+      "platformFeePercentage": "Platform fee",
+      "courierEarningsPercentage": "Courier receives"
+    },
+    "savingsNotice": "💰 Save 10% by scheduling 24+ hours in advance!",
+    "fairPricing": "Fair pricing: 70% goes to your courier"
+  },
+  "maps": {
+    "title": "Route Map",
+    "loading": "Loading map...",
+    "calculating": "Calculating route...",
+    "origin": "Pickup Location",
+    "destination": "Delivery Location",
+    "distance": "Distance",
+    "duration": "Estimated Time",
+    "estimatedNotice": "Distance shown is approximate based on current traffic.",
+    "route": "Route",
+    "viewMap": "View on Map",
+    "enterAddress": "Enter address",
+    "searchAddress": "Search for an address...",
+    "selectLocation": "Select location on map",
+    "useCurrentLocation": "Use my current location",
+    "confirmLocation": "Confirm location",
+    "errors": {
+      "noRoute": "Could not calculate route. Please check addresses.",
+      "apiError": "Map service temporarily unavailable",
+      "geolocationDenied": "Location access denied",
+      "invalidAddress": "Invalid address. Please try again."
+    },
+    "instructions": {
+      "clickMap": "Click on the map to select a location",
+      "dragMarker": "Drag the marker to adjust position",
+      "searchOrClick": "Search for an address or click on the map"
+    }
+  },
+  "earnings": {
+    "title": "Your Earnings",
+    "total": "Total Earnings",
+    "today": "Today",
+    "thisWeek": "This Week",
+    "thisMonth": "This Month",
+    "breakdown": "Earnings Breakdown",
+    "deliveries": "Deliveries",
+    "averagePerDelivery": "Average per Delivery",
+    "courierShare": "Your Share (70%)",
+    "platformShare": "Platform Fee (30%)",
+    "grossRevenue": "Gross Revenue",
+    "netEarnings": "Net Earnings",
+    "pending": "Pending",
+    "completed": "Completed",
+    "history": {
+      "title": "Earnings History",
+      "date": "Date",
+      "amount": "Amount",
+      "delivery": "Delivery",
+      "status": "Status"
+    },
+    "summary": {
+      "totalDeliveries": "Total Deliveries",
+      "successRate": "Success Rate",
+      "averageRating": "Average Rating",
+      "totalDistance": "Total Distance Covered"
+    }
+  }
+}

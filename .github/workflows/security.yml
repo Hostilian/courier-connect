@@ -1,0 +1,69 @@
+name: Security Audit
+
+on:
+  schedule:
+    # Run weekly on Monday at 9 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+
+jobs:
+  audit:
+    name: NPM Security Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+      - name: Run security audit with report
+        run: |
+          npm audit --json > audit-report.json || true
+          
+          echo "## 🔒 Security Audit Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          vulnerabilities=$(cat audit-report.json | jq '.metadata.vulnerabilities')
+          
+          if [ "$vulnerabilities" != "null" ]; then
+            critical=$(echo $vulnerabilities | jq '.critical // 0')
+            high=$(echo $vulnerabilities | jq '.high // 0')
+            moderate=$(echo $vulnerabilities | jq '.moderate // 0')
+            low=$(echo $vulnerabilities | jq '.low // 0')
+            
+            echo "| Severity | Count |" >> $GITHUB_STEP_SUMMARY
+            echo "|----------|-------|" >> $GITHUB_STEP_SUMMARY
+            echo "| 🔴 Critical | $critical |" >> $GITHUB_STEP_SUMMARY
+            echo "| 🟠 High | $high |" >> $GITHUB_STEP_SUMMARY
+            echo "| 🟡 Moderate | $moderate |" >> $GITHUB_STEP_SUMMARY
+            echo "| 🟢 Low | $low |" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            
+            if [ "$critical" -gt 0 ] || [ "$high" -gt 0 ]; then
+              echo "⚠️ **Action Required**: Critical or high severity vulnerabilities detected!" >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "✅ No vulnerabilities detected!" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-audit-report
+          path: audit-report.json
+          retention-days: 30

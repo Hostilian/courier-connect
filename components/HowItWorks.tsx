@@ -7,23 +7,23 @@ export default function HowItWorks() {
   const steps = [
     {
       icon: <MapPin className="w-8 h-8" />,
-      title: 'Share Your Locations',
-      description: 'Tell us where to pick up and deliver. Add any special instructions to make things easier!'
+      title: 'Enter Pickup & Delivery',
+      description: 'Provide pickup and delivery addresses. Add any special instructions for the courier.'
     },
     {
       icon: <Package className="w-8 h-8" />,
-      title: 'Describe Your Item',
-      description: 'Whether it\'s documents, a gift, or a marketplace find—just let us know what needs delivering.'
+      title: 'Describe Your Package',
+      description: 'Tell us what needs delivering—documents, gifts, or marketplace purchases.'
     },
     {
       icon: <Truck className="w-8 h-8" />,
-      title: 'A Neighbor Helps Out',
-      description: 'Friendly, verified couriers nearby will see your request and lend a hand.'
+      title: 'Courier Accepts',
+      description: 'Verified couriers in your area see the request and accept the delivery.'
     },
     {
       icon: <CheckCircle className="w-8 h-8" />,
-      title: 'Track & Smile',
-      description: 'Follow along in real-time and relax knowing your item is on its way safely.'
+      title: 'Track & Receive',
+      description: 'Follow delivery progress in real-time and receive your package safely.'
     }
   ]
 
@@ -35,7 +35,7 @@ export default function HowItWorks() {
             How It Works
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Getting help with deliveries is simple, friendly, and straightforward.
+            Request a delivery in four simple steps.
           </p>
         </div>
 

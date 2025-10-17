@@ -1,0 +1,450 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "forCouriers": "Kuryeler İçin",
+    "trackDelivery": "Teslimatı Takip Et",
+    "requestDelivery": "Teslimat İste"
+  },
+  "header": {
+    "taglineLocationCity": "{country} · {city} için hizmet veriyoruz",
+    "taglineLocationCountry": "{country} için hizmet veriyoruz",
+    "taglineDefault": "Hızlı. Yerel. Güler yüzlü.",
+    "requestLink": "İste",
+    "becomeCourier": "Kurye ol"
+  },
+  "home": {
+    "hero": {
+      "title": "Hızlı ve Güvenilir Teslimat Hizmeti",
+      "subtitle": "Güvenilir kurye ağımızla paketlerinizi hızlı ve güvenli bir şekilde teslim edin",
+      "cta": "Teslimat İste",
+      "ctaSecondary": "Kurye Ol",
+      "locationCity": "{city} şehrinde yerel kuryeler",
+      "locationCountry": "{country} için güneşli enerjiyle hizmet veriyoruz",
+      "locationFallback": "Dünyanın her yerine güneşli bir gülümsemeyle teslimat yapıyoruz",
+      "changeLocation": "Başka bir konuma mı ihtiyacınız var?"
+    },
+    "stats": {
+      "deliveries": "Aktif Teslimatlar",
+      "couriers": "Doğrulanmış Kuryeler",
+      "cities": "Kapsanan Şehirler",
+      "rating": "Müşteri Değerlendirmesi"
+    },
+    "howItWorks": {
+      "title": "Nasıl Çalışır",
+      "step1": {
+        "title": "Teslimat İste",
+        "description": "Alım ve teslimat bilgilerini girin"
+      },
+      "step2": {
+        "title": "Eşleştirme",
+        "description": "Sistemimiz en iyi kuryeyi bulur"
+      },
+      "step3": {
+        "title": "Gerçek Zamanlı Takip",
+        "description": "Teslimatınızı her adımda izleyin"
+      },
+      "step4": {
+        "title": "Paketi Teslim Al",
+        "description": "Paketinizi güvenle teslim alın"
+      }
+    },
+    "features": {
+      "title": "Neden Bizi Seçmelisiniz",
+      "fast": {
+        "title": "Şimşek Hızı",
+        "description": "Çoğu şehirde aynı gün teslimat mevcut"
+      },
+      "secure": {
+        "title": "%100 Güvenli",
+        "description": "Paketleriniz tamamen sigortalı ve takip ediliyor"
+      },
+      "affordable": {
+        "title": "Uygun Fiyatlar",
+        "description": "Gizli ücret olmayan şeffaf fiyatlandırma"
+      },
+      "support": {
+        "title": "7/24 Destek",
+        "description": "Ekibimiz her zaman size yardımcı olmak için burada"
+      }
+    },
+    "locations": {
+      "title": "Nerede ihtiyaç duyarsanız güveniliriz",
+      "subtitle": "Tarihi bulvarlardan kıyı pazarlarına kadar Courier Connect her kapıya güneş enerjisi getirir.",
+      "global": "Küresel kapsama",
+      "activeCity": "{city} yakınındaki kuryeleri gösteriyoruz",
+      "activeGlobal": "Yerel teslimat havasını görmek için bir konum seçin",
+      "coverage": "Avrupa Birliği, Kuzey ve Güney Amerika ve Steam'in tanıdığı her ülkede faaliyet gösteriyoruz. Nerede olduğunuzu paylaşın, gerisini biz hallederiz.",
+      "hubTagline": "Aynı gün güneşli hizmet",
+      "hubs": {
+        "berlin": "Berlin",
+        "prague": "Prag",
+        "istanbul": "İstanbul",
+        "newYork": "New York",
+        "toronto": "Toronto",
+        "saoPaulo": "São Paulo"
+      }
+    },
+    "testimonials": {
+      "title": "Müşterilerimiz Ne Diyor",
+      "customer1": {
+        "name": "Sarah Johnson",
+        "role": "Küçük İşletme Sahibi",
+        "quote": "Mükemmel hizmet! Paketlerim her zaman zamanında ve mükemmel durumda geliyor."
+      },
+      "customer2": {
+        "name": "Michael Chen",
+        "role": "Online Alışverişçi",
+        "quote": "Gerçek zamanlı takip bana huzur veriyor. Kesinlikle tavsiye ederim!"
+      },
+      "customer3": {
+        "name": "Emma Rodriguez",
+        "role": "Serbest Çalışan",
+        "quote": "Uygun fiyatlar ve güvenilir kuryeler. Bu benim tercih ettiğim teslimat hizmeti."
+      }
+    },
+    "cta": {
+      "title": "Başlamaya Hazır mısınız?",
+      "subtitle": "Binlerce memnun müşteriye katılın",
+      "button": "Hemen Teslimat İste"
+    }
+  },
+  "request": {
+    "title": "Teslimat İste",
+    "subtitle": "Bilgileri doldurun, sizin için mükemmel kuryeyi bulalım",
+    "banner": {
+      "globalTitle": "Küresel kapsama",
+      "city": "Kuryeleri {city} yakınlarına yönlendireceğiz.",
+      "country": "Sizi {country} içindeki güvenilir kuryelerle buluşturuyoruz.",
+      "global": "Yerel seçenekleri açmak için nerede olduğunuzu söyleyin.",
+      "change": "Konumu güncelle"
+    },
+    "steps": {
+      "pickup": "Alım Bilgileri",
+      "delivery": "Teslimat Bilgileri",
+      "preferences": "Tercihler"
+    },
+    "pickup": {
+      "title": "Alım Bilgileri",
+      "name": "Adınız",
+      "namePlaceholder": "Ahmet Yılmaz",
+      "phone": "Telefon Numarası",
+      "phonePlaceholder": "+90 123 456 7890",
+      "email": "E-posta (isteğe bağlı)",
+      "emailPlaceholder": "ahmet@ornek.com",
+      "address": "Alım Adresi",
+      "street": "Sokak Adresi",
+      "city": "Şehir",
+      "zipCode": "Posta Kodu"
+    },
+    "delivery": {
+      "title": "Teslimat Bilgileri",
+      "recipientName": "Alıcı Adı",
+      "recipientPhone": "Alıcı Telefonu",
+      "address": "Teslimat Adresi",
+      "street": "Sokak Adresi",
+      "city": "Şehir",
+      "zipCode": "Posta Kodu",
+      "notes": "Teslimat Notları (isteğe bağlı)",
+      "notesPlaceholder": "Kapı zilini çal, kapıya bırak, vb."
+    },
+    "preferences": {
+      "title": "Paket ve Tercihler",
+      "packageType": "Paket Türü",
+      "packageTypes": {
+        "documents": "Belgeler",
+        "small": "Küçük Paket",
+        "medium": "Orta Paket",
+        "large": "Büyük Paket"
+      },
+      "weight": "Ağırlık (kg)",
+      "dimensions": "Boyutlar (isteğe bağlı)",
+      "dimensionsPlaceholder": "U x G x Y (cm)",
+      "specialInstructions": "Özel Talimatlar",
+      "specialInstructionsPlaceholder": "Kırılır, Dik tut, vb.",
+      "urgency": "Teslimat Aciliyeti",
+      "urgencyTypes": {
+        "standard": "Standart (2-3 saat)",
+        "express": "Ekspres (1 saat)",
+        "scheduled": "Planlanmış"
+      }
+    },
+    "buttons": {
+      "next": "İleri",
+      "previous": "Geri",
+      "submit": "Teslimat İste"
+    },
+    "trackButton": "Teslimatı takip et",
+    "trackingId": "Takip kodu",
+    "newRequest": "Yeni istek",
+    "success": {
+      "title": "Teslimat İstendi!",
+      "message": "Takip kodunuz:",
+      "info": "Sizin için en iyi kuryeyi buluyoruz. SMS ve e-posta ile güncellemeler alacaksınız.",
+      "track": "Teslimatı Takip Et",
+      "newRequest": "Yeni İstek"
+    },
+    "scheduledOption": "📅 Scheduled (Choose date & time)"
+  },
+  "track": {
+    "title": "Teslimatınızı Takip Edin",
+    "subtitle": "Gerçek zamanlı güncellemeleri görmek için takip kodunuzu girin",
+    "trackingCode": "Takip Kodu",
+    "trackingCodePlaceholder": "10 haneli takip kodunu girin",
+    "trackButton": "Paketi Takip Et",
+    "status": {
+      "pending": "Kurye Bekleniyor",
+      "accepted": "Kurye Atandı",
+      "picked_up": "Paket Alındı",
+      "in_transit": "Yolda",
+      "delivered": "Teslim Edildi",
+      "cancelled": "İptal Edildi"
+    },
+    "details": {
+      "title": "Teslimat Detayları",
+      "from": "Gönderen",
+      "to": "Alıcı",
+      "courier": "Kurye",
+      "estimatedTime": "Tahmini Teslimat",
+      "actualTime": "Teslim Zamanı",
+      "packageType": "Paket Türü",
+      "status": "Mevcut Durum"
+    },
+    "notFound": {
+      "title": "Takip Kodu Bulunamadı",
+      "message": "Lütfen takip kodunuzu kontrol edin ve tekrar deneyin.",
+      "button": "Tekrar Dene"
+    }
+  },
+  "courier": {
+    "register": {
+      "title": "Kurye Ol",
+      "subtitle": "Şehrinizde paket teslim ederek kazanmaya başlayın",
+      "steps": {
+        "credentials": "Hesap",
+        "vehicle": "Araç",
+        "verification": "Doğrulama"
+      },
+      "credentials": {
+        "title": "Hesabınızı Oluşturun",
+        "firstName": "Ad",
+        "lastName": "Soyad",
+        "email": "E-posta Adresi",
+        "phone": "Telefon Numarası",
+        "password": "Şifre",
+        "confirmPassword": "Şifreyi Onayla",
+        "terms": "Hizmet Şartlarını ve Gizlilik Politikasını kabul ediyorum"
+      },
+      "vehicle": {
+        "title": "Araç Bilgileri",
+        "vehicleType": "Araç Türü",
+        "vehicleTypes": {
+          "bike": "Bisiklet",
+          "motorcycle": "Motosiklet",
+          "car": "Araba",
+          "van": "Van"
+        },
+        "licensePlate": "Plaka (varsa)",
+        "insurance": "Sigorta Bilgileri",
+        "insurancePlaceholder": "Poliçe numarası veya detaylar"
+      },
+      "verification": {
+        "title": "Doğrulama Belgeleri",
+        "idDocument": "Kimlik Belgesi",
+        "driversLicense": "Sürücü Belgesi (varsa)",
+        "insurance": "Sigorta Sertifikası",
+        "photo": "Profil Fotoğrafı",
+        "uploadInstructions": "Belgelerinizin net fotoğraflarını yükleyin",
+        "agreement": "Sağlanan tüm bilgilerin doğru olduğunu onaylıyorum"
+      },
+      "buttons": {
+        "next": "İleri",
+        "previous": "Geri",
+        "submit": "Başvuru Gönder"
+      },
+      "success": {
+        "title": "Başvuru Gönderildi!",
+        "message": "Başvurunuzu 24-48 saat içinde inceleyeceğiz.",
+        "info": "Hesabınız doğrulandığında e-posta alacaksınız.",
+        "login": "Girişe Git"
+      }
+    },
+    "login": {
+      "title": "Kurye Girişi",
+      "subtitle": "Panonuza erişmek için giriş yapın",
+      "email": "E-posta Adresi",
+      "password": "Şifre",
+      "remember": "Beni hatırla",
+      "forgotPassword": "Şifremi unuttum?",
+      "loginButton": "Giriş Yap",
+      "noAccount": "Hesabınız yok mu?",
+      "register": "Buradan kayıt olun"
+    },
+    "dashboard": {
+      "title": "Kurye Paneli",
+      "welcome": "Tekrar hoş geldiniz",
+      "stats": {
+        "available": "Mevcut İşler",
+        "active": "Aktif Teslimatlar",
+        "completed": "Bugün Tamamlanan",
+        "earnings": "Bugünkü Kazanç"
+      },
+      "availableJobs": {
+        "title": "Mevcut Teslimatlar",
+        "noJobs": "Şu anda mevcut teslimat yok",
+        "distance": "km uzakta",
+        "accept": "İşi Kabul Et",
+        "viewDetails": "Detayları Gör"
+      },
+      "activeDeliveries": {
+        "title": "Aktif Teslimatlarınız",
+        "pickup": "Alım",
+        "delivery": "Teslimat",
+        "updateStatus": "Durumu Güncelle",
+        "complete": "Teslimatı Tamamla",
+        "cancel": "İptal Et"
+      },
+      "statusUpdate": {
+        "picked_up": "Alındı Olarak İşaretle",
+        "in_transit": "Yolda Olarak İşaretle",
+        "delivered": "Teslim Edildi Olarak İşaretle"
+      }
+    }
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Bir hata oluştu",
+    "tryAgain": "Tekrar Dene",
+    "cancel": "İptal",
+    "confirm": "Onayla",
+    "save": "Kaydet",
+    "close": "Kapat",
+    "required": "Gerekli",
+    "optional": "İsteğe Bağlı"
+  },
+  "scheduling": {
+    "title": "Schedule Your Delivery",
+    "pickupDate": "Pickup Date",
+    "pickupTime": "Pickup Time",
+    "deliveryDate": "Delivery Date",
+    "deliveryTime": "Delivery Time",
+    "selectDate": "Select date",
+    "selectTime": "Select time",
+    "asap": "As soon as possible",
+    "scheduled": "Schedule for later",
+    "advanceBooking": "Book in advance for 10% discount",
+    "minimumNotice": "Minimum 2 hours notice required",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "timeSlots": {
+      "morning": "Morning (8 AM - 12 PM)",
+      "afternoon": "Afternoon (12 PM - 5 PM)",
+      "evening": "Evening (5 PM - 9 PM)"
+    },
+    "errors": {
+      "pastDate": "Cannot schedule for past dates",
+      "tooSoon": "Pickup time must be at least 2 hours from now",
+      "invalidTime": "Please select a valid time slot"
+    }
+  },
+  "pricing": {
+    "title": "Pricing Details",
+    "calculating": "Calculating price...",
+    "estimate": "Estimated Price",
+    "breakdown": "Price Breakdown",
+    "basePrice": "Base Price",
+    "distancePrice": "Distance ({distance} km)",
+    "urgencyPrice": "Urgency Fee",
+    "packageSizePrice": "Package Size Fee",
+    "scheduledDiscount": "Advance Booking Discount",
+    "subtotal": "Subtotal",
+    "platformFee": "Platform Fee (30%)",
+    "courierEarnings": "Courier Earnings (70%)",
+    "total": "Total Price",
+    "courierWillReceive": "Courier will receive",
+    "youPay": "You pay",
+    "perKm": "per km",
+    "priceFactors": {
+      "title": "What affects the price?",
+      "distance": "Distance between pickup and delivery",
+      "urgency": "How fast you need it delivered",
+      "packageSize": "Size of your package",
+      "scheduling": "When you schedule the delivery"
+    },
+    "urgencyLevels": {
+      "standard": "Standard (2-4 hours)",
+      "express": "Express (1-2 hours)",
+      "urgent": "Urgent (< 1 hour)",
+      "scheduled": "Scheduled"
+    },
+    "packageSizes": {
+      "small": "Small (< 5kg)",
+      "medium": "Medium (5-15kg)",
+      "large": "Large (> 15kg)"
+    },
+    "config": {
+      "basePrice": "Base price",
+      "pricePerKm": "Per kilometer",
+      "platformFeePercentage": "Platform fee",
+      "courierEarningsPercentage": "Courier receives"
+    },
+    "savingsNotice": "💰 Save 10% by scheduling 24+ hours in advance!",
+    "fairPricing": "Fair pricing: 70% goes to your courier"
+  },
+  "maps": {
+    "title": "Route Map",
+    "loading": "Loading map...",
+    "calculating": "Calculating route...",
+    "origin": "Pickup Location",
+    "destination": "Delivery Location",
+    "distance": "Distance",
+    "duration": "Estimated Time",
+    "estimatedNotice": "Distance shown is approximate based on current traffic.",
+    "route": "Route",
+    "viewMap": "View on Map",
+    "enterAddress": "Enter address",
+    "searchAddress": "Search for an address...",
+    "selectLocation": "Select location on map",
+    "useCurrentLocation": "Use my current location",
+    "confirmLocation": "Confirm location",
+    "errors": {
+      "noRoute": "Could not calculate route. Please check addresses.",
+      "apiError": "Map service temporarily unavailable",
+      "geolocationDenied": "Location access denied",
+      "invalidAddress": "Invalid address. Please try again."
+    },
+    "instructions": {
+      "clickMap": "Click on the map to select a location",
+      "dragMarker": "Drag the marker to adjust position",
+      "searchOrClick": "Search for an address or click on the map"
+    }
+  },
+  "earnings": {
+    "title": "Your Earnings",
+    "total": "Total Earnings",
+    "today": "Today",
+    "thisWeek": "This Week",
+    "thisMonth": "This Month",
+    "breakdown": "Earnings Breakdown",
+    "deliveries": "Deliveries",
+    "averagePerDelivery": "Average per Delivery",
+    "courierShare": "Your Share (70%)",
+    "platformShare": "Platform Fee (30%)",
+    "grossRevenue": "Gross Revenue",
+    "netEarnings": "Net Earnings",
+    "pending": "Pending",
+    "completed": "Completed",
+    "history": {
+      "title": "Earnings History",
+      "date": "Date",
+      "amount": "Amount",
+      "delivery": "Delivery",
+      "status": "Status"
+    },
+    "summary": {
+      "totalDeliveries": "Total Deliveries",
+      "successRate": "Success Rate",
+      "averageRating": "Average Rating",
+      "totalDistance": "Total Distance Covered"
+    }
+  }
+}
