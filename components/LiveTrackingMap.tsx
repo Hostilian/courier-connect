@@ -1,11 +1,14 @@
 'use client';
 
+import { useDeliveryTracking } from '@/lib/hooks/useDeliveryTracking';
 import { loadGoogleMaps } from '@/lib/maps';
-import { Loader2, MapPin, Phone, User } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Loader2, MapPin, Phone, User, Wifi, WifiOff } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 
 interface DeliveryTracking {
+  _id?: string; // MongoDB ID for WebSocket
   trackingId: string;
   status: string;
   senderName: string;
@@ -36,18 +39,87 @@ export default function LiveTrackingMap({
   delivery,
   showCourierLocation = true,
   autoRefresh = true,
-  refreshInterval = 30000, // 30 seconds
+  refreshInterval = 30000, // Not used anymore - WebSocket gives us real-time updates
   height = '600px',
 }: LiveTrackingMapProps) {
   const t = useTranslations();
   const mapRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [loading, setLoading] = useState(true);
+  const [currentStatus, setCurrentStatus] = useState(delivery.status);
   
   const originMarkerRef = useRef<google.maps.Marker | null>(null);
   const destinationMarkerRef = useRef<google.maps.Marker | null>(null);
   const courierMarkerRef = useRef<google.maps.Marker | null>(null);
   const directionsRendererRef = useRef<google.maps.DirectionsRenderer | null>(null);
+
+  // WebSocket real-time tracking
+  // Because manually refreshing is so 2010
+  const {
+    courierLocation: realtimeCourierLocation,
+    courierHeading,
+    courierSpeed,
+    deliveryStatus: realtimeStatus,
+    isCourierOnline,
+    isConnected: isSocketConnected,
+    lastUpdate,
+  } = useDeliveryTracking({
+    trackingId: delivery.trackingId,
+    deliveryId: delivery._id || delivery.trackingId,
+    onLocationUpdate: (location) => {
+      console.log('Real-time location update received:', location);
+      // Smooth marker animation will be handled in the effect below
+    },
+    onStatusUpdate: (status) => {
+      console.log('Status update received:', status.status);
+      setCurrentStatus(status.status);
+    },
+  });
+
+  // Use real-time courier location if available, fallback to prop
+  const activeCourierLocation = realtimeCourierLocation || delivery.courierLocation;
+  const activeStatus = realtimeStatus || currentStatus;
+
+  // Smooth marker animation function
+  // Interpolates between current and target position
+  // Because instant jumps look like the courier is teleporting
+  const animateMarkerTo = (
+    marker: google.maps.Marker,
+    targetPosition: { lat: number; lng: number },
+    duration: number = 1000 // 1 second animation
+  ) => {
+    const currentPosition = marker.getPosition();
+    if (!currentPosition) {
+      marker.setPosition(targetPosition);
+      return;
+    }
+
+    const startLat = currentPosition.lat();
+    const startLng = currentPosition.lng();
+    const deltaLat = targetPosition.lat - startLat;
+    const deltaLng = targetPosition.lng - startLng;
+    
+    const startTime = Date.now();
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function for smooth animation (ease-out)
+      const easeProgress = 1 - Math.pow(1 - progress, 3);
+      
+      const newLat = startLat + deltaLat * easeProgress;
+      const newLng = startLng + deltaLng * easeProgress;
+      
+      marker.setPosition({ lat: newLat, lng: newLng });
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  };
 
   // Initialize map
   useEffect(() => {
@@ -179,30 +251,53 @@ export default function LiveTrackingMap({
         }
       }
 
-      // Courier marker (Live location)
-      if (showCourierLocation && delivery.courierLocation) {
+      // Courier marker (Live location with smooth animation)
+      if (showCourierLocation && activeCourierLocation) {
         if (courierMarkerRef.current) {
-          courierMarkerRef.current.setPosition(delivery.courierLocation);
+          // Smoothly animate marker to new position
+          // Because teleporting couriers looks janky
+          animateMarkerTo(courierMarkerRef.current, activeCourierLocation);
+          
+          // Update rotation based on heading
+          if (courierHeading !== null) {
+            const icon = courierMarkerRef.current.getIcon() as google.maps.Symbol;
+            if (icon && typeof icon === 'object') {
+              icon.rotation = courierHeading;
+              courierMarkerRef.current.setIcon(icon);
+            }
+          }
         } else {
-          // Custom courier icon (animated)
+          // Create new courier marker with custom icon
+          const courierIcon: google.maps.Symbol = {
+            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+            scale: 5,
+            fillColor: '#3B82F6',
+            fillOpacity: 1,
+            strokeColor: '#FFFFFF',
+            strokeWeight: 2,
+            rotation: courierHeading || 0,
+          };
+
           courierMarkerRef.current = new google.maps.Marker({
-            position: delivery.courierLocation,
+            position: activeCourierLocation,
             map,
             title: `Courier: ${delivery.courierName || 'On the way'}`,
-            icon: {
-              url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-            },
-            animation: google.maps.Animation.BOUNCE,
+            icon: courierIcon,
+            zIndex: 1000, // Always on top
           });
 
-          // Add info window
+          // Add info window with live status
           const infoWindow = new google.maps.InfoWindow({
             content: `
               <div class="p-2">
                 <h3 class="font-bold mb-1">🚗 Courier Location</h3>
                 <p class="text-sm">${delivery.courierName || 'Your courier'}</p>
                 ${delivery.courierPhone ? `<p class="text-sm text-gray-600">📞 ${delivery.courierPhone}</p>` : ''}
-                <p class="text-xs text-blue-600 mt-1">Live tracking</p>
+                ${courierSpeed !== null ? `<p class="text-xs text-gray-500">Speed: ${(courierSpeed * 3.6).toFixed(1)} km/h</p>` : ''}
+                <p class="text-xs text-blue-600 mt-1 flex items-center gap-1">
+                  <span class="inline-block w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
+                  Live tracking
+                </p>
               </div>
             `,
           });
@@ -210,13 +305,6 @@ export default function LiveTrackingMap({
           courierMarkerRef.current.addListener('click', () => {
             infoWindow.open(map, courierMarkerRef.current!);
           });
-
-          // Stop bouncing after 3 seconds
-          setTimeout(() => {
-            if (courierMarkerRef.current) {
-              courierMarkerRef.current.setAnimation(null);
-            }
-          }, 3000);
         }
       }
 
@@ -261,21 +349,10 @@ export default function LiveTrackingMap({
     };
 
     updateMapContent();
-  }, [map, delivery, showCourierLocation]);
+  }, [map, delivery, showCourierLocation, activeCourierLocation, courierHeading, courierSpeed]);
 
-  // Auto-refresh courier location
-  useEffect(() => {
-    if (!autoRefresh || delivery.status === 'delivered' || delivery.status === 'cancelled') {
-      return;
-    }
-
-    const interval = setInterval(() => {
-      // In a real app, fetch updated courier location from API
-      // fetchCourierLocation(delivery.trackingId);
-    }, refreshInterval);
-
-    return () => clearInterval(interval);
-  }, [autoRefresh, refreshInterval, delivery.status, delivery.trackingId]);
+  // Auto-refresh is replaced by WebSocket real-time updates
+  // No need for polling anymore. Welcome to the future.
 
   // Status color
   const getStatusColor = (status: string) => {
@@ -314,10 +391,38 @@ export default function LiveTrackingMap({
 
       {/* Delivery Info Card */}
       <div className="absolute top-4 left-4 right-4 bg-white rounded-lg shadow-xl p-4 max-w-md">
+        {/* Connection Status Indicator */}
+        <AnimatePresence>
+          {!isSocketConnected && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="mb-2 p-2 bg-yellow-50 border border-yellow-300 rounded-lg flex items-center gap-2"
+            >
+              <WifiOff className="w-4 h-4 text-yellow-600" />
+              <span className="text-xs text-yellow-800">Reconnecting to live tracking...</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <div className="flex items-center justify-between mb-3">
-          <h3 className="font-bold text-lg">📦 {delivery.trackingId}</h3>
-          <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(delivery.status)}`}>
-            {delivery.status.replace('_', ' ').toUpperCase()}
+          <div className="flex items-center gap-2">
+            <h3 className="font-bold text-lg">📦 {delivery.trackingId}</h3>
+            {isSocketConnected && isCourierOnline && (
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="flex items-center gap-1 text-xs text-green-600"
+                title="Live tracking active"
+              >
+                <Wifi className="w-3 h-3" />
+                <span className="w-2 h-2 bg-green-600 rounded-full animate-pulse" />
+              </motion.div>
+            )}
+          </div>
+          <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(activeStatus)}`}>
+            {activeStatus.replace('_', ' ').toUpperCase()}
           </span>
         </div>
 
@@ -410,13 +515,48 @@ export default function LiveTrackingMap({
         )}
       </div>
 
-      {/* Live Indicator */}
-      {showCourierLocation && delivery.courierLocation && delivery.status === 'in_transit' && (
-        <div className="absolute bottom-4 left-4 bg-blue-600 text-white rounded-full px-4 py-2 shadow-lg flex items-center gap-2">
-          <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-          <span className="text-sm font-medium">Live Tracking</span>
-        </div>
-      )}
+      {/* Live Tracking Indicators */}
+      <AnimatePresence>
+        {showCourierLocation && activeCourierLocation && activeStatus === 'in_transit' && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="absolute bottom-4 left-4 right-4 flex gap-2 flex-wrap"
+          >
+            {/* Live Tracking Status */}
+            {isSocketConnected && isCourierOnline && (
+              <div className="bg-green-600 text-white rounded-full px-4 py-2 shadow-lg flex items-center gap-2">
+                <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                <span className="text-sm font-medium">Live Tracking Active</span>
+              </div>
+            )}
+
+            {/* Connection Lost Warning */}
+            {!isSocketConnected && (
+              <div className="bg-yellow-600 text-white rounded-full px-4 py-2 shadow-lg flex items-center gap-2">
+                <WifiOff className="w-4 h-4" />
+                <span className="text-sm font-medium">Reconnecting...</span>
+              </div>
+            )}
+
+            {/* Courier Offline */}
+            {isSocketConnected && !isCourierOnline && (
+              <div className="bg-gray-600 text-white rounded-full px-4 py-2 shadow-lg flex items-center gap-2">
+                <div className="w-2 h-2 bg-white rounded-full" />
+                <span className="text-sm font-medium">Courier Offline</span>
+              </div>
+            )}
+
+            {/* Last Update Time */}
+            {lastUpdate && (
+              <div className="bg-blue-900 bg-opacity-80 text-white rounded-full px-4 py-2 shadow-lg text-xs">
+                Updated {Math.floor((Date.now() - lastUpdate) / 1000)}s ago
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

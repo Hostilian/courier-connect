@@ -1,5 +1,4 @@
 'use client';
-'use client';
 
 import LanguageSelector from '@/components/LanguageSelector';
 import { useLocationContext } from '@/components/LocationProvider';
