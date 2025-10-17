@@ -210,10 +210,35 @@
       "status": "Estado Actual"
     },
     "notFound": {
-      "title": "Código de Rastreo No Encontrado",
-      "message": "Por favor verifica tu código de rastreo e intenta de nuevo.",
-      "button": "Intentar de Nuevo"
-    }
+      "title": "No Encontrado",
+      "message": "No pudimos encontrar una entrega con este código. Por favor, comprueba el código e inténtalo de nuevo.",
+      "button": "Intentar Otra Vez"
+    },
+    "rateDelivery": "Califica Tu Experiencia de Entrega"
+  },
+  "ratings": {
+    "fetchError": "No se pudieron cargar las valoraciones",
+    "noRatings": "Aún no hay valoraciones",
+    "basedOn": "{count, plural, =1 {# valoración} other {# valoraciones}}",
+    "ratingDistribution": "Distribución de valoraciones",
+    "recentReviews": "Reseñas recientes"
+  },
+  "feedback": {
+    "title": "Califica tu experiencia de entrega",
+    "ratingLabel": "¿Cómo fue tu experiencia?",
+    "commentLabel": "Tu comentario (opcional)",
+    "commentPlaceholder": "Cuéntanos sobre tu experiencia...",
+    "nameLabel": "Tu nombre (opcional)",
+    "namePlaceholder": "Juan Pérez",
+    "emailLabel": "Tu email (opcional)",
+    "emailPlaceholder": "tu@ejemplo.com",
+    "submitting": "Enviando...",
+    "submitFeedback": "Enviar Valoración",
+    "ratingRequired": "Por favor selecciona una valoración",
+    "thankYou": "¡Gracias por tu valoración!",
+    "thankYouTitle": "¡Valoración enviada!",
+    "feedbackReceived": "Tu opinión nos ayuda a mejorar nuestro servicio.",
+    "error": "Algo salió mal. Por favor intenta de nuevo."
   },
   "courier": {
     "register": {

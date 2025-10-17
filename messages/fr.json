@@ -210,10 +210,35 @@
       "status": "État Actuel"
     },
     "notFound": {
-      "title": "Code de Suivi Non Trouvé",
-      "message": "Veuillez vérifier votre code de suivi et réessayer.",
+      "title": "Non Trouvé",
+      "message": "Nous n'avons pas trouvé de livraison avec ce code. Veuillez vérifier le code et réessayer.",
       "button": "Réessayer"
-    }
+    },
+    "rateDelivery": "Évaluez Votre Expérience de Livraison"
+  },
+  "ratings": {
+    "fetchError": "Impossible de charger les évaluations",
+    "noRatings": "Pas encore d'évaluations",
+    "basedOn": "{count, plural, =1 {# évaluation} other {# évaluations}}",
+    "ratingDistribution": "Distribution des évaluations",
+    "recentReviews": "Avis récents"
+  },
+  "feedback": {
+    "title": "Évaluez votre expérience de livraison",
+    "ratingLabel": "Comment était votre expérience ?",
+    "commentLabel": "Votre commentaire (optionnel)",
+    "commentPlaceholder": "Parlez-nous de votre expérience...",
+    "nameLabel": "Votre nom (optionnel)",
+    "namePlaceholder": "Jean Dupont",
+    "emailLabel": "Votre email (optionnel)",
+    "emailPlaceholder": "vous@exemple.com",
+    "submitting": "Envoi en cours...",
+    "submitFeedback": "Envoyer l'Évaluation",
+    "ratingRequired": "Veuillez sélectionner une note",
+    "thankYou": "Merci pour votre évaluation !",
+    "thankYouTitle": "Évaluation envoyée !",
+    "feedbackReceived": "Votre avis nous aide à améliorer notre service.",
+    "error": "Une erreur s'est produite. Veuillez réessayer."
   },
   "courier": {
     "register": {
