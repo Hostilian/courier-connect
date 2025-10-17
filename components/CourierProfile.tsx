@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { ChevronDown, ChevronUp, Clock, MapPin, Package, Star } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import { useState } from 'react';
 import CourierRating from './CourierRating';
 
@@ -43,12 +44,14 @@ export default function CourierProfile({
       <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white">
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
           {/* Profile Image */}
-          <div className="w-24 h-24 rounded-full bg-white flex-shrink-0 overflow-hidden border-4 border-white shadow-lg">
+          <div className="w-24 h-24 rounded-full bg-white flex-shrink-0 overflow-hidden border-4 border-white shadow-lg relative">
             {profileImage ? (
-              <img
+              <Image
                 src={profileImage}
                 alt={name}
-                className="w-full h-full object-cover"
+                layout="fill"
+                objectFit="cover"
+                className="w-full h-full"
               />
             ) : (
               <div className="w-full h-full bg-blue-100 text-blue-600 flex items-center justify-center text-2xl font-bold">

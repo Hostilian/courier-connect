@@ -42,7 +42,7 @@ export default function CourierRating({
     if (initialRatings.length === 0) {
       fetchRatings();
     }
-  }, [courierId, initialRatings.length]);
+  }, [courierId, initialRatings.length, fetchRatings]);
 
   async function fetchRatings() {
     try {
