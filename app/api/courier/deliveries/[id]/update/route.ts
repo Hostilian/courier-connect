@@ -3,11 +3,12 @@
 // This route changes the status of a delivery. From 'accepted' to 'picked_up', etc.
 // It's like watching a kid grow up, but the kid is a cardboard box.
 
-import { NextRequest, NextResponse } from 'next/server';
+import { getAuth } from '@/lib/auth';
+import { sendDeliveryCompletedEmail } from '@/lib/email';
+import { getErrorResponse } from '@/lib/helpers';
 import dbConnect from '@/lib/mongodb';
 import DeliveryRequest from '@/models/DeliveryRequest';
-import { getAuth } from '@/lib/auth';
-import { getErrorResponse } from '@/lib/helpers';
+import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
 // Let's make sure the status is one of the ones we actually use.
@@ -70,6 +71,16 @@ export async function PUT(
     }
 
     await delivery.save(); // Save your work. Always save your work.
+
+    // If the delivery is complete, send a nice email to the customer.
+    if (newStatus === 'delivered') {
+      try {
+        await sendDeliveryCompletedEmail(delivery);
+      } catch (emailError) {
+        console.error('Failed to send delivery completed email:', emailError);
+        // Don't let email failure stop the process. Just log it.
+      }
+    }
 
     return NextResponse.json(delivery);
   } catch (error) {

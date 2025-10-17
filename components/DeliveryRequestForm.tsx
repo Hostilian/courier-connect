@@ -51,11 +51,13 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
     // Sender info
     senderName: '',
     senderPhone: '',
+    senderEmail: '',
     senderAddress: '',
 
     // Receiver info
     receiverName: '',
     receiverPhone: '',
+    receiverEmail: '',
     receiverAddress: '',
 
     // Package info
@@ -212,7 +214,7 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
         basePrice: priceBreakdown?.basePrice,
         distancePrice: priceBreakdown?.distancePrice,
         urgencyPrice: priceBreakdown?.urgencyPrice,
-        scheduledDiscount: priceBreakdown?.scheduledDiscount,
+        scheduledPrice: priceBreakdown?.scheduledPrice,
         packageSizePrice: priceBreakdown?.packageSizePrice,
         locale,
         serviceCountry: location.countryCode,
@@ -296,6 +298,21 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
 
               <div>
                 <label className="block text-sm font-medium mb-2">
+                  {requestT('senderEmail')} *
+                </label>
+                <input
+                  type="email"
+                  name="senderEmail"
+                  value={formData.senderEmail}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">
                   {requestT('pickupAddress')} *
                 </label>
                 <textarea
@@ -363,6 +380,21 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
                   value={formData.receiverPhone}
                   onChange={handleChange}
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  {requestT('receiverEmail')} *
+                </label>
+                <input
+                  type="email"
+                  name="receiverEmail"
+                  value={formData.receiverEmail}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  placeholder="them@example.com"
                   required
                 />
               </div>
@@ -553,16 +585,16 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
                       <span>{formatCurrency(priceBreakdown.urgencyPrice)}</span>
                     </div>
                   )}
-                  {priceBreakdown.scheduledDiscount > 0 && (
-                    <div className="flex justify-between text-sm text-green-600">
-                      <span>{pricingT('scheduledDiscount')}</span>
-                      <span>-{formatCurrency(priceBreakdown.scheduledDiscount)}</span>
-                    </div>
-                  )}
-                  {priceBreakdown.scheduledFee > 0 && (
+                  {priceBreakdown.scheduledPrice > 0 && (
                     <div className="flex justify-between text-sm">
                       <span>{pricingT('scheduledFee')}</span>
-                      <span>{formatCurrency(priceBreakdown.scheduledFee)}</span>
+                      <span>{formatCurrency(priceBreakdown.scheduledPrice)}</span>
+                    </div>
+                  )}
+                  {priceBreakdown.scheduledPrice < 0 && (
+                    <div className="flex justify-between text-sm text-green-600">
+                      <span>{pricingT('scheduledDiscount')}</span>
+                      <span>{formatCurrency(priceBreakdown.scheduledPrice)}</span>
                     </div>
                   )}
                   <div className="border-t pt-3 flex justify-between font-bold text-lg">

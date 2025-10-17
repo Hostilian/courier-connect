@@ -2,11 +2,11 @@
 // You want to see what you're working on? Fine. Here's a list.
 // Don't come crying to me when you realize how much you've signed up for.
 
-import { NextRequest, NextResponse } from 'next/server';
-import dbConnect from '@/lib/mongodb';
-import DeliveryRequest from '@/models/DeliveryRequest';
 import { getAuth } from '@/lib/auth';
 import { getErrorResponse } from '@/lib/helpers';
+import dbConnect from '@/lib/mongodb';
+import DeliveryRequest from '@/models/DeliveryRequest';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   try {

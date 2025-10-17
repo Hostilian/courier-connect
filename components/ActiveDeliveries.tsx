@@ -6,10 +6,11 @@
 
 import { getLanguageByCode } from '@/lib/languages';
 import { motion } from 'framer-motion';
-import { Loader2, Package, MapPin, Clock, CheckCircle, Truck } from 'lucide-react';
+import { CheckCircle, Loader2, Package, Truck } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import CourierLocationTracker from './CourierLocationTracker';
 
 // Another interface. It's like a blueprint for a box's sad journey.
 interface ActiveDelivery {
@@ -108,6 +109,10 @@ export default function ActiveDeliveries() {
     }
   };
 
+  const isDeliveryActive = (status: string) => {
+    return status === 'accepted' || status === 'picked_up' || status === 'in_transit';
+  }
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-48">
@@ -182,6 +187,12 @@ export default function ActiveDeliveries() {
                         </button>
                      )}
                   </div>
+                </div>
+                <div className="mt-4">
+                  <CourierLocationTracker 
+                    trackingId={delivery.trackingId}
+                    isDeliveryActive={isDeliveryActive(delivery.status)}
+                  />
                 </div>
               </motion.div>
             )

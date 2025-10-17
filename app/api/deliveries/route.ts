@@ -1,6 +1,7 @@
 // Deliveries API. Where delivery requests are born. It's a beautiful thing, really.
 // People send us data, we validate it, calculate prices, and save it to a database.
 // Then we return a tracking ID. The circle of life, but for packages.
+import { sendDeliveryConfirmationEmail } from '@/lib/email';
 import dbConnect from '@/lib/mongodb';
 import { calculateDeliveryPrice, getEstimatedDeliveryTime } from '@/lib/pricing';
 import DeliveryRequest from '@/models/DeliveryRequest';
@@ -38,10 +39,12 @@ export async function POST(request: NextRequest) {
       senderPhone,
       senderAddress,
       senderLocation,
+      senderEmail,
       receiverName,
       receiverPhone,
       receiverAddress,
       receiverLocation,
+      receiverEmail,
       packageType,
       packageSize,
       packageDescription,
@@ -159,15 +162,14 @@ export async function POST(request: NextRequest) {
       distance: Number(computedDistance.toFixed(2)),
       urgency: normalizedUrgency,
       packageSize: normalizedPackageSize,
-      scheduledPickupDate: scheduledPickup,
+      pickupDateTime: scheduledPickup,
     });
 
     const rawSubtotal =
       pricing.basePrice +
       pricing.distancePrice +
       pricing.packageSizePrice +
-      pricing.urgencyPrice +
-      pricing.scheduledPrice;
+      pricing.urgencyPrice;
 
     const minimumAdjustment = Number((pricing.totalPrice - rawSubtotal).toFixed(2));
     const minimumPriceApplied = minimumAdjustment > 0.009;
@@ -188,55 +190,71 @@ export async function POST(request: NextRequest) {
       attempts++;
     }
 
-    const delivery = await DeliveryRequest.create({
+    const normalizedSenderLocation = isValidCoordinate(senderLocation) ? senderLocation : undefined;
+    const normalizedReceiverLocation = isValidCoordinate(receiverLocation) ? receiverLocation : undefined;
+
+    const newDeliveryRequest = new DeliveryRequest({
       trackingId,
       status: 'pending',
-      senderName: senderName.trim(),
-      senderPhone: senderPhone.trim(),
-      senderAddress: senderAddress.trim(),
-      senderLocation: isValidCoordinate(senderLocation) ? senderLocation : undefined,
-      receiverName: receiverName.trim(),
-      receiverPhone: receiverPhone.trim(),
-      receiverAddress: receiverAddress.trim(),
-      receiverLocation: isValidCoordinate(receiverLocation) ? receiverLocation : undefined,
-      packageType: sanitizedPackageType,
+      senderName,
+      senderPhone,
+      senderAddress,
+      senderLocation: normalizedSenderLocation,
+      senderEmail,
+      receiverName,
+      receiverPhone,
+      receiverAddress,
+      receiverLocation: normalizedReceiverLocation,
+      receiverEmail,
+      packageType,
       packageSize: normalizedPackageSize,
-      packageDescription: typeof packageDescription === 'string' ? packageDescription : '',
+      packageDescription,
       urgency: normalizedUrgency,
-      pickupTime: sanitizedPickupTime,
-      scheduledPickupDate: scheduledPickup ?? undefined,
-      scheduledDeliveryDate: scheduledDelivery ?? undefined,
-      notes: typeof notes === 'string' ? notes : '',
-      serviceCountry: sanitizedServiceCountry,
-      serviceCity: sanitizedServiceCity,
-      distance: Number(computedDistance.toFixed(2)),
+      pickupDateTime: pickupTime,
+      deliveryDateTime: scheduledDeliveryTime,
+      notes,
+      locale,
+      serviceCountry,
+      serviceCity,
+      distance: computedDistance,
       duration: computedDuration,
-      distanceText: routeDistanceText,
-      durationText: routeDurationText,
-      distanceEstimated: distanceEstimated,
-      routePolyline: polyline,
+      routePolyline,
+      distanceText: routeDetails.distanceText,
+      durationText: routeDetails.durationText,
+      distanceEstimated: routeDetails.estimated,
       price: pricing.totalPrice,
       courierEarnings: pricing.courierEarnings,
       platformFee: pricing.platformFee,
       basePrice: pricing.basePrice,
       distancePrice: pricing.distancePrice,
       urgencyPrice: pricing.urgencyPrice,
-      scheduledPrice: pricing.scheduledPrice,
       packageSizePrice: pricing.packageSizePrice,
+      scheduledPrice: pricing.scheduledPrice,
       minimumAdjustment: minimumPriceApplied ? minimumAdjustment : 0,
       minimumPriceApplied,
       estimatedDelivery,
-      locale: typeof locale === 'string' && locale ? locale : 'en',
+      scheduledPickupDate: scheduledPickup ?? undefined,
+      scheduledDeliveryDate: scheduledDelivery ?? undefined,
     });
+
+    await newDeliveryRequest.save();
+
+    // Send confirmation email
+    try {
+      await sendDeliveryConfirmationEmail(newDeliveryRequest);
+    } catch (emailError) {
+      console.error('Failed to send confirmation email:', emailError);
+      // Don't block the response for this, just log it
+    }
 
     return NextResponse.json(
       {
         success: true,
-        trackingId: delivery.trackingId,
-        price: delivery.price,
+        trackingId: newDeliveryRequest.trackingId,
+        price: newDeliveryRequest.price,
         pricing,
-        distance: delivery.distance,
-        duration: delivery.duration,
+        distance: newDeliveryRequest.distance,
+        duration: newDeliveryRequest.duration,
         minimumPriceApplied,
       },
       { status: 201 }

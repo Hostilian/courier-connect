@@ -1,10 +1,10 @@
 'use client';
 
+import ActiveDeliveries from '@/components/ActiveDeliveries';
 import AvailableDeliveries from '@/components/AvailableDeliveries';
 import CourierEarnings from '@/components/CourierEarnings';
 import withAuth from '@/components/withAuth';
 import { useTranslations } from 'next-intl';
-import ActiveDeliveries from '@/components/ActiveDeliveries';
 
 function CourierDashboard() {
   const t = useTranslations('courier.dashboard');

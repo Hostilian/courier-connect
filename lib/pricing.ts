@@ -8,7 +8,7 @@ import { getDay, getHours } from 'date-fns';
 // What we need to know to price something. It's not rocket science. Though maybe it should be.
 export interface PricingInput {
   distance: number; // How far in kilometers. Could be miles, but we're international now.
-  urgency: 'standard' | 'express' | 'urgent'; // How fast they want it. Spoiler: always fast.
+  urgency: 'standard' | 'express' | 'urgent' | 'scheduled'; // How fast they want it. Spoiler: always fast.
   packageSize: 'small' | 'medium' | 'large' | 'extra-large'; // Like t-shirts, but more expensive
   pickupDateTime?: Date | null; // For planners. All three of them.
 }
@@ -20,8 +20,7 @@ export interface PricingBreakdown {
   urgencyPrice: number; // Want it fast? Open your wallet wider.
   timeOfDayPrice: number; // Rush hour? That'll cost you.
   dayOfWeekPrice: number; // Weekend delivery? Oh yeah, that's extra.
-  scheduledFee: number; // Fee for scheduling. Planning costs extra apparently.
-  scheduledDiscount: number; // Discount for booking way in advance.
+  scheduledPrice: number; // Fee or discount for scheduling.
   packageSizePrice: number; // Big box, big bucks. Economics 101.
   totalPrice: number; // The final damage. What you actually pay.
   courierEarnings: number; // 70% - What the courier gets. Before taxes. Ha!
@@ -45,6 +44,7 @@ const PRICING_CONFIG = {
     standard: 1.0, // No extra charge. The boring option.
     express: 1.5, // 50% more. Now we're talking.
     urgent: 2.0, // DOUBLE. You want it NOW? This is what NOW costs.
+    scheduled: 1.0, // No urgency charge for scheduled deliveries.
   },
 
   // Package size multipliers. Size matters. In pricing, anyway.
@@ -131,17 +131,15 @@ export function calculateDeliveryPrice(input: PricingInput): PricingBreakdown {
   subtotal += urgencyPrice;
 
   // Step 7: Scheduled delivery fee or discount.
-  let scheduledFee = 0;
-  let scheduledDiscount = 0;
-  if (pickupDateTime) {
+  let scheduledPrice = 0;
+  if (urgency === 'scheduled' && pickupDateTime) {
     const hoursDifference = (pickupDateTime.getTime() - new Date().getTime()) / (1000 * 60 * 60);
     if (hoursDifference >= 24) {
-      scheduledDiscount = subtotal * PRICING_CONFIG.ADVANCE_BOOKING_DISCOUNT;
-      subtotal -= scheduledDiscount;
+      scheduledPrice = - (subtotal * PRICING_CONFIG.ADVANCE_BOOKING_DISCOUNT);
     } else {
-      scheduledFee = PRICING_CONFIG.SCHEDULED_FEE;
-      subtotal += scheduledFee;
+      scheduledPrice = PRICING_CONFIG.SCHEDULED_FEE;
     }
+    subtotal += scheduledPrice;
   }
 
   // Step 8: Minimum price check. Can't be too cheap. We have an image to maintain.
@@ -159,8 +157,7 @@ export function calculateDeliveryPrice(input: PricingInput): PricingBreakdown {
     urgencyPrice,
     timeOfDayPrice,
     dayOfWeekPrice,
-    scheduledFee,
-    scheduledDiscount,
+    scheduledPrice,
     totalPrice: finalPrice,
     courierEarnings,
     platformFee,

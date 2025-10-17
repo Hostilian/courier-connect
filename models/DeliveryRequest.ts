@@ -11,12 +11,14 @@ export interface IDeliveryRequest extends Document {
   // Sender Information - You know, the person who WANTS to get rid of something
   senderName: string; // Their name. Hopefully not fake.
   senderPhone: string; // Their phone. For when things go wrong. And they will.
+  senderEmail: string; // Their email. For sending confirmations and updates.
   senderAddress: string; // Where they live. Could be anywhere. Probably a third-floor walkup.
   senderLocation?: { lat: number; lng: number }; // GPS coordinates. Because addresses aren't good enough anymore.
   
   // Receiver Information - The poor soul who's RECEIVING something
   receiverName: string; // Their name. Also hopefully not fake.
   receiverPhone: string; // Their phone. They'll need it.
+  receiverEmail: string; // Their email. So they know a package is coming.
   receiverAddress: string; // Where they live. Fingers crossed it's real.
   receiverLocation?: { lat: number; lng: number }; // More GPS coordinates. We're very thorough.
   
@@ -26,7 +28,7 @@ export interface IDeliveryRequest extends Document {
   packageDescription: string; // What they CLAIM is inside. Emphasis on "claim."
   
   // Delivery Information & Scheduling - When and how fast
-  urgency: 'standard' | 'express' | 'urgent'; // How fast they want it. Spoiler: always "urgent"
+  urgency: 'standard' | 'express' | 'urgent' | 'scheduled'; // How fast they want it. Spoiler: always "urgent"
   pickupDateTime: Date | null; // For people who plan ahead. Rare species.
   deliveryDateTime: Date | null; // When they want it delivered. Dreams are free.
   notes?: string; // Special instructions. Usually something impossible like "leave with the non-existent doorman"
@@ -59,7 +61,7 @@ export interface IDeliveryRequest extends Document {
   minimumAdjustment?: number; // When the price was too low and we had to bump it up. Oops.
   minimumPriceApplied?: boolean; // Did we apply a minimum? Yes. We did.
   estimatedDelivery?: Date; // When we THINK it'll arrive. Could be way off.
-  actualDelivery?: Date; // When it ACTUALLY arrived. Reality check time.
+  deliveredAt?: Date; // When it ACTUALLY arrived. Reality check time.
   courierRating?: number; // Rating from customer (1-5 stars). Usually 5 or 1. No in-between.
   
   // Payment - Show me the money
@@ -103,6 +105,12 @@ const DeliveryRequestSchema: Schema = new Schema(
       required: [true, 'Sender phone is required'], // Need a phone. For when things go south.
       trim: true, // Again with the trimming. Whitespace is the enemy.
     },
+    senderEmail: {
+      type: String,
+      required: [true, 'Sender email is required'],
+      trim: true,
+      lowercase: true,
+    },
     senderAddress: {
       type: String,
       required: [true, 'Sender address is required'], // Where to pick up. Kind of important.
@@ -126,6 +134,12 @@ const DeliveryRequestSchema: Schema = new Schema(
       type: String,
       required: [true, 'Receiver phone is required'],
       trim: true,
+    },
+    receiverEmail: {
+      type: String,
+      required: [true, 'Receiver email is required'],
+      trim: true,
+      lowercase: true,
     },
     receiverAddress: {
       type: String,
@@ -163,7 +177,7 @@ const DeliveryRequestSchema: Schema = new Schema(
     urgency: {
       type: String,
       required: [true, 'Urgency is required'],
-      enum: ['standard', 'express', 'urgent'],
+      enum: ['standard', 'express', 'urgent', 'scheduled'],
       default: 'standard',
     },
     
@@ -287,7 +301,7 @@ const DeliveryRequestSchema: Schema = new Schema(
     estimatedDelivery: {
       type: Date,
     },
-    actualDelivery: {
+    deliveredAt: {
       type: Date,
     },
     courierRating: {
@@ -325,5 +339,16 @@ DeliveryRequestSchema.index({ createdAt: -1 });
 DeliveryRequestSchema.index({ status: 1, createdAt: -1 });
 DeliveryRequestSchema.index({ serviceCountry: 1, createdAt: -1 });
 
-export default mongoose.models.DeliveryRequest || 
+// Add a pre-save hook to update the 'deliveredAt' timestamp
+DeliveryRequestSchema.pre('save', function (next) {
+  // If the status is being changed to 'delivered' and it wasn't 'delivered' before
+  if (this.isModified('status') && this.status === 'delivered') {
+    this.deliveredAt = new Date();
+  }
+  next();
+});
+
+// This is the part where we export the model. It's like releasing a bird into the wild.
+// Except this bird is a database model. And the wild is our application.
+export default mongoose.models.DeliveryRequest ||
   mongoose.model<IDeliveryRequest>('DeliveryRequest', DeliveryRequestSchema);

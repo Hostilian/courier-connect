@@ -1,64 +1,49 @@
 'use client';
 
-import { getLanguageByCode } from '@/lib/languages';
 import { GoogleMap, Marker, Polyline, useJsApiLoader } from '@react-google-maps/api';
-import { motion } from 'framer-motion';
-import { Truck } from 'lucide-react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import io, { Socket } from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
 
 const mapContainerStyle = {
   width: '100%',
-  height: '100%',
-  borderRadius: '1rem',
-  minHeight: '400px',
+  height: '400px',
+  borderRadius: '0.5rem',
 };
 
+const WEBSOCKET_URL = process.env.NEXT_PUBLIC_WEBSOCKET_URL || 'http://localhost:3001';
+
 interface LiveTrackingMapProps {
-  deliveryId: string;
-  initialCourierLocation?: { lat: number; lng: number };
+  trackingId: string;
   origin: { lat: number; lng: number };
   destination: { lat: number; lng: number };
   routePolyline?: string;
 }
 
-export default function LiveTrackingMap({
-  deliveryId,
-  initialCourierLocation,
-  origin,
-  destination,
-  routePolyline,
-}: LiveTrackingMapProps) {
+export default function LiveTrackingMap({ trackingId, origin, destination, routePolyline }: LiveTrackingMapProps) {
   const t = useTranslations('tracking');
-  const locale = useLocale();
-  const theme = getLanguageByCode(locale)?.culturalTheme;
-
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '',
-    libraries: ['geometry'], // Needed for decoding polyline
+    libraries: ['geometry'],
   });
 
-  const [courierLocation, setCourierLocation] = useState(initialCourierLocation);
+  const [courierLocation, setCourierLocation] = useState<{ lat: number; lng: number } | null>(null);
   const socketRef = useRef<Socket | null>(null);
 
   useEffect(() => {
-    // Make sure we don't create a million socket connections
-    if (socketRef.current) return;
+    if (!trackingId || typeof window === 'undefined') return;
 
-    const socket = io(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000', {
-      path: '/api/socketio',
-    });
+    const socket = io(WEBSOCKET_URL);
     socketRef.current = socket;
 
     socket.on('connect', () => {
-      console.log('Socket connected:', socket.id);
-      socket.emit('customer:join', { deliveryId });
+      console.log('Socket connected for tracking:', socket.id);
+      socket.emit('join_tracking_room', trackingId);
     });
 
-    socket.on('courier:location', (locationData: { location: { lat: number; lng: number } }) => {
-      console.log('Received courier location update:', locationData.location);
-      setCourierLocation(locationData.location);
+    socket.on('location_update', (location: { lat: number; lng: number }) => {
+      console.log('Received location update:', location);
+      setCourierLocation(location);
     });
 
     socket.on('disconnect', () => {
@@ -67,32 +52,41 @@ export default function LiveTrackingMap({
 
     return () => {
       if (socketRef.current) {
-        console.log('Cleaning up socket connection.');
-        socketRef.current.emit('leave_delivery_room', deliveryId);
         socketRef.current.disconnect();
-        socketRef.current = null;
       }
     };
-  }, [deliveryId]);
+  }, [trackingId]);
 
   const mapRef = useRef<google.maps.Map | null>(null);
 
   const onMapLoad = (map: google.maps.Map) => {
     mapRef.current = map;
-    if (isLoaded) {
-      const bounds = new google.maps.LatLngBounds();
-      if (origin) bounds.extend(new google.maps.LatLng(origin.lat, origin.lng));
-      if (destination) bounds.extend(new google.maps.LatLng(destination.lat, destination.lng));
-      if (courierLocation) {
-        bounds.extend(new google.maps.LatLng(courierLocation.lat, courierLocation.lng));
-      }
+    if (typeof window !== 'undefined') {
+      const bounds = new window.google.maps.LatLngBounds();
+      if (origin) bounds.extend(origin);
+      if (destination) bounds.extend(destination);
       map.fitBounds(bounds);
     }
   };
-  
+
+  useEffect(() => {
+    if (mapRef.current && courierLocation) {
+      const bounds = new window.google.maps.LatLngBounds();
+      if (origin) bounds.extend(origin);
+      if (destination) bounds.extend(destination);
+      bounds.extend(courierLocation);
+      mapRef.current.fitBounds(bounds);
+    }
+  }, [courierLocation, origin, destination]);
+
   const decodedPath = useMemo(() => {
-    if (!isLoaded || !routePolyline) return [];
-    return google.maps.geometry.encoding.decodePath(routePolyline);
+    if (!isLoaded || !routePolyline || typeof window === 'undefined' || !window.google?.maps?.geometry) return [];
+    try {
+      return window.google.maps.geometry.encoding.decodePath(routePolyline);
+    } catch (e) {
+      console.error("Error decoding polyline:", e);
+      return [];
+    }
   }, [isLoaded, routePolyline]);
 
   if (loadError) {
@@ -104,83 +98,43 @@ export default function LiveTrackingMap({
   }
 
   return (
-    <div className="relative h-full w-full" style={{ minHeight: '400px' }}>
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        onLoad={onMapLoad}
-        options={{
-          disableDefaultUI: true,
-          zoomControl: true,
-          styles: [ // Adding a subtle map style
-            {
-              featureType: 'all',
-              elementType: 'labels.text.fill',
-              stylers: [{ "color": "#7c93a3" }, { "lightness": "-10" }]
-            },
-            {
-              featureType: 'poi',
-              elementType: 'labels.icon',
-              stylers: [{ "visibility": "off" }]
-            },
-          ]
-        }}
-      >
-        {origin && <Marker position={origin} icon={{
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: 8,
-          fillColor: theme?.secondary || '#FF6B6B',
-          fillOpacity: 1,
-          strokeWeight: 2,
-          strokeColor: 'white',
-        }} />}
-        
-        {destination && <Marker position={destination} icon={{
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: 8,
-          fillColor: theme?.accent || '#3B82F6',
-          fillOpacity: 1,
-          strokeWeight: 2,
-          strokeColor: 'white',
-        }} />}
-        
-        {courierLocation && (
-           <Marker
-             position={courierLocation}
-             icon={{
-               path: 'M21.71,11.29l-9-9a1,1,0,0,0-1.42,0l-9,9a1,1,0,0,0,0,1.42l9,9a1,1,0,0,0,1.42,0l9-9A1,1,0,0,0,21.71,11.29Z',
-               fillColor: theme?.primary || '#FBBF24',
-               fillOpacity: 1,
-               strokeColor: 'white',
-               strokeWeight: 1.5,
-               rotation: 0, // This could be updated with courier's heading
-               scale: 1.5,
-               anchor: new google.maps.Point(12, 12),
-             }}
-           />
-        )}
+    <GoogleMap
+      mapContainerStyle={mapContainerStyle}
+      onLoad={onMapLoad}
+      options={{
+        disableDefaultUI: true,
+        zoomControl: true,
+      }}
+    >
+      {origin && <Marker position={origin} label="P" title="Pickup" />}
+      {destination && <Marker position={destination} label="D" title="Delivery" />}
+      
+      {courierLocation && (
+        <Marker
+          position={courierLocation}
+          icon={{
+            path: 'M20.92,12.62A1,1,0,0,0,20,12H18.33V10.5a1,1,0,0,0-2,0V12H7.67V10.5a1,1,0,0,0-2,0V12H4a1,1,0,0,0-1,1.38,3,3,0,0,0,2,2.62V18a1,1,0,0,0,1,1H8a1,1,0,0,0,1-1V17h6v1a1,1,0,0,0,1,1h1a1,1,0,0,0,1-1V16a3,3,0,0,0,2-2.62A1,1,0,0,0,20.92,12.62ZM7.5,15A1.5,1.5,0,1,1,9,13.5,1.5,1.5,0,0,1,7.5,15Zm9,0A1.5,1.5,0,1,1,18,13.5,1.5,1.5,0,0,1,16.5,15Z',
+            fillColor: '#4285F4',
+            fillOpacity: 1,
+            strokeWeight: 0,
+            rotation: 0,
+            scale: 1.5,
+            anchor: (typeof window !== 'undefined') ? new window.google.maps.Point(12, 12) : undefined,
+          }}
+          title="Courier"
+        />
+      )}
 
-        {decodedPath.length > 0 && (
-          <Polyline
-            path={decodedPath}
-            options={{
-              strokeColor: theme?.primary || '#3B82F6',
-              strokeOpacity: 0.7,
-              strokeWeight: 5,
-            }}
-          />
-        )}
-      </GoogleMap>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="absolute top-4 left-4 bg-white p-3 rounded-lg shadow-lg flex items-center gap-3"
-      >
-        <Truck className="w-6 h-6" style={{ color: theme?.primary || '#3B82F6' }} />
-        <div>
-          <p className="font-semibold text-gray-800">{t('courierEnRoute')}</p>
-          <p className="text-sm text-gray-600">{t('locationUpdatingLive')}</p>
-        </div>
-      </motion.div>
-    </div>
+      {decodedPath.length > 0 && (
+        <Polyline
+          path={decodedPath}
+          options={{
+            strokeColor: '#4285F4',
+            strokeOpacity: 0.8,
+            strokeWeight: 4,
+          }}
+        />
+      )}
+    </GoogleMap>
   );
 }

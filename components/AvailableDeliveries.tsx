@@ -4,7 +4,7 @@ import { getLanguageByCode } from '@/lib/languages';
 import { motion } from 'framer-motion';
 import { Clock, DollarSign, Loader2, MapPin, Package } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 interface Delivery {

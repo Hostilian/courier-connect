@@ -2,11 +2,13 @@
 // You know, for a guy who doesn't like to commit, I sure do a lot of it.
 // This route is for when a courier decides, "Yeah, I'll take that box." It's a big moment.
 
-import { NextRequest, NextResponse } from 'next/server';
+import { getAuth } from '@/lib/auth';
+import { sendDeliveryAcceptedEmail } from '@/lib/email';
+import { getErrorResponse } from '@/lib/helpers';
 import dbConnect from '@/lib/mongodb';
 import DeliveryRequest from '@/models/DeliveryRequest';
-import { getAuth } from '@/lib/auth';
-import { getErrorResponse } from '@/lib/helpers';
+import User from '@/models/User';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(
   request: NextRequest,
@@ -38,11 +40,27 @@ export async function POST(
       );
     }
 
+    // Find the courier to get their name
+    const courier = await User.findById(user.userId);
+    if (!courier) {
+      // This should be impossible if auth is working, but hey, paranoia is a virtue in programming.
+      return getErrorResponse(404, 'Courier profile not found.');
+    }
+
     // Alright, it's yours. Tag it and bag it.
     delivery.status = 'accepted';
     delivery.courierId = user.userId; // Put your name on it.
+    delivery.courierName = courier.name; // Add the courier's name for the customer to see
 
     await delivery.save(); // Save it to the database. Make it official.
+
+    // Notify the customer that their hero has arrived
+    try {
+      await sendDeliveryAcceptedEmail(delivery, courier);
+    } catch (emailError) {
+      console.error('Failed to send courier accepted email:', emailError);
+      // Log and continue
+    }
 
     // Send back the good news. You've got a job to do.
     return NextResponse.json(delivery);
