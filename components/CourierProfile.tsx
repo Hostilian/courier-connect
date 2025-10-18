@@ -49,9 +49,9 @@ export default function CourierProfile({
               <Image
                 src={profileImage}
                 alt={name}
-                layout="fill"
-                objectFit="cover"
-                className="w-full h-full"
+                fill
+                sizes="96px"
+                className="object-cover"
               />
             ) : (
               <div className="w-full h-full bg-blue-100 text-blue-600 flex items-center justify-center text-2xl font-bold">

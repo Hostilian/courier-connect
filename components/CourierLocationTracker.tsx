@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/components/AuthProvider';
 import { Loader2, Wifi, WifiOff } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 
 interface CourierLocationTrackerProps {
@@ -18,6 +18,45 @@ export default function CourierLocationTracker({ trackingId, isDeliveryActive }:
   const [status, setStatus] = useState<'idle' | 'connecting' | 'tracking' | 'error' | 'paused'>('idle');
   const [error, setError] = useState<string | null>(null);
   const watchIdRef = useRef<number | null>(null);
+
+  const startGeolocationWatcher = useCallback((socket: Socket) => {
+    if (watchIdRef.current !== null) return; // Already watching
+
+    if (navigator.geolocation) {
+      watchIdRef.current = navigator.geolocation.watchPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          const location = { lat: latitude, lng: longitude };
+          
+          socket.emit('courier_location_update', {
+            trackingId,
+            location,
+          });
+          setError(null);
+        },
+        (err) => {
+          console.error('Geolocation error:', err);
+          setError(`Geolocation error: ${err.message}`);
+          setStatus('error');
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        }
+      );
+    } else {
+      setError('Geolocation is not supported by this browser.');
+      setStatus('error');
+    }
+  }, [trackingId]);
+
+  const stopGeolocationWatcher = useCallback(() => {
+    if (watchIdRef.current !== null) {
+      navigator.geolocation.clearWatch(watchIdRef.current);
+      watchIdRef.current = null;
+    }
+  }, []);
 
   useEffect(() => {
     if (isLoading || !user || !trackingId || !isDeliveryActive) {
@@ -62,46 +101,7 @@ export default function CourierLocationTracker({ trackingId, isDeliveryActive }:
       }
       setStatus('idle');
     };
-  }, [trackingId, user, isDeliveryActive, isLoading, status]); // Added isLoading and status to dependency array
-
-  const startGeolocationWatcher = (socket: Socket) => {
-    if (watchIdRef.current !== null) return; // Already watching
-
-    if (navigator.geolocation) {
-      watchIdRef.current = navigator.geolocation.watchPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          const location = { lat: latitude, lng: longitude };
-          
-          socket.emit('courier_location_update', {
-            trackingId,
-            location,
-          });
-          setError(null);
-        },
-        (err) => {
-          console.error('Geolocation error:', err);
-          setError(`Geolocation error: ${err.message}`);
-          setStatus('error');
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 10000,
-          maximumAge: 0,
-        }
-      );
-    } else {
-      setError('Geolocation is not supported by this browser.');
-      setStatus('error');
-    }
-  };
-
-  const stopGeolocationWatcher = () => {
-    if (watchIdRef.current !== null) {
-      navigator.geolocation.clearWatch(watchIdRef.current);
-      watchIdRef.current = null;
-    }
-  };
+  }, [trackingId, user, isDeliveryActive, isLoading, status, startGeolocationWatcher, stopGeolocationWatcher]);
 
   const getStatusIndicator = () => {
     switch (status) {

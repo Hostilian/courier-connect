@@ -4,7 +4,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import StarRating from './StarRating';
 
 interface Rating {
@@ -38,13 +38,7 @@ export default function CourierRating({
   const [isLoading, setIsLoading] = useState(initialRatings.length === 0);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (initialRatings.length === 0) {
-      fetchRatings();
-    }
-  }, [courierId, initialRatings.length, fetchRatings]);
-
-  async function fetchRatings() {
+  const fetchRatings = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
@@ -71,7 +65,13 @@ export default function CourierRating({
     } finally {
       setIsLoading(false);
     }
-  }
+  }, [courierId, t]);
+
+  useEffect(() => {
+    if (initialRatings.length === 0) {
+      fetchRatings();
+    }
+  }, [initialRatings.length, fetchRatings]);
 
   // Format the rating number to include decimal place if needed
   const formatRating = (rating: number): string => {

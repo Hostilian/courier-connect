@@ -198,21 +198,20 @@ export function useSocket(options: UseSocketOptions = {}): UseSocketReturn {
 
   // Auto-connect on mount if enabled
   useEffect(() => {
-    if (ready && autoConnect && !socket && !connecting) {
-      connect();
+    if (!autoConnect) {
+      return;
     }
-  }, [ready, autoConnect, connect, socket, connecting]);
 
-  // Cleanup on unmount
-  // Good coding hygiene. Like washing your hands, but for sockets.
-  useEffect(() => {
+    connect();
+
     return () => {
-      if (socketRef.current) {
+      if (!manualDisconnectRef.current && socketRef.current) {
         socketRef.current.disconnect();
         socketRef.current = null;
+        setStatus('disconnected');
       }
     };
-  }, []); // Empty deps - only run once
+  }, [autoConnect, connect]);
 
   // Periodic ping to keep connection alive
   // Like checking if someone's still there. "You up?"
