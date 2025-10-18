@@ -255,7 +255,7 @@ export default function TrackPage() {
           )}
 
           {/* Rating Form for Completed Deliveries */}
-          {delivery && delivery.status === 'delivered' && delivery.courierName && (
+          {delivery && delivery.status === 'delivered' && delivery.courierName && delivery.courierId && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -265,7 +265,7 @@ export default function TrackPage() {
               <FeedbackForm 
                 deliveryId={delivery.id} 
                 trackingId={delivery.trackingId}
-                courierId={delivery.courierId}
+                courierId={delivery.courierId!}
                 customerEmail={delivery.senderEmail}
               />
             </motion.div>

@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
       distance,
       urgency,
       packageSize,
-      scheduledPickupDate: scheduledPickupDate ? new Date(scheduledPickupDate) : undefined,
+      pickupDateTime: scheduledPickupDate ? new Date(scheduledPickupDate) : undefined,
     };
 
     const pricing = calculateDeliveryPrice(pricingInput);
