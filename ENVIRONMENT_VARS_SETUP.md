@@ -28,6 +28,7 @@ Error: MONGODB_URI is not defined. Please add it to your environment variables.
    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_key
    STRIPE_SECRET_KEY=sk_test_your_key
    STRIPE_WEBHOOK_SECRET=whsec_your_key
+   STRIPE_DEFAULT_CURRENCY=usd
    ```
 
 4. **Deploy Again**:

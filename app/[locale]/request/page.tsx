@@ -76,6 +76,7 @@ export default function RequestPage() {
   const [calculatingPrice, setCalculatingPrice] = useState(false);
   const [loading, setLoading] = useState(false);
   const [trackingId, setTrackingId] = useState('');
+  const [deliveryId, setDeliveryId] = useState('');
   const [paymentLoading, setPaymentLoading] = useState(false);
 
   const pickupRef = useRef<HTMLTextAreaElement | null>(null);
@@ -309,17 +310,19 @@ export default function RequestPage() {
     : null;
 
   const handlePayment = async () => {
-    if (!trackingId) return;
+    if (!deliveryId) return;
     setPaymentLoading(true);
     try {
-      const res = await fetch('/api/stripe/checkout', {
+      const res = await fetch('/api/payments/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ trackingId }),
+        body: JSON.stringify({ deliveryId }),
       });
       if (res.ok) {
         const { url } = await res.json();
-        if (url) window.location.href = url;
+        if (url) {
+          window.location.href = url;
+        }
       } else {
         alert('Payment failed. Please try again.');
       }
@@ -395,6 +398,7 @@ export default function RequestPage() {
 
       if (response.ok) {
         const data = await response.json();
+        setDeliveryId(data.deliveryId || '');
         setTrackingId(data.trackingId);
         setStep(4);
       } else {
@@ -453,7 +457,7 @@ export default function RequestPage() {
           <div className="flex flex-col gap-3 mb-4">
             <button
               onClick={handlePayment}
-              disabled={paymentLoading}
+              disabled={paymentLoading || !deliveryId}
               className="w-full px-4 py-3 rounded-lg font-medium transition-all disabled:opacity-50 bg-green-600 text-white hover:bg-green-700"
             >
               {paymentLoading ? t('common.loading') : '💳 Pay Now'}
