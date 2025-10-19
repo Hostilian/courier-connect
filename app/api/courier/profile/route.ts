@@ -1,13 +1,16 @@
-import dbConnect from '@/lib/mongodb';
 import { getAuth } from '@/lib/auth';
-import DeliveryRequest from '@/models/DeliveryRequest';
+import dbConnect from '@/lib/mongodb';
 import type { IDeliveryRequest } from '@/models/DeliveryRequest';
-import Rating from '@/models/Rating';
+import DeliveryRequest from '@/models/DeliveryRequest';
 import type { IRating } from '@/models/Rating';
-import User from '@/models/User';
+import Rating from '@/models/Rating';
 import type { IUser } from '@/models/User';
-import { NextRequest, NextResponse } from 'next/server';
+import User from '@/models/User';
 import { Types } from 'mongoose';
+import { NextRequest, NextResponse } from 'next/server';
+
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 type RatingBucket = { rating: number; count: number };
 

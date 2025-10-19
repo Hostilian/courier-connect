@@ -3,6 +3,9 @@ import User from '@/models/User';
 import type { Types } from 'mongoose';
 import { NextRequest, NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 interface DirectoryCourierResponse {
   id: string;
   name: string;

@@ -4,6 +4,9 @@ import User from '@/models/User';
 import jwt from 'jsonwebtoken';
 import { NextRequest, NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 const JWT_SECRET = process.env.JWT_SECRET || 'courier-connect-secret-key-change-in-production';
 
 // Verify JWT token

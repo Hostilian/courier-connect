@@ -11,6 +11,9 @@ import DeliveryRequest from '@/models/DeliveryRequest';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 // Let's make sure the status is one of the ones we actually use.
 // No "in_my_feelings" status allowed.
 const updateStatusSchema = z.object({

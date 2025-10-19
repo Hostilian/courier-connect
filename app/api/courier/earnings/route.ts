@@ -4,6 +4,9 @@ import dbConnect from '@/lib/mongodb';
 import DeliveryRequest from '@/models/DeliveryRequest';
 import { NextRequest, NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function GET(request: NextRequest) {
   try {
     const { user } = await getAuth(request);
