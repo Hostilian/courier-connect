@@ -4,10 +4,10 @@
   "description": "Peer-to-peer delivery service platform",
   "private": false,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next dev",
     "dev:next": "next dev",
     "build": "next build",
-    "start": "node server.js",
+    "start": "next start",
     "start:next": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",

@@ -1,154 +1,97 @@
-# Courier Connect
-
-![CI](https://github.com/Hostilian/courier-connect/workflows/CI/badge.svg)
-![Deploy](https://github.com/Hostilian/courier-connect/workflows/Deploy%20to%20Production/badge.svg)
-
-**Local Delivery Platform**
-
-Courier Connect is a multilingual delivery service platform connecting customers with local couriers. Simple, fast, and available in 14+ languages.
-
-## Features
-
-- ✅ No login required for customers
-- 🌍 14+ languages with instant switching
-- 📱 Mobile-first responsive design
-- 📍 Real-time delivery tracking
-- 💳 Secure Stripe payments
-- 📧 Email notifications
-- 🗺️ Google Maps integration
-- 🌐 RTL support for Arabic and other languages
-
-## Quick Links
-
-- 🚀 [Contributing Guidelines](CONTRIBUTING.md)
-- 📖 [Development Workflows](DEVELOPMENT.md)
-- 🛠️ [DevOps Guide](DEVOPS.md)
-- 📋 [Deployment Guide](DEPLOYMENT.md)
-- 🤝 [Code of Conduct](CODE_OF_CONDUCT.md)
-- 🤖 [AI Agent Instructions](.github/copilot-instructions.md)
-
-## Getting Started
-
-### Requirements
-
-- Node.js 18+
-- MongoDB database
-
-### Installation
-
-```bash
-# Install dependencies
-npm install
-
-# Set up environment variables
-# Copy .env.example to .env.local and configure
-
-# Start development server
-npm run dev
-```
-
-Visit http://localhost:3000
-
-## Environment Variables
-
-```bash
-# Database
-MONGODB_URI=your_mongodb_connection_string
-
-# Security
-JWT_SECRET=your_jwt_secret_key
-
-# Application
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-
-# Email
-RESEND_API_KEY=your_resend_api_key
-
-# Maps (optional)
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_maps_key
-
-# Payments (optional)
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_key
-STRIPE_SECRET_KEY=your_stripe_secret
-STRIPE_WEBHOOK_SECRET=your_webhook_secret
-```
-
-## Supported Languages
-
-Czech, German, English, Spanish, French, Italian, Polish, Portuguese, Russian, Turkish, Ukrainian, Vietnamese, Arabic, Chinese
-
-## How It Works
-
-### For Customers
-
-1. Visit website and select language
-2. Enter pickup and delivery details
-3. Get matched with nearby courier
-4. Track delivery in real-time
-5. Pay securely and rate experience
-
-### For Couriers
-
-1. Register with verification
-2. View available delivery jobs
-3. Accept deliveries and earn
-4. Update status as you deliver
-5. Build your reputation
-
-## Deployment
-
-### Vercel
-
-1. Push code to GitHub
-2. Import repository in Vercel
-3. Add environment variables
-4. Deploy
-
-See DEPLOYMENT.md for details.
-
-## Technology
-
-- Next.js 14 (App Router)
-- MongoDB with Mongoose
-- TypeScript
-- Tailwind CSS & Framer Motion
-- next-intl (14+ languages)
-- Stripe (payments)
-- Resend (emails)
-- Google Maps API
-
-## Contributing
-
-We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting a PR.
-
-### Development Workflow
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes following our [code conventions](CONTRIBUTING.md)
-4. Test thoroughly (see [Development Guide](DEVELOPMENT.md))
-5. Commit your changes (`git commit -m 'feat: Add amazing feature'`)
-6. Push to your fork (`git push origin feature/amazing-feature`)
-7. Open a Pull Request
-
-See [DEVELOPMENT.md](DEVELOPMENT.md) for detailed workflows including:
-- Database migrations
-- Testing procedures
-- Internationalization workflow
-- Feature development process
-
-## Community
-
-- 🐛 [Report a Bug](.github/ISSUE_TEMPLATE/bug_report.yml)
-- ✨ [Request a Feature](.github/ISSUE_TEMPLATE/feature_request.yml)
-- 🌍 [Translation Issue](.github/ISSUE_TEMPLATE/translation_issue.yml)
-- 💬 [Discussions](https://github.com/Hostilian/courier-connect/discussions)
-
-## License
-
-MIT License
+<div align="center">
+  <a href="https://hostilian.org" target="_blank">
+    <img src="https://hostilian.org/images/courier-connect-logo.svg" alt="Courier Connect Logo" width="120" height="120">
+  </a>
+  <h1 align="center">Courier Connect</h1>
+  <p align="center">
+    <strong>Peer-to-Peer Local Delivery Platform</strong>
+    <br />
+    Connecting customers with local couriers. No registration needed for customers.
+  </p>
+  <p align="center">
+    <a href="https://hostilian.org"><strong>hostilian.org »</strong></a>
+  </p>
+  <div align="center">
+    <a href="https://github.com/Hostilian/courier-connect/actions/workflows/ci.yml">
+      <img src="https://github.com/Hostilian/courier-connect/actions/workflows/ci.yml/badge.svg" alt="CI Status">
+    </a>
+    <a href="https://github.com/Hostilian/courier-connect/blob/master/LICENSE">
+      <img src="https://img.shields.io/github/license/Hostilian/courier-connect" alt="License">
+    </a>
+    <a href="https://github.com/Hostilian/courier-connect/issues">
+      <img src="https://img.shields.io/github/issues/Hostilian/courier-connect" alt="GitHub issues">
+    </a>
+  </div>
+</div>
 
 ---
 
-**Made with ❤️ by the Courier Connect Team**
+## ✨ Features
 
+- **Customer-Friendly**: No registration required for delivery requests.
+- **Courier Network**: Verified couriers can register and accept local jobs.
+- **Real-Time Tracking**: Live map tracking for all deliveries.
+- **Multilingual**: Supports 14+ languages with cultural theming.
+- **Location-Aware**: Service areas across EU, North & South America.
+- **Secure Payments**: Stripe integration for online payments.
+
+## 🚀 Quick Start
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/Hostilian/courier-connect.git
+    cd courier-connect
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Set up environment variables:**
+    Copy `.env.example` to `.env.local` and fill in the required values.
+    ```bash
+    cp .env.example .env.local
+    ```
+    - `MONGODB_URI`: Your MongoDB connection string.
+    - `JWT_SECRET`: A secret key for signing JWTs.
+    - `NEXT_PUBLIC_APP_URL`: The public URL of your application (e.g., `http://localhost:3000`).
+
+4.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+    The application will be available at `http://localhost:3000`.
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Database**: MongoDB with Mongoose
+- **Authentication**: JWT with `jose`
+- **Styling**: Tailwind CSS & Framer Motion
+- **Internationalization**: `next-intl`
+- **Payments**: Stripe
+- **Maps**: Google Maps API
+- **Email**: Resend
+
+## 📂 Project Structure
+
+```
+/app
+  /[locale]         # Internationalized routes
+  /api              # API endpoints
+/components         # Shared React components
+/lib                # Core logic, utilities, and configs
+/messages           # Translation files
+/models             # Mongoose data models
+/public             # Static assets
+/tests              # E2E and unit tests
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [Contributing Guidelines](docs/CONTRIBUTING.md) to get started.
+
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

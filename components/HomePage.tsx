@@ -1,27 +1,27 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
-import { getLocaleTheme, getLanguageByCode } from '@/lib/languages';
 import { useLocationContext } from '@/components/LocationProvider';
 import { getCountryByCode } from '@/lib/countries';
+import { getLanguageByCode, getLocaleTheme } from '@/lib/languages';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import {
-  Package,
-  Truck,
-  Star,
-  Shield,
-  Clock,
-  Users,
-  MapPin,
-  ArrowRight,
-  Sparkles,
+    ArrowRight,
+    Clock,
+    MapPin,
+    Package,
+    Shield,
+    Sparkles,
+    Star,
+    Truck,
+    Users,
 } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import Link from 'next/link';
 import type { CSSProperties } from 'react';
+import ImageOptimizationDemo from './ImageOptimizationDemo';
+import LanguageSelector from './LanguageSelector';
 import LocationSelector from './LocationSelector';
 import QuickFlags from './QuickFlags';
-import LanguageSelector from './LanguageSelector';
-import ImageOptimizationDemo from './ImageOptimizationDemo';
 
 const overlayStyles: Record<'geo' | 'floral' | 'grid' | 'waves', CSSProperties> = {
     geo: {
