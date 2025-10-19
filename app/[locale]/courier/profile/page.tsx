@@ -1,8 +1,58 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { getLanguageByCode } from '@/lib/languages';
+import {
+    BadgeCheck,
+    Calendar,
+    Camera,
+    CheckCircle,
+    Clock,
+    DollarSign,
+    Mail,
+    MapPin,
+    Package,
+    Phone,
+    Shield,
+    Star,
+    User,
+} from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { User, Mail, Phone, MapPin, Car, Star, DollarSign, Calendar, Shield, Camera } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+
+interface CourierReview {
+  id: string;
+  customerName: string;
+  rating: number;
+  comment: string;
+  createdAt: string;
+  deliveryType: string;
+  city: string;
+  verified: boolean;
+}
+
+interface RatingDistribution {
+  rating: number;
+  count: number;
+}
+
+interface PerformanceMetrics {
+  reliability: number;
+  communication: number;
+  timeliness: number;
+  care: number;
+}
+
+interface RatingSummary {
+  average: number;
+  totalReviews: number;
+  completionRate: number;
+  onTimePercentage: number;
+  repeatCustomers: number;
+  averageResponseTime: string;
+  metrics: PerformanceMetrics;
+  distribution: RatingDistribution[];
+}
 
 interface CourierProfile {
   name: string;
@@ -17,16 +67,38 @@ interface CourierProfile {
   joinDate: string;
   insuranceExpiry: string;
   verified: boolean;
+  ratingSummary: RatingSummary;
+  badges: string[];
+  serviceAreas: string[];
+  specialties: string[];
+  safetyIncidents: number;
+  reviews: CourierReview[];
 }
+
+const TIMEFRAME_WINDOWS = {
+  '30': 30,
+  '90': 90,
+  all: null,
+} as const;
+
+type TimeframeKey = keyof typeof TIMEFRAME_WINDOWS;
 
 export default function CourierProfilePage() {
   const router = useRouter();
+  const locale = useLocale();
+  const t = useTranslations('courier.profile');
+  const theme = getLanguageByCode(locale)?.culturalTheme;
+  const gradientClass = theme?.gradient
+    ? `bg-gradient-to-r ${theme.gradient}`
+    : 'bg-gradient-to-r from-blue-600 to-purple-600';
+  const accentColor = theme?.primary || '#3B82F6';
+
   const [profile, setProfile] = useState<CourierProfile | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [selectedTimeframe, setSelectedTimeframe] = useState<TimeframeKey>('90');
 
   useEffect(() => {
-    // Fetch courier profile
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem('courierToken');
@@ -35,7 +107,6 @@ export default function CourierProfilePage() {
           return;
         }
 
-        // Mock data for demonstration
         setProfile({
           name: 'John Courier',
           email: 'john@example.com',
@@ -45,10 +116,78 @@ export default function CourierProfilePage() {
           licensePlate: 'ABC-1234',
           rating: 4.8,
           totalDeliveries: 342,
-          totalEarnings: 2840.50,
+          totalEarnings: 2840.5,
           joinDate: '2024-01-15',
           insuranceExpiry: '2025-06-30',
           verified: true,
+          ratingSummary: {
+            average: 4.8,
+            totalReviews: 184,
+            completionRate: 98,
+            onTimePercentage: 96,
+            repeatCustomers: 42,
+            averageResponseTime: '7 min',
+            metrics: {
+              reliability: 4.9,
+              communication: 4.7,
+              timeliness: 4.8,
+              care: 4.9,
+            },
+            distribution: [
+              { rating: 5, count: 132 },
+              { rating: 4, count: 38 },
+              { rating: 3, count: 10 },
+              { rating: 2, count: 3 },
+              { rating: 1, count: 1 },
+            ],
+          },
+          badges: ['Top Courier Q3 2025', 'Customer Favorite', 'Zero Incident Streak'],
+          serviceAreas: ['San Francisco, CA', 'Oakland, CA', 'San Jose, CA'],
+          specialties: ['Express deliveries', 'Fragile packages', 'Airport pickups'],
+          safetyIncidents: 0,
+          reviews: [
+            {
+              id: 'r1',
+              customerName: 'Nina Patel',
+              rating: 5,
+              comment:
+                'John kept me updated the entire time and handled fragile samples with great care. Highly recommend.',
+              createdAt: '2025-10-01T10:34:00.000Z',
+              deliveryType: 'express',
+              city: 'San Francisco',
+              verified: true,
+            },
+            {
+              id: 'r2',
+              customerName: 'Liam O’Connor',
+              rating: 5,
+              comment: 'Arrived early, super friendly, and the package arrived exactly as packed.',
+              createdAt: '2025-09-20T14:10:00.000Z',
+              deliveryType: 'fragile',
+              city: 'Oakland',
+              verified: true,
+            },
+            {
+              id: 'r3',
+              customerName: 'Sofia Martinez',
+              rating: 4,
+              comment: 'Great service overall. Traffic caused a small delay but communication was clear.',
+              createdAt: '2025-08-28T09:18:00.000Z',
+              deliveryType: 'scheduled',
+              city: 'San Jose',
+              verified: true,
+            },
+            {
+              id: 'r4',
+              customerName: 'Emma Chen',
+              rating: 5,
+              comment: 'Handled an urgent medical delivery flawlessly. Will book again.',
+              createdAt: '2025-06-12T08:22:00.000Z',
+              deliveryType: 'urgent',
+              city: 'San Francisco',
+              verified: true,
+            },
+          ],
         });
         setLoading(false);
       } catch (error) {
@@ -62,21 +201,47 @@ export default function CourierProfilePage() {
 
   const handleSave = async () => {
     try {
-      // Save profile changes
       setIsEditing(false);
-      alert('Profile updated successfully!');
+      alert(t('notifications.updated'));
     } catch (error) {
       console.error('Failed to save profile:', error);
-      alert('Failed to update profile');
+      alert(t('notifications.error'));
     }
   };
+
+  const filteredReviews = useMemo(() => {
+    if (!profile) {
+      return [];
+    }
+
+    const days = TIMEFRAME_WINDOWS[selectedTimeframe];
+    if (!days) {
+      return profile.reviews;
+    }
+
+    const now = Date.now();
+    const windowMs = days * 24 * 60 * 60 * 1000;
+    return profile.reviews.filter((review) => {
+      const createdAt = new Date(review.createdAt).getTime();
+      return now - createdAt <= windowMs;
+    });
+  }, [profile, selectedTimeframe]);
+
+  const ratingDistribution = useMemo(() => {
+    if (!profile) return [];
+    const total = profile.ratingSummary.totalReviews || 1;
+    return profile.ratingSummary.distribution.map((bucket) => ({
+      ...bucket,
+      percentage: Math.round((bucket.count / total) * 100),
+    }));
+  }, [profile]);
 
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading profile...</p>
+          <div className="animate-spin rounded-full h-16 w-16 border-b-4" style={{ borderColor: accentColor }}></div>
+          <p className="mt-4 text-gray-600">{t('loading')}</p>
         </div>
       </div>
     );
@@ -86,287 +251,435 @@ export default function CourierProfilePage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-red-600 mb-4">Failed to load profile</p>
+          <p className="text-red-600 mb-4">{t('loadError')}</p>
           <button
             onClick={() => router.push('/courier/dashboard')}
             className="text-blue-600 hover:underline"
           >
-            Return to Dashboard
+            {t('returnToDashboard')}
           </button>
         </div>
       </div>
     );
   }
 
+  const insuranceIsExpiringSoon =
+    new Date(profile.insuranceExpiry).getTime() < Date.now() + 30 * 24 * 60 * 60 * 1000;
+
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg p-8 text-white mb-8">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-6">
+        <div className={`${gradientClass} rounded-2xl shadow-lg p-8 text-white mb-8`}>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex items-start gap-6">
               <div className="relative">
-                <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center text-blue-600 text-4xl font-bold">
+                <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center text-4xl font-bold" style={{ color: accentColor }}>
                   {profile.name.charAt(0)}
                 </div>
                 {profile.verified && (
-                  <div className="absolute bottom-0 right-0 bg-green-500 rounded-full p-2">
+                  <div className="absolute -bottom-2 -right-2 rounded-full p-2 bg-green-500">
                     <Shield className="w-5 h-5 text-white" />
                   </div>
                 )}
-                <button className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-blue-700 hover:bg-blue-800 text-white px-3 py-1 rounded-full text-xs flex items-center space-x-1">
+                <button
+                  type="button"
+                  className="absolute -bottom-3 left-1/2 -translate-x-1/2 rounded-full px-3 py-1 text-xs font-semibold flex items-center gap-1"
+                  style={{ backgroundColor: 'rgba(255,255,255,0.16)' }}
+                >
                   <Camera className="w-3 h-3" />
-                  <span>Edit</span>
+                  {t('editPhoto')}
                 </button>
               </div>
               <div>
-                <h1 className="text-3xl font-bold mb-1">{profile.name}</h1>
-                <div className="flex items-center space-x-4 text-blue-100">
-                  <div className="flex items-center">
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400 mr-1" />
-                    <span className="font-semibold">{profile.rating}</span>
-                  </div>
-                  <div>•</div>
-                  <div>{profile.totalDeliveries} deliveries</div>
-                  <div>•</div>
-                  <div>${profile.totalEarnings.toFixed(2)} earned</div>
+                <h1 className="text-3xl md:text-4xl font-bold">{profile.name}</h1>
+                <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-blue-100">
+                  <span className="flex items-center gap-1">
+                    <Star className="w-4 h-4 fill-yellow-300 text-yellow-300" />
+                    {profile.rating.toFixed(1)}
+                  </span>
+                  <span aria-hidden="true">•</span>
+                  <span>{t('header.deliveries', { count: profile.totalDeliveries })}</span>
+                  <span aria-hidden="true">•</span>
+                  <span>{t('header.earnings', { amount: profile.totalEarnings.toFixed(2) })}</span>
+                </div>
+                <div className="mt-3 flex flex-wrap gap-3 text-xs uppercase tracking-wide text-blue-100">
+                  <span className="flex items-center gap-1">
+                    <CheckCircle className="h-3.5 w-3.5" />
+                    {t('header.completionRate', { value: profile.ratingSummary.completionRate })}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Clock className="h-3.5 w-3.5" />
+                    {t('header.responseTime', { value: profile.ratingSummary.averageResponseTime })}
+                  </span>
                 </div>
               </div>
             </div>
             <button
-              onClick={() => setIsEditing(!isEditing)}
-              className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition"
+              type="button"
+              onClick={() => setIsEditing((prev) => !prev)}
+              className="self-start rounded-xl bg-white px-6 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-100"
             >
-              {isEditing ? 'Cancel' : 'Edit Profile'}
+              {isEditing ? t('actions.cancelEdit') : t('actions.editProfile')}
             </button>
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Left Column - Stats */}
+        <div className="grid gap-8 lg:grid-cols-3">
           <div className="space-y-6">
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Quick Stats</h2>
-              <div className="space-y-4">
+            <div className="rounded-2xl bg-white p-6 shadow-lg">
+              <h2 className="text-lg font-semibold text-gray-900">{t('quickStats.title')}</h2>
+              <div className="mt-5 space-y-4 text-sm text-gray-600">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <DollarSign className="w-5 h-5 text-green-600 mr-2" />
-                    <span className="text-gray-700">Total Earnings</span>
+                  <div className="flex items-center gap-2">
+                    <DollarSign className="h-4 w-4 text-green-600" />
+                    <span>{t('quickStats.totalEarnings')}</span>
                   </div>
-                  <span className="font-bold text-gray-900">${profile.totalEarnings.toFixed(2)}</span>
+                  <span className="font-semibold text-gray-900">${profile.totalEarnings.toFixed(2)}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <Star className="w-5 h-5 text-yellow-500 mr-2" />
-                    <span className="text-gray-700">Rating</span>
+                  <div className="flex items-center gap-2">
+                    <Package className="h-4 w-4 text-indigo-600" />
+                    <span>{t('quickStats.completedDeliveries')}</span>
                   </div>
-                  <span className="font-bold text-gray-900">{profile.rating} / 5.0</span>
+                  <span className="font-semibold text-gray-900">{profile.totalDeliveries}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <Calendar className="w-5 h-5 text-blue-600 mr-2" />
-                    <span className="text-gray-700">Member Since</span>
+                  <div className="flex items-center gap-2">
+                    <Star className="h-4 w-4 text-yellow-500" />
+                    <span>{t('quickStats.rating')}</span>
                   </div>
-                  <span className="font-bold text-gray-900">
-                    {new Date(profile.joinDate).toLocaleDateString()}
+                  <span className="font-semibold text-gray-900">{profile.rating.toFixed(1)} / 5</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4 text-blue-600" />
+                    <span>{t('quickStats.memberSince')}</span>
+                  </div>
+                  <span className="font-semibold text-gray-900">
+                    {new Intl.DateTimeFormat(locale, { dateStyle: 'medium' }).format(new Date(profile.joinDate))}
                   </span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Verification Status</h2>
-              <div className="space-y-3">
-                <div className="flex items-center">
-                  <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mr-3">
-                    <span className="text-white text-xs">✓</span>
+            <div className="rounded-2xl bg-white p-6 shadow-lg">
+              <h2 className="text-lg font-semibold text-gray-900">{t('verification.title')}</h2>
+              <div className="mt-4 space-y-3 text-sm text-gray-600">
+                {['email', 'phone', 'id', 'background', 'insurance'].map((item) => (
+                  <div key={item} className="flex items-center gap-3">
+                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-green-500 text-white text-xs">
+                      ✓
+                    </div>
+                    <span>{t(`verification.items.${item}`)}</span>
                   </div>
-                  <span className="text-gray-700">Email Verified</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mr-3">
-                    <span className="text-white text-xs">✓</span>
-                  </div>
-                  <span className="text-gray-700">Phone Verified</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mr-3">
-                    <span className="text-white text-xs">✓</span>
-                  </div>
-                  <span className="text-gray-700">ID Verified</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mr-3">
-                    <span className="text-white text-xs">✓</span>
-                  </div>
-                  <span className="text-gray-700">Background Check</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mr-3">
-                    <span className="text-white text-xs">✓</span>
-                  </div>
-                  <span className="text-gray-700">Insurance Verified</span>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-white p-6 shadow-lg">
+              <h2 className="text-lg font-semibold text-gray-900">{t('serviceAreas.title')}</h2>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {profile.serviceAreas.map((area) => (
+                  <span
+                    key={area}
+                    className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600"
+                  >
+                    {area}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-5">
+                <h3 className="text-sm font-semibold text-gray-900">{t('serviceAreas.specialtiesTitle')}</h3>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {profile.specialties.map((specialty) => (
+                    <span
+                      key={specialty}
+                      className="rounded-lg bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700"
+                    >
+                      {specialty}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
+
+            <div className="rounded-2xl bg-white p-6 shadow-lg">
+              <h2 className="text-lg font-semibold text-gray-900">{t('highlights.title')}</h2>
+              <ul className="mt-4 space-y-3 text-sm text-gray-600">
+                {profile.badges.map((badge) => (
+                  <li key={badge} className="flex items-center gap-2">
+                    <BadgeCheck className="h-4 w-4 text-emerald-600" />
+                    {badge}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 flex items-center gap-2 text-xs text-gray-500">
+                <Shield className="h-4 w-4" />
+                {t('highlights.safetyRecord', { incidents: profile.safetyIncidents })}
+              </p>
+            </div>
           </div>
 
-          {/* Right Column - Profile Details */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Personal Information */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">Personal Information</h2>
-              <div className="grid md:grid-cols-2 gap-6">
+          <div className="space-y-6 lg:col-span-2">
+            <div className="rounded-2xl bg-white p-6 shadow-lg">
+              <h2 className="text-lg font-semibold text-gray-900">{t('personalInfo.title')}</h2>
+              <div className="mt-6 grid gap-6 md:grid-cols-2">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <User className="w-4 h-4 inline mr-1" />
-                    Full Name
+                    <User className="mr-1 inline h-4 w-4" />
+                    {t('personalInfo.name')}
                   </label>
                   <input
                     type="text"
                     value={profile.name}
                     disabled={!isEditing}
-                    onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-600"
+                    onChange={(event) =>
+                      setProfile((prev) => (prev ? { ...prev, name: event.target.value } : prev))
+                    }
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-600"
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <Mail className="w-4 h-4 inline mr-1" />
-                    Email Address
+                    <Mail className="mr-1 inline h-4 w-4" />
+                    {t('personalInfo.email')}
                   </label>
                   <input
                     type="email"
                     value={profile.email}
                     disabled={!isEditing}
-                    onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-600"
+                    onChange={(event) =>
+                      setProfile((prev) => (prev ? { ...prev, email: event.target.value } : prev))
+                    }
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-600"
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <Phone className="w-4 h-4 inline mr-1" />
-                    Phone Number
+                    <Phone className="mr-1 inline h-4 w-4" />
+                    {t('personalInfo.phone')}
                   </label>
                   <input
                     type="tel"
                     value={profile.phone}
                     disabled={!isEditing}
-                    onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-600"
+                    onChange={(event) =>
+                      setProfile((prev) => (prev ? { ...prev, phone: event.target.value } : prev))
+                    }
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-600"
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <MapPin className="w-4 h-4 inline mr-1" />
-                    Address
+                    <MapPin className="mr-1 inline h-4 w-4" />
+                    {t('personalInfo.address')}
                   </label>
                   <input
                     type="text"
                     value={profile.address}
                     disabled={!isEditing}
-                    onChange={(e) => setProfile({ ...profile, address: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-600"
+                    onChange={(event) =>
+                      setProfile((prev) => (prev ? { ...prev, address: event.target.value } : prev))
+                    }
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-600"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Vehicle Information */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">Vehicle Information</h2>
-              <div className="grid md:grid-cols-2 gap-6">
+            <div className="rounded-2xl bg-white p-6 shadow-lg">
+              <h2 className="text-lg font-semibold text-gray-900">{t('vehicleInfo.title')}</h2>
+              <div className="mt-6 grid gap-6 md:grid-cols-2">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <Car className="w-4 h-4 inline mr-1" />
-                    Vehicle Details
+                    <Package className="mr-1 inline h-4 w-4" />
+                    {t('vehicleInfo.vehicle')}
                   </label>
                   <input
                     type="text"
                     value={profile.vehicle}
                     disabled={!isEditing}
-                    onChange={(e) => setProfile({ ...profile, vehicle: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-600"
-                    placeholder="Make, Model, Year"
+                    onChange={(event) =>
+                      setProfile((prev) => (prev ? { ...prev, vehicle: event.target.value } : prev))
+                    }
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-600"
+                    placeholder={t('vehicleInfo.placeholder')}
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    License Plate
+                    {t('vehicleInfo.licensePlate')}
                   </label>
                   <input
                     type="text"
                     value={profile.licensePlate}
                     disabled={!isEditing}
-                    onChange={(e) => setProfile({ ...profile, licensePlate: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-600"
+                    onChange={(event) =>
+                      setProfile((prev) => (prev ? { ...prev, licensePlate: event.target.value } : prev))
+                    }
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-600"
                   />
                 </div>
-
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <Shield className="w-4 h-4 inline mr-1" />
-                    Insurance Expiry Date
+                    <Shield className="mr-1 inline h-4 w-4" />
+                    {t('vehicleInfo.insuranceExpiry')}
                   </label>
                   <input
                     type="date"
                     value={profile.insuranceExpiry}
                     disabled={!isEditing}
-                    onChange={(e) => setProfile({ ...profile, insuranceExpiry: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-600"
+                    onChange={(event) =>
+                      setProfile((prev) => (prev ? { ...prev, insuranceExpiry: event.target.value } : prev))
+                    }
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-600"
                   />
-                  {new Date(profile.insuranceExpiry) < new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) && (
-                    <p className="text-orange-600 text-sm mt-2">
-                      ⚠️ Insurance expiring soon! Please update.
-                    </p>
+                  {insuranceIsExpiringSoon && (
+                    <p className="mt-2 text-sm text-orange-600">{t('vehicleInfo.insuranceWarning')}</p>
                   )}
                 </div>
               </div>
             </div>
 
-            {/* Documents */}
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">Documents</h2>
-              <div className="space-y-4">
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer">
-                  <div className="text-center">
-                    <Camera className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                    <p className="text-sm text-gray-600">Upload Driver's License</p>
+            <div className="rounded-2xl bg-white p-6 shadow-lg">
+              <h2 className="text-lg font-semibold text-gray-900">{t('performance.title')}</h2>
+              <div className="mt-6 grid gap-6 md:grid-cols-2">
+                {Object.entries(profile.ratingSummary.metrics).map(([key, value]) => (
+                  <div key={key} className="rounded-xl border border-gray-100 p-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-semibold text-gray-700">{t(`performance.metrics.${key}`)}</span>
+                      <span className="text-lg font-bold" style={{ color: accentColor }}>
+                        {value.toFixed(1)}
+                      </span>
+                    </div>
+                    <div className="mt-3 h-2 rounded-full bg-gray-100">
+                      <div
+                        className="h-2 rounded-full"
+                        style={{ width: `${(value / 5) * 100}%`, backgroundColor: accentColor }}
+                      ></div>
+                    </div>
                   </div>
-                </div>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer">
-                  <div className="text-center">
-                    <Camera className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                    <p className="text-sm text-gray-600">Upload Insurance Certificate</p>
-                  </div>
-                </div>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer">
-                  <div className="text-center">
-                    <Camera className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                    <p className="text-sm text-gray-600">Upload Vehicle Registration</p>
-                  </div>
+                ))}
+              </div>
+              <div className="mt-8">
+                <h3 className="text-sm font-semibold text-gray-900">{t('performance.distribution')}</h3>
+                <div className="mt-4 space-y-3 text-xs text-gray-600">
+                  {ratingDistribution.map((bucket) => (
+                    <div key={bucket.rating} className="flex items-center gap-3">
+                      <span className="w-8 font-semibold">{bucket.rating}★</span>
+                      <div className="h-2 flex-1 rounded-full bg-gray-100">
+                        <div
+                          className="h-2 rounded-full"
+                          style={{ width: `${bucket.percentage}%`, backgroundColor: accentColor }}
+                        ></div>
+                      </div>
+                      <span className="w-10 text-right">{bucket.percentage}%</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
 
-            {/* Save Button */}
+            <div className="rounded-2xl bg-white p-6 shadow-lg">
+              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <h2 className="text-lg font-semibold text-gray-900">{t('reviews.title')}</h2>
+                  <p className="text-sm text-gray-500">{t('reviews.subtitle', { count: filteredReviews.length })}</p>
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <label className="text-gray-600" htmlFor="review-timeframe">
+                    {t('reviews.filterLabel')}
+                  </label>
+                  <select
+                    id="review-timeframe"
+                    value={selectedTimeframe}
+                    onChange={(event) => setSelectedTimeframe(event.target.value as TimeframeKey)}
+                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="30">{t('reviews.timeframe.30')}</option>
+                    <option value="90">{t('reviews.timeframe.90')}</option>
+                    <option value="all">{t('reviews.timeframe.all')}</option>
+                  </select>
+                </div>
+              </div>
+
+              {filteredReviews.length === 0 ? (
+                <div className="mt-6 rounded-2xl border border-dashed border-gray-200 p-8 text-center text-sm text-gray-500">
+                  {t('reviews.empty')}
+                </div>
+              ) : (
+                <div className="mt-6 space-y-5">
+                  {filteredReviews.map((review) => (
+                    <div key={review.id} className="rounded-2xl border border-gray-100 p-5 shadow-sm">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <div className="font-semibold text-gray-900">{review.customerName}</div>
+                        <span aria-hidden="true" className="hidden sm:inline">
+                          •
+                        </span>
+                        <div className="flex items-center gap-1 text-sm text-gray-500">
+                          <MapPin className="h-3.5 w-3.5" />
+                          {review.city}
+                        </div>
+                        {review.verified && (
+                          <span className="flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-1 text-xs font-semibold text-emerald-700">
+                            <Shield className="h-3 w-3" />
+                            {t('reviews.verified')}
+                          </span>
+                        )}
+                      </div>
+                      <div className="mt-3 flex items-center gap-1">
+                        {Array.from({ length: 5 }).map((_, index) => (
+                          <Star
+                            key={`${review.id}-star-${index}`}
+                            className={`h-4 w-4 ${index < review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200'}`}
+                          />
+                        ))}
+                        <span className="ml-2 text-xs uppercase tracking-wide text-gray-400">
+                          {t('reviews.deliveryType', { type: review.deliveryType })}
+                        </span>
+                      </div>
+                      <p className="mt-3 text-sm text-gray-700">“{review.comment}”</p>
+                      <div className="mt-3 flex items-center gap-2 text-xs text-gray-500">
+                        <Clock className="h-3.5 w-3.5" />
+                        {new Intl.DateTimeFormat(locale, { dateStyle: 'medium' }).format(new Date(review.createdAt))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="rounded-2xl bg-white p-6 shadow-lg">
+              <h2 className="text-lg font-semibold text-gray-900">{t('documents.title')}</h2>
+              <div className="mt-6 grid gap-4 md:grid-cols-3">
+                {[t('documents.license'), t('documents.insurance'), t('documents.registration')].map((label) => (
+                  <div
+                    key={label}
+                    className="flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-gray-300 p-4 text-center text-sm text-gray-600 transition hover:border-blue-400 hover:text-blue-600"
+                  >
+                    <Camera className="h-8 w-8 text-gray-400" />
+                    <span>{label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {isEditing && (
-              <div className="flex justify-end space-x-4">
+              <div className="flex justify-end gap-4">
                 <button
+                  type="button"
                   onClick={() => setIsEditing(false)}
-                  className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition"
+                  className="rounded-xl border border-gray-300 px-6 py-3 font-semibold text-gray-700 transition hover:bg-gray-50"
                 >
-                  Cancel
+                  {t('actions.cancelEdit')}
                 </button>
                 <button
+                  type="button"
                   onClick={handleSave}
-                  className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition"
+                  className="rounded-xl px-6 py-3 text-sm font-semibold text-white shadow-sm transition"
+                  style={{ backgroundColor: accentColor }}
                 >
-                  Save Changes
+                  {t('actions.saveChanges')}
                 </button>
               </div>
             )}

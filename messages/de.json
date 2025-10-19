@@ -308,6 +308,118 @@
         "in_transit": "Als Unterwegs Markieren",
         "delivered": "Als Geliefert Markieren"
       }
+    },
+    "profile": {
+      "loading": "Profil wird geladen...",
+      "loadError": "Dieses Kurierprofil konnte nicht geladen werden.",
+      "returnToDashboard": "Zurück zum Dashboard",
+      "editPhoto": "Foto aktualisieren",
+      "notifications": {
+        "updated": "Profil erfolgreich aktualisiert!",
+        "error": "Änderungen konnten nicht gespeichert werden. Bitte erneut versuchen."
+      },
+      "header": {
+        "deliveries": "{count} abgeschlossene Lieferungen",
+        "earnings": "${amount} verdient",
+        "completionRate": "{value}% abgeschlossene Aufträge",
+        "responseTime": "Durchschnittliche Reaktionszeit {value}"
+      },
+      "actions": {
+        "editProfile": "Profil bearbeiten",
+        "cancelEdit": "Abbrechen",
+        "saveChanges": "Speichern"
+      },
+      "quickStats": {
+        "title": "Kennzahlen",
+        "totalEarnings": "Gesamteinnahmen",
+        "completedDeliveries": "Erledigte Lieferungen",
+        "rating": "Durchschnittsbewertung",
+        "memberSince": "Mitglied seit"
+      },
+      "verification": {
+        "title": "Verifizierungsstatus",
+        "items": {
+          "email": "E-Mail verifiziert",
+          "phone": "Telefon verifiziert",
+          "id": "Identität verifiziert",
+          "background": "Hintergrundprüfung bestanden",
+          "insurance": "Versicherung bestätigt"
+        }
+      },
+      "serviceAreas": {
+        "title": "Servicegebiete",
+        "specialtiesTitle": "Spezialisierungen"
+      },
+      "highlights": {
+        "title": "Auszeichnungen",
+        "safetyRecord": "Sicherheitsbilanz: {incidents, plural, =0 {Keine Vorfälle gemeldet} one {# gemeldeter Vorfall} other {# gemeldete Vorfälle}}"
+      },
+      "personalInfo": {
+        "title": "Persönliche Daten",
+        "name": "Vollständiger Name",
+        "email": "E-Mail-Adresse",
+        "phone": "Telefonnummer",
+        "address": "Standort"
+      },
+      "vehicleInfo": {
+        "title": "Fahrzeugdaten",
+        "vehicle": "Fahrzeugdetails",
+        "placeholder": "Marke, Modell, Baujahr",
+        "licensePlate": "Kennzeichen",
+        "insuranceExpiry": "Ablauf der Versicherung",
+        "insuranceWarning": "Versicherung läuft bald ab. Bitte Dokumente aktualisieren."
+      },
+      "performance": {
+        "title": "Leistung und Bewertungen",
+        "metrics": {
+          "reliability": "Zuverlässigkeit",
+          "communication": "Kommunikation",
+          "timeliness": "Pünktlichkeit",
+          "care": "Sorgfalt mit dem Paket"
+        },
+        "distribution": "Bewertungsverteilung"
+      },
+      "reviews": {
+        "title": "Aktuelle Bewertungen",
+        "subtitle": "{count} Bewertung(en) angezeigt",
+        "filterLabel": "Zeitraum",
+        "timeframe": {
+          "30": "Letzte 30 Tage",
+          "90": "Letzte 90 Tage",
+          "all": "Gesamte Zeit"
+        },
+        "empty": "In diesem Zeitraum liegen noch keine Bewertungen vor.",
+        "verified": "Verifizierte Lieferung",
+        "deliveryType": "Lieferart: {type}"
+      },
+      "documents": {
+        "title": "Dokumente",
+        "license": "Führerschein hochladen",
+        "insurance": "Versicherungsnachweis hochladen",
+        "registration": "Fahrzeugschein hochladen"
+      }
+    },
+    "directory": {
+      "title": "Vertrauenswürdige Kuriere in der Nähe",
+      "subtitle": "Entdecken Sie top-bewertete Kuriere, die in Ihrer Nähe verfügbar sind.",
+      "ratingLabel": "Mindestbewertung",
+      "ratingValue": "{rating}+ Sterne",
+      "clearFilter": "Filter zurücksetzen",
+      "noResults": "Kein Kurier erfüllt derzeit diese Bewertung. Senken Sie den Filter.",
+      "card": {
+        "badgeTop": "Top-Kurier",
+        "reviews": "{count} Bewertungen",
+        "deliveries": "{count} Lieferungen",
+        "languages": "Spricht {languages}",
+        "cta": "Profil ansehen"
+      },
+      "specialties": {
+        "express": "Expresslieferung",
+        "fragile": "Empfindliche Güter",
+        "longDistance": "Langstrecke",
+        "food": "Essen & Catering",
+        "documents": "Dokumente"
+      }
     }
   },
   "common": {

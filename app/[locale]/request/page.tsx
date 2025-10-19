@@ -1,5 +1,6 @@
 'use client';
 
+import CourierDirectory from '@/components/CourierDirectory';
 import DeliveryMap from '@/components/DeliveryMap';
 import { useLocationContext } from '@/components/LocationProvider';
 import LocationSelector from '@/components/LocationSelector';
@@ -1017,6 +1018,8 @@ export default function RequestPage() {
             </div>
           </div>
         </div>
+
+        <CourierDirectory />
       </div>
     </div>
   );

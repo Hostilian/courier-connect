@@ -343,6 +343,118 @@
         "in_transit": "Mark as In Transit",
         "delivered": "Mark as Delivered"
       }
+    },
+    "profile": {
+      "loading": "Loading profile...",
+      "loadError": "We couldn't load that courier profile.",
+      "returnToDashboard": "Return to dashboard",
+      "editPhoto": "Update photo",
+      "notifications": {
+        "updated": "Profile updated successfully!",
+        "error": "We couldn't save your changes. Please try again."
+      },
+      "header": {
+        "deliveries": "{count} deliveries completed",
+        "earnings": "${amount} earned",
+        "completionRate": "{value}% completion rate",
+        "responseTime": "Avg. response time {value}"
+      },
+      "actions": {
+        "editProfile": "Edit profile",
+        "cancelEdit": "Cancel",
+        "saveChanges": "Save changes"
+      },
+      "quickStats": {
+        "title": "Quick stats",
+        "totalEarnings": "Total earnings",
+        "completedDeliveries": "Completed deliveries",
+        "rating": "Average rating",
+        "memberSince": "Member since"
+      },
+      "verification": {
+        "title": "Verification status",
+        "items": {
+          "email": "Email verified",
+          "phone": "Phone verified",
+          "id": "ID verified",
+          "background": "Background check completed",
+          "insurance": "Insurance confirmed"
+        }
+      },
+      "serviceAreas": {
+        "title": "Service areas",
+        "specialtiesTitle": "Specialties"
+      },
+      "highlights": {
+        "title": "Recognition",
+        "safetyRecord": "Safety record: {incidents, plural, =0 {Zero incidents reported} one {# incident reported} other {# incidents reported}}"
+      },
+      "personalInfo": {
+        "title": "Personal information",
+        "name": "Full name",
+        "email": "Email address",
+        "phone": "Phone number",
+        "address": "Home base"
+      },
+      "vehicleInfo": {
+        "title": "Vehicle information",
+        "vehicle": "Vehicle details",
+        "placeholder": "Make, model, year",
+        "licensePlate": "License plate",
+        "insuranceExpiry": "Insurance expiry",
+        "insuranceWarning": "Insurance expiring soon. Please update your documents."
+      },
+      "performance": {
+        "title": "Performance and ratings",
+        "metrics": {
+          "reliability": "Reliability",
+          "communication": "Communication",
+          "timeliness": "On-time arrival",
+          "care": "Package care"
+        },
+        "distribution": "Rating distribution"
+      },
+      "reviews": {
+        "title": "Recent reviews",
+        "subtitle": "Showing {count} review(s)",
+        "filterLabel": "Timeframe",
+        "timeframe": {
+          "30": "Last 30 days",
+          "90": "Last 90 days",
+          "all": "All time"
+        },
+        "empty": "No reviews in this timeframe yet. Keep up the great work!",
+        "verified": "Verified delivery",
+        "deliveryType": "Delivery type: {type}"
+      },
+      "documents": {
+        "title": "Documents",
+        "license": "Upload driver's license",
+        "insurance": "Upload insurance certificate",
+        "registration": "Upload vehicle registration"
+      }
+    },
+    "directory": {
+      "title": "Trusted couriers nearby",
+      "subtitle": "Browse highly rated couriers ready to help in your area.",
+      "ratingLabel": "Minimum rating",
+      "ratingValue": "{rating}+ stars",
+      "clearFilter": "Reset filter",
+      "noResults": "No couriers meet this rating yet. Try lowering the filter.",
+      "card": {
+        "badgeTop": "Top courier",
+        "reviews": "{count} reviews",
+        "deliveries": "{count} deliveries",
+        "languages": "Speaks {languages}",
+        "cta": "View profile"
+      },
+      "specialties": {
+        "express": "Express delivery",
+        "fragile": "Fragile items",
+        "longDistance": "Long distance",
+        "food": "Food & catering",
+        "documents": "Documents"
+      }
     }
   },
   "common": {

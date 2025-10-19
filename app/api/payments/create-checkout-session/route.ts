@@ -4,7 +4,7 @@ import DeliveryRequest from '@/models/DeliveryRequest';
 import { NextRequest, NextResponse } from 'next/server';
 
 const DEFAULT_CURRENCY = process.env.STRIPE_DEFAULT_CURRENCY || 'usd';
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+const APP_URL = (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000').replace(/\/$/, '');
 
 export async function POST(request: NextRequest) {
   try {

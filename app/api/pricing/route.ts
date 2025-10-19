@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
       distance,
       urgency,
       packageSize,
-      scheduledPickupDate: scheduledDateTime ? new Date(scheduledDateTime) : undefined,
+      pickupDateTime: scheduledDateTime ? new Date(scheduledDateTime) : undefined,
     });
 
     // And then you send it back. It's like a game of catch, but with data. And you never know who's on the other end. Could be a guy in his underwear for all I know.

@@ -48,11 +48,13 @@ test.describe('Pricing Calculator', () => {
     await page.check('input[value="express"]');
     await page.waitForTimeout(1500);
 
-    const expressPrice = await page.locator('[data-testid="price-estimate"]').textContent();
-    
-    // Should be roughly 2x the standard price
-    // ~$8-10 for express
-    expect(expressPrice).toMatch(/\$[8-12]\.\d{2}/);
+  const expressPrice = await page.locator('[data-testid="price-estimate"]').textContent();
+  const expressAmount = parseFloat(expressPrice?.match(/\$([\d.]+)/)?.[1] || '0');
+
+  // Should be roughly 2x the standard price
+  // ~$8-10 for express
+  expect(expressAmount).toBeGreaterThanOrEqual(8);
+  expect(expressAmount).toBeLessThanOrEqual(12);
   });
 
   test('should apply urgent delivery multiplier', async ({ page }) => {

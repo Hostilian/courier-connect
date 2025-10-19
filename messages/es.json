@@ -308,6 +308,118 @@
         "in_transit": "Marcar como En Tránsito",
         "delivered": "Marcar como Entregado"
       }
+    },
+    "profile": {
+      "loading": "Cargando perfil...",
+      "loadError": "No pudimos cargar este perfil de mensajero.",
+      "returnToDashboard": "Volver al panel",
+      "editPhoto": "Actualizar foto",
+      "notifications": {
+        "updated": "¡Perfil actualizado correctamente!",
+        "error": "No pudimos guardar tus cambios. Inténtalo de nuevo."
+      },
+      "header": {
+        "deliveries": "{count} entregas completadas",
+        "earnings": "${amount} ganados",
+        "completionRate": "{value}% de pedidos completados",
+        "responseTime": "Tiempo medio de respuesta {value}"
+      },
+      "actions": {
+        "editProfile": "Editar perfil",
+        "cancelEdit": "Cancelar",
+        "saveChanges": "Guardar cambios"
+      },
+      "quickStats": {
+        "title": "Estadísticas rápidas",
+        "totalEarnings": "Ganancias totales",
+        "completedDeliveries": "Entregas completadas",
+        "rating": "Valoración media",
+        "memberSince": "Miembro desde"
+      },
+      "verification": {
+        "title": "Estado de verificación",
+        "items": {
+          "email": "Correo verificado",
+          "phone": "Teléfono verificado",
+          "id": "Identidad verificada",
+          "background": "Antecedentes aprobados",
+          "insurance": "Seguro confirmado"
+        }
+      },
+      "serviceAreas": {
+        "title": "Zonas de servicio",
+        "specialtiesTitle": "Especialidades"
+      },
+      "highlights": {
+        "title": "Reconocimientos",
+        "safetyRecord": "Historial de seguridad: {incidents, plural, =0 {Sin incidentes reportados} one {# incidente reportado} other {# incidentes reportados}}"
+      },
+      "personalInfo": {
+        "title": "Información personal",
+        "name": "Nombre completo",
+        "email": "Correo electrónico",
+        "phone": "Número de teléfono",
+        "address": "Base de operaciones"
+      },
+      "vehicleInfo": {
+        "title": "Información del vehículo",
+        "vehicle": "Detalles del vehículo",
+        "placeholder": "Marca, modelo, año",
+        "licensePlate": "Matrícula",
+        "insuranceExpiry": "Vencimiento del seguro",
+        "insuranceWarning": "El seguro vence pronto. Actualiza tus documentos."
+      },
+      "performance": {
+        "title": "Rendimiento y valoraciones",
+        "metrics": {
+          "reliability": "Fiabilidad",
+          "communication": "Comunicación",
+          "timeliness": "Puntualidad",
+          "care": "Cuidado del paquete"
+        },
+        "distribution": "Distribución de valoraciones"
+      },
+      "reviews": {
+        "title": "Reseñas recientes",
+        "subtitle": "Mostrando {count} reseña(s)",
+        "filterLabel": "Periodo",
+        "timeframe": {
+          "30": "Últimos 30 días",
+          "90": "Últimos 90 días",
+          "all": "Todo el tiempo"
+        },
+        "empty": "No hay reseñas en este periodo todavía. ¡Sigue así!",
+        "verified": "Entrega verificada",
+        "deliveryType": "Tipo de entrega: {type}"
+      },
+      "documents": {
+        "title": "Documentos",
+        "license": "Subir licencia de conducir",
+        "insurance": "Subir certificado de seguro",
+        "registration": "Subir registro del vehículo"
+      }
+    },
+    "directory": {
+      "title": "Mensajeros de confianza cercanos",
+      "subtitle": "Descubre mensajeros con alta valoración listos para ayudarte en tu zona.",
+      "ratingLabel": "Valoración mínima",
+      "ratingValue": "{rating}+ estrellas",
+      "clearFilter": "Restablecer filtro",
+      "noResults": "Ningún mensajero cumple con esta valoración todavía. Prueba bajando el filtro.",
+      "card": {
+        "badgeTop": "Mensajero destacado",
+        "reviews": "{count} reseñas",
+        "deliveries": "{count} entregas",
+        "languages": "Habla {languages}",
+        "cta": "Ver perfil"
+      },
+      "specialties": {
+        "express": "Entrega exprés",
+        "fragile": "Artículos frágiles",
+        "longDistance": "Larga distancia",
+        "food": "Comida y catering",
+        "documents": "Documentos"
+      }
     }
   },
   "common": {
@@ -392,7 +504,6 @@
   },
   "maps": {
     "title": "Route Map",
-    "loading": "Loading map...",
     "calculating": "Calculating route...",
     "origin": "Pickup Location",
     "destination": "Delivery Location",
