@@ -8,7 +8,7 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
 
 export async function POST(request: NextRequest) {
   try {
-    const { deliveryId, successPath = '/payment/success', cancelPath = '/payment/cancel' } = await request.json();
+  const { deliveryId, successPath = '/{locale}/payment/success', cancelPath = '/{locale}/payment/cancel' } = await request.json();
 
     if (!deliveryId) {
       return NextResponse.json({ error: 'deliveryId is required' }, { status: 400 });

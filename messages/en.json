@@ -500,5 +500,20 @@
     "specialInstructions": "Special Instructions (Optional)",
     "instructionsPlaceholder": "e.g., Ring doorbell twice, use side entrance...",
     "summary": "Summary"
+  },
+  "payment": {
+    "success": {
+      "title": "Payment Confirmed",
+      "description": "Thank you! Your delivery has been paid and is ready to be matched with a courier.",
+      "sessionLabel": "Stripe session",
+      "trackDelivery": "Track delivery",
+      "newDelivery": "Book another delivery"
+    },
+    "cancel": {
+      "title": "Payment Cancelled",
+      "description": "No charge was made. You can try the payment again whenever you're ready.",
+      "tryAgain": "Try payment again",
+      "trackDelivery": "View tracking"
+    }
   }
 }
