@@ -2,12 +2,13 @@ import { IDeliveryRequest } from '@/models/DeliveryRequest';
 import { IUser } from '@/models/User';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resendApiKey = process.env.RESEND_API_KEY;
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 const fromEmail = process.env.FROM_EMAIL || 'noreply@courierconnect.com';
 const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
 
 async function sendEmail(options: { to: string | string[]; subject: string; html: string; }) {
-  if (!process.env.RESEND_API_KEY || process.env.NODE_ENV === 'test') {
+  if (!resend || !process.env.RESEND_API_KEY || process.env.NODE_ENV === 'test') {
     console.log('RESEND_API_KEY not set or in test environment, skipping email.');
     return Promise.resolve({ id: 'test_email_id' });
   }

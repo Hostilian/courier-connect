@@ -47,7 +47,7 @@ interface RatingSummary {
   average: number;
   totalReviews: number;
   completionRate: number;
-  onTimePercentage: number;
+  onTimePercentage: number | null;
   repeatCustomers: number;
   averageResponseTime: string;
   metrics: PerformanceMetrics;
@@ -55,17 +55,18 @@ interface RatingSummary {
 }
 
 interface CourierProfile {
+  id: string;
   name: string;
   email: string;
   phone: string;
   address: string;
   vehicle: string;
-  licensePlate: string;
+  licensePlate?: string;
   rating: number;
   totalDeliveries: number;
   totalEarnings: number;
   joinDate: string;
-  insuranceExpiry: string;
+  insuranceExpiry: string | null;
   verified: boolean;
   ratingSummary: RatingSummary;
   badges: string[];
@@ -73,6 +74,7 @@ interface CourierProfile {
   specialties: string[];
   safetyIncidents: number;
   reviews: CourierReview[];
+  languages: string[];
 }
 
 const TIMEFRAME_WINDOWS = {
@@ -96,108 +98,62 @@ export default function CourierProfilePage() {
   const [profile, setProfile] = useState<CourierProfile | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [selectedTimeframe, setSelectedTimeframe] = useState<TimeframeKey>('90');
 
   useEffect(() => {
+    let cancelled = false;
+
     const fetchProfile = async () => {
+      setLoading(true);
+      setError(null);
+
       try {
-        const token = localStorage.getItem('courierToken');
+        const token = typeof window !== 'undefined' ? localStorage.getItem('courierToken') : null;
         if (!token) {
-          router.push('/courier/login');
+          router.push(`/${locale}/courier/login`);
           return;
         }
 
-        setProfile({
-          name: 'John Courier',
-          email: 'john@example.com',
-          phone: '+1 (555) 123-4567',
-          address: '123 Main St, San Francisco, CA 94102',
-          vehicle: 'Honda Civic 2020',
-          licensePlate: 'ABC-1234',
-          rating: 4.8,
-          totalDeliveries: 342,
-          totalEarnings: 2840.5,
-          joinDate: '2024-01-15',
-          insuranceExpiry: '2025-06-30',
-          verified: true,
-          ratingSummary: {
-            average: 4.8,
-            totalReviews: 184,
-            completionRate: 98,
-            onTimePercentage: 96,
-            repeatCustomers: 42,
-            averageResponseTime: '7 min',
-            metrics: {
-              reliability: 4.9,
-              communication: 4.7,
-              timeliness: 4.8,
-              care: 4.9,
-            },
-            distribution: [
-              { rating: 5, count: 132 },
-              { rating: 4, count: 38 },
-              { rating: 3, count: 10 },
-              { rating: 2, count: 3 },
-              { rating: 1, count: 1 },
-            ],
-          },
-          badges: ['Top Courier Q3 2025', 'Customer Favorite', 'Zero Incident Streak'],
-          serviceAreas: ['San Francisco, CA', 'Oakland, CA', 'San Jose, CA'],
-          specialties: ['Express deliveries', 'Fragile packages', 'Airport pickups'],
-          safetyIncidents: 0,
-          reviews: [
-            {
-              id: 'r1',
-              customerName: 'Nina Patel',
-              rating: 5,
-              comment:
-                'John kept me updated the entire time and handled fragile samples with great care. Highly recommend.',
-              createdAt: '2025-10-01T10:34:00.000Z',
-              deliveryType: 'express',
-              city: 'San Francisco',
-              verified: true,
-            },
-            {
-              id: 'r2',
-              customerName: 'Liam O’Connor',
-              rating: 5,
-              comment: 'Arrived early, super friendly, and the package arrived exactly as packed.',
-              createdAt: '2025-09-20T14:10:00.000Z',
-              deliveryType: 'fragile',
-              city: 'Oakland',
-              verified: true,
-            },
-            {
-              id: 'r3',
-              customerName: 'Sofia Martinez',
-              rating: 4,
-              comment: 'Great service overall. Traffic caused a small delay but communication was clear.',
-              createdAt: '2025-08-28T09:18:00.000Z',
-              deliveryType: 'scheduled',
-              city: 'San Jose',
-              verified: true,
-            },
-            {
-              id: 'r4',
-              customerName: 'Emma Chen',
-              rating: 5,
-              comment: 'Handled an urgent medical delivery flawlessly. Will book again.',
-              createdAt: '2025-06-12T08:22:00.000Z',
-              deliveryType: 'urgent',
-              city: 'San Francisco',
-              verified: true,
-            },
-          ],
+        const response = await fetch('/api/courier/profile', {
+          headers: { Authorization: `Bearer ${token}` },
+          cache: 'no-store',
         });
-        setLoading(false);
-      } catch (error) {
-        console.error('Failed to fetch profile:', error);
-        setLoading(false);
+
+        if (response.status === 401) {
+          router.push(`/${locale}/courier/login`);
+          return;
+        }
+
+        if (!response.ok) {
+          const payload = await response.json().catch(() => null);
+          throw new Error(payload?.error || 'Failed to load courier profile');
+        }
+
+        const payload = await response.json();
+        if (!cancelled) {
+          setProfile(payload.profile ?? null);
+        }
+      } catch (fetchError) {
+        if (!cancelled) {
+          console.error('Failed to fetch profile:', fetchError);
+          const message =
+            fetchError instanceof Error ? fetchError.message : 'Failed to load courier profile';
+          setError(message);
+          setProfile(null);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
     };
 
     fetchProfile();
-  }, [router]);
+    return () => {
+      cancelled = true;
+    };
+  }, [locale, router]);
 
   const handleSave = async () => {
     try {
@@ -247,13 +203,14 @@ export default function CourierProfilePage() {
     );
   }
 
-  if (!profile) {
+  if (error) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-red-600 mb-4">{t('loadError')}</p>
+          <p className="text-red-600 mb-2">{t('loadError')}</p>
+          <p className="mb-4 text-sm text-gray-600">{error}</p>
           <button
-            onClick={() => router.push('/courier/dashboard')}
+            onClick={() => router.push(`/${locale}/courier/dashboard`)}
             className="text-blue-600 hover:underline"
           >
             {t('returnToDashboard')}
@@ -263,8 +220,25 @@ export default function CourierProfilePage() {
     );
   }
 
-  const insuranceIsExpiringSoon =
-    new Date(profile.insuranceExpiry).getTime() < Date.now() + 30 * 24 * 60 * 60 * 1000;
+  if (!profile) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <p className="mb-4 text-gray-700">{t('loadError')}</p>
+          <button
+            onClick={() => router.push(`/${locale}/courier/dashboard`)}
+            className="text-blue-600 hover:underline"
+          >
+            {t('returnToDashboard')}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const insuranceIsExpiringSoon = profile.insuranceExpiry
+    ? new Date(profile.insuranceExpiry).getTime() < Date.now() + 30 * 24 * 60 * 60 * 1000
+    : false;
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -527,7 +501,7 @@ export default function CourierProfilePage() {
                   </label>
                   <input
                     type="date"
-                    value={profile.insuranceExpiry}
+                    value={profile.insuranceExpiry ?? ''}
                     disabled={!isEditing}
                     onChange={(event) =>
                       setProfile((prev) => (prev ? { ...prev, insuranceExpiry: event.target.value } : prev))

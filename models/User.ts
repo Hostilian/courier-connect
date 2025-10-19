@@ -6,7 +6,15 @@ export interface IUser extends Document {
   passwordHash: string;
   phone: string;
   city: string;
+  country?: string;
   vehicleType: 'bike' | 'scooter' | 'motorcycle' | 'car' | 'van';
+  vehicleDetails?: string;
+  licensePlate?: string;
+  languages: string[];
+  specialties: string[];
+  serviceAreas: string[];
+  bio?: string;
+  photoUrl?: string;
   idNumber: string;
   role: 'courier' | 'admin';
   isVerified: boolean;
@@ -20,6 +28,8 @@ export interface IUser extends Document {
   totalDeliveries: number;
   completedDeliveries: number;
   activeDeliveries: number;
+  insuranceExpiry?: Date;
+  safetyIncidents: number;
   earnings: number;
   createdAt: Date;
   updatedAt: Date;
@@ -56,10 +66,45 @@ const UserSchema: Schema = new Schema(
       required: [true, 'City is required'],
       trim: true,
     },
+    country: {
+      type: String,
+      trim: true,
+    },
     vehicleType: {
       type: String,
       required: [true, 'Vehicle type is required'],
       enum: ['bike', 'scooter', 'motorcycle', 'car', 'van'],
+    },
+    vehicleDetails: {
+      type: String,
+      trim: true,
+      maxlength: [120, 'Vehicle details cannot exceed 120 characters'],
+    },
+    licensePlate: {
+      type: String,
+      trim: true,
+      maxlength: [32, 'License plate cannot exceed 32 characters'],
+    },
+    languages: {
+      type: [String],
+      default: [],
+    },
+    specialties: {
+      type: [String],
+      default: [],
+    },
+    serviceAreas: {
+      type: [String],
+      default: [],
+    },
+    bio: {
+      type: String,
+      trim: true,
+      maxlength: [500, 'Bio cannot exceed 500 characters'],
+    },
+    photoUrl: {
+      type: String,
+      trim: true,
     },
     idNumber: {
       type: String,
@@ -92,6 +137,9 @@ const UserSchema: Schema = new Schema(
       type: Date,
       select: false,
     },
+    insuranceExpiry: {
+      type: Date,
+    },
     totalRating: {
       type: Number,
       default: 0,
@@ -117,6 +165,11 @@ const UserSchema: Schema = new Schema(
       min: 0,
     },
     activeDeliveries: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    safetyIncidents: {
       type: Number,
       default: 0,
       min: 0,
