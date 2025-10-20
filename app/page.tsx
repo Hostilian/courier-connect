@@ -1,5 +1,4 @@
-
-
+"use client";
 import { defaultLocale } from '@/i18n';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
