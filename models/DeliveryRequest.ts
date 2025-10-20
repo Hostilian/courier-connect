@@ -68,6 +68,7 @@ export interface IDeliveryRequest extends Document {
   paymentStatus?: 'unpaid' | 'paid' | 'refunded'; // Did they pay? Are we giving money back? The eternal question.
   paymentIntentId?: string; // Stripe's ID. Long confusing string. Par for the course.
   checkoutSessionId?: string; // Stripe Checkout session ID. Because apparently one ID wasn't enough.
+  paymentCapturedAt?: Date; // When payment was captured from escrow. Money actually moved.
   
   // Metadata - The boring administrative stuff
   locale: string; // What language. 'en' for English. 'fr' for Français. You get it.
@@ -312,7 +313,7 @@ const DeliveryRequestSchema: Schema = new Schema(
     },
     paymentStatus: {
       type: String,
-      enum: ['unpaid', 'paid', 'refunded'],
+      enum: ['unpaid', 'pending', 'authorized', 'paid', 'refunded', 'failed'],
       default: 'unpaid',
     },
     paymentIntentId: {
@@ -322,6 +323,9 @@ const DeliveryRequestSchema: Schema = new Schema(
     checkoutSessionId: {
       type: String,
       trim: true,
+    },
+    paymentCapturedAt: {
+      type: Date,
     },
     
     // Metadata

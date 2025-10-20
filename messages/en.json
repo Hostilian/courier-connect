@@ -224,6 +224,15 @@
       "info": "We're finding the best courier for you. You'll receive updates via SMS and email.",
       "track": "Track Delivery",
       "newRequest": "New Request"
+    },
+    "templates": {
+      "title": "What are you sending?",
+      "showAll": "Show all options",
+      "showLess": "Show less",
+      "helpText": "Choose a template to auto-fill common delivery types, or skip to create a custom request.",
+      "clearTemplate": "Clear template and start over",
+      "specialInstructions": "Important Notes",
+      "recommended": "Popular"
     }
   },
   "track": {
@@ -324,24 +333,51 @@
       "title": "Courier Dashboard",
       "availableJobs": {
         "title": "Available Deliveries",
-        "noJobs": "No available deliveries right now. Check back soon!",
-        "distance": "{distance} km away",
-        "accept": "Accept Job",
-        "viewDetails": "View Details",
-        "pickup": "Pickup",
-        "delivery": "Delivery"
+        "subtitle": "{count} available",
+        "noDeliveries": {
+          "title": "No deliveries available",
+          "description": "Check back soon for new delivery requests."
+        },
+        "loading": "Loading available deliveries...",
+        "error": {
+          "title": "Error loading deliveries",
+          "description": "We couldn't fetch available deliveries. Please try again."
+        },
+        "from": "From",
+        "to": "To",
+        "acceptButton": "Accept Job",
+        "acceptSuccess": "Delivery accepted! It's now in your active deliveries.",
+        "acceptError": {
+          "generic": "Failed to accept delivery. Please try again.",
+          "alreadyAccepted": "This delivery has already been accepted by another courier."
+        },
+        "urgency": {
+          "standard": "Standard",
+          "express": "Express",
+          "urgent": "Urgent"
+        }
       },
       "activeDeliveries": {
         "title": "Your Active Deliveries",
-        "noJobs": "You have no active deliveries. Go accept one.",
-        "pickup": "Pickup",
-        "delivery": "Delivery",
-        "complete": "Complete Delivery"
+        "subtitle": "{count} active",
+        "noJobs": {
+          "title": "No active deliveries",
+          "description": "Accept a delivery to get started."
+        },
+        "loading": "Loading your active deliveries...",
+        "error": {
+          "title": "Error loading deliveries",
+          "description": "We couldn't fetch your active deliveries. Please try again."
+        },
+        "from": "From",
+        "to": "To"
       },
       "statusUpdate": {
-        "picked_up": "Mark as Picked Up",
-        "in_transit": "Mark as In Transit",
-        "delivered": "Mark as Delivered"
+        "markPickedUp": "Mark as Picked Up",
+        "markInTransit": "Mark as In Transit",
+        "markDelivered": "Mark as Delivered",
+        "success": "Status updated successfully!",
+        "error": "Failed to update status. Please try again."
       }
     },
     "profile": {
@@ -454,6 +490,33 @@
         "longDistance": "Long distance",
         "food": "Food & catering",
         "documents": "Documents"
+      }
+    },
+    "stripe": {
+      "loading": "Loading...",
+      "networkError": "Network error. Please try again.",
+      "onboardingError": "Failed to start onboarding. Please try again.",
+      "dashboardError": "Failed to open dashboard. Please try again.",
+      "openDashboard": "Open Stripe Dashboard",
+      "onboarded": {
+        "title": "✓ Payment Setup Complete",
+        "description": "You're all set to receive payouts! Earnings will be transferred to your bank account after each completed delivery."
+      },
+      "pending": {
+        "title": "⏳ Payment Setup In Progress",
+        "description": "We're reviewing your information. This usually takes 1-2 business days.",
+        "detailsSubmitted": "Details submitted",
+        "chargesEnabled": "Account verified",
+        "payoutsEnabled": "Payouts enabled",
+        "continueOnboarding": "Continue Setup"
+      },
+      "notOnboarded": {
+        "title": "💳 Set Up Payments",
+        "description": "Connect your bank account to receive automatic payouts for completed deliveries.",
+        "benefit1": "Automatic transfers after delivery confirmation",
+        "benefit2": "70% of delivery price goes directly to you",
+        "benefit3": "Track your earnings in real-time",
+        "startOnboarding": "Connect Bank Account"
       }
     }
   },
@@ -585,7 +648,11 @@
       "noRecentDeliveries": "No deliveries in this period.",
       "7d": "7 Days",
       "30d": "30 Days",
-      "90d": "90 Days"
+      "90d": "90 Days",
+      "error": {
+        "title": "Error Loading Earnings",
+        "message": "We couldn't fetch your earnings data. Please try again in a few moments."
+      }
     },
   "preferences": {
     "packageDetails": "Package Details",

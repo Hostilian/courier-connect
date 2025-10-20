@@ -8,7 +8,7 @@ const APP_URL = (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000').rep
 
 export async function POST(request: NextRequest) {
   try {
-  const { deliveryId, successPath = '/{locale}/payment/success', cancelPath = '/{locale}/payment/cancel' } = await request.json();
+    const { deliveryId, successPath = '/{locale}/payment/success', cancelPath = '/{locale}/payment/cancel' } = await request.json();
 
     if (!deliveryId) {
       return NextResponse.json({ error: 'deliveryId is required' }, { status: 400 });
@@ -34,6 +34,20 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Delivery total is invalid for payment' }, { status: 400 });
     }
 
+    // Create PaymentIntent with manual capture for escrow
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amountInCents,
+      currency: DEFAULT_CURRENCY,
+      payment_method_types: ['card'],
+      capture_method: 'manual', // Hold funds in escrow until delivery confirmed
+      metadata: {
+        deliveryId: delivery.id,
+        trackingId: delivery.trackingId,
+        courierEarnings: String(delivery.courierEarnings),
+        platformFee: String(delivery.platformFee),
+      },
+    });
+
     const resolvedSuccessPath = successPath.replace('{locale}', delivery.locale || 'en');
     const resolvedCancelPath = cancelPath.replace('{locale}', delivery.locale || 'en');
 
@@ -44,6 +58,7 @@ export async function POST(request: NextRequest) {
       ? resolvedCancelPath
       : `/${resolvedCancelPath}`;
 
+    // Create Checkout Session with the PaymentIntent
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       payment_method_types: ['card'],
@@ -61,6 +76,15 @@ export async function POST(request: NextRequest) {
         },
       ],
       customer_email: delivery.senderEmail,
+      payment_intent_data: {
+        metadata: {
+          deliveryId: delivery.id,
+          trackingId: delivery.trackingId,
+          courierEarnings: String(delivery.courierEarnings),
+          platformFee: String(delivery.platformFee),
+        },
+        capture_method: 'manual', // Escrow - hold until delivery confirmed
+      },
       metadata: {
         deliveryId: delivery.id,
         trackingId: delivery.trackingId,
@@ -70,11 +94,14 @@ export async function POST(request: NextRequest) {
     });
 
     delivery.checkoutSessionId = session.id;
+    delivery.paymentIntentId = paymentIntent.id;
+    delivery.paymentStatus = 'pending';
     await delivery.save();
 
     return NextResponse.json({
       sessionId: session.id,
       url: session.url,
+      paymentIntentId: paymentIntent.id,
     });
   } catch (error) {
     console.error('Create Checkout Session error:', error);

@@ -3,7 +3,6 @@
 // We do a 70/30 split. Courier gets 70%, we get 30%. That's the cost of doing business, folks.
 // Don't look at me like that. Servers aren't free. Neither is my therapist.
 
-import { getDay, getHours } from 'date-fns';
 
 // What we need to know to price something. It's not rocket science. Though maybe it should be.
 export interface PricingInput {
@@ -91,65 +90,57 @@ const PRICING_CONFIG = {
 export function calculateDeliveryPrice(input: PricingInput): PricingBreakdown {
   const { distance, urgency, packageSize, pickupDateTime } = input;
 
-  // Step 1: Base price. The foundation. The bedrock. Three whole dollars.
+  // Step 1: Base and distance price. This is the non-surcharged foundation.
   const basePrice = PRICING_CONFIG.BASE_PRICE;
-
-  // Step 2: Distance price. Multiply distance by our per-km rate. Revolutionary mathematics.
   const distancePrice = distance * PRICING_CONFIG.PRICE_PER_KM;
+  const baseAndDistancePrice = basePrice + distancePrice;
 
-  // Step 3: Package size multiplier. Bigger box = more money. Shocking stuff.
+  // Step 2: Calculate all surcharges based on the initial baseAndDistancePrice.
+  // This prevents compounding multipliers.
   const packageSizeMultiplier = PRICING_CONFIG.PACKAGE_SIZE_MULTIPLIERS[packageSize] || 1.0;
-  const packageSizePrice = (basePrice + distancePrice) * (packageSizeMultiplier - 1);
+  const packageSizePrice = baseAndDistancePrice * (packageSizeMultiplier - 1);
 
-  // Step 4: Subtotal before all the fun surcharges.
-  let subtotal = basePrice + distancePrice + packageSizePrice;
+  const urgencyMultiplier = PRICING_CONFIG.URGENCY_MULTIPLIERS[urgency];
+  const urgencyPrice = baseAndDistancePrice * (urgencyMultiplier - 1);
 
-  // Step 5: Time-based surcharges. This is where it gets interesting.
-  const now = pickupDateTime || new Date(); // Use scheduled time if available, otherwise right now.
-  const hour = getHours(now);
-  const day = getDay(now);
+  const now = pickupDateTime || new Date();
+  const hour = now.getUTCHours();
+  const day = now.getUTCDay();
 
-  // Time of Day Surcharge
   let timeOfDayPrice = 0;
   const { PEAK_HOURS_START, PEAK_HOURS_END, EVENING_PEAK_START, EVENING_PEAK_END, SURCHARGE_MULTIPLIER: TIME_SURCHARGE } = PRICING_CONFIG.TIME_OF_DAY_SURCHARGE;
   if ((hour >= PEAK_HOURS_START && hour < PEAK_HOURS_END) || (hour >= EVENING_PEAK_START && hour < EVENING_PEAK_END)) {
-    timeOfDayPrice = subtotal * (TIME_SURCHARGE - 1);
-    subtotal += timeOfDayPrice;
+    timeOfDayPrice = baseAndDistancePrice * (TIME_SURCHARGE - 1);
   }
 
-  // Day of Week Surcharge
   let dayOfWeekPrice = 0;
   const { WEEKEND_DAYS, SURCHARGE_MULTIPLIER: WEEKEND_SURCHARGE } = PRICING_CONFIG.DAY_OF_WEEK_SURCHARGE;
   if (WEEKEND_DAYS.includes(day)) {
-    dayOfWeekPrice = subtotal * (WEEKEND_SURCHARGE - 1);
-    subtotal += dayOfWeekPrice;
+    dayOfWeekPrice = baseAndDistancePrice * (WEEKEND_SURCHARGE - 1);
   }
 
-  // Step 6: Urgency multiplier. How bad do you want it?
-  const urgencyMultiplier = PRICING_CONFIG.URGENCY_MULTIPLIERS[urgency];
-  const urgencyPrice = subtotal * (urgencyMultiplier - 1);
-  subtotal += urgencyPrice;
-
-  // Step 7: Scheduled delivery fee or discount.
   let scheduledPrice = 0;
   if (urgency === 'scheduled' && pickupDateTime) {
     const hoursDifference = (pickupDateTime.getTime() - new Date().getTime()) / (1000 * 60 * 60);
     if (hoursDifference >= 24) {
-      scheduledPrice = - (subtotal * PRICING_CONFIG.ADVANCE_BOOKING_DISCOUNT);
+      // Apply discount to the base+distance+package price
+      const subtotalForDiscount = baseAndDistancePrice + packageSizePrice;
+      scheduledPrice = - (subtotalForDiscount * PRICING_CONFIG.ADVANCE_BOOKING_DISCOUNT);
     } else {
       scheduledPrice = PRICING_CONFIG.SCHEDULED_FEE;
     }
-    subtotal += scheduledPrice;
   }
 
-  // Step 8: Minimum price check. Can't be too cheap. We have an image to maintain.
-  let finalPrice = Math.max(subtotal, PRICING_CONFIG.MINIMUM_PRICE);
+  // Step 3: Sum up the base price and all calculated surcharges.
+  const subtotal = baseAndDistancePrice + packageSizePrice + urgencyPrice + timeOfDayPrice + dayOfWeekPrice + scheduledPrice;
 
-  // Step 9: The split. Time to divide the spoils.
+  // Step 4: Minimum price check.
+  const finalPrice = Math.max(subtotal, PRICING_CONFIG.MINIMUM_PRICE);
+
+  // Step 5: The split.
   const courierEarnings = finalPrice * PRICING_CONFIG.COURIER_PERCENTAGE;
   const platformFee = finalPrice - courierEarnings;
 
-  // Finally, the breakdown. All the numbers in a neat little package.
   return {
     basePrice,
     distancePrice,
