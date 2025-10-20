@@ -43,49 +43,14 @@ export async function POST(request: NextRequest) {
           const delivery = await DeliveryRequest.findById(deliveryId);
 
           if (delivery) {
-            // Payment authorized and held in escrow (not captured yet)
-            delivery.paymentStatus = 'authorized';
+            delivery.paymentStatus = 'paid';
             delivery.paymentIntentId = typeof session.payment_intent === 'string' ? session.payment_intent : undefined;
             delivery.checkoutSessionId = session.id;
             await delivery.save();
-            console.log(`Payment authorized for delivery ${delivery.trackingId} - funds in escrow`);
           }
         }
         break;
       }
-
-      case 'payment_intent.succeeded': {
-        const paymentIntent = event.data.object as Stripe.PaymentIntent;
-        const deliveryId = paymentIntent.metadata?.deliveryId;
-
-        if (deliveryId) {
-          await dbConnect();
-          const delivery = await DeliveryRequest.findById(deliveryId);
-
-          if (delivery) {
-            // Funds captured and ready for payout
-            delivery.paymentStatus = 'paid';
-            await delivery.save();
-            console.log(`Payment captured for delivery ${delivery.trackingId}`);
-          }
-        }
-        break;
-      }
-
-      case 'payment_intent.payment_failed': {
-        const paymentIntent = event.data.object as Stripe.PaymentIntent;
-        const deliveryId = paymentIntent.metadata?.deliveryId;
-
-        if (deliveryId) {
-          await dbConnect();
-          await DeliveryRequest.findByIdAndUpdate(deliveryId, {
-            paymentStatus: 'failed',
-          });
-          console.log(`Payment failed for delivery ${deliveryId}`);
-        }
-        break;
-      }
-
       case 'checkout.session.expired': {
         const session = event.data.object as Stripe.Checkout.Session;
         const deliveryId = session.metadata?.deliveryId;
@@ -99,9 +64,7 @@ export async function POST(request: NextRequest) {
         }
         break;
       }
-
       default:
-        console.log(`Unhandled event type: ${event.type}`);
         break;
     }
 

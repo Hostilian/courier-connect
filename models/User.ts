@@ -31,8 +31,6 @@ export interface IUser extends Document {
   insuranceExpiry?: Date;
   safetyIncidents: number;
   earnings: number;
-  stripeAccountId?: string;
-  stripeOnboardingComplete: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -180,14 +178,6 @@ const UserSchema: Schema = new Schema(
       type: Number,
       default: 0,
       min: 0,
-    },
-    stripeAccountId: {
-      type: String,
-      trim: true,
-    },
-    stripeOnboardingComplete: {
-      type: Boolean,
-      default: false,
     },
   },
   {

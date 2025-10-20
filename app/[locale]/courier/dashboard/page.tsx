@@ -3,7 +3,6 @@
 import ActiveDeliveries from '@/components/ActiveDeliveries';
 import AvailableDeliveries from '@/components/AvailableDeliveries';
 import CourierEarnings from '@/components/CourierEarnings';
-import StripeConnectOnboarding from '@/components/StripeConnectOnboarding';
 import withAuth from '@/components/withAuth';
 import { getLanguageByCode } from '@/lib/languages';
 import { motion } from 'framer-motion';
@@ -58,7 +57,6 @@ function CourierDashboard() {
           
           {/* Left Column (Main Content) */}
           <div className="lg:col-span-2 space-y-8">
-            <StripeConnectOnboarding />
             <ActiveDeliveries />
             <AvailableDeliveries />
           </div>

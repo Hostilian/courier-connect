@@ -491,33 +491,6 @@
         "food": "Food & catering",
         "documents": "Documents"
       }
-    },
-    "stripe": {
-      "loading": "Loading...",
-      "networkError": "Network error. Please try again.",
-      "onboardingError": "Failed to start onboarding. Please try again.",
-      "dashboardError": "Failed to open dashboard. Please try again.",
-      "openDashboard": "Open Stripe Dashboard",
-      "onboarded": {
-        "title": "✓ Payment Setup Complete",
-        "description": "You're all set to receive payouts! Earnings will be transferred to your bank account after each completed delivery."
-      },
-      "pending": {
-        "title": "⏳ Payment Setup In Progress",
-        "description": "We're reviewing your information. This usually takes 1-2 business days.",
-        "detailsSubmitted": "Details submitted",
-        "chargesEnabled": "Account verified",
-        "payoutsEnabled": "Payouts enabled",
-        "continueOnboarding": "Continue Setup"
-      },
-      "notOnboarded": {
-        "title": "💳 Set Up Payments",
-        "description": "Connect your bank account to receive automatic payouts for completed deliveries.",
-        "benefit1": "Automatic transfers after delivery confirmation",
-        "benefit2": "70% of delivery price goes directly to you",
-        "benefit3": "Track your earnings in real-time",
-        "startOnboarding": "Connect Bank Account"
-      }
     }
   },
   "common": {
