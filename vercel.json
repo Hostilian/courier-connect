@@ -5,6 +5,10 @@
   "framework": "nextjs",
   "regions": ["iad1"],
   "alias": ["hostilian.org", "www.hostilian.org"],
+  "rewrites": [
+    { "source": "/:locale", "destination": "/[locale]" },
+    { "source": "/:locale/:path*", "destination": "/[locale]/:path*" }
+  ],
   "headers": [
     {
       "source": "/(.*)",

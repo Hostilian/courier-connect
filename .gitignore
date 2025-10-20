@@ -11,10 +11,9 @@
 /build
 
 # Environment Variables
-.env*.local
-.env
-.env.development
-.env.production
+.env.local
+.env.example
+.env*
 
 # Vercel
 .vercel
