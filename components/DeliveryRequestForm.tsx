@@ -194,6 +194,13 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Service area validation
+    const supportedCountries = ['CZ', 'TR', 'UA', 'VN', 'US', 'DE', 'CA', 'BR'];
+    if (!location.countryCode || !supportedCountries.includes(location.countryCode)) {
+      setError('Sorry, we do not currently serve your country.');
+      return;
+    }
     setLoading(true);
     setError(null);
 
@@ -221,23 +228,20 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
         serviceCity: location.city,
       };
 
-      const response = await fetch('/api/deliveries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
+      // Supabase integration
+      const { createDeliveryRequest } = await import('@/lib/supabaseDatabase');
+      const { data, error: supabaseError } = await createDeliveryRequest(payload);
+      if (supabaseError) {
+        setError(requestT('error'));
+      } else if (data && data[0]?.tracking_id) {
         if (onSuccess) {
-          onSuccess(data.trackingId);
+          onSuccess({ trackingId: data[0].tracking_id, pricing: priceBreakdown });
         }
       } else {
-  const errorData = await response.json();
-  setError(errorData.error || requestT('error'));
+        setError(requestT('error'));
       }
     } catch (err) {
-  setError(requestT('error'));
+      setError(requestT('error'));
     } finally {
       setLoading(false);
     }
