@@ -90,10 +90,12 @@
     ```
 
 3.  **Set up environment variables:**
-    Copy `.env.example` to `.env.local` and fill in the required values.
-    - `MONGODB_URI`: Your MongoDB connection string.
-    - `JWT_SECRET`: A secret key for signing JWTs.
-    - `NEXT_PUBLIC_APP_URL`: The public URL of your application (e.g., `http://localhost:3000`).
+  Copy `.env.example` to `.env.local` and fill in the required values.
+  - `MONGODB_URI`: Your MongoDB connection string.
+  - `JWT_SECRET`: A secret key for signing JWTs.
+  - `NEXT_PUBLIC_APP_URL`: The public URL of your application (e.g., `http://localhost:3000`).
+  - `NEXT_PUBLIC_SUPABASE_URL`: Your Supabase project URL.
+  - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Your Supabase anon public key.
 
 4.  **Run the development server:**
     ```bash
