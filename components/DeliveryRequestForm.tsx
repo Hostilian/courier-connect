@@ -230,12 +230,13 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
 
       // Supabase integration
       const { createDeliveryRequest } = await import('@/lib/supabaseDatabase');
-      const { data, error: supabaseError } = await createDeliveryRequest(payload);
+      const response = await createDeliveryRequest(payload);
+      const { data, error: supabaseError } = response as { data: Array<{ tracking_id: string }> | null, error: any };
       if (supabaseError) {
         setError(requestT('error'));
-      } else if (data && Array.isArray(data) && data.length > 0 && 'tracking_id' in data[0]) {
+      } else if (data && Array.isArray(data) && data.length > 0 && data[0].tracking_id) {
         if (onSuccess) {
-          onSuccess({ trackingId: (data[0] as { tracking_id: string }).tracking_id, pricing: priceBreakdown });
+          onSuccess({ trackingId: data[0].tracking_id, pricing: priceBreakdown });
         }
       } else {
         setError(requestT('error'));
