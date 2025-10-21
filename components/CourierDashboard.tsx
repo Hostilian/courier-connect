@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { subscribeCourierJobs, unsubscribeCourierJobs } from '@/lib/supabaseRealtime';
+import { useEffect, useState } from 'react';
 
 interface CourierJob {
   id: string;
