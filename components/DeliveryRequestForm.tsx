@@ -233,9 +233,9 @@ export default function DeliveryRequestForm({ onSuccess }: DeliveryRequestFormPr
       const { data, error: supabaseError } = await createDeliveryRequest(payload);
       if (supabaseError) {
         setError(requestT('error'));
-      } else if (data && data[0]?.tracking_id) {
+      } else if (data && Array.isArray(data) && data.length > 0 && 'tracking_id' in data[0]) {
         if (onSuccess) {
-          onSuccess({ trackingId: data[0].tracking_id, pricing: priceBreakdown });
+          onSuccess({ trackingId: (data[0] as { tracking_id: string }).tracking_id, pricing: priceBreakdown });
         }
       } else {
         setError(requestT('error'));
