@@ -1,7 +1,7 @@
 'use client';
-import React, { useState } from 'react';
-import { useLocale } from 'next-intl';
 import { getLocaleTheme } from '@/lib/languages';
+import { useLocale } from 'next-intl';
+import { useState } from 'react';
 
 export default function CourierTodoList() {
   const [tasks, setTasks] = useState([

@@ -7,14 +7,14 @@ import { loadGoogleMaps } from '@/lib/maps';
 import type { PricingBreakdown } from '@/lib/pricing';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
-    ArrowLeft,
-    ArrowRight,
-    DollarSign,
-    Info,
-    Loader2,
-    MapPin,
-    Package,
-    User
+  ArrowLeft,
+  ArrowRight,
+  DollarSign,
+  Info,
+  Loader2,
+  MapPin,
+  Package,
+  User
 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
