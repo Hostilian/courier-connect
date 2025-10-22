@@ -1,6 +1,6 @@
 'use client';
 
-import { subscribeCourierJobs, unsubscribeCourierJobs } from '@/lib/supabaseRealtime';
+// import { subscribeCourierJobs, unsubscribeCourierJobs } from '@/lib/supabaseRealtime';
 import { useEffect, useState } from 'react';
 
 interface CourierJob {
@@ -20,19 +20,8 @@ export default function CourierDashboard() {
   useEffect(() => {
     // Initial fetch (optional, can use supabaseDatabase helper)
     // Subscribe to real-time updates
-    const sub = subscribeCourierJobs((payload) => {
-      if (payload.eventType === 'INSERT') {
-        setJobs((prev) => [...prev, payload.new]);
-      } else if (payload.eventType === 'UPDATE') {
-        setJobs((prev) => prev.map((job) => job.id === payload.new.id ? payload.new : job));
-      } else if (payload.eventType === 'DELETE') {
-        setJobs((prev) => prev.filter((job) => job.id !== payload.old.id));
-      }
-    });
-    setSubscription(sub);
-    return () => {
-      unsubscribeCourierJobs(sub);
-    };
+    // Real-time subscription removed (supabaseRealtime deleted)
+    // TODO: Replace with alternative real-time implementation if needed
   }, []);
 
   return (
