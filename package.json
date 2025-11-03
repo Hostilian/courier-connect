@@ -17,7 +17,11 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:report": "playwright show-report",
-    "playwright:install": "playwright install --with-deps"
+    "playwright:install": "playwright install --with-deps",
+    "tools:diagnose-ollama": "node tools/diagnose_build_with_ollama.js",
+    "tools:ollama-check": "tools\\check_ollama.cmd",
+    "tools:hf-setup": "tools\\hf_setup.cmd",
+    "tools:llm-cli": "node tools/llm_cli.js"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",

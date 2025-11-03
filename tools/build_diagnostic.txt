@@ -1,0 +1,104 @@
+Proactive audit (manual) — Courier Connect
+Date: 2025-10-24
+
+Summary
+- I ran the production build, TypeScript checks, and lint. Build compiled successfully and type-check/lint passed in the runs performed on this machine. Because the build succeeded there was no failing build output to feed to an LLM; however I produced this proactive audit with high-impact recommendations you can apply immediately.
+
+High-impact improvements (prioritized)
+
+1) CI / preflight checks (prevent regressions)
+Files to check: `package.json`, `.github/workflows/ci.yml` (create if missing)
+Why: Ensure PRs run `type-check`, `lint`, `test`, and `build` to catch issues early.
+Suggested changes:
+  - Add npm script in `package.json`:
+
+```json
+"scripts": {
+  "ci:check": "npm run type-check && npm run lint && npm run build && npm run test"
+}
+```
+
+  - Add a GitHub Actions job (example `.github/workflows/ci.yml`):
+
+```yaml
+name: CI
+on: [push, pull_request]
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2 # or use node/setup
+      - name: Install
+        run: npm ci
+      - name: Typecheck + Lint
+        run: npm run ci:check
+
+```
+
+2) Secrets & env security
+Files to check: `.env.local`, `lib/auth.ts`, `app/api/` files
+Why: Avoid leaking secrets to client bundles; only expose public variables with NEXT_PUBLIC_ prefix.
+Suggestions:
+  - Verify secrets are only accessed server-side (e.g., in `lib/auth.ts` and API routes). If you need a value client-side, create a read-only derived public variable `NEXT_PUBLIC_*`.
+  - Rotate JWT or signing secrets and store in your deployment secret manager.
+
+3) WebSocket / realtime scaling
+Files to check: `server.js`, `app/api/realtime` (or `app/api/socket`), `WEBHOOK` integration
+Why: `socket.io` in single-process works, but for production scale you need an adapter (Redis) or managed socket service and CORS config.
+Suggested change (server.js):
+
+```js
+const io = new Server(server, { cors: { origin: process.env.ALLOWED_ORIGIN || '*' } });
+// For scaling across processes:
+// const { createAdapter } = require('@socket.io/redis-adapter');
+// io.adapter(createAdapter(pubClient, subClient));
+```
+
+4) Performance: dynamic imports & bundle reduction
+Files to check: large client components (`components/DeliveryMap.tsx`, `components/CourierDashboard.tsx`, `components/DeliveryMap.tsx`)
+Why: Libraries like maps, charts, and framer-motion can increase client bundles.
+Suggestion: lazy-load heavy components with dynamic import (Next.js):
+
+```tsx
+import dynamic from 'next/dynamic';
+const DeliveryMap = dynamic(() => import('@/components/DeliveryMap'), { ssr: false });
+```
+
+5) Image optimization and caching
+Files to check: `next.config.js`, usages of `<img>` vs `next/image` in components
+Why: Use `next/image` (or the built-in image optimization) and set cache headers for static assets.
+Suggestion: ensure `next.config.js` images config includes your domains (already present) and prefer `priority` for critical images and `placeholder="blur"` for UX where helpful.
+
+6) Validation & error handling
+Files to check: `lib/validation.ts`, API routes under `app/api/`, `models/` input handlers
+Why: Robust validation prevents 500s and improves security. Use `zod` (already in deps) for request validation.
+Example (API route):
+
+```ts
+import { z } from 'zod';
+const bodySchema = z.object({ pickup: z.string(), dropoff: z.string() });
+export async function POST(req: Request) {
+  const body = await req.json();
+  const parsed = bodySchema.safeParse(body);
+  if (!parsed.success) return new Response(JSON.stringify({ error: parsed.error }), { status: 400 });
+  // ... proceed
+}
+```
+
+Quick actionable checklist (apply in this order)
+1. Add `ci:check` script and a simple GitHub Actions CI job.
+2. Confirm `.env.local` is in `.gitignore` (it is) and ensure no secrets are in the repo.
+3. Add Socket.IO Redis adapter if you expect more than one node/process; add ALLOWED_ORIGIN env var and strict CORS.
+4. Audit client bundles with `next build && next analyze` (or `next-bundle-analyzer`) and lazy-load heavy components.
+5. Ensure API routes use `zod` validation and return 4xx for bad input.
+6. Add Lighthouse and accessibility checks to CI or run locally before releases.
+
+If you want, I can generate the following next:
+- A small GitHub Actions `ci.yml` draft and apply it.
+- A `package.json` update adding `ci:check` and `analyze` scripts.
+- A PR-ready patch that converts one heavy component (e.g., `DeliveryMap.tsx`) to dynamic import.
+
+End of audit.
+HF_API_KEY not set; attempting local transformers pipeline (may download models).
+Local transformers run failed: 'charmap' codec can't encode character '\u25b2' in position 1313: character maps to <undefined>

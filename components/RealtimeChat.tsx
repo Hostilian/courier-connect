@@ -1,6 +1,6 @@
 'use client';
-import React, { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
+import { useEffect, useState } from 'react';
 
 interface Message {
   id: string;
