@@ -16,29 +16,38 @@ const intlMiddleware = createMiddleware({
 
 // Wrap the middleware to handle custom redirects and 404s
 export default async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname, search } = request.nextUrl;
 
-  // Allow API routes and Next.js internals to pass straight through
+  // Handle root and ensure proper locale prefixing
+  if (pathname === '/' || pathname === '') {
+    return NextResponse.redirect(new URL(`/${defaultLocale}${search}`, request.url));
+  }
+
+  // Process request through internationalization middleware
+  return intlMiddleware(request);
+
+  // Allow API routes and Next.js internals to pass through
   if (
     pathname.startsWith('/api') ||
     pathname.startsWith('/_next') ||
+    pathname.startsWith('/_vercel') ||
     pathname === '/favicon.ico' ||
+    pathname === '/robots.txt' ||
     pathname === '/robots.txt'
   ) {
     return NextResponse.next();
   }
 
-  // Redirect bare root requests to the default locale homepage
-  if (pathname === '/' || pathname === '') {
-    const url = request.nextUrl.clone();
-    url.pathname = `/${defaultLocale}`;
-    return NextResponse.redirect(url);
-  }
-
-  // Ensure that any non-prefixed path gets the default locale prefix
+  // Handle all non-prefixed paths
   const hasLocalePrefix = locales.some(
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
   );
+
+  if (!hasLocalePrefix && !pathname.startsWith('/_next') && !pathname.startsWith('/api')) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/${defaultLocale}${pathname}`;
+    return NextResponse.redirect(url);
+  }
 
   if (!hasLocalePrefix) {
     const normalizedPathname = pathname.startsWith('/') ? pathname : `/${pathname}`;

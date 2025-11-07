@@ -18,14 +18,9 @@
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:report": "playwright show-report",
     "playwright:install": "playwright install --with-deps",
-    "tools:diagnose-ollama": "node tools/diagnose_build_with_ollama.js",
-    "tools:ollama-check": "tools\\check_ollama.cmd",
-    "tools:hf-setup": "tools\\hf_setup.cmd",
-    "tools:llm-cli": "node tools/llm_cli.js"
+    "tools:hf-setup": "tools\\hf_setup.cmd"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.6",
-    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.44",
     "@types/react-dom": "^18.2.17",

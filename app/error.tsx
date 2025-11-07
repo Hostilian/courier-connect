@@ -13,9 +13,12 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Error logged for monitoring
-    if (process.env.NODE_ENV === 'development') {
-      console.error('Application error:', error);
+    // Log error and report to monitoring service in production
+    if (process.env.NODE_ENV === 'production') {
+      // Production error reporting would go here
+      console.error('Critical error:', error.message);
+    } else {
+      console.error('Development error:', error);
     }
   }, [error]);
 
