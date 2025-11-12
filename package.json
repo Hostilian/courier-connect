@@ -39,7 +39,7 @@
     "jose": "^6.1.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.378.0",
-    "mongoose": "^8.3.0",
+    "mongoose": "^8.19.2",
     "next": "^14.2.33",
     "next-auth": "^4.24.0",
     "next-intl": "^4.3.12",
